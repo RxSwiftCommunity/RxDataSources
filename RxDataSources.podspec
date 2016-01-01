@@ -40,4 +40,7 @@ data
   s.tvos.deployment_target = '9.0'
 
   s.source_files          = 'Sources/**/*.swift'
+
+  s.dependency 'RxSwift', '~> 2.0'
+  s.dependency 'RxCocoa', '~> 2.0'
 end
