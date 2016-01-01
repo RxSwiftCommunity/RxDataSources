@@ -16,7 +16,7 @@ That means that data sources now have additional responsibility of updating the 
 ## Example usage
 
 ```swift
-let data: Obserable<Section> = ...
+let data: Observable<Section> = ...
 
 let dataSource = RxTableViewSectionedAnimatedDataSource<Section>()
 dataSource.cellFactory = { (tv, ip, i) in
