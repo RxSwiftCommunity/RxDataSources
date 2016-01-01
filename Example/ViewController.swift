@@ -70,20 +70,22 @@ class ViewController: UIViewController {
         // While `useAnimatedUpdateForCollectionView` is false, you can click as fast as
         // you want, table view doesn't seem to have same issues like collection view.
 
-        #if useAnimatedUpdateForCollectionView
+        let useAnimatedUpdates = false
+        if useAnimatedUpdates {
             let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource<NumberSection>()
             skinCollectionViewDataSource(cvAnimatedDataSource)
 
-            randomizeSections
+            randomSections
                 .bindTo(animatedCollectionView.rx_itemsAnimatedWithDataSource(cvAnimatedDataSource))
                 .addDisposableTo(disposeBag)
-        #else
+        }
+        else {
             let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
             skinCollectionViewDataSource(cvReloadDataSource)
             randomSections
                 .bindTo(animatedCollectionView.rx_itemsWithDataSource(cvReloadDataSource))
                 .addDisposableTo(disposeBag)
-        #endif
+        }
 
         // touches
 
@@ -102,8 +104,7 @@ class ViewController: UIViewController {
 
     func skinTableViewDataSource(dataSource: RxTableViewSectionedDataSource<NumberSection>) {
         dataSource.cellFactory = { (tv, ip, i) in
-            let cell = tv.dequeueReusableCellWithIdentifier("Cell")
-                ?? UITableViewCell(style:.Default, reuseIdentifier: "Cell")
+            let cell = tv.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style:.Default, reuseIdentifier: "Cell")
 
             cell.textLabel!.text = "\(i)"
 
