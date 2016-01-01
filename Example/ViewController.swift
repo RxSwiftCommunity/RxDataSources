@@ -63,8 +63,6 @@ class ViewController: UIViewController {
         // but this is really not a bug in the algorithm. The generated changes are
         // pseudorandom, and crash happens depending on clicking speed.
         //
-        // More info in `RxDataSourceStarterKit/README.md`
-        //
         // If you want, turn this to true, just click slow :)
         //
         // While `useAnimatedUpdateForCollectionView` is false, you can click as fast as
