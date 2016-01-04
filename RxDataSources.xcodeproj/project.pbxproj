@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		23614F812F542C592D0C1D4C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DEB206B91CFC58CCC4885B /* Pods.framework */; };
+		9FCDA14F1C3AA110000F5F94 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5481C36F1FC0090614D /* Changeset.swift */; };
+		9FCDA1501C3AA110000F5F94 /* CollectionViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */; };
+		9FCDA1511C3AA110000F5F94 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54A1C36F1FC0090614D /* DataSource.swift */; };
+		9FCDA1521C3AA110000F5F94 /* Differentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54B1C36F1FC0090614D /* Differentiator.swift */; };
+		9FCDA1531C3AA110000F5F94 /* SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54C1C36F1FC0090614D /* SectionedViewType.swift */; };
+		9FCDA1541C3AA110000F5F94 /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54D1C36F1FC0090614D /* SectionModel.swift */; };
+		9FCDA1551C3AA110000F5F94 /* SectionModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54E1C36F1FC0090614D /* SectionModelType.swift */; };
+		9FCDA1561C3AA110000F5F94 /* TableViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54F1C36F1FC0090614D /* TableViewSectionedDataSource.swift */; };
+		9FCDA1571C3AA116000F5F94 /* ObservableConvertibleType+Differentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5511C36F1FC0090614D /* ObservableConvertibleType+Differentiator.swift */; };
+		9FCDA1581C3AA116000F5F94 /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5521C36F1FC0090614D /* RxCollectionViewSectionedAnimatedDataSource.swift */; };
+		9FCDA1591C3AA116000F5F94 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */; };
+		9FCDA15A1C3AA116000F5F94 /* RxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */; };
+		9FCDA15B1C3AA116000F5F94 /* RxTableViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */; };
+		9FCDA15C1C3AA116000F5F94 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5561C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift */; };
+		9FCDA15D1C3AA121000F5F94 /* RxDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = C8984C5D1C36AF35001E4272 /* RxDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C85EE5571C36F1FC0090614D /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5481C36F1FC0090614D /* Changeset.swift */; };
 		C85EE5581C36F1FC0090614D /* CollectionViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */; };
 		C85EE5591C36F1FC0090614D /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54A1C36F1FC0090614D /* DataSource.swift */; };
@@ -55,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		46DEB206B91CFC58CCC4885B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FCDA1471C3AA0C5000F5F94 /* RxDataSources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxDataSources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9EE2D86FCA2AAF8C7A46790 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C85EE5481C36F1FC0090614D /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
 		C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionedDataSource.swift; sourceTree = "<group>"; };
@@ -91,6 +107,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9FCDA1431C3AA0C5000F5F94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C8984C561C36AF35001E4272 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,6 +219,7 @@
 				C8984C5A1C36AF35001E4272 /* RxDataSources.framework */,
 				C8984C9B1C36B6FA001E4272 /* Example.app */,
 				C8984CB11C36B723001E4272 /* ExampleUITests.xctest */,
+				9FCDA1471C3AA0C5000F5F94 /* RxDataSources.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,6 +259,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		9FCDA1441C3AA0C5000F5F94 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FCDA15D1C3AA121000F5F94 /* RxDataSources.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C8984C571C36AF35001E4272 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,6 +278,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9FCDA1461C3AA0C5000F5F94 /* RxDataSources-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FCDA14E1C3AA0C5000F5F94 /* Build configuration list for PBXNativeTarget "RxDataSources-iOS" */;
+			buildPhases = (
+				9FCDA1421C3AA0C5000F5F94 /* Sources */,
+				9FCDA1431C3AA0C5000F5F94 /* Frameworks */,
+				9FCDA1441C3AA0C5000F5F94 /* Headers */,
+				9FCDA1451C3AA0C5000F5F94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxDataSources-iOS";
+			productName = "RxDataSources-iOS";
+			productReference = 9FCDA1471C3AA0C5000F5F94 /* RxDataSources.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		C8984C591C36AF35001E4272 /* RxDataSources */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8984C621C36AF35001E4272 /* Build configuration list for PBXNativeTarget "RxDataSources" */;
@@ -312,6 +362,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = kzaher;
 				TargetAttributes = {
+					9FCDA1461C3AA0C5000F5F94 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					C8984C591C36AF35001E4272 = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -340,11 +393,19 @@
 				C8984C591C36AF35001E4272 /* RxDataSources */,
 				C8984C9A1C36B6FA001E4272 /* Example */,
 				C8984CB01C36B723001E4272 /* ExampleUITests */,
+				9FCDA1461C3AA0C5000F5F94 /* RxDataSources-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9FCDA1451C3AA0C5000F5F94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C8984C581C36AF35001E4272 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -405,6 +466,27 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9FCDA1421C3AA0C5000F5F94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FCDA15A1C3AA116000F5F94 /* RxTableViewSectionedAnimatedDataSource.swift in Sources */,
+				9FCDA1591C3AA116000F5F94 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
+				9FCDA1551C3AA110000F5F94 /* SectionModelType.swift in Sources */,
+				9FCDA1511C3AA110000F5F94 /* DataSource.swift in Sources */,
+				9FCDA1521C3AA110000F5F94 /* Differentiator.swift in Sources */,
+				9FCDA15C1C3AA116000F5F94 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
+				9FCDA1531C3AA110000F5F94 /* SectionedViewType.swift in Sources */,
+				9FCDA1571C3AA116000F5F94 /* ObservableConvertibleType+Differentiator.swift in Sources */,
+				9FCDA15B1C3AA116000F5F94 /* RxTableViewSectionedReloadDataSource.swift in Sources */,
+				9FCDA1501C3AA110000F5F94 /* CollectionViewSectionedDataSource.swift in Sources */,
+				9FCDA1561C3AA110000F5F94 /* TableViewSectionedDataSource.swift in Sources */,
+				9FCDA1581C3AA116000F5F94 /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */,
+				9FCDA14F1C3AA110000F5F94 /* Changeset.swift in Sources */,
+				9FCDA1541C3AA110000F5F94 /* SectionModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C8984C551C36AF35001E4272 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +561,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9FCDA14C1C3AA0C5000F5F94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RxDataSources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kzaher.RxDataSources-iOS";
+				PRODUCT_NAME = RxDataSources;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9FCDA14D1C3AA0C5000F5F94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = RxDataSources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kzaher.RxDataSources-iOS";
+				PRODUCT_NAME = RxDataSources;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		C8984C601C36AF35001E4272 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -659,6 +773,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9FCDA14E1C3AA0C5000F5F94 /* Build configuration list for PBXNativeTarget "RxDataSources-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FCDA14C1C3AA0C5000F5F94 /* Debug */,
+				9FCDA14D1C3AA0C5000F5F94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		C8984C541C36AF35001E4272 /* Build configuration list for PBXProject "RxDataSources" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
