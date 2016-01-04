@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C8984C591C36AF35001E4272"
-               BuildableName = "RxDataSources.framework"
-               BlueprintName = "RxDataSources"
+               BlueprintIdentifier = "9FCDA1461C3AA0C5000F5F94"
+               BuildableName = "RxDataSources-iOS.framework"
+               BlueprintName = "RxDataSources-iOS"
                ReferencedContainer = "container:RxDataSources.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C8984C591C36AF35001E4272"
-            BuildableName = "RxDataSources.framework"
-            BlueprintName = "RxDataSources"
+            BlueprintIdentifier = "9FCDA1461C3AA0C5000F5F94"
+            BuildableName = "RxDataSources-iOS.framework"
+            BlueprintName = "RxDataSources-iOS"
             ReferencedContainer = "container:RxDataSources.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C8984C591C36AF35001E4272"
-            BuildableName = "RxDataSources.framework"
-            BlueprintName = "RxDataSources"
+            BlueprintIdentifier = "9FCDA1461C3AA0C5000F5F94"
+            BuildableName = "RxDataSources-iOS.framework"
+            BlueprintName = "RxDataSources-iOS"
             ReferencedContainer = "container:RxDataSources.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
