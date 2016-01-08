@@ -10,8 +10,6 @@ import Foundation
 
 public protocol SectionModelType {
     typealias Item
-    
+
     var items: [Item] { get }
-    
-    init(original: Self, items: [Item])
 }

@@ -12,7 +12,7 @@ import Foundation
     import RxCocoa
 #endif
 
-extension ObservableConvertibleType where E: SequenceType, E.Generator.Element : protocol<SectionModelType, Hashable>, E.Generator.Element.Item: Hashable {
+extension ObservableConvertibleType where E: SequenceType, E.Generator.Element : AnimatableSectionModelType, E.Generator.Element.Item: Hashable {
     typealias Section = E.Generator.Element
 
     public func differentiateForSectionedView()

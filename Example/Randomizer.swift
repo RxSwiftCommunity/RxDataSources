@@ -27,8 +27,6 @@ struct PseudoRandomGenerator {
     }
 }
 
-typealias NumberSection = HashableSectionModel<String, Int>
-
 let insertItems = true
 let deleteItems = true
 let moveItems = true
@@ -57,7 +55,7 @@ struct Randomizer {
 
     func countTotalItemsInSections(sections: [NumberSection]) -> Int {
         return sections.reduce(0) { p, s in
-            return p + s.items.count
+            return p + s.numbers.count
         }
     }
 
@@ -81,7 +79,7 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let index = randomValue % (sections.count + 1)
             if insertSections {
-                sections.insert(NumberSection(model: section, items: []), atIndex: index)
+                sections.insert(NumberSection(header: section, numbers: [], updated: NSDate()), atIndex: index)
             }
             else {
                 nextUnusedSections.append(section)
@@ -94,7 +92,7 @@ struct Randomizer {
 
             let sectionIndex = randomValue % sections.count
             let section = sections[sectionIndex]
-            let itemCount = section.items.count
+            let itemCount = section.numbers.count
 
             // insert
             (nextRng, randomValue) = nextRng.get_random()
@@ -103,7 +101,7 @@ struct Randomizer {
                 let itemIndex = randomValue % (itemCount + 1)
 
                 if insertItems {
-                    sections[sectionIndex].items.insert(unusedValue, atIndex: itemIndex)
+                    sections[sectionIndex].numbers.insert(unusedValue, atIndex: itemIndex)
                 }
                 else {
                     nextUnusedItems.append(unusedValue)
@@ -112,15 +110,15 @@ struct Randomizer {
                 // update
             else {
                 if itemCount == 0 {
-                    sections[sectionIndex].items.insert(unusedValue, atIndex: 0)
+                    sections[sectionIndex].numbers.insert(unusedValue, atIndex: 0)
                     continue
                 }
 
                 (nextRng, randomValue) = nextRng.get_random()
                 let itemIndex = itemCount
                 if reloadItems {
-                    nextUnusedItems.append(sections[sectionIndex].items.removeAtIndex(itemIndex % itemCount))
-                    sections[sectionIndex].items.insert(unusedValue, atIndex: itemIndex % itemCount)
+                    nextUnusedItems.append(sections[sectionIndex].numbers.removeAtIndex(itemIndex % itemCount))
+                    sections[sectionIndex].numbers.insert(unusedValue, atIndex: itemIndex % itemCount)
 
                 }
                 else {
@@ -147,7 +145,7 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let destinationSectionIndex = randomValue % sections.count
 
-            let sectionItemCount = sections[sourceSectionIndex].items.count
+            let sectionItemCount = sections[sourceSectionIndex].numbers.count
 
             if sectionItemCount == 0 {
                 continue
@@ -159,9 +157,9 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
 
             if moveItems {
-                let item = sections[sourceSectionIndex].items.removeAtIndex(sourceItemIndex)
-                let targetItemIndex = randomValue % (sections[destinationSectionIndex].items.count + 1)
-                sections[destinationSectionIndex].items.insert(item, atIndex: targetItemIndex)
+                let item = sections[sourceSectionIndex].numbers.removeAtIndex(sourceItemIndex)
+                let targetItemIndex = randomValue % (sections[destinationSectionIndex].numbers.count + 1)
+                sections[destinationSectionIndex].numbers.insert(item, atIndex: targetItemIndex)
             }
         }
 
@@ -177,7 +175,7 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let sourceSectionIndex = randomValue % sections.count
 
-            let sectionItemCount = sections[sourceSectionIndex].items.count
+            let sectionItemCount = sections[sourceSectionIndex].numbers.count
 
             if sectionItemCount == 0 {
                 continue
@@ -187,7 +185,7 @@ struct Randomizer {
             let sourceItemIndex = randomValue % sectionItemCount
 
             if deleteItems {
-                nextUnusedItems.append(sections[sourceSectionIndex].items.removeAtIndex(sourceItemIndex))
+                nextUnusedItems.append(sections[sourceSectionIndex].numbers.removeAtIndex(sourceItemIndex))
             }
         }
 
@@ -226,11 +224,11 @@ struct Randomizer {
             if deleteSections {
                 let section = sections.removeAtIndex(sectionIndex)
 
-                for item in section.items {
+                for item in section.numbers {
                     nextUnusedItems.append(item)
                 }
 
-                nextUnusedSections.append(section.model)
+                nextUnusedSections.append(section.identity)
             }
         }
 

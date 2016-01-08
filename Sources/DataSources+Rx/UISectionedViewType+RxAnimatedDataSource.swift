@@ -18,7 +18,7 @@ extension UITableView {
             DataSource: protocol<RxTableViewDataSourceType, UITableViewDataSource>,
             S: SequenceType,
             O: ObservableConvertibleType,
-            Section: protocol<SectionModelType, Hashable>
+            Section: AnimatableSectionModelType
         where
             DataSource.Element == [Changeset<Section>],
             O.E == S,
@@ -38,7 +38,7 @@ extension UICollectionView {
             DataSource: protocol<RxCollectionViewDataSourceType, UICollectionViewDataSource>,
             S: SequenceType,
             O: ObservableConvertibleType,
-            Section: protocol<SectionModelType, Hashable>
+            Section: AnimatableSectionModelType
         where
             DataSource.Element == [Changeset<Section>],
             O.E == S,

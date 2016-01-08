@@ -117,7 +117,9 @@ func _performBatchUpdates<V: SectionedViewType, S: SectionModelType>(view: V, ch
     let rowAnimation = UITableViewRowAnimation.Automatic
     
     view.deleteSections(changes.deletedSections, animationStyle: rowAnimation)
-    view.reloadSections(changes.updatedSections, animationStyle: rowAnimation)
+    // Updated sections doesn't mean reload entire section, somebody needs to update the section view manually
+    // otherwise all cells will be reloaded for nothing.
+    //view.reloadSections(changes.updatedSections, animationStyle: rowAnimation)
     view.insertSections(changes.insertedSections, animationStyle: rowAnimation)
     for (from, to) in changes.movedSections {
         view.moveSection(from, to: to)
