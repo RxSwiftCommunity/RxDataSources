@@ -30,8 +30,6 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: SectionModelType>
         switch observedEvent {
         case .Next(let element):
             for c in element {
-                //print("Animating ==============================\n\(c)\n===============================\n")
-                
                 if !set {
                     setSections(c.finalSections)
                     collectionView.reloadData()

@@ -12,7 +12,7 @@ import Foundation
     import RxCocoa
 #endif
 
-extension ObservableConvertibleType where E: SequenceType, E.Generator.Element : AnimatableSectionModelType, E.Generator.Element.Item: Hashable {
+extension ObservableConvertibleType where E: SequenceType, E.Generator.Element : AnimatableSectionModelType {
     typealias Section = E.Generator.Element
 
     public func differentiateForSectionedView()
@@ -31,9 +31,9 @@ extension ObservableConvertibleType where E: SequenceType, E.Generator.Element :
                 do {
                     return try differencesForSectionedView(Array(oldSections), finalSections: Array(newSections))
                 }
-                // in case of error, print it to terminal only
+                // in case of error, print it to terminal only because this is binding to UI Step
                 catch let e {
-                    print(e)
+                    rxDebugFatalError(e)
                     return [Changeset.initialValue(Array(newSections))]
                 }
             }

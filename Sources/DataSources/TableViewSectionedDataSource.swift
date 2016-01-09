@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 // objc monkey business
-public class _TableViewSectionedDataSource : NSObject
-                                             , UITableViewDataSource {
+public class _TableViewSectionedDataSource
+    : NSObject
+    , UITableViewDataSource {
     
     func _numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -54,7 +55,8 @@ public class _TableViewSectionedDataSource : NSObject
     }
 }
 
-public class RxTableViewSectionedDataSource<S: SectionModelType> : _TableViewSectionedDataSource {
+public class RxTableViewSectionedDataSource<S: SectionModelType>
+    : _TableViewSectionedDataSource {
     
     public typealias I = S.Item
     public typealias Section = S

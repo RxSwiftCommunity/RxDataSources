@@ -1,5 +1,5 @@
 //
-//  SectionedViewType.swift
+//  UI+SectionedViewType.swift
 //  RxDataSources
 //
 //  Created by Krunoslav Zaher on 6/27/15.

@@ -66,6 +66,7 @@ extension SectionAssociatedData : CustomDebugStringConvertible {
 struct ItemAssociatedData {
     var event: EditEvent
     var indexAfterDelete: Int?
+    var finalIndex: ItemPath?
 }
 
 extension ItemAssociatedData : CustomDebugStringConvertible {
@@ -78,7 +79,7 @@ extension ItemAssociatedData : CustomDebugStringConvertible {
 
 extension ItemAssociatedData {
     static var initial : ItemAssociatedData {
-        return ItemAssociatedData(event: .Untouched, indexAfterDelete: nil)
+        return ItemAssociatedData(event: .Untouched, indexAfterDelete: nil, finalIndex: nil)
     }
 }
 
@@ -257,8 +258,8 @@ public func differencesForSectionedView<S: AnimatableSectionModelType>(
     var sectionCommands = try CommandGenerator<S>.generatorForInitialSections(initialSections, finalSections: finalSections)
 
     result.appendContentsOf(sectionCommands.generateDeleteSections())
-    result.appendContentsOf(sectionCommands.generateInsertAndMoveSections())
-    result.appendContentsOf(sectionCommands.generateNewAndMovedItems())
+    result.appendContentsOf(try sectionCommands.generateInsertAndMoveSections())
+    result.appendContentsOf(try sectionCommands.generateNewAndMovedItems())
 
     return result
 }
@@ -319,17 +320,17 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         
         // }
 
-        _ = {
+        _ = try {
             var untouchedOldIndex: Int? = 0
             let findNextUntouchedOldIndex = { (initialSearchIndex: Int?) -> Int? in
                 var i = initialSearchIndex
                 
                 while i != nil && i < initialSections.count {
-                    if initialSectionData[i!].event == .Untouched {
+                    if initialSectionData[try i.unwrap()].event == .Untouched {
                         return i
                     }
                     
-                    i = i! + 1
+                    i = try i.unwrap() + 1
                 }
                 
                 return nil
@@ -339,7 +340,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
             // this should fix all sections and move them into correct places
             // 2nd stage
             for (i, finalSection) in finalSections.enumerate() {
-                untouchedOldIndex = findNextUntouchedOldIndex(untouchedOldIndex)
+                untouchedOldIndex = try findNextUntouchedOldIndex(untouchedOldIndex)
                 
                 // oh, it did exist
                 if let oldSectionIndex = initialSectionIndexes[finalSection.identity] {
@@ -349,7 +350,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                     initialSectionData[oldSectionIndex].event = moveType
                     
                     if moveType == .Moved {
-                        let moveCommand = (from: initialSectionData[oldSectionIndex].indexAfterDelete!, to: i)
+                        let moveCommand = (from: try initialSectionData[oldSectionIndex].indexAfterDelete.unwrap(), to: i)
                         movedSections.append(moveCommand)
                     }
                 }
@@ -367,7 +368,6 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         let finalItemData = finalSections.map { s in
             return [ItemAssociatedData](count: s.items.count, repeatedValue: ItemAssociatedData.initial)
         }
-
 
         return CommandGenerator<S>(
             initialSections: initialSections,
@@ -394,6 +394,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
 
     mutating func generateDeleteSections() -> [Changeset<S>] {
         var deletedItems = [ItemPath]()
+        var updatedItems = [ItemPath]()
 
         // mark deleted items {
         // 1rst stage again (I know, I know ...)
@@ -420,7 +421,15 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                     }
 
                     initialItemData[i][j].indexAfterDelete = indexAfterDelete
+                    initialItemData[i][j].finalIndex = ItemPath(sectionIndex: finalItemIndex.0, itemIndex: finalItemIndex.1)
                     indexAfterDelete += 1
+
+                    // should this item be reloaded, if so, then this is the time to do it
+
+                    let finalItem = finalSections[finalItemIndex.0].items[finalItemIndex.1]
+                    if finalItem != initialItem {
+                        updatedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
+                    }
                 }
                 else {
                     initialItemData[i][j].event = .Deleted
@@ -431,7 +440,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         }
         // }
 
-        if deletedItems.count == 0 && deletedSections.count == 0 {
+        if deletedItems.count == 0 && deletedSections.count == 0 && updatedItems.count == 0 {
             return []
         }
 
@@ -441,9 +450,9 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
             }
 
             var items: [S.Item] = []
-            for (j, item) in s.items.enumerate() {
-                if self.initialItemData[i][j].event != .Deleted {
-                    items.append(item)
+            for (j, _) in s.items.enumerate() {
+                if let finalIndex = self.initialItemData[i][j].finalIndex {
+                    items.append(self.finalSections[finalIndex.sectionIndex].items[finalIndex.itemIndex])
                 }
             }
             return [S(original: s, items: items)]
@@ -451,17 +460,18 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         return [Changeset(
             finalSections: finalSectionsAfterDeletes,
             deletedSections: deletedSections,
-            deletedItems: deletedItems
+            deletedItems: deletedItems,
+            updatedItems: updatedItems
         )]
     }
 
-    func generateInsertAndMoveSections() -> [Changeset<S>] {
+    func generateInsertAndMoveSections() throws -> [Changeset<S>] {
         if insertedSections.count ==  0 && movedSections.count == 0 /*&& newAndMovedSections_updatedSections.count != 0*/ {
             return []
         }
 
         // sections should be in place, but items should be original without deleted ones
-        let finalSections: [S] = self.finalSections.enumerate().map { i, s -> S in
+        let finalSections: [S] = try self.finalSections.enumerate().map { i, s -> S in
             let event = self.finalSectionData[i].event
             
             if event == .Inserted {
@@ -469,20 +479,30 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                 return s
             }
             else if event == .Moved || event == .MovedAutomatically {
-                let originalSectionIndex = initialSectionIndexes[s.identity]!
+                let originalSectionIndex = try initialSectionIndexes[s.identity].unwrap()
                 let originalSection = initialSections[originalSectionIndex]
                 
                 var items: [S.Item] = []
-                for (j, item) in originalSection.items.enumerate() {
-                    if self.initialItemData[originalSectionIndex][j].event != .Deleted {
-                        items.append(item)
+                for (j, _) in originalSection.items.enumerate() {
+                    let initialData = self.initialItemData[originalSectionIndex][j]
+
+                    guard initialData.event != .Deleted else {
+                        continue
                     }
+
+                    guard let finalIndex = initialData.finalIndex else {
+                        try rxPrecondition(false, "Item was moved, but no final location.")
+                        continue
+                    }
+
+                    items.append(self.finalSections[finalIndex.sectionIndex].items[finalIndex.itemIndex])
                 }
                 
                 return S(original: s, items: items)
             }
             else {
-                fatalError("This is weird, this shouldn't happen")
+                try rxPrecondition(false, "This is weird, this shouldn't happen")
+                return s
             }
         }
 
@@ -493,9 +513,9 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         )]
     }
 
-    mutating func generateNewAndMovedItems() -> [Changeset<S>] {
-        var newAndMovedItems_insertedItems = [ItemPath]()
-        var newAndMovedItems_movedItems = [(from: ItemPath, to: ItemPath)]()
+    mutating func generateNewAndMovedItems() throws -> [Changeset<S>] {
+        var insertedItems = [ItemPath]()
+        var movedItems = [(from: ItemPath, to: ItemPath)]()
 
         // mark new and moved items {
         // 3rd stage
@@ -507,13 +527,18 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
             var untouchedOldIndex: Int? = 0
             let findNextUntouchedOldIndex = { (initialSearchIndex: Int?) -> Int? in
                 var i2 = initialSearchIndex
-                
-                while originalSection != nil && i2 != nil && i2! < self.initialItemData[originalSection!].count {
-                    if self.initialItemData[originalSection!][i2!].event == .Untouched {
+
+                guard let originalSection = originalSection else {
+                    return nil
+                }
+                while i2 != nil && i2 ?? Int.max < self.initialItemData[originalSection].count {
+                    let i2Value = try i2.unwrap()
+
+                    if self.initialItemData[originalSection][i2Value].event == .Untouched {
                         return i2
                     }
                     
-                    i2 = i2! + 1
+                    i2 = i2Value + 1
                 }
                 
                 return nil
@@ -528,9 +553,9 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
             for (j, finalItem) in finalSection.items.enumerate() {
                 let currentItemEvent = finalItemData[i][j].event
                 
-                precondition(currentItemEvent == .Untouched)
+                try rxPrecondition(currentItemEvent == .Untouched, "Current event is not untouched")
                 
-                untouchedOldIndex = findNextUntouchedOldIndex(untouchedOldIndex)
+                untouchedOldIndex = try findNextUntouchedOldIndex(untouchedOldIndex)
                 
                 // ok, so it was moved from somewhere
                 if let originalIndex = initialItemIndexes[finalItem.identity] {
@@ -538,15 +563,15 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                     // In case trying to move from deleted section, abort, otherwise it will crash table view
                     if initialSectionData[originalIndex.0].event == .Deleted {
                         finalItemData[i][j].event = .Inserted
-                        newAndMovedItems_insertedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
+                        insertedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
                     }
                     // original section can't be inserted
                     else if initialSectionData[originalIndex.0].event == .Inserted {
-                        fatalError("New section in initial sections, that is wrong")
+                        try rxPrecondition(false, "New section in initial sections, that is wrong")
                     }
                     // what's left is moved section
                     else {
-                        precondition(initialSectionData[originalIndex.0].event == .Moved || initialSectionData[originalIndex.0].event == .MovedAutomatically)
+                        try rxPrecondition(initialSectionData[originalIndex.0].event == .Moved || initialSectionData[originalIndex.0].event == .MovedAutomatically, "Section not moved")
                         
                         let eventType =
                                originalIndex.0 == (originalSection ?? -1)
@@ -560,33 +585,38 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                         finalItemData[i][j].event = eventType
 
                         if eventType == .Moved {
-                            let finalSectionIndex = finalSectionIndexes[initialSections[originalIndex.0].identity]!
-                            let moveFromItemWithIndex = initialItemData[originalIndex.0][originalIndex.1].indexAfterDelete!
-                            
+                            let finalSectionIndex = try finalSectionIndexes[initialSections[originalIndex.0].identity].unwrap()
+                            let moveFromItemWithIndex = try initialItemData[originalIndex.0][originalIndex.1].indexAfterDelete.unwrap()
+
                             let moveCommand = (
                                 from: ItemPath(sectionIndex: finalSectionIndex, itemIndex: moveFromItemWithIndex),
                                 to: ItemPath(sectionIndex: i, itemIndex: j)
                             )
-                            newAndMovedItems_movedItems.append(moveCommand)
+                            movedItems.append(moveCommand)
+                        }
+                        else if eventType == .MovedAutomatically {
+                        }
+                        else {
+                            try rxPrecondition(false, "No third option")
                         }
                     }
                 }
                 // if it wasn't moved from anywhere, it's inserted
                 else {
                     finalItemData[i][j].event = .Inserted
-                    newAndMovedItems_insertedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
+                    insertedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
                 }
             }
         }
         // }
 
-        if newAndMovedItems_insertedItems.count == 0 && newAndMovedItems_movedItems.count == 0 {
+        if insertedItems.count == 0 && movedItems.count == 0 {
             return []
         }
         return [Changeset(
             finalSections: finalSections,
-            insertedItems: newAndMovedItems_insertedItems,
-            movedItems: newAndMovedItems_movedItems
+            insertedItems: insertedItems,
+            movedItems: movedItems
         )]
     }
 }

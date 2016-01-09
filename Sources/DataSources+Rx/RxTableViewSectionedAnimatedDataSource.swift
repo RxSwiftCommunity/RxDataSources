@@ -27,7 +27,6 @@ public class RxTableViewSectionedAnimatedDataSource<S: SectionModelType>
         switch observedEvent {
         case .Next(let element):
             for c in element {
-                //print("Animating ==============================\n\(c)\n===============================\n")
                 setSections(c.finalSections)
                 if c.reloadData {
                     tableView.reloadData()

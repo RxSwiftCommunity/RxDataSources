@@ -42,10 +42,10 @@ struct Randomizer {
 
     let rng: PseudoRandomGenerator
 
-    let unusedItems: [Int]
+    let unusedItems: [IntItem]
     let unusedSections: [String]
 
-    init(rng: PseudoRandomGenerator, sections: [NumberSection], unusedItems: [Int] = [], unusedSections: [String] = []) {
+    init(rng: PseudoRandomGenerator, sections: [NumberSection], unusedItems: [IntItem] = [], unusedSections: [String] = []) {
         self.rng = rng
         self.sections = sections
 
@@ -62,9 +62,24 @@ struct Randomizer {
     func randomize() -> Randomizer {
 
         var nextUnusedSections = [String]()
-        var nextUnusedItems = [Int]()
+        var nextUnusedItems = [IntItem]()
 
-        var sections = self.sections
+        var (nextRng, randomValue) = rng.get_random()
+
+        let updateDates = randomValue % 3 == 1 && reloadItems
+
+        (nextRng, randomValue) = nextRng.get_random()
+
+        let date = NSDate()
+
+        // update updates in current items if needed
+        var sections = self.sections.map {
+            updateDates ? NumberSection(header: $0.header, numbers: $0.numbers.map { x in IntItem(number: x.number, date: date) }, updated: date)  : $0
+        }
+
+        let currentUnusedItems = self.unusedItems.map {
+            updateDates ? IntItem(number: $0.number, date: date) : $0
+        }
 
         let sectionCount = sections.count
         let itemCount = countTotalItemsInSections(sections)
@@ -72,7 +87,6 @@ struct Randomizer {
         let startItemCount = itemCount + unusedItems.count
         let startSectionCount = self.sections.count + unusedSections.count
 
-        var (nextRng, randomValue) = rng.get_random()
 
         // insert sections
         for section in self.unusedSections {
@@ -87,7 +101,7 @@ struct Randomizer {
         }
 
         // insert/reload items
-        for unusedValue in self.unusedItems {
+        for unusedValue in currentUnusedItems {
             (nextRng, randomValue) = nextRng.get_random()
 
             let sectionIndex = randomValue % sections.count
@@ -107,7 +121,7 @@ struct Randomizer {
                     nextUnusedItems.append(unusedValue)
                 }
             }
-                // update
+            // update
             else {
                 if itemCount == 0 {
                     sections[sectionIndex].numbers.insert(unusedValue, atIndex: 0)

@@ -9,10 +9,12 @@
 import Foundation
 import RxDataSources
 
+// MARK: Data
+
 struct NumberSection {
     var header: String
 
-    var numbers: [Int]
+    var numbers: [IntItem]
 
     var updated: NSDate
 
@@ -23,31 +25,51 @@ struct NumberSection {
     }
 }
 
-// MARK: Just extensions to say how to determine identity and how to determine is entity updated
 
-extension Int : IdentifiableType {
-    public typealias Identity = Int
-
-    public var identity: Int {
-        return self
-    }
+struct IntItem {
+    let number: Int
+    let date: NSDate
 }
 
+// MARK: Just extensions to say how to determine identity and how to determine is entity updated
 
 extension NumberSection : AnimatableSectionModelType {
-    typealias Item = Int
+    typealias Item = IntItem
     typealias Identity = String
 
     var identity: String {
         return header
     }
 
-    var items: [Int] {
+    var items: [IntItem] {
         return numbers
     }
 
     init(original: NumberSection, items: [Item]) {
         self = original
         self.numbers = items
+    }
+}
+
+extension IntItem
+    : IdentifiableType
+    , Equatable {
+    typealias Identity = Int
+
+    var identity: Int {
+        return number
+    }
+}
+
+// equatable, this is needed to detect changes
+func == (lhs: IntItem, rhs: IntItem) -> Bool {
+    return lhs.number == rhs.number && lhs.date.isEqualToDate(rhs.date)
+}
+
+// MARK: Some nice extensions
+extension IntItem
+    : CustomStringConvertible {
+    var description: String {
+        return "\(number) @ \(Int(date.timeIntervalSince1970) % 1000)"
     }
 }

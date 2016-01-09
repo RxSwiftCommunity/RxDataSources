@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
     
-public class _CollectionViewSectionedDataSource : NSObject
-                                                  , UICollectionViewDataSource {
+public class _CollectionViewSectionedDataSource
+    : NSObject
+    , UICollectionViewDataSource {
     
     func _numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 0
