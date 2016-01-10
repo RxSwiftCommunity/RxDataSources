@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreLocation
 
 class ExampleUITests: XCTestCase {
         

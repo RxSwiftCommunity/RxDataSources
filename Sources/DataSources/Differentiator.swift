@@ -584,7 +584,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
             }
         }
 
-        if insertedSections.count ==  0 && movedSections.count == 0 /*&& newAndMovedSections_updatedSections.count != 0*/ {
+        if insertedSections.count ==  0 && movedSections.count == 0 {
             return []
         }
 
