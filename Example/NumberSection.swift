@@ -33,7 +33,8 @@ struct IntItem {
 
 // MARK: Just extensions to say how to determine identity and how to determine is entity updated
 
-extension NumberSection : AnimatableSectionModelType {
+extension NumberSection
+    : AnimatableSectionModelType {
     typealias Item = IntItem
     typealias Identity = String
 
@@ -48,6 +49,13 @@ extension NumberSection : AnimatableSectionModelType {
     init(original: NumberSection, items: [Item]) {
         self = original
         self.numbers = items
+    }
+}
+
+extension NumberSection
+    : CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "NumberSection(header: \"\(self.header)\", numbers: \(numbers.debugDescription), updated: date)"
     }
 }
 
@@ -68,7 +76,15 @@ func == (lhs: IntItem, rhs: IntItem) -> Bool {
 
 // MARK: Some nice extensions
 extension IntItem
+    : CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "IntItem(number: \(number), date: date)"
+    }
+}
+
+extension IntItem
     : CustomStringConvertible {
+
     var description: String {
         return "\(number) @ \(Int(date.timeIntervalSince1970) % 1000)"
     }

@@ -40,6 +40,8 @@
 		C8984CE11C36D289001E4272 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8984CE01C36D289001E4272 /* CoreLocation.framework */; };
 		C8E3267F1C405809008814CE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E3267E1C405809008814CE /* DataSources.swift */; };
 		C8E326811C405861008814CE /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E326801C405861008814CE /* Optional+Extensions.swift */; };
+		C8E326831C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E326821C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift */; };
+		C8E326851C409246008814CE /* ItemPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E326841C409246008814CE /* ItemPath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,8 @@
 		C8984CE01C36D289001E4272 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C8E3267E1C405809008814CE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
 		C8E326801C405861008814CE /* Optional+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
+		C8E326821C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimatableSectionModelType+ItemPath.swift"; sourceTree = "<group>"; };
+		C8E326841C409246008814CE /* ItemPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPath.swift; sourceTree = "<group>"; };
 		F1A2870B4410B76AE8768DCC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,9 +178,11 @@
 				C85EE54F1C36F1FC0090614D /* TableViewSectionedDataSource.swift */,
 				C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */,
 				C86901831C3D5A9B00AB0C22 /* AnimatableSectionModelType.swift */,
+				C8E326821C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift */,
 				C86901851C3D5B9500AB0C22 /* IdentifiableType.swift */,
 				C86901871C3DD67800AB0C22 /* IdentifiableValue.swift */,
 				C8E326801C405861008814CE /* Optional+Extensions.swift */,
+				C8E326841C409246008814CE /* ItemPath.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -436,6 +442,7 @@
 				C85EE5591C36F1FC0090614D /* DataSource.swift in Sources */,
 				C85EE55A1C36F1FC0090614D /* Differentiator.swift in Sources */,
 				C85EE5641C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
+				C8E326831C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift in Sources */,
 				C86901881C3DD67800AB0C22 /* IdentifiableValue.swift in Sources */,
 				C85EE55B1C36F1FC0090614D /* UI+SectionedViewType.swift in Sources */,
 				C85EE55F1C36F1FC0090614D /* ObservableConvertibleType+Differentiator.swift in Sources */,
@@ -444,6 +451,7 @@
 				C85EE55E1C36F1FC0090614D /* TableViewSectionedDataSource.swift in Sources */,
 				C85EE5601C36F1FC0090614D /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */,
 				C85EE5571C36F1FC0090614D /* Changeset.swift in Sources */,
+				C8E326851C409246008814CE /* ItemPath.swift in Sources */,
 				C8E3267F1C405809008814CE /* DataSources.swift in Sources */,
 				C85EE55C1C36F1FC0090614D /* SectionModel.swift in Sources */,
 			);

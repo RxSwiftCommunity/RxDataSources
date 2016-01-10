@@ -13,11 +13,6 @@ import RxSwift
 import RxCocoa
 #endif
 
-public struct ItemPath {
-    public let sectionIndex: Int
-    public let itemIndex: Int
-}
-
 public struct Changeset<S: SectionModelType> {
     public typealias I = S.Item
 

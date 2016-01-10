@@ -141,10 +141,12 @@ class ViewController: UIViewController {
             let nSections = 10
             let nItems = 100
 
+
             /*
-            let nSections = 1
-            let nItems = 10
+            let nSections = 10
+            let nItems = 2
             */
+
             return (0 ..< nSections).map { (i: Int) in
                 NumberSection(header: "Section \(i + 1)", numbers: $(Array(i * nItems ..< (i + 1) * nItems)), updated: NSDate())
             }
@@ -153,6 +155,7 @@ class ViewController: UIViewController {
             return _initialValue
         }
     }
+
 
     let _initialValue: [NumberSection] = [
         NumberSection(header: "section 1", numbers: $([1, 2, 3]), updated: NSDate()),
