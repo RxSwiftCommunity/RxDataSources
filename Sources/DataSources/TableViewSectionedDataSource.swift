@@ -87,8 +87,19 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     public func setSections(sections: [S]) {
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
-    
-    public var cellFactory: CellFactory! = nil
+
+
+    @available(*, deprecated=0.2, message="Please use `configureCell`")
+    public var cellFactory: CellFactory! {
+        get {
+            return configureCell
+        }
+        set {
+            configureCell = newValue
+        }
+    }
+
+    public var configureCell: CellFactory! = nil
     
     public var titleForHeaderInSection: ((section: Int) -> String)?
     public var titleForFooterInSection: ((section: Int) -> String)?
@@ -97,7 +108,7 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     
     public override init() {
         super.init()
-        self.cellFactory = { [weak self] _ in
+        self.configureCell = { [weak self] _ in
             if let strongSelf = self {
                 precondition(false, "There is a minor problem. `cellFactory` property on \(strongSelf) was not set. Please set it manually, or use one of the `rx_bindTo` methods.")
             }
@@ -119,7 +130,7 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     override func _tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
-        return cellFactory(tableView, indexPath, itemAtIndexPath(indexPath))
+        return configureCell(tableView, indexPath, itemAtIndexPath(indexPath))
     }
     
     override func _tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

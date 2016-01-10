@@ -36,6 +36,7 @@
 		C8984CD81C36BED7001E4272 /* Randomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8984CD71C36BED7001E4272 /* Randomizer.swift */; };
 		C8A3F7981C41F19D008FD727 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8984C5A1C36AF35001E4272 /* RxDataSources.framework */; };
 		C8A3F7991C41F19D008FD727 /* RxDataSources.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C8984C5A1C36AF35001E4272 /* RxDataSources.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C8D132121C429C5B00B59FFF /* AnimatableSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D132111C429C5B00B59FFF /* AnimatableSectionModel.swift */; };
 		C8E3267F1C405809008814CE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E3267E1C405809008814CE /* DataSources.swift */; };
 		C8E326811C405861008814CE /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E326801C405861008814CE /* Optional+Extensions.swift */; };
 		C8E326831C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E326821C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift */; };
@@ -114,6 +115,7 @@
 		C8984CB51C36B723001E4272 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8984CD71C36BED7001E4272 /* Randomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Randomizer.swift; sourceTree = "<group>"; };
 		C8984CE01C36D289001E4272 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C8D132111C429C5B00B59FFF /* AnimatableSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSectionModel.swift; sourceTree = "<group>"; };
 		C8E3267E1C405809008814CE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
 		C8E326801C405861008814CE /* Optional+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
 		C8E326821C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimatableSectionModelType+ItemPath.swift"; sourceTree = "<group>"; };
@@ -189,21 +191,22 @@
 		C85EE5471C36F1FC0090614D /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				C8E3267E1C405809008814CE /* DataSources.swift */,
+				C8D132111C429C5B00B59FFF /* AnimatableSectionModel.swift */,
+				C86901831C3D5A9B00AB0C22 /* AnimatableSectionModelType.swift */,
+				C8E326821C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift */,
 				C85EE5481C36F1FC0090614D /* Changeset.swift */,
+				C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */,
 				C85EE54A1C36F1FC0090614D /* DataSource.swift */,
+				C8E3267E1C405809008814CE /* DataSources.swift */,
 				C85EE54B1C36F1FC0090614D /* Differentiator.swift */,
-				C85EE54C1C36F1FC0090614D /* UI+SectionedViewType.swift */,
+				C86901851C3D5B9500AB0C22 /* IdentifiableType.swift */,
+				C86901871C3DD67800AB0C22 /* IdentifiableValue.swift */,
+				C8E326841C409246008814CE /* ItemPath.swift */,
+				C8E326801C405861008814CE /* Optional+Extensions.swift */,
 				C85EE54D1C36F1FC0090614D /* SectionModel.swift */,
 				C85EE54E1C36F1FC0090614D /* SectionModelType.swift */,
 				C85EE54F1C36F1FC0090614D /* TableViewSectionedDataSource.swift */,
-				C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */,
-				C86901831C3D5A9B00AB0C22 /* AnimatableSectionModelType.swift */,
-				C8E326821C40910E008814CE /* AnimatableSectionModelType+ItemPath.swift */,
-				C86901851C3D5B9500AB0C22 /* IdentifiableType.swift */,
-				C86901871C3DD67800AB0C22 /* IdentifiableValue.swift */,
-				C8E326801C405861008814CE /* Optional+Extensions.swift */,
-				C8E326841C409246008814CE /* ItemPath.swift */,
+				C85EE54C1C36F1FC0090614D /* UI+SectionedViewType.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				C85EE55F1C36F1FC0090614D /* ObservableConvertibleType+Differentiator.swift in Sources */,
 				C85EE5631C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				C85EE5581C36F1FC0090614D /* CollectionViewSectionedDataSource.swift in Sources */,
+				C8D132121C429C5B00B59FFF /* AnimatableSectionModel.swift in Sources */,
 				C85EE55E1C36F1FC0090614D /* TableViewSectionedDataSource.swift in Sources */,
 				C85EE5601C36F1FC0090614D /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */,
 				C85EE5571C36F1FC0090614D /* Changeset.swift in Sources */,

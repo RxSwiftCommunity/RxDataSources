@@ -101,7 +101,7 @@ class ViewController: UIViewController {
     // MARK: Skinning
 
     func skinTableViewDataSource(dataSource: RxTableViewSectionedDataSource<NumberSection>) {
-        dataSource.cellFactory = { (tv, ip, i) in
+        dataSource.configureCell = { (tv, ip, i) in
             let cell = tv.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style:.Default, reuseIdentifier: "Cell")
 
             cell.textLabel!.text = "\(i)"
