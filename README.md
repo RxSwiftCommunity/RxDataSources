@@ -42,6 +42,16 @@ and
 
 **We'll try to keep the API as stable as possible, but breaking API changes can occur.**
 
+### CocoaPods
+
+Podfile
 ```
 pod 'RxDataSources', '~> 0.1'
+```
+
+### Carthage
+
+Cartfile
+```
+github "RxSwiftCommunity/RxDataSources" ~> 0.1
 ```
