@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxCocoa
     
 public class _CollectionViewSectionedDataSource
     : NSObject
@@ -47,7 +48,8 @@ public class _CollectionViewSectionedDataSource
 }
 
 public class CollectionViewSectionedDataSource<S: SectionModelType>
-    : _CollectionViewSectionedDataSource {
+    : _CollectionViewSectionedDataSource
+    , SectionedViewDataSourceType {
     public typealias I = S.Item
     public typealias Section = S
     public typealias CellFactory = (UICollectionView, NSIndexPath, I) -> UICollectionViewCell
@@ -69,6 +71,10 @@ public class CollectionViewSectionedDataSource<S: SectionModelType>
 
     public func itemAtIndexPath(indexPath: NSIndexPath) -> I {
         return self._sectionModels[indexPath.section].items[indexPath.item]
+    }
+
+    public func modelAtIndexPath(indexPath: NSIndexPath) throws -> Any {
+        return itemAtIndexPath(indexPath)
     }
     
     public func setSections(sections: [S]) {

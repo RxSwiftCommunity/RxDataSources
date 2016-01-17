@@ -87,11 +87,12 @@ class ViewController: UIViewController {
 
         // touches
 
-        Observable.of(tableView.rx_itemSelected, animatedTableView.rx_itemSelected, animatedCollectionView.rx_itemSelected)
+        Observable.of(
+            tableView.rx_modelSelected(IntItem.self),
+            animatedTableView.rx_modelSelected(IntItem.self),
+            animatedCollectionView.rx_modelSelected(IntItem.self)
+        )
             .merge()
-            .withLatestFrom(randomSections) { //(i: NSIndexPath, sections)
-                return $1[$0.section].items[$0.item]
-            }
             .subscribeNext { item in
                 print("Let me guess, it's .... It's \(item), isn't it? Yeah, I've got it.")
             }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxCocoa
 
 // objc monkey business
 public class _TableViewSectionedDataSource
@@ -56,7 +57,8 @@ public class _TableViewSectionedDataSource
 }
 
 public class RxTableViewSectionedDataSource<S: SectionModelType>
-    : _TableViewSectionedDataSource {
+    : _TableViewSectionedDataSource
+    , SectionedViewDataSourceType {
     
     public typealias I = S.Item
     public typealias Section = S
@@ -82,6 +84,10 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
 
     public func itemAtIndexPath(indexPath: NSIndexPath) -> I {
         return self._sectionModels[indexPath.section].items[indexPath.item]
+    }
+
+    public func modelAtIndexPath(indexPath: NSIndexPath) throws -> Any {
+        return itemAtIndexPath(indexPath)
     }
 
     public func setSections(sections: [S]) {
