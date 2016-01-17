@@ -53,5 +53,5 @@ pod 'RxDataSources', '~> 0.1'
 
 Cartfile
 ```
-github "RxSwiftCommunity/RxDataSources" ~> 0.1
+github "RxSwiftCommunity/RxDataSources"
 ```
