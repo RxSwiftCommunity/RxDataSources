@@ -46,7 +46,7 @@ and
 
 Podfile
 ```
-pod 'RxDataSources', '~> 0.1'
+pod 'RxDataSources', '~> 0.4'
 ```
 
 ### Carthage
