@@ -110,7 +110,7 @@ class ViewController: UIViewController {
             return cell
         }
 
-        dataSource.titleForHeaderInSection = { [unowned dataSource] (section: Int) -> String in
+        dataSource.titleForHeaderInSection = { [unowned dataSource] (section: Int) -> String? in
             return dataSource.sectionAtIndex(section).header
         }
     }

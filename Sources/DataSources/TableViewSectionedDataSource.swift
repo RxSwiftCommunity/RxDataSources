@@ -124,8 +124,8 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
 
     public var configureCell: CellFactory! = nil
     
-    public var titleForHeaderInSection: ((section: Int) -> String)?
-    public var titleForFooterInSection: ((section: Int) -> String)?
+    public var titleForHeaderInSection: ((section: Int) -> String?)?
+    public var titleForFooterInSection: ((section: Int) -> String?)?
     
     public var canEditRowAtIndexPath: ((indexPath: NSIndexPath) -> Bool)?
     public var canMoveRowAtIndexPath: ((indexPath: NSIndexPath) -> Bool)?
