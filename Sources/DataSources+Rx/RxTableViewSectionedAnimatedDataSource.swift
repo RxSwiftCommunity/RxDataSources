@@ -18,6 +18,7 @@ public class RxTableViewSectionedAnimatedDataSource<S: SectionModelType>
     , RxTableViewDataSourceType {
     
     public typealias Element = [Changeset<S>]
+    public var animationConfiguration: AnimationConfiguration? = nil
 
     public override init() {
         super.init()
@@ -32,7 +33,7 @@ public class RxTableViewSectionedAnimatedDataSource<S: SectionModelType>
                     tableView.reloadData()
                 }
                 else {
-                    tableView.performBatchUpdates(c)
+                  tableView.performBatchUpdates(c, animationConfiguration: self.animationConfiguration)
                 }
             }
         case .Error(let error):

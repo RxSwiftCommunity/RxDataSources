@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		114F5F4F1C65480100873440 /* AnimationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F5F4E1C65480100873440 /* AnimationConfiguration.swift */; };
+		114F5F501C654D4000873440 /* AnimationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F5F4E1C65480100873440 /* AnimationConfiguration.swift */; };
+		114F5F511C654D4100873440 /* AnimationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F5F4E1C65480100873440 /* AnimationConfiguration.swift */; };
 		31F5DF7595C7270291EC68B1 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5DF8D8FEAF8A5A896F9183 /* Pods_Example.framework */; };
 		3F3F1F9B6D81372F9ACB56BA /* Pods_RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7A9C0E7ECD7070FC9580EC /* Pods_RxDataSources.framework */; };
 		9FCDA16B1C3AF4A2000F5F94 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5481C36F1FC0090614D /* Changeset.swift */; };
@@ -161,6 +164,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		114F5F4E1C65480100873440 /* AnimationConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationConfiguration.swift; sourceTree = "<group>"; };
 		3E15073CAB4A12D06640B51A /* Pods-RxDataSources.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxDataSources.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxDataSources/Pods-RxDataSources.release.xcconfig"; sourceTree = "<group>"; };
 		637B448ADC7B4911C3B71CC9 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		703C1235B70E5689A7D241A9 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -335,19 +339,20 @@
 				C8BB76231C4C3CDF002B21C8 /* AnimatableSectionModel.swift */,
 				C8BB76241C4C3CDF002B21C8 /* AnimatableSectionModelType.swift */,
 				C8BB76251C4C3CDF002B21C8 /* AnimatableSectionModelType+ItemPath.swift */,
+				114F5F4E1C65480100873440 /* AnimationConfiguration.swift */,
+				C85EE5481C36F1FC0090614D /* Changeset.swift */,
+				C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */,
+				C85EE54A1C36F1FC0090614D /* DataSource.swift */,
 				C8BB76261C4C3CDF002B21C8 /* DataSources.swift */,
+				C85EE54B1C36F1FC0090614D /* Differentiator.swift */,
 				C8BB76271C4C3CDF002B21C8 /* IdentifiableType.swift */,
 				C8BB76281C4C3CDF002B21C8 /* IdentifiableValue.swift */,
 				C8BB76291C4C3CDF002B21C8 /* ItemPath.swift */,
 				C8BB762A1C4C3CDF002B21C8 /* Optional+Extensions.swift */,
-				C8BB762B1C4C3CDF002B21C8 /* UI+SectionedViewType.swift */,
-				C85EE5481C36F1FC0090614D /* Changeset.swift */,
-				C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */,
-				C85EE54A1C36F1FC0090614D /* DataSource.swift */,
-				C85EE54B1C36F1FC0090614D /* Differentiator.swift */,
 				C85EE54D1C36F1FC0090614D /* SectionModel.swift */,
 				C85EE54E1C36F1FC0090614D /* SectionModelType.swift */,
 				C85EE54F1C36F1FC0090614D /* TableViewSectionedDataSource.swift */,
+				C8BB762B1C4C3CDF002B21C8 /* UI+SectionedViewType.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -758,6 +763,7 @@
 				9FCDA1751C3AF4A2000F5F94 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				C8BB76351C4C3CDF002B21C8 /* IdentifiableType.swift in Sources */,
 				C8BB76331C4C3CDF002B21C8 /* DataSources.swift in Sources */,
+				114F5F511C654D4100873440 /* AnimationConfiguration.swift in Sources */,
 				9FCDA1711C3AF4A2000F5F94 /* SectionModelType.swift in Sources */,
 				C8BB762F1C4C3CDF002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				9FCDA16D1C3AF4A2000F5F94 /* DataSource.swift in Sources */,
@@ -787,6 +793,7 @@
 				C85EE5611C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				C8BB76341C4C3CDF002B21C8 /* IdentifiableType.swift in Sources */,
 				C8BB76321C4C3CDF002B21C8 /* DataSources.swift in Sources */,
+				114F5F501C654D4000873440 /* AnimationConfiguration.swift in Sources */,
 				C85EE55D1C36F1FC0090614D /* SectionModelType.swift in Sources */,
 				C8BB762E1C4C3CDF002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				C85EE5591C36F1FC0090614D /* DataSource.swift in Sources */,
@@ -846,6 +853,7 @@
 				C8BB76631C4C3E53002B21C8 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				C8BB76641C4C3E53002B21C8 /* IdentifiableType.swift in Sources */,
 				C8BB76651C4C3E53002B21C8 /* DataSources.swift in Sources */,
+				114F5F4F1C65480100873440 /* AnimationConfiguration.swift in Sources */,
 				C8BB76661C4C3E53002B21C8 /* SectionModelType.swift in Sources */,
 				C8BB76671C4C3E53002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				C8BB76681C4C3E53002B21C8 /* DataSource.swift in Sources */,
