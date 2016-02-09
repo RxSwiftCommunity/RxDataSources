@@ -17,6 +17,7 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: SectionModelType>
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
     public typealias Element = [Changeset<S>]
+    public var animationConfiguration: AnimationConfiguration? = nil
     
     // For some inexplicable reason, when doing animated updates first time
     // it crashes. Still need to figure out that one.
@@ -37,7 +38,7 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: SectionModelType>
                     return
                 }
                 setSections(c.finalSections)
-                collectionView.performBatchUpdates(c)
+                collectionView.performBatchUpdates(c, animationConfiguration: self.animationConfiguration)
             }
         case .Error(let error):
             bindingErrorToInterface(error)
