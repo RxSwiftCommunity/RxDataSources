@@ -102,7 +102,7 @@ class ViewController: UIViewController {
     // MARK: Skinning
 
     func skinTableViewDataSource(dataSource: RxTableViewSectionedDataSource<NumberSection>) {
-        dataSource.configureCell = { (tv, ip, i) in
+        dataSource.configureCell = { (_, tv, ip, i) in
             let cell = tv.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style:.Default, reuseIdentifier: "Cell")
 
             cell.textLabel!.text = "\(i)"
@@ -110,13 +110,13 @@ class ViewController: UIViewController {
             return cell
         }
 
-        dataSource.titleForHeaderInSection = { [unowned dataSource] (section: Int) -> String? in
-            return dataSource.sectionAtIndex(section).header
+        dataSource.titleForHeaderInSection = { (ds, section) -> String? in
+            return ds.sectionAtIndex(section).header
         }
     }
 
     func skinCollectionViewDataSource(dataSource: CollectionViewSectionedDataSource<NumberSection>) {
-        dataSource.cellFactory = { (cv, ip, i) in
+        dataSource.cellFactory = { (_, cv, ip, i) in
             let cell = cv.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: ip) as! NumberCell
 
             cell.value!.text = "\(i)"
@@ -124,10 +124,10 @@ class ViewController: UIViewController {
             return cell
         }
 
-        dataSource.supplementaryViewFactory = { [unowned dataSource] (cv, kind, ip) in
+        dataSource.supplementaryViewFactory = { (ds ,cv, kind, ip) in
             let section = cv.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Section", forIndexPath: ip) as! NumberSectionView
 
-            section.value!.text = "\(dataSource.sectionAtIndex(ip.section).header)"
+            section.value!.text = "\(ds.sectionAtIndex(ip.section).header)"
             
             return section
         }
