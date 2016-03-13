@@ -25,10 +25,9 @@ public class RxTableViewSectionedAnimatedDataSource<S: SectionModelType>
     }
 
     public func tableView(tableView: UITableView, observedEvent: Event<Element>) {
-        switch observedEvent {
-        case .Next(let element):
+        UIBindingObserver(UIElement: self) { dataSource, element in
             for c in element {
-                setSections(c.finalSections)
+                dataSource.setSections(c.finalSections)
                 if c.reloadData {
                     tableView.reloadData()
                 }
@@ -36,10 +35,6 @@ public class RxTableViewSectionedAnimatedDataSource<S: SectionModelType>
                   tableView.performBatchUpdates(c, animationConfiguration: self.animationConfiguration)
                 }
             }
-        case .Error(let error):
-            bindingErrorToInterface(error)
-        case .Completed:
-            break
-        }
+        }.on(observedEvent)
     }
 }

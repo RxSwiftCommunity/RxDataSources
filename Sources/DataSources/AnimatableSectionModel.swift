@@ -20,9 +20,7 @@ public struct AnimatableSectionModel<Section: Hashable, ItemType: Hashable>
     public var items: [Item]
 
     public var identity: Section {
-        get {
-            return model
-        }
+        return model
     }
     
     public init(model: Section, items: [ItemType]) {
@@ -36,63 +34,14 @@ public struct AnimatableSectionModel<Section: Hashable, ItemType: Hashable>
     }
     
     public var description: String {
-        get {
-            return "HashableSectionModel(model: \"\(self.model)\", items: \(items))"
-        }
+        return "HashableSectionModel(model: \"\(self.model)\", items: \(items))"
     }
     
     public var hashValue: Int {
-        get {
-            return self.model.hashValue
-        }
+        return self.model.hashValue
     }
 }
 
 public func == <S, I>(lhs: AnimatableSectionModel<S, I>, rhs: AnimatableSectionModel<S, I>) -> Bool {
-    return lhs.model == rhs.model
-}
-
-@available(*, deprecated=0.2, message="Please use AnimatableSectionModel or your own model implementing `AnimatableSectionModelType`")
-public struct HashableSectionModel<Section: Hashable, ItemType: Hashable>
-    : Hashable
-    , AnimatableSectionModelType
-    , CustomStringConvertible {
-    public typealias Item = IdentitifiableValue<ItemType>
-    public typealias Identity = Section
-
-    public var model: Section
-    
-    public var items: [Item]
-
-    public var identity: Section {
-        get {
-            return model
-        }
-    }
-    
-    public init(model: Section, items: [ItemType]) {
-        self.model = model
-        self.items = items.map(IdentitifiableValue.init)
-    }
-    
-    public init(original: HashableSectionModel, items: [Item]) {
-        self.model = original.model
-        self.items = items
-    }
-    
-    public var description: String {
-        get {
-            return "HashableSectionModel(model: \"\(self.model)\", items: \(items))"
-        }
-    }
-    
-    public var hashValue: Int {
-        get {
-            return self.model.hashValue
-        }
-    }
-}
-
-public func == <S, I>(lhs: HashableSectionModel<S, I>, rhs: HashableSectionModel<S, I>) -> Bool {
     return lhs.model == rhs.model
 }

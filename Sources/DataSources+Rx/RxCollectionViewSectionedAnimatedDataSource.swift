@@ -28,22 +28,18 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: SectionModelType>
     }
     
     public func collectionView(collectionView: UICollectionView, observedEvent: Event<Element>) {
-        switch observedEvent {
-        case .Next(let element):
+        UIBindingObserver(UIElement: self) { dataSource, element in
             for c in element {
-                if !set {
-                    setSections(c.finalSections)
+                if !dataSource.set {
+                    dataSource.setSections(c.finalSections)
                     collectionView.reloadData()
-                    set = true
+                    dataSource.set = true
                     return
                 }
-                setSections(c.finalSections)
+                dataSource.setSections(c.finalSections)
                 collectionView.performBatchUpdates(c, animationConfiguration: self.animationConfiguration)
             }
-        case .Error(let error):
-            bindingErrorToInterface(error)
-        case .Completed:
-            break
-        }
+
+        }.on(observedEvent)
     }
 }

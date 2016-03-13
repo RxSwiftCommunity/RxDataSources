@@ -24,14 +24,9 @@ public class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
     }
 
     public func collectionView(collectionView: UICollectionView, observedEvent: Event<Element>) {
-        switch observedEvent {
-        case .Next(let element):
-            setSections(element)
+        UIBindingObserver(UIElement: self) { dataSource, element in
+            dataSource.setSections(element)
             collectionView.reloadData()
-        case .Error(let error):
-            bindingErrorToInterface(error)
-        case .Completed:
-            break
-        }
+        }.on(observedEvent)
     }
 }

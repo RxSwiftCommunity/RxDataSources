@@ -27,9 +27,7 @@ public struct SectionModel<Section, ItemType>
     }
 
     public var description: String {
-        get {
-            return "\(self.model) > \(items)"
-        }
+        return "\(self.model) > \(items)"
     }
 }
 

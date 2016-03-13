@@ -128,16 +128,6 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     }
 
 
-    @available(*, deprecated=0.2, message="Please use `configureCell`")
-    public var cellFactory: CellFactory! {
-        get {
-            return configureCell
-        }
-        set {
-            configureCell = newValue
-        }
-    }
-
     public var configureCell: CellFactory! = nil
     
     public var titleForHeaderInSection: ((RxTableViewSectionedDataSource<S>, section: Int) -> String?)?

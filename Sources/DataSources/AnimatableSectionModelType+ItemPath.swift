@@ -10,8 +10,6 @@ import Foundation
 
 extension Array where Element: AnimatableSectionModelType {
     subscript(index: ItemPath) -> Element.Item {
-        get {
-            return self[index.sectionIndex].items[index.itemIndex]
-        }
+        return self[index.sectionIndex].items[index.itemIndex]
     }
 }
