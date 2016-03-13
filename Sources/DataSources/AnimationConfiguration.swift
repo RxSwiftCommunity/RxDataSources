@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /**
    Exposes custom animation styles for insertion, deletion and reloading behavior.
