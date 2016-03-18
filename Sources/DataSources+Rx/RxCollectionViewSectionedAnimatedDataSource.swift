@@ -13,10 +13,12 @@ import RxSwift
 import RxCocoa
 #endif
 
-public class RxCollectionViewSectionedAnimatedDataSource<S: SectionModelType>
+public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
     public typealias Element = [Changeset<S>]
+    public typealias ItemType = S.Item.Identity
+
     public var animationConfiguration: AnimationConfiguration? = nil
     
     // For some inexplicable reason, when doing animated updates first time
@@ -41,5 +43,14 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: SectionModelType>
             }
 
         }.on(observedEvent)
+    }
+    
+    override public func modelAtIndexPath(indexPath: NSIndexPath) throws -> Any {
+        let model = itemAtIndexPath(indexPath)
+        if let m = model as? IdentitifiableValue<ItemType> {
+            return m.value
+        } else {
+            return model
+        }
     }
 }
