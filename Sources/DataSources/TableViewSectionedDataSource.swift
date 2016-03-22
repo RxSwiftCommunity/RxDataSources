@@ -8,7 +8,9 @@
 
 import Foundation
 import UIKit
+#if !RX_NO_MODULE
 import RxCocoa
+#endif
 
 // objc monkey business
 public class _TableViewSectionedDataSource
@@ -178,7 +180,7 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     
     override func _tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         guard let canEditRow = canEditRowAtIndexPath?(self, indexPath: indexPath) else {
-            return super._tableView(tableView, canEditRowAtIndexPath: indexPath)
+            return super._tableView(tableView, canMoveRowAtIndexPath: indexPath)
         }
         
         return canEditRow
