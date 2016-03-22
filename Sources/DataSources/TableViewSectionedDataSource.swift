@@ -178,7 +178,7 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     
     override func _tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         guard let canEditRow = canEditRowAtIndexPath?(self, indexPath: indexPath) else {
-            return super._tableView(tableView, canMoveRowAtIndexPath: indexPath)
+            return super._tableView(tableView, canEditRowAtIndexPath: indexPath)
         }
         
         return canEditRow
