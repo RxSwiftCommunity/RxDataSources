@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [0.7](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.7)
+## [0.7](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.6.2)
 
 #### Features
 
