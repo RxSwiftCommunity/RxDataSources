@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.7](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.7)
+
+#### Features
+
+* Xcode 7.3 / Swift 2.2 support
+
 ## [0.6](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.6.1)
 
 #### Anomalies
