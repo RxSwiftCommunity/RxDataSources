@@ -23,20 +23,6 @@ struct NumberSection {
         self.numbers = numbers
         self.updated = updated
     }
-    
-    mutating func appendItem(item: IntItem) {
-        numbers.append(item)
-    }
-    
-    mutating func removeItemAtIndex(index: Int) {
-        numbers.removeAtIndex(index)
-    }
-    
-    mutating func moveItemAtIndex(index: Int , toIndex newIndex: Int) {
-        numbers.insert(numbers.removeAtIndex(index), atIndex: newIndex)
-    }
-    
-//    mutating func repl
 }
 
 
