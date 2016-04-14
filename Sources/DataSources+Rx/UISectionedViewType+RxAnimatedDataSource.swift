@@ -16,18 +16,18 @@ import RxCocoa
 extension UITableView {
     public func rx_itemsAnimatedWithDataSource<
             DataSource: protocol<RxTableViewDataSourceType, UITableViewDataSource>,
-            O: ObservableConvertibleType,
-            Section: AnimatableSectionModelType
+            S: SequenceType,
+            O: ObservableType
         where
-            DataSource.Element == [Changeset<Section>],
-            O.E == [Section]
+            DataSource.Element == S,
+            O.E == S,
+            S.Generator.Element: AnimatableSectionModelType
         >
         (dataSource: DataSource)
         -> (source: O)
         -> Disposable  {
         return  { source in
-            let differences = source.differentiateForSectionedView()
-            return self.rx_itemsWithDataSource(dataSource)(source: differences)
+            return self.rx_itemsWithDataSource(dataSource)(source: source)
         }
     }
 }
@@ -35,18 +35,18 @@ extension UITableView {
 extension UICollectionView {
     public func rx_itemsAnimatedWithDataSource<
             DataSource: protocol<RxCollectionViewDataSourceType, UICollectionViewDataSource>,
-            O: ObservableConvertibleType,
-            Section: AnimatableSectionModelType
+            S: SequenceType,
+            O: ObservableType
         where
-            DataSource.Element == [Changeset<Section>],
-            O.E == [Section]
+            DataSource.Element == S,
+            O.E == S,
+            S.Generator.Element: AnimatableSectionModelType
         >
         (dataSource: DataSource)
         -> (source: O)
         -> Disposable  {
         return { source in
-            let differences = source.differentiateForSectionedView()
-            return self.rx_itemsWithDataSource(dataSource)(source: differences)
+            return self.rx_itemsWithDataSource(dataSource)(source: source)
         }
     }
 }

@@ -82,9 +82,14 @@ public class CollectionViewSectionedDataSource<S: SectionModelType>
     public typealias SectionModelSnapshot = SectionModel<S, I>
     
     private var _sectionModels: [SectionModelSnapshot] = []
-    
+
+    public var sectionModels: [S] {
+        return _sectionModels.map { Section(original: $0.model, items: $0.items) }
+    }
+
     public func sectionAtIndex(section: Int) -> S {
-        return self._sectionModels[section].model
+        let sectionModel = self._sectionModels[section]
+        return S(original: sectionModel.model, items: sectionModel.items)
     }
     
     public func itemAtIndexPath(indexPath: NSIndexPath) -> I {

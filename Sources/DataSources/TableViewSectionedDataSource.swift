@@ -88,7 +88,13 @@ public class _TableViewSectionedDataSource
     public func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return _tableView(tableView, sectionForSectionIndexTitle: title, atIndex: index)
     }
-    
+
+    func _tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    }
+
+    public func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        _tableView(tableView, moveRowAtIndexPath: sourceIndexPath, toIndexPath: destinationIndexPath)
+    }
 }
 
 public class RxTableViewSectionedDataSource<S: SectionModelType>
@@ -110,11 +116,12 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     private var _sectionModels: [SectionModelSnapshot] = []
 
     public var sectionModels: [S] {
-        return _sectionModels.map { $0.model }
+        return _sectionModels.map { Section(original: $0.model, items: $0.items) }
     }
 
     public func sectionAtIndex(section: Int) -> S {
-        return self._sectionModels[section].model
+        let sectionModel = _sectionModels[section]
+        return Section(original: sectionModel.model, items: sectionModel.items)
     }
 
     public func itemAtIndexPath(indexPath: NSIndexPath) -> I {
@@ -128,7 +135,6 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     public func setSections(sections: [S]) {
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
-
 
     public var configureCell: CellFactory! = nil
     
@@ -192,6 +198,22 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         }
         
         return canMoveRow
+    }
+
+    override func _tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        let sourceSection = self.sectionModels[sourceIndexPath.section]
+        var sourceItems = sourceSection.items
+
+        let sourceItem = sourceItems.removeAtIndex(sourceIndexPath.item)
+
+        let sourceSectionNew = SectionModelSnapshot(model: sourceSection, items: sourceItems)
+        self._sectionModels[sourceIndexPath.section] = sourceSectionNew
+
+        let destinationSection = self.sectionModels[destinationIndexPath.section]
+        var destinationItems = destinationSection.items
+        destinationItems.insert(sourceItem, atIndex: destinationIndexPath.item)
+
+        self._sectionModels[destinationIndexPath.section] = SectionModelSnapshot(model: destinationSection, items: destinationItems)
     }
     
     override func _sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
