@@ -128,6 +128,12 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         return self._sectionModels[indexPath.section].items[indexPath.item]
     }
 
+    public func setItem(item item: I, indexPath: NSIndexPath) {
+        var section = self._sectionModels[indexPath.section]
+        section.items[indexPath.item] = item
+        self._sectionModels[indexPath.section] = section
+    }
+
     public func modelAtIndexPath(indexPath: NSIndexPath) throws -> Any {
         return itemAtIndexPath(indexPath)
     }
