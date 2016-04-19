@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 #### Interface changes
 
 * Adds required initializer to `SectionModelType.init(original: Self, items: [Item])` to support moving of table rows with animation.
-* `rx_itemsAnimatedWithDataSource` for just using `rx_itemsWithDataSource`.
+* `rx_itemsAnimatedWithDataSource` deprecated in favor of just using `rx_itemsWithDataSource`.
 
 #### Features
 
