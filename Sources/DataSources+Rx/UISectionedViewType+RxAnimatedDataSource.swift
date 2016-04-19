@@ -14,6 +14,7 @@ import RxCocoa
 #endif
 
 extension UITableView {
+    @available(*, deprecated=0.7, renamed="rx_itemsWithDataSource", message="You can just use normal `rx_itemsWithDataSource` extension.")
     public func rx_itemsAnimatedWithDataSource<
             DataSource: protocol<RxTableViewDataSourceType, UITableViewDataSource>,
             S: SequenceType,
@@ -33,6 +34,7 @@ extension UITableView {
 }
 
 extension UICollectionView {
+    @available(*, deprecated=0.7, renamed="rx_itemsWithDataSource", message="You can just use normal `rx_itemsWithDataSource` extension.")
     public func rx_itemsAnimatedWithDataSource<
             DataSource: protocol<RxCollectionViewDataSourceType, UICollectionViewDataSource>,
             S: SequenceType,

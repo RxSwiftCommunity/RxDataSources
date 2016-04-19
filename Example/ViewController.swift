@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         skinTableViewDataSource(reloadDataSource)
 
         randomSections
-            .bindTo(animatedTableView.rx_itemsAnimatedWithDataSource(tvAnimatedDataSource))
+            .bindTo(animatedTableView.rx_itemsWithDataSource(tvAnimatedDataSource))
             .addDisposableTo(disposeBag)
 
         randomSections
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
             skinCollectionViewDataSource(cvAnimatedDataSource)
 
             randomSections
-                .bindTo(animatedCollectionView.rx_itemsAnimatedWithDataSource(cvAnimatedDataSource))
+                .bindTo(animatedCollectionView.rx_itemsWithDataSource(cvAnimatedDataSource))
                 .addDisposableTo(disposeBag)
         }
         else {

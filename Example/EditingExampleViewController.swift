@@ -17,7 +17,7 @@ class EditingExampleViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let disposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +27,8 @@ class EditingExampleViewController: UIViewController {
                                          NumberSection(header: "Section 3", numbers: [], updated: NSDate())]
 
         let initialState = SectionedTableViewState(sections: sections)
-        let addCommand = addButton.rx_tap
+        let addCommand = Observable.of(addButton.rx_tap.asObservable(), Observable.of((), (), ()))
+            .merge()
             .scan(0) { x, _ in x + 1 }
             .map { (number: Int) -> TableViewEditingCommand in
                 let randSection = Int(arc4random_uniform(UInt32(sections.count)))
@@ -42,7 +43,7 @@ class EditingExampleViewController: UIViewController {
             .map { (sourceIndex, destinationIndex) in
                 return TableViewEditingCommand.MoveItem(sourceIndex: sourceIndex, destinationIndex: destinationIndex)
             }
-        
+
         Observable.of(addCommand, deleteCommand, movedCommand)
             .merge()
             .scan(initialState) {
@@ -53,7 +54,7 @@ class EditingExampleViewController: UIViewController {
                 $0.sections
             }
             .shareReplay(1)
-            .bindTo(tableView.rx_itemsAnimatedWithDataSource(dataSource))
+            .bindTo(tableView.rx_itemsWithDataSource(dataSource))
             .addDisposableTo(disposeBag)
         
         skinTableViewDataSource(dataSource)
