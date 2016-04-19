@@ -86,6 +86,6 @@ extension IntItem
     : CustomStringConvertible {
 
     var description: String {
-        return "\(number) @ \(Int(date.timeIntervalSince1970) % 1000)"
+        return "\(number)"
     }
 }

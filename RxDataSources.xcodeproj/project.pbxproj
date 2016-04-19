@@ -105,6 +105,7 @@
 		C8BB76781C4C3E53002B21C8 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; };
 		C8BB767B1C4C3E53002B21C8 /* RxDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = C8984C5D1C36AF35001E4272 /* RxDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C8BB76831C4C3EC5002B21C8 /* RxDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = C8984C5D1C36AF35001E4272 /* RxDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C8E946A01CC6DEC800C5559C /* EditingExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6BED1CA4830A00D3C605 /* EditingExampleViewController.swift */; };
 		C8EC65C61C4C441B00FC9207 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8BB76811C4C3E53002B21C8 /* RxDataSources.framework */; };
 		C8EC65C71C4C441B00FC9207 /* RxDataSources.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C8BB76811C4C3E53002B21C8 /* RxDataSources.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -831,6 +832,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8E946A01CC6DEC800C5559C /* EditingExampleViewController.swift in Sources */,
 				C8BB76451C4C3DD4002B21C8 /* NumberSection.swift in Sources */,
 				C8BB76461C4C3DD4002B21C8 /* ViewController.swift in Sources */,
 				C8BB76471C4C3DD4002B21C8 /* Randomizer.swift in Sources */,

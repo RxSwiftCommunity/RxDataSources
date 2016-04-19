@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         // While `useAnimatedUpdateForCollectionView` is false, you can click as fast as
         // you want, table view doesn't seem to have same issues like collection view.
 
-        let useAnimatedUpdates = false
+        let useAnimatedUpdates = true
         if useAnimatedUpdates {
             let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource<NumberSection>()
             skinCollectionViewDataSource(cvAnimatedDataSource)
@@ -139,8 +139,8 @@ class ViewController: UIViewController {
         let generate = true
         if generate {
 
-            let nSections = 10
-            let nItems = 100
+            let nSections = 4
+            let nItems = 2
 
 
             /*
