@@ -114,6 +114,11 @@
 		C8CC634E1CCF8492006AE8CE /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CC634C1CCF8492006AE8CE /* Array+Extensions.swift */; };
 		C8CC634F1CCF8492006AE8CE /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CC634C1CCF8492006AE8CE /* Array+Extensions.swift */; };
 		C8E946A01CC6DEC800C5559C /* EditingExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6BED1CA4830A00D3C605 /* EditingExampleViewController.swift */; };
+		C8EBA5E81CD3DDF400E745F3 /* MultipleSectionModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61F31CCFD96800A8BE32 /* MultipleSectionModelViewController.swift */; };
+		C8EBA5E91CD3DE0A00E745F3 /* ImageTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61F61CCFDE6A00A8BE32 /* ImageTitleTableViewCell.swift */; };
+		C8EBA5EA1CD3DE0A00E745F3 /* TitleSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61F81CCFDEA800A8BE32 /* TitleSwitchTableViewCell.swift */; };
+		C8EBA5EB1CD3DE0A00E745F3 /* TitleSteperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FA1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift */; };
+		C8EBA5EC1CD3DE0A00E745F3 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FC1CCFF63600A8BE32 /* UIKitExtensions.swift */; };
 		C8EC65C61C4C441B00FC9207 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8BB76811C4C3E53002B21C8 /* RxDataSources.framework */; };
 		C8EC65C71C4C441B00FC9207 /* RxDataSources.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C8BB76811C4C3E53002B21C8 /* RxDataSources.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -867,11 +872,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EBA5E91CD3DE0A00E745F3 /* ImageTitleTableViewCell.swift in Sources */,
 				C8E946A01CC6DEC800C5559C /* EditingExampleViewController.swift in Sources */,
 				C8BB76451C4C3DD4002B21C8 /* NumberSection.swift in Sources */,
 				C8BB76461C4C3DD4002B21C8 /* ViewController.swift in Sources */,
+				C8EBA5E81CD3DDF400E745F3 /* MultipleSectionModelViewController.swift in Sources */,
+				C8EBA5EB1CD3DE0A00E745F3 /* TitleSteperTableViewCell.swift in Sources */,
 				C8BB76471C4C3DD4002B21C8 /* Randomizer.swift in Sources */,
+				C8EBA5EA1CD3DE0A00E745F3 /* TitleSwitchTableViewCell.swift in Sources */,
 				C8153A511CC6C2F70050C990 /* CustomizationUsingTableViewDelegate.swift in Sources */,
+				C8EBA5EC1CD3DE0A00E745F3 /* UIKitExtensions.swift in Sources */,
 				C8BB76481C4C3DD4002B21C8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
