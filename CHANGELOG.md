@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+
+## [0.8](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.8)
+
+#### Features
+
+* Adds new example of how to present heterogeneous sections.
+
+#### Anomalies
+
+* Fixes old `AnimatableSectionModel` definition.
+* Fixes problem with `UICollectionView` iOS 9 reordering features.
+
 ## [0.7](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.7)
 
 #### Interface changes
