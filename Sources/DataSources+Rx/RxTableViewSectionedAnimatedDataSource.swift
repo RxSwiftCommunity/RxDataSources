@@ -18,8 +18,6 @@ public class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelTyp
     , RxTableViewDataSourceType {
     
     public typealias Element = [Changeset<S>]
-    public typealias ItemType = S.Item.Identity
-
     public var animationConfiguration: AnimationConfiguration? = nil
 
     public override init() {
@@ -38,14 +36,5 @@ public class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelTyp
                 }
             }
         }.on(observedEvent)
-    }
-    
-    override public func modelAtIndexPath(indexPath: NSIndexPath) throws -> Any {
-        let model = itemAtIndexPath(indexPath)
-        if let m = model as? IdentitifiableValue<ItemType> {
-            return m.value
-        } else {
-            return model
-        }
     }
 }
