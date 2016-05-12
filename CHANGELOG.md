@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.8.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.8.1)
+
+#### Anomalies
+
+* Fixes problem with `SectionModel.init`.
 
 ## [0.8](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.8)
 
