@@ -21,6 +21,7 @@ public class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelTyp
     public var animationConfiguration = AnimationConfiguration()
 
     var dataSet = false
+    var suspendOnNextFrame = false
 
     public override init() {
         super.init()
@@ -28,8 +29,9 @@ public class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelTyp
 
     public func tableView(tableView: UITableView, observedEvent: Event<Element>) {
         UIBindingObserver(UIElement: self) { dataSource, newSections in
-            if !self.dataSet {
+            if !self.dataSet || self.suspendOnNextFrame {
                 self.dataSet = true
+                self.suspendOnNextFrame = false
                 dataSource.setSections(newSections)
                 tableView.reloadData()
             }
