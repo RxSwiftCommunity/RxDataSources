@@ -21,7 +21,7 @@ public class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelTyp
     public var animationConfiguration = AnimationConfiguration()
 
     var dataSet = false
-    var suspendOnNextFrame = false
+    public var suspendOnNextFrame = false
 
     public override init() {
         super.init()
