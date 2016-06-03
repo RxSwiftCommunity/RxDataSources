@@ -11,6 +11,7 @@ import RxDataSources
 import RxSwift
 import RxCocoa
 
+// redux like editing example
 class EditingExampleViewController: UIViewController {
     
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -27,22 +28,16 @@ class EditingExampleViewController: UIViewController {
                                          NumberSection(header: "Section 3", numbers: [], updated: NSDate())]
 
         let initialState = SectionedTableViewState(sections: sections)
-        let addCommand = Observable.of(addButton.rx_tap.asObservable(), Observable.of((), (), ()))
+        let add3ItemsAddStart = Observable.of((), (), ())
+        let addCommand = Observable.of(addButton.rx_tap.asObservable(), add3ItemsAddStart)
             .merge()
-            .scan(0) { x, _ in x + 1 }
-            .map { (number: Int) -> TableViewEditingCommand in
-                let randSection = Int(arc4random_uniform(UInt32(sections.count)))
-                let item = IntItem(number: number, date: NSDate())
-                return TableViewEditingCommand.AppendItem(item: item, section: randSection)
-            }
+            .map(TableViewEditingCommand.addRandomItem)
+
         let deleteCommand = tableView.rx_itemDeleted.asObservable()
-            .map {
-                return TableViewEditingCommand.DeleteItem($0)
-            }
+            .map(TableViewEditingCommand.DeleteItem)
+
         let movedCommand = tableView.rx_itemMoved
-            .map { (sourceIndex, destinationIndex) in
-                return TableViewEditingCommand.MoveItem(sourceIndex: sourceIndex, destinationIndex: destinationIndex)
-            }
+            .map(TableViewEditingCommand.MoveItem)
 
         Observable.of(addCommand, deleteCommand, movedCommand)
             .merge()
@@ -143,6 +138,15 @@ struct SectionedTableViewState {
                 return SectionedTableViewState(sections: sections)
             }
         }
+    }
+}
+
+extension TableViewEditingCommand {
+    static func addRandomItem() -> TableViewEditingCommand {
+        let randSection = Int(arc4random_uniform(UInt32(3)))
+        let number = Int(arc4random_uniform(UInt32(100)))
+        let item = IntItem(number: number, date: NSDate())
+        return TableViewEditingCommand.AppendItem(item: item, section: randSection)
     }
 }
 

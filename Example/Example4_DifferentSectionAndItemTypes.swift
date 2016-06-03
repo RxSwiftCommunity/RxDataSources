@@ -11,37 +11,7 @@ import RxDataSources
 import RxCocoa
 import RxSwift
 
-enum MultipleSectionModel {
-    case ImageProvidableSection(title: String, items: [SectionItem])
-    case ToggleableSection(title: String, items: [SectionItem])
-    case StepperableSection(title: String, items: [SectionItem])
-}
-
-enum SectionItem {
-    case ImageSectionItem(image: UIImage, title: String)
-    case ToggleableSectionItem(title: String, enabled: Bool)
-    case StepperSectionItem(title: String)
-}
-
-extension MultipleSectionModel: SectionModelType {
-    typealias Item = SectionItem
-    
-    var items: [SectionItem] {
-        switch  self {
-        case .ImageProvidableSection(title: _, items: let items):
-            return items.map {$0}
-        case .StepperableSection(title: _, items: let items):
-            return items.map {$0}
-        case .ToggleableSection(title: _, items: let items):
-            return items.map {$0}
-        }
-    }
-    
-    init(original: MultipleSectionModel, items: [Item]) {
-        self = original
-    }
-}
-
+// the trick is to just use enum for different section types
 class MultipleSectionModelViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -98,6 +68,37 @@ class MultipleSectionModelViewController: UIViewController {
         }
     }
     
+}
+
+enum MultipleSectionModel {
+    case ImageProvidableSection(title: String, items: [SectionItem])
+    case ToggleableSection(title: String, items: [SectionItem])
+    case StepperableSection(title: String, items: [SectionItem])
+}
+
+enum SectionItem {
+    case ImageSectionItem(image: UIImage, title: String)
+    case ToggleableSectionItem(title: String, enabled: Bool)
+    case StepperSectionItem(title: String)
+}
+
+extension MultipleSectionModel: SectionModelType {
+    typealias Item = SectionItem
+    
+    var items: [SectionItem] {
+        switch  self {
+        case .ImageProvidableSection(title: _, items: let items):
+            return items.map {$0}
+        case .StepperableSection(title: _, items: let items):
+            return items.map {$0}
+        case .ToggleableSection(title: _, items: let items):
+            return items.map {$0}
+        }
+    }
+    
+    init(original: MultipleSectionModel, items: [Item]) {
+        self = original
+    }
 }
 
 extension MultipleSectionModel {
