@@ -104,19 +104,30 @@ public class CollectionViewSectionedDataSource<S: SectionModelType>
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
     
-    public var cellFactory: CellFactory! = nil
+    public var configureCell: CellFactory! = nil
+
+    @available(*, deprecated=0.8.1, renamed="configureCell")
+    public var cellFactory: CellFactory! {
+        get {
+            return self.configureCell
+        }
+        set {
+            self.configureCell = newValue
+        }
+    }
+
     public var supplementaryViewFactory: SupplementaryViewFactory
     
     public var moveItem: ((CollectionViewSectionedDataSource<S>, sourceIndexPath:NSIndexPath, destinationIndexPath:NSIndexPath) -> Void)?
     public var canMoveItemAtIndexPath: ((CollectionViewSectionedDataSource<S>, indexPath:NSIndexPath) -> Bool)?
     
     public override init() {
-        self.cellFactory = {_, _, _, _ in return (nil as UICollectionViewCell?)! }
+        self.configureCell = {_, _, _, _ in return (nil as UICollectionViewCell?)! }
         self.supplementaryViewFactory = {_, _, _, _ in (nil as UICollectionReusableView?)! }
         
         super.init()
         
-        self.cellFactory = { [weak self] _ in
+        self.configureCell = { [weak self] _ in
             precondition(false, "There is a minor problem. `cellFactory` property on \(self!) was not set. Please set it manually, or use one of the `rx_bindTo` methods.")
             
             return (nil as UICollectionViewCell!)!
