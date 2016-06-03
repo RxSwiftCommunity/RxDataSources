@@ -31,11 +31,11 @@ class MultipleSectionModelViewController: UIViewController {
         
         let dataSource = RxTableViewSectionedReloadDataSource<MultipleSectionModel>()
 
-      Observable.just(sections)
+        skinTableViewDataSource(dataSource)
+        
+        Observable.just(sections)
             .bindTo(tableView.rx_itemsWithDataSource(dataSource))
             .addDisposableTo(disposeBag)
-        
-        skinTableViewDataSource(dataSource)
     }
     
     func skinTableViewDataSource(dataSource: RxTableViewSectionedReloadDataSource<MultipleSectionModel>) {
@@ -60,14 +60,17 @@ class MultipleSectionModelViewController: UIViewController {
                 return cell
             }
         }
-        
+
+        dataSource.canEditRowAtIndexPath = { _ in
+            return false
+        }
+
         dataSource.titleForHeaderInSection = { dataSource, index in
             let section = dataSource.sectionAtIndex(index)
             
             return section.title
         }
     }
-    
 }
 
 enum MultipleSectionModel {
