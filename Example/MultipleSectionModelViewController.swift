@@ -60,6 +60,7 @@ class MultipleSectionModelViewController: UIViewController {
         ]
         
         let dataSource = RxTableViewSectionedReloadDataSource<MultipleSectionModel>()
+
       Observable.just(sections)
             .bindTo(tableView.rx_itemsWithDataSource(dataSource))
             .addDisposableTo(disposeBag)
