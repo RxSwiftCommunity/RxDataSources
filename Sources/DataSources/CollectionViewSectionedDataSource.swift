@@ -152,7 +152,7 @@ public class CollectionViewSectionedDataSource<S: SectionModelType>
     override func _rx_collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
-        return cellFactory(self, collectionView, indexPath, itemAtIndexPath(indexPath))
+        return configureCell(self, collectionView, indexPath, itemAtIndexPath(indexPath))
     }
     
     override func _rx_collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
