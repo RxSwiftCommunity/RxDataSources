@@ -29,6 +29,9 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionMod
     
     public func collectionView(collectionView: UICollectionView, observedEvent: Event<Element>) {
         UIBindingObserver(UIElement: self) { dataSource, newSections in
+            #if DEBUG
+                self._dataSourceBound = true
+            #endif
             if !self.dataSet {
                 self.dataSet = true
                 dataSource.setSections(newSections)

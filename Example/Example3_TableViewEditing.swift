@@ -39,6 +39,7 @@ class EditingExampleViewController: UIViewController {
         let movedCommand = tableView.rx_itemMoved
             .map(TableViewEditingCommand.MoveItem)
 
+        skinTableViewDataSource(dataSource)
         Observable.of(addCommand, deleteCommand, movedCommand)
             .merge()
             .scan(initialState) {
@@ -51,8 +52,6 @@ class EditingExampleViewController: UIViewController {
             .shareReplay(1)
             .bindTo(tableView.rx_itemsWithDataSource(dataSource))
             .addDisposableTo(disposeBag)
-        
-        skinTableViewDataSource(dataSource)
     }
     
     override func viewDidAppear(animated: Bool) {
