@@ -51,10 +51,11 @@ extension UITableView : SectionedViewType {
         self.reloadSections(indexSet(sections), withRowAnimation: animationStyle)
     }
 
-    public func performBatchUpdates<S: SectionModelType>(changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
+    public func performBatchUpdates<S: SectionModelType>(changes: Changeset<S>, animationConfiguration: AnimationConfiguration, completion: ((Bool) -> Void)? = nil) {
         self.beginUpdates()
         _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
         self.endUpdates()
+        completion?(true)
     }
 }
 
@@ -111,7 +112,7 @@ public protocol SectionedViewType {
     func moveSection(from: Int, to: Int)
     func reloadSections(sections: [Int], animationStyle: UITableViewRowAnimation)
 
-    func performBatchUpdates<S>(changes: Changeset<S>, animationConfiguration: AnimationConfiguration)
+    func performBatchUpdates<S>(changes: Changeset<S>, animationConfiguration: AnimationConfiguration, completion: ((Bool) -> Void)?)
 }
 
 func _performBatchUpdates<V: SectionedViewType, S: SectionModelType>(view: V, changes: Changeset<S>, animationConfiguration:AnimationConfiguration) {
