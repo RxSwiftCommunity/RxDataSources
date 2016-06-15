@@ -18,6 +18,9 @@
 		845F61FB1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FA1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift */; };
 		845F61FD1CCFF63600A8BE32 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FC1CCFF63600A8BE32 /* UIKitExtensions.swift */; };
 		84FC6BEE1CA4830A00D3C605 /* Example3_TableViewEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6BED1CA4830A00D3C605 /* Example3_TableViewEditing.swift */; };
+		888669D71D11F67C008DC240 /* NumberSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3441D0219A7006308C5 /* NumberSection.swift */; };
+		888669D81D11F68B008DC240 /* Randomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3451D0219A7006308C5 /* Randomizer.swift */; };
+		888669D91D11F762008DC240 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3431D0219A7006308C5 /* AppDelegate.swift */; };
 		9FCDA16B1C3AF4A2000F5F94 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5481C36F1FC0090614D /* Changeset.swift */; };
 		9FCDA16C1C3AF4A2000F5F94 /* CollectionViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */; };
 		9FCDA16E1C3AF4A2000F5F94 /* Differentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54B1C36F1FC0090614D /* Differentiator.swift */; };
@@ -877,13 +880,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888669D91D11F762008DC240 /* AppDelegate.swift in Sources */,
 				C8EBA5E91CD3DE0A00E745F3 /* ImageTitleTableViewCell.swift in Sources */,
 				C8E946A01CC6DEC800C5559C /* Example3_TableViewEditing.swift in Sources */,
 				C8BB76461C4C3DD4002B21C8 /* Example2_RandomizedSectionsAnimation.swift in Sources */,
 				C8EBA5E81CD3DDF400E745F3 /* Example4_DifferentSectionAndItemTypes.swift in Sources */,
 				C8EBA5EB1CD3DE0A00E745F3 /* TitleSteperTableViewCell.swift in Sources */,
 				C8EBA5EA1CD3DE0A00E745F3 /* TitleSwitchTableViewCell.swift in Sources */,
+				888669D81D11F68B008DC240 /* Randomizer.swift in Sources */,
 				C8153A511CC6C2F70050C990 /* Example1_CustomizationUsingTableViewDelegate.swift in Sources */,
+				888669D71D11F67C008DC240 /* NumberSection.swift in Sources */,
 				C8EBA5EC1CD3DE0A00E745F3 /* UIKitExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
