@@ -61,10 +61,6 @@ class MultipleSectionModelViewController: UIViewController {
             }
         }
 
-        dataSource.canEditRowAtIndexPath = { _ in
-            return false
-        }
-
         dataSource.titleForHeaderInSection = { dataSource, index in
             let section = dataSource.sectionAtIndex(index)
             
