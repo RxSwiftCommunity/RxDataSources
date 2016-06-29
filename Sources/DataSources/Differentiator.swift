@@ -13,6 +13,7 @@ public enum DifferentiatorError
     , CustomDebugStringConvertible {
     case DuplicateItem(item: Any)
     case DuplicateSection(section: Any)
+    case InvalidInitializerImplementation(section: Any, expectedItems: Any, expectedIdentifier: Any)
 }
 
 extension DifferentiatorError {
@@ -22,6 +23,10 @@ extension DifferentiatorError {
             return "Duplicate item \(item)"
         case let .DuplicateSection(section):
             return "Duplicate section \(section)"
+        case let InvalidInitializerImplementation(section, expectedItems, expectedIdentifier):
+            return "Wrong initializer implementation for: \(section)\n" +
+                "Expected it should return items: \(expectedItems)\n" +
+                "Expected it should have id: \(expectedIdentifier)"
         }
     }
 }
@@ -282,6 +287,16 @@ public func differencesForSectionedView<S: AnimatableSectionModelType>(
     result.appendContentsOf(try sectionCommands.generateNewAndMovedItems())
 
     return result
+}
+
+private extension AnimatableSectionModelType {
+    init(safeOriginal: Self, safeItems: [Item]) throws {
+        self.init(original: safeOriginal, items: safeItems)
+
+        if self.items != safeItems || self.identity != safeOriginal.identity {
+            throw DifferentiatorError.InvalidInitializerImplementation(section: self, expectedItems: safeItems, expectedIdentifier: safeOriginal.identity)
+        }
+    }
 }
 
 struct CommandGenerator<S: AnimatableSectionModelType> {
@@ -545,7 +560,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                 }
             }
 
-            afterDeleteState.append(S(original: initialSection, items: afterDeleteItems))
+            afterDeleteState.append(try S(safeOriginal: initialSection, safeItems: afterDeleteItems))
         }
         // }
 
@@ -620,7 +635,9 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                     items.append(self.finalSections[finalIndex.sectionIndex].items[finalIndex.itemIndex])
                 }
                 
-                return S(original: s, items: items)
+                let modifiedSection = try S(safeOriginal: s, safeItems: items)
+
+                return modifiedSection
             }
             else {
                 try rxPrecondition(false, "This is weird, this shouldn't happen")
