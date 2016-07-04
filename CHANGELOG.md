@@ -3,6 +3,29 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.9](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.8.1)
+
+#### Possibly breaking changes
+
+* Adds default IdentifiableType extensions for:
+	* String
+	* Int
+	* Float
+
+This can break your code if you've implemented those extensions locally. This can be easily solved by just removing local extensions.
+
+#### Features
+
+* Swift 2.3 compatible
+* Improves mutability checkes. If data source is being mutated after binding, warning assert is triggered.
+* Deprecates `cellFactory` in favor of `configureCell`.
+* Improves runtime checks in DEBUG mode for correct `SectionModelType.init` implementation.
+
+#### Fixes
+
+* Fixes default value for `canEditRowAtIndexPath` and sets it to `false`.
+* Changes DEBUG asserting behavior in case multiple items with same identity are found to printing warning message to terminal. Fallbacks as before to `reloadData`.
+
 ## [0.8.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.8.1)
 
 #### Anomalies
