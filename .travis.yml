@@ -1,0 +1,10 @@
+language: objective-c
+
+osx_image: xcode7.3
+
+notifications:
+  slack: rxswift:3ykt2Z61f8GkdvhCZTYPduOL
+  email: false
+
+script: 
+  - echo "WIP"
