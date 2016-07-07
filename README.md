@@ -24,7 +24,7 @@ Table and Collection view data sources
 Writing table and collection view data sources is tedious. There is a large number of delegate methods that need to be implemented for the simplest case possible.
 
 RxSwift helps alleviate some of the burden with a simple data binding mechanism:
-1) Turn your data into an Observable stream
+1) Turn your data into an Observable sequence
 2) Bind the data to the tableView/collectionView using one of:
   - `rx_itemsWithDataSource(:protocol<RxTableViewDataSourceType, UITableViewDataSource>)`
   - `rx_itemsWithCellIdentifier(:String)`
@@ -104,7 +104,7 @@ dataSource.titleForHeaderInSection = { ds, index in
 }
 ```
 
-4) Define the actual data as an Observable stream of CustomData objects and bind it to the tableView
+4) Define the actual data as an Observable sequence of CustomData objects and bind it to the tableView
 ```swift 
 let sections = [
   SectionOfCustomData(header: "First section", items: [CustomData(anInt: 0, aString: "zero", aCGPoint: CGPoint.zero), CustomData(anInt: 1, aString: "one", aCGPoint: CGPoint(x: 1, y: 1)) ]),
@@ -120,7 +120,7 @@ Observable.just(sections)
 ### Animations
 To implement animations with RxDataSources, the same steps are required as with non-animated data, execept:
 - SectionOfCustomData needs to conform to `AnimatableSectionModelType`
-- dataSource needs to be an instance of `RxTableViewSectionedAnimatedDataSource` or `RxTableViewSectionedAniamtedDataSource`
+- dataSource needs to be an instance of `RxTableViewSectionedAnimatedDataSource` or `RxTableViewSectionedAnimatedDataSource`
 
 
 
