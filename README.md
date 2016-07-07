@@ -21,20 +21,108 @@ Table and Collection view data sources
 - [x] Works with `UITableView` and `UICollectionView`
 
 ## Why
-
 Writing table and collection view data sources is tedious. There is a large number of delegate methods that need to be implemented for the simplest case possible.
 
-The problem is even bigger when table view or collection view needs to display animated updates.
+RxSwift helps alleviate some of the burden with a simple data binding mechanism:
+1) Turn your data into an Observable stream
+2) Bind the data to the tableView/collectionView using one of:
+  - `rx_itemsWithDataSource(:protocol<RxTableViewDataSourceType, UITableViewDataSource>)`
+  - `rx_itemsWithCellIdentifier(:String)`
+  - `rx_itemsWithCellIdentifier(:String:Cell.Type)`
+  - `rx_itemsWithCellFactory(:ObservableType)`
 
-This project makes it super easy to just write
+```swift
+let dataSource = Observable<[String]>.just(["first element", "second element", "third element"])
+
+dataSource.bindTo(tableView.rx_itemsWithCellIdentifier("Cell")) { index, model, cell in
+  cell.textLabel?.text = model
+}
+.addDisposableTo(disposeBag)
+```
+
+This works well with simple data sets but does not handle cases where you need to bind complex data sets with multiples sections, or when you need to perform animations when adding/modifying/deleting items.  
+
+These are precisely the use cases that RxDataSources helps solve.
+
+With RxDataSources, it is super easy to just write
 
 ```swift
 Observable.just([MySection(header: "title", items: [1, 2, 3])])
     .bindTo(tableView.rx_itemsWithDataSource(dataSource))
     .addDisposableTo(disposeBag)
 ```
-
 ![RxDataSources example app](https://raw.githubusercontent.com/kzaher/rxswiftcontent/rxdatasources/RxDataSources.gif)
+
+## How
+Given the following custom data structure:
+```swift
+struct CustomData {
+  var anInt: Int
+  var aString: String
+  var aCGPoint: CGPoint
+}
+```
+
+1) Start by defining your sections with a struct that conforms to the `SectionModelType` protocol:
+  - define the `Item` typealias: equal to the type of items that the section will contain
+  - declare an `items` property: of type array of `Item`
+
+```swift
+struct SectionOfCustomData {
+  var header: String    
+  var items: [Item]
+}
+extension SectionOfCustomData: SectionModelType {
+  typealias Item = CustomData
+  
+   init(original: SectionOfCustomData, items: [Item]) {
+    self = original
+    self.items = items
+  } 
+}
+```
+
+2) Create a dataSource object and pass it your `SectionOfCustomData` type:
+```swift 
+let dataSource = RxTableViewSectionedReloadDataSource<SectionOfCustomData>()
+```
+
+3) Customize closures on the dataSource as needed:
+- `configureCell` (required)
+- `titleForHeaderInSection`
+- `titleForFooterInSection`
+- etc
+
+```swift 
+dataSource.configureCell = { ds, tv, ip, item in
+  let cell = tv.dequeueReusableCellWithIdentifier("Cell", forIndexPath: ip)
+  cell.textLabel?.text = "Item \(item.anInt): \(item.aString) - \(item.aCGPoint.x):\(item.aCGPoint.y)"
+  return cell
+}
+dataSource.titleForHeaderInSection = { ds, index in
+  return ds.sectionModels[index].header
+}
+```
+
+4) Define the actual data as an Observable stream of CustomData objects and bind it to the tableView
+```swift 
+let sections = [
+  SectionOfCustomData(header: "First section", items: [CustomData(anInt: 0, aString: "zero", aCGPoint: CGPoint.zero), CustomData(anInt: 1, aString: "one", aCGPoint: CGPoint(x: 1, y: 1)) ]),
+  SectionOfCustomData(header: "Second section", items: [CustomData(anInt: 2, aString: "two", aCGPoint: CGPoint(x: 2, y: 2)), CustomData(anInt: 3, aString: "three", aCGPoint: CGPoint(x: 3, y: 3)) ])
+]
+
+Observable.just(sections)
+  .bindTo(tableView.rx_itemsWithDataSource(dataSource))
+  .addDisposableTo(disposeBag)
+```
+
+
+### Animations
+To implement animations with RxDataSources, the same steps are required as with non-animated data, execept:
+- SectionOfCustomData needs to conform to `AnimatableSectionModelType`
+- dataSource needs to be an instance of `RxTableViewSectionedAnimatedDataSource` or `RxTableViewSectionedAniamtedDataSource`
+
+
 
 ## Installation
 
