@@ -186,7 +186,7 @@ public class CollectionViewSectionedDataSource<S: SectionModelType>
     }
     
     override func _rx_collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
-        precondition((indexPath as NSIndexPath).item < _sectionModels[(indexPath as NSIndexPath).section].items.count)
+        precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
         return configureCell(self, collectionView, indexPath, itemAtIndexPath(indexPath))
     }

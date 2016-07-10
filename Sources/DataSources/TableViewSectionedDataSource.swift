@@ -77,13 +77,11 @@ public class _TableViewSectionedDataSource
     func _sectionIndexTitlesForTableView(_ tableView: UITableView) -> [String]? {
         return nil
     }
-
+    
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return _sectionIndexTitlesForTableView(tableView)
     }
-    #endif
 
-    #if os(iOS)
     func _rx_tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return 0
     }
@@ -142,13 +140,13 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     }
 
     public func itemAtIndexPath(_ indexPath: IndexPath) -> I {
-        return self._sectionModels[(indexPath as NSIndexPath).section].items[(indexPath as NSIndexPath).item]
+        return self._sectionModels[indexPath.section].items[indexPath.item]
     }
 
     public func setItem(item: I, indexPath: IndexPath) {
-        var section = self._sectionModels[(indexPath as NSIndexPath).section]
-        section.items[(indexPath as NSIndexPath).item] = item
-        self._sectionModels[(indexPath as NSIndexPath).section] = section
+        var section = self._sectionModels[indexPath.section]
+        section.items[indexPath.item] = item
+        self._sectionModels[indexPath.section] = section
     }
 
     public func modelAtIndexPath(_ indexPath: IndexPath) throws -> Any {
@@ -238,7 +236,7 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     }
     
     override func _rx_tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        precondition((indexPath as NSIndexPath).item < _sectionModels[(indexPath as NSIndexPath).section].items.count)
+        precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
         return configureCell(self, tableView, indexPath, itemAtIndexPath(indexPath))
     }
@@ -288,5 +286,4 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         return section
     }
     #endif
-    
 }
