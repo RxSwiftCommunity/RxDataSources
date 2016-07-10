@@ -53,7 +53,7 @@ struct Randomizer {
         self.unusedItems = unusedItems
     }
 
-    func countTotalItemsInSections(sections: [NumberSection]) -> Int {
+    func countTotalItems(sections: [NumberSection]) -> Int {
         return sections.reduce(0) { p, s in
             return p + s.numbers.count
         }
@@ -70,7 +70,7 @@ struct Randomizer {
 
         (nextRng, randomValue) = nextRng.get_random()
 
-        let date = NSDate()
+        let date = Date()
 
         // update updates in current items if needed
         var sections = self.sections.map {
@@ -82,7 +82,7 @@ struct Randomizer {
         }
 
         let sectionCount = sections.count
-        let itemCount = countTotalItemsInSections(sections)
+        let itemCount = countTotalItems(sections: sections)
 
         let startItemCount = itemCount + unusedItems.count
         let startSectionCount = self.sections.count + unusedSections.count
@@ -93,7 +93,7 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let index = randomValue % (sections.count + 1)
             if insertSections {
-                sections.insert(NumberSection(header: section, numbers: [], updated: NSDate()), atIndex: index)
+                sections.insert(NumberSection(header: section, numbers: [], updated: Date()), at: index)
             }
             else {
                 nextUnusedSections.append(section)
@@ -115,7 +115,7 @@ struct Randomizer {
                 let itemIndex = randomValue % (itemCount + 1)
 
                 if insertItems {
-                    sections[sectionIndex].numbers.insert(unusedValue, atIndex: itemIndex)
+                    sections[sectionIndex].numbers.insert(unusedValue, at: itemIndex)
                 }
                 else {
                     nextUnusedItems.append(unusedValue)
@@ -124,15 +124,15 @@ struct Randomizer {
             // update
             else {
                 if itemCount == 0 {
-                    sections[sectionIndex].numbers.insert(unusedValue, atIndex: 0)
+                    sections[sectionIndex].numbers.insert(unusedValue, at: 0)
                     continue
                 }
 
                 (nextRng, randomValue) = nextRng.get_random()
                 let itemIndex = itemCount
                 if reloadItems {
-                    nextUnusedItems.append(sections[sectionIndex].numbers.removeAtIndex(itemIndex % itemCount))
-                    sections[sectionIndex].numbers.insert(unusedValue, atIndex: itemIndex % itemCount)
+                    nextUnusedItems.append(sections[sectionIndex].numbers.remove(at: itemIndex % itemCount))
+                    sections[sectionIndex].numbers.insert(unusedValue, at: itemIndex % itemCount)
 
                 }
                 else {
@@ -141,7 +141,7 @@ struct Randomizer {
             }
         }
 
-        assert(countTotalItemsInSections(sections) + nextUnusedItems.count == startItemCount)
+        assert(countTotalItems(sections: sections) + nextUnusedItems.count == startItemCount)
         assert(sections.count + nextUnusedSections.count == startSectionCount)
 
         let itemActionCount = itemCount / 7
@@ -171,13 +171,13 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
 
             if moveItems {
-                let item = sections[sourceSectionIndex].numbers.removeAtIndex(sourceItemIndex)
+                let item = sections[sourceSectionIndex].numbers.remove(at: sourceItemIndex)
                 let targetItemIndex = randomValue % (sections[destinationSectionIndex].numbers.count + 1)
-                sections[destinationSectionIndex].numbers.insert(item, atIndex: targetItemIndex)
+                sections[destinationSectionIndex].numbers.insert(item, at: targetItemIndex)
             }
         }
 
-        assert(countTotalItemsInSections(sections) + nextUnusedItems.count == startItemCount)
+        assert(countTotalItems(sections: sections) + nextUnusedItems.count == startItemCount)
         assert(sections.count + nextUnusedSections.count == startSectionCount)
 
         // delete items
@@ -199,11 +199,11 @@ struct Randomizer {
             let sourceItemIndex = randomValue % sectionItemCount
 
             if deleteItems {
-                nextUnusedItems.append(sections[sourceSectionIndex].numbers.removeAtIndex(sourceItemIndex))
+                nextUnusedItems.append(sections[sourceSectionIndex].numbers.remove(at: sourceItemIndex))
             }
         }
 
-        assert(countTotalItemsInSections(sections) + nextUnusedItems.count == startItemCount)
+        assert(countTotalItems(sections: sections) + nextUnusedItems.count == startItemCount)
         assert(sections.count + nextUnusedSections.count == startSectionCount)
 
         // move sections
@@ -218,12 +218,12 @@ struct Randomizer {
             let targetIndex = randomValue % sections.count
 
             if explicitlyMoveSections {
-                let section = sections.removeAtIndex(sectionIndex)
-                sections.insert(section, atIndex: targetIndex)
+                let section = sections.remove(at: sectionIndex)
+                sections.insert(section, at: targetIndex)
             }
         }
 
-        assert(countTotalItemsInSections(sections) + nextUnusedItems.count == startItemCount)
+        assert(countTotalItems(sections: sections) + nextUnusedItems.count == startItemCount)
         assert(sections.count + nextUnusedSections.count == startSectionCount)
 
         // delete sections
@@ -236,7 +236,7 @@ struct Randomizer {
             let sectionIndex = randomValue % sections.count
 
             if deleteSections {
-                let section = sections.removeAtIndex(sectionIndex)
+                let section = sections.remove(at: sectionIndex)
 
                 for item in section.numbers {
                     nextUnusedItems.append(item)
@@ -246,7 +246,7 @@ struct Randomizer {
             }
         }
 
-        assert(countTotalItemsInSections(sections) + nextUnusedItems.count == startItemCount)
+        assert(countTotalItems(sections: sections) + nextUnusedItems.count == startItemCount)
         assert(sections.count + nextUnusedSections.count == startSectionCount)
 
         return Randomizer(rng: nextRng, sections: sections, unusedItems: nextUnusedItems, unusedSections: nextUnusedSections)

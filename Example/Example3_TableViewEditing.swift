@@ -23,9 +23,9 @@ class EditingExampleViewController: UIViewController {
         super.viewDidLoad()
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<NumberSection>()
-        let sections: [NumberSection] = [NumberSection(header: "Section 1", numbers: [], updated: NSDate()),
-                                         NumberSection(header: "Section 2", numbers: [], updated: NSDate()),
-                                         NumberSection(header: "Section 3", numbers: [], updated: NSDate())]
+        let sections: [NumberSection] = [NumberSection(header: "Section 1", numbers: [], updated: Date()),
+                                         NumberSection(header: "Section 2", numbers: [], updated: Date()),
+                                         NumberSection(header: "Section 3", numbers: [], updated: Date())]
 
         let initialState = SectionedTableViewState(sections: sections)
         let add3ItemsAddStart = Observable.of((), (), ())
@@ -39,11 +39,11 @@ class EditingExampleViewController: UIViewController {
         let movedCommand = tableView.rx_itemMoved
             .map(TableViewEditingCommand.MoveItem)
 
-        skinTableViewDataSource(dataSource)
+        skinTableViewDataSource(dataSource: dataSource)
         Observable.of(addCommand, deleteCommand, movedCommand)
             .merge()
-            .scan(initialState) {
-                return $0.executeCommand($1)
+            .scan(initialState) { (state: SectionedTableViewState, command: TableViewEditingCommand) -> SectionedTableViewState in
+                return state.execute(command: command)
             }
             .startWith(initialState)
             .map {
@@ -54,19 +54,19 @@ class EditingExampleViewController: UIViewController {
             .addDisposableTo(disposeBag)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.setEditing(true, animated: true)
     }
     
     func skinTableViewDataSource(dataSource: RxTableViewSectionedAnimatedDataSource<NumberSection>) {
         
-        dataSource.animationConfiguration = AnimationConfiguration(insertAnimation: .Top,
-                                                                   reloadAnimation: .Fade,
-                                                                   deleteAnimation: .Left)
+        dataSource.animationConfiguration = AnimationConfiguration(insertAnimation: .top,
+                                                                   reloadAnimation: .fade,
+                                                                   deleteAnimation: .left)
         
         dataSource.configureCell = { (dataSource, table, idxPath, item) in
-            let cell = table.dequeueReusableCellWithIdentifier("Cell", forIndexPath: idxPath)
+            let cell = table.dequeueReusableCell(withIdentifier: "Cell", for: idxPath)
             
             cell.textLabel?.text = "\(item)"
             
@@ -88,8 +88,8 @@ class EditingExampleViewController: UIViewController {
 
 enum TableViewEditingCommand {
     case AppendItem(item: IntItem, section: Int)
-    case MoveItem(sourceIndex: NSIndexPath, destinationIndex: NSIndexPath)
-    case DeleteItem(NSIndexPath)
+    case MoveItem(sourceIndex: IndexPath, destinationIndex: IndexPath)
+    case DeleteItem(IndexPath)
 }
 
 // This is the part
@@ -101,7 +101,7 @@ struct SectionedTableViewState {
         self.sections = sections
     }
     
-    func executeCommand(command: TableViewEditingCommand) -> SectionedTableViewState {
+    func execute(command: TableViewEditingCommand) -> SectionedTableViewState {
         switch command {
         case .AppendItem(let appendEvent):
             var sections = self.sections
@@ -111,7 +111,7 @@ struct SectionedTableViewState {
         case .DeleteItem(let indexPath):
             var sections = self.sections
             var items = sections[indexPath.section].items
-            items.removeAtIndex(indexPath.row)
+            items.remove(at: indexPath.row)
             sections[indexPath.section] = NumberSection(original: sections[indexPath.section], items: items)
             return SectionedTableViewState(sections: sections)
         case .MoveItem(let moveEvent):
@@ -120,15 +120,15 @@ struct SectionedTableViewState {
             var destinationItems = sections[moveEvent.destinationIndex.section].items
             
             if moveEvent.sourceIndex.section == moveEvent.destinationIndex.section {
-                destinationItems.insert(destinationItems.removeAtIndex(moveEvent.sourceIndex.row),
-                                        atIndex: moveEvent.destinationIndex.row)
+                destinationItems.insert(destinationItems.remove(at: moveEvent.sourceIndex.row),
+                                        at: moveEvent.destinationIndex.row)
                 let destinationSection = NumberSection(original: sections[moveEvent.destinationIndex.section], items: destinationItems)
                 sections[moveEvent.sourceIndex.section] = destinationSection
                 
                 return SectionedTableViewState(sections: sections)
             } else {
-                let item = sourceItems.removeAtIndex(moveEvent.sourceIndex.row)
-                destinationItems.insert(item, atIndex: moveEvent.destinationIndex.row)
+                let item = sourceItems.remove(at: moveEvent.sourceIndex.row)
+                destinationItems.insert(item, at: moveEvent.destinationIndex.row)
                 let sourceSection = NumberSection(original: sections[moveEvent.sourceIndex.section], items: sourceItems)
                 let destinationSection = NumberSection(original: sections[moveEvent.destinationIndex.section], items: destinationItems)
                 sections[moveEvent.sourceIndex.section] = sourceSection
@@ -144,7 +144,7 @@ extension TableViewEditingCommand {
     static func addRandomItem() -> TableViewEditingCommand {
         let randSection = Int(arc4random_uniform(UInt32(3)))
         let number = Int(arc4random_uniform(UInt32(100)))
-        let item = IntItem(number: number, date: NSDate())
+        let item = IntItem(number: number, date: Date())
         return TableViewEditingCommand.AppendItem(item: item, section: randSection)
     }
 }

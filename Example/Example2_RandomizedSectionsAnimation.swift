@@ -103,9 +103,9 @@ class ViewController: UIViewController {
 // MARK: Skinning
 extension ViewController {
 
-    func skinTableViewDataSource(dataSource: RxTableViewSectionedDataSource<NumberSection>) {
+    func skinTableViewDataSource(_ dataSource: RxTableViewSectionedDataSource<NumberSection>) {
         dataSource.configureCell = { (_, tv, ip, i) in
-            let cell = tv.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style:.Default, reuseIdentifier: "Cell")
+            let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style:.default, reuseIdentifier: "Cell")
 
             cell.textLabel!.text = "\(i)"
 
@@ -117,9 +117,9 @@ extension ViewController {
         }
     }
 
-    func skinCollectionViewDataSource(dataSource: CollectionViewSectionedDataSource<NumberSection>) {
+    func skinCollectionViewDataSource(_ dataSource: CollectionViewSectionedDataSource<NumberSection>) {
         dataSource.configureCell = { (_, cv, ip, i) in
-            let cell = cv.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: ip) as! NumberCell
+            let cell = cv.dequeueReusableCell(withReuseIdentifier: "Cell", for: ip) as! NumberCell
 
             cell.value!.text = "\(i)"
 
@@ -127,7 +127,7 @@ extension ViewController {
         }
 
         dataSource.supplementaryViewFactory = { (ds ,cv, kind, ip) in
-            let section = cv.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Section", forIndexPath: ip) as! NumberSectionView
+            let section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Section", for: ip) as! NumberSectionView
 
             section.value!.text = "\(ds.sectionAtIndex(ip.section).header)"
             
@@ -151,7 +151,7 @@ extension ViewController {
             */
 
             return (0 ..< nSections).map { (i: Int) in
-                NumberSection(header: "Section \(i + 1)", numbers: $(Array(i * nItems ..< (i + 1) * nItems)), updated: NSDate())
+                NumberSection(header: "Section \(i + 1)", numbers: $(Array(i * nItems ..< (i + 1) * nItems)), updated: Date())
             }
         }
         else {
@@ -163,19 +163,19 @@ extension ViewController {
 }
 
 let _initialValue: [NumberSection] = [
-    NumberSection(header: "section 1", numbers: $([1, 2, 3]), updated: NSDate()),
-    NumberSection(header: "section 2", numbers: $([4, 5, 6]), updated: NSDate()),
-    NumberSection(header: "section 3", numbers: $([7, 8, 9]), updated: NSDate()),
-    NumberSection(header: "section 4", numbers: $([10, 11, 12]), updated: NSDate()),
-    NumberSection(header: "section 5", numbers: $([13, 14, 15]), updated: NSDate()),
-    NumberSection(header: "section 6", numbers: $([16, 17, 18]), updated: NSDate()),
-    NumberSection(header: "section 7", numbers: $([19, 20, 21]), updated: NSDate()),
-    NumberSection(header: "section 8", numbers: $([22, 23, 24]), updated: NSDate()),
-    NumberSection(header: "section 9", numbers: $([25, 26, 27]), updated: NSDate()),
-    NumberSection(header: "section 10", numbers: $([28, 29, 30]), updated: NSDate())
+    NumberSection(header: "section 1", numbers: $([1, 2, 3]), updated: Date()),
+    NumberSection(header: "section 2", numbers: $([4, 5, 6]), updated: Date()),
+    NumberSection(header: "section 3", numbers: $([7, 8, 9]), updated: Date()),
+    NumberSection(header: "section 4", numbers: $([10, 11, 12]), updated: Date()),
+    NumberSection(header: "section 5", numbers: $([13, 14, 15]), updated: Date()),
+    NumberSection(header: "section 6", numbers: $([16, 17, 18]), updated: Date()),
+    NumberSection(header: "section 7", numbers: $([19, 20, 21]), updated: Date()),
+    NumberSection(header: "section 8", numbers: $([22, 23, 24]), updated: Date()),
+    NumberSection(header: "section 9", numbers: $([25, 26, 27]), updated: Date()),
+    NumberSection(header: "section 10", numbers: $([28, 29, 30]), updated: Date())
 ]
 
-func $(numbers: [Int]) -> [IntItem] {
-    return numbers.map { IntItem(number: $0, date: NSDate()) }
+func $(_ numbers: [Int]) -> [IntItem] {
+    return numbers.map { IntItem(number: $0, date: Date()) }
 }
 

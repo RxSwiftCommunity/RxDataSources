@@ -40,12 +40,12 @@ class CustomizationUsingTableViewDelegate : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
         let dataSource = RxTableViewSectionedAnimatedDataSource<MySection>()
 
         dataSource.configureCell = { ds, tv, ip, item in
-            let cell = tv.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style: .Default, reuseIdentifier: "Cell")
+            let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
             cell.textLabel?.text = "Item \(item)"
 
             return cell
@@ -78,7 +78,7 @@ class CustomizationUsingTableViewDelegate : UIViewController {
 }
 
 extension CustomizationUsingTableViewDelegate : UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 
         // you can also fetch item
         guard let item = dataSource?.itemAtIndexPath(indexPath),

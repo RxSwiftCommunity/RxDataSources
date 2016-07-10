@@ -38,7 +38,7 @@ class MultipleSectionModelViewController: UIViewController {
             .addDisposableTo(disposeBag)
     }
     
-    func skinTableViewDataSource(dataSource: RxTableViewSectionedReloadDataSource<MultipleSectionModel>) {
+    func skinTableViewDataSource(_ dataSource: RxTableViewSectionedReloadDataSource<MultipleSectionModel>) {
         dataSource.configureCell = { (dataSource, table, idxPath, _) in
             switch dataSource.itemAtIndexPath(idxPath) {
             case let .ImageSectionItem(image, title):
@@ -54,7 +54,7 @@ class MultipleSectionModelViewController: UIViewController {
                 return cell
             case let .ToggleableSectionItem(title, enabled):
                 let cell: TitleSwitchTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
-                cell.switchControl.on = enabled
+                cell.switchControl.isOn = enabled
                 cell.titleLabel.text = title
                 
                 return cell

@@ -16,9 +16,9 @@ struct NumberSection {
 
     var numbers: [IntItem]
 
-    var updated: NSDate
+    var updated: Date
 
-    init(header: String, numbers: [Item], updated: NSDate) {
+    init(header: String, numbers: [Item], updated: Date) {
         self.header = header
         self.numbers = numbers
         self.updated = updated
@@ -28,7 +28,7 @@ struct NumberSection {
 
 struct IntItem {
     let number: Int
-    let date: NSDate
+    let date: Date
 }
 
 // MARK: Just extensions to say how to determine identity and how to determine is entity updated
@@ -71,7 +71,7 @@ extension IntItem
 
 // equatable, this is needed to detect changes
 func == (lhs: IntItem, rhs: IntItem) -> Bool {
-    return lhs.number == rhs.number && lhs.date.isEqualToDate(rhs.date)
+    return lhs.number == rhs.number && lhs.date == rhs.date
 }
 
 // MARK: Some nice extensions
