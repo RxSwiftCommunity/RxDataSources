@@ -50,7 +50,10 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionMod
                         }
                     }
                     catch let e {
+                        #if DEBUG
+                        print("Error while binding data animated: \(e)\nFallback to normal `reloadData` behavior.")
                         rxDebugFatalError(e)
+                        #endif
                         self.setSections(newSections)
                         collectionView.reloadData()
                     }

@@ -57,12 +57,8 @@ public class _TableViewSectionedDataSource
         return _rx_tableView(tableView, titleForFooterInSection: section)
     }
 
-    public var canEditRowAtIndexPathImplemented: Bool {
-        return false
-    }
-
     func _rx_tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        return false
     }
     
     public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -100,13 +96,6 @@ public class _TableViewSectionedDataSource
         _rx_tableView(tableView, moveRowAtIndexPath: sourceIndexPath, toIndexPath: destinationIndexPath)
     }
 
-    override public func respondsToSelector(aSelector: Selector) -> Bool {
-        if aSelector == #selector(UITableViewDataSource.tableView(_:canEditRowAtIndexPath:)) {
-            return self.canEditRowAtIndexPathImplemented
-        }
-
-        return super.respondsToSelector(aSelector)
-    }
 }
 
 public class RxTableViewSectionedDataSource<S: SectionModelType>
@@ -197,10 +186,6 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         }
     }
 
-    override public var canEditRowAtIndexPathImplemented: Bool {
-        let result = canEditRowAtIndexPath != nil
-        return result
-    }
     public var canMoveRowAtIndexPath: ((RxTableViewSectionedDataSource<S>, indexPath: NSIndexPath) -> Bool)? {
         didSet {
             #if DEBUG
@@ -209,7 +194,6 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         }
     }
 
-    
     public var sectionIndexTitles: ((RxTableViewSectionedDataSource<S>) -> [String]?)? {
         didSet {
             #if DEBUG

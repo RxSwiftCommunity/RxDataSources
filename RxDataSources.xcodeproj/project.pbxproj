@@ -18,6 +18,9 @@
 		845F61FB1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FA1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift */; };
 		845F61FD1CCFF63600A8BE32 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FC1CCFF63600A8BE32 /* UIKitExtensions.swift */; };
 		84FC6BEE1CA4830A00D3C605 /* Example3_TableViewEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6BED1CA4830A00D3C605 /* Example3_TableViewEditing.swift */; };
+		888669D71D11F67C008DC240 /* NumberSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3441D0219A7006308C5 /* NumberSection.swift */; };
+		888669D81D11F68B008DC240 /* Randomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3451D0219A7006308C5 /* Randomizer.swift */; };
+		888669D91D11F762008DC240 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3431D0219A7006308C5 /* AppDelegate.swift */; };
 		9FCDA16B1C3AF4A2000F5F94 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5481C36F1FC0090614D /* Changeset.swift */; };
 		9FCDA16C1C3AF4A2000F5F94 /* CollectionViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */; };
 		9FCDA16E1C3AF4A2000F5F94 /* Differentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54B1C36F1FC0090614D /* Differentiator.swift */; };
@@ -33,8 +36,17 @@
 		9FF3014B1C4AA6D1007376BD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF301491C4AA6D1007376BD /* RxSwift.framework */; };
 		9FF3014E1C4AA6DA007376BD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; };
 		9FF301501C4AA6DA007376BD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014D1C4AA6DA007376BD /* RxSwift.framework */; };
+		C814E8F51D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */; };
+		C814E8F61D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */; };
+		C814E8F71D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */; };
 		C8153A501CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8153A4F1CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift */; };
 		C8153A511CC6C2F70050C990 /* Example1_CustomizationUsingTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8153A4F1CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift */; };
+		C8477FB91D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8477FB81D29DBC90074454A /* IntegerType+IdentifiableType.swift */; };
+		C8477FBA1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8477FB81D29DBC90074454A /* IntegerType+IdentifiableType.swift */; };
+		C8477FBB1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8477FB81D29DBC90074454A /* IntegerType+IdentifiableType.swift */; };
+		C8477FBD1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8477FBC1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift */; };
+		C8477FBE1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8477FBC1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift */; };
+		C8477FBF1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8477FBC1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift */; };
 		C85EE5571C36F1FC0090614D /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5481C36F1FC0090614D /* Changeset.swift */; };
 		C85EE5581C36F1FC0090614D /* CollectionViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */; };
 		C85EE55A1C36F1FC0090614D /* Differentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54B1C36F1FC0090614D /* Differentiator.swift */; };
@@ -188,7 +200,10 @@
 		9FF3014D1C4AA6DA007376BD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		A66428182C504F0369D6A3F2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B472785F652B32605A7A6838 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C8153A4F1CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example1_CustomizationUsingTableViewDelegate.swift; sourceTree = "<group>"; };
+		C8477FB81D29DBC90074454A /* IntegerType+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerType+IdentifiableType.swift"; sourceTree = "<group>"; };
+		C8477FBC1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingPointType+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C85EE5481C36F1FC0090614D /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
 		C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionedDataSource.swift; sourceTree = "<group>"; };
 		C85EE54B1C36F1FC0090614D /* Differentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Differentiator.swift; sourceTree = "<group>"; };
@@ -378,6 +393,9 @@
 				C85EE54F1C36F1FC0090614D /* TableViewSectionedDataSource.swift */,
 				C8BB762B1C4C3CDF002B21C8 /* UI+SectionedViewType.swift */,
 				C8CC634C1CCF8492006AE8CE /* Array+Extensions.swift */,
+				C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */,
+				C8477FB81D29DBC90074454A /* IntegerType+IdentifiableType.swift */,
+				C8477FBC1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -536,13 +554,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8984CAA1C36B6FA001E4272 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
-				CE301EF235F2B45D0C3E30B9 /* 📦 Check Pods Manifest.lock */,
+				CE301EF235F2B45D0C3E30B9 /* [CP] Check Pods Manifest.lock */,
 				C8984C971C36B6FA001E4272 /* Sources */,
 				C8984C981C36B6FA001E4272 /* Frameworks */,
 				C8984C991C36B6FA001E4272 /* Resources */,
 				C8EC65CA1C4C441B00FC9207 /* Embed Frameworks */,
-				5D41B451D84BA67C35C4AC67 /* 📦 Embed Pods Frameworks */,
-				FF90FC9979157345588A89F5 /* 📦 Copy Pods Resources */,
+				5D41B451D84BA67C35C4AC67 /* [CP] Embed Pods Frameworks */,
+				FF90FC9979157345588A89F5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -595,12 +613,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8BB767E1C4C3E53002B21C8 /* Build configuration list for PBXNativeTarget "RxDataSources" */;
 			buildPhases = (
-				C6F25DB535B519D2FD763EC9 /* 📦 Check Pods Manifest.lock */,
+				C6F25DB535B519D2FD763EC9 /* [CP] Check Pods Manifest.lock */,
 				C8BB765F1C4C3E53002B21C8 /* Sources */,
 				C8BB76761C4C3E53002B21C8 /* Frameworks */,
 				C8BB767A1C4C3E53002B21C8 /* Headers */,
 				C8BB767C1C4C3E53002B21C8 /* Resources */,
-				07272154CEBF20D8EC983364 /* 📦 Copy Pods Resources */,
+				07272154CEBF20D8EC983364 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -711,14 +729,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		07272154CEBF20D8EC983364 /* 📦 Copy Pods Resources */ = {
+		07272154CEBF20D8EC983364 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,14 +744,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RxDataSources/Pods-RxDataSources-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5D41B451D84BA67C35C4AC67 /* 📦 Embed Pods Frameworks */ = {
+		5D41B451D84BA67C35C4AC67 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -741,14 +759,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C6F25DB535B519D2FD763EC9 /* 📦 Check Pods Manifest.lock */ = {
+		C6F25DB535B519D2FD763EC9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -756,14 +774,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		CE301EF235F2B45D0C3E30B9 /* 📦 Check Pods Manifest.lock */ = {
+		CE301EF235F2B45D0C3E30B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,14 +789,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FF90FC9979157345588A89F5 /* 📦 Copy Pods Resources */ = {
+		FF90FC9979157345588A89F5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -796,6 +814,7 @@
 				9FCDA1761C3AF4A2000F5F94 /* RxTableViewSectionedAnimatedDataSource.swift in Sources */,
 				C8BB76391C4C3CDF002B21C8 /* ItemPath.swift in Sources */,
 				C8BB76311C4C3CDF002B21C8 /* AnimatableSectionModelType+ItemPath.swift in Sources */,
+				C8477FBF1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift in Sources */,
 				C8CC634F1CCF8492006AE8CE /* Array+Extensions.swift in Sources */,
 				9FCDA1751C3AF4A2000F5F94 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				C8BB76351C4C3CDF002B21C8 /* IdentifiableType.swift in Sources */,
@@ -805,6 +824,7 @@
 				C8BB762F1C4C3CDF002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				9FCDA16E1C3AF4A2000F5F94 /* Differentiator.swift in Sources */,
 				9FCDA1781C3AF4A2000F5F94 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
+				C8477FBB1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				9FCDA1771C3AF4A2000F5F94 /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				9FCDA16C1C3AF4A2000F5F94 /* CollectionViewSectionedDataSource.swift in Sources */,
 				9FCDA1721C3AF4A2000F5F94 /* TableViewSectionedDataSource.swift in Sources */,
@@ -815,6 +835,7 @@
 				9FCDA16B1C3AF4A2000F5F94 /* Changeset.swift in Sources */,
 				9FCDA1701C3AF4A2000F5F94 /* SectionModel.swift in Sources */,
 				C8BB763D1C4C3CDF002B21C8 /* UI+SectionedViewType.swift in Sources */,
+				C814E8F71D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,6 +846,7 @@
 				C85EE5621C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift in Sources */,
 				C8BB76381C4C3CDF002B21C8 /* ItemPath.swift in Sources */,
 				C8BB76301C4C3CDF002B21C8 /* AnimatableSectionModelType+ItemPath.swift in Sources */,
+				C8477FBE1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift in Sources */,
 				C8CC634E1CCF8492006AE8CE /* Array+Extensions.swift in Sources */,
 				C85EE5611C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				C8BB76341C4C3CDF002B21C8 /* IdentifiableType.swift in Sources */,
@@ -834,6 +856,7 @@
 				C8BB762E1C4C3CDF002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				C85EE55A1C36F1FC0090614D /* Differentiator.swift in Sources */,
 				C85EE5641C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
+				C8477FBA1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				C85EE5631C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				C85EE5581C36F1FC0090614D /* CollectionViewSectionedDataSource.swift in Sources */,
 				C85EE55E1C36F1FC0090614D /* TableViewSectionedDataSource.swift in Sources */,
@@ -844,6 +867,7 @@
 				C85EE5571C36F1FC0090614D /* Changeset.swift in Sources */,
 				C85EE55C1C36F1FC0090614D /* SectionModel.swift in Sources */,
 				C8BB763C1C4C3CDF002B21C8 /* UI+SectionedViewType.swift in Sources */,
+				C814E8F61D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,13 +901,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888669D91D11F762008DC240 /* AppDelegate.swift in Sources */,
 				C8EBA5E91CD3DE0A00E745F3 /* ImageTitleTableViewCell.swift in Sources */,
 				C8E946A01CC6DEC800C5559C /* Example3_TableViewEditing.swift in Sources */,
 				C8BB76461C4C3DD4002B21C8 /* Example2_RandomizedSectionsAnimation.swift in Sources */,
 				C8EBA5E81CD3DDF400E745F3 /* Example4_DifferentSectionAndItemTypes.swift in Sources */,
 				C8EBA5EB1CD3DE0A00E745F3 /* TitleSteperTableViewCell.swift in Sources */,
 				C8EBA5EA1CD3DE0A00E745F3 /* TitleSwitchTableViewCell.swift in Sources */,
+				888669D81D11F68B008DC240 /* Randomizer.swift in Sources */,
 				C8153A511CC6C2F70050C990 /* Example1_CustomizationUsingTableViewDelegate.swift in Sources */,
+				888669D71D11F67C008DC240 /* NumberSection.swift in Sources */,
 				C8EBA5EC1CD3DE0A00E745F3 /* UIKitExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -895,6 +922,7 @@
 				C8BB76601C4C3E53002B21C8 /* RxTableViewSectionedAnimatedDataSource.swift in Sources */,
 				C8BB76611C4C3E53002B21C8 /* ItemPath.swift in Sources */,
 				C8BB76621C4C3E53002B21C8 /* AnimatableSectionModelType+ItemPath.swift in Sources */,
+				C8477FBD1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift in Sources */,
 				C8CC634D1CCF8492006AE8CE /* Array+Extensions.swift in Sources */,
 				C8BB76631C4C3E53002B21C8 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
 				C8BB76641C4C3E53002B21C8 /* IdentifiableType.swift in Sources */,
@@ -904,6 +932,7 @@
 				C8BB76671C4C3E53002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				C8BB76691C4C3E53002B21C8 /* Differentiator.swift in Sources */,
 				C8BB766A1C4C3E53002B21C8 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
+				C8477FB91D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				C8BB766C1C4C3E53002B21C8 /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				C8BB766D1C4C3E53002B21C8 /* CollectionViewSectionedDataSource.swift in Sources */,
 				C8BB766E1C4C3E53002B21C8 /* TableViewSectionedDataSource.swift in Sources */,
@@ -914,6 +943,7 @@
 				C8BB76731C4C3E53002B21C8 /* Changeset.swift in Sources */,
 				C8BB76741C4C3E53002B21C8 /* SectionModel.swift in Sources */,
 				C8BB76751C4C3E53002B21C8 /* UI+SectionedViewType.swift in Sources */,
+				C814E8F51D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,6 +1076,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1087,6 +1118,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

@@ -61,10 +61,6 @@ class MultipleSectionModelViewController: UIViewController {
             }
         }
 
-        dataSource.canEditRowAtIndexPath = { _ in
-            return false
-        }
-
         dataSource.titleForHeaderInSection = { dataSource, index in
             let section = dataSource.sectionAtIndex(index)
             
@@ -100,7 +96,14 @@ extension MultipleSectionModel: SectionModelType {
     }
     
     init(original: MultipleSectionModel, items: [Item]) {
-        self = original
+        switch original {
+        case let .ImageProvidableSection(title: title, items: _):
+            self = .ImageProvidableSection(title: title, items: items)
+        case let .StepperableSection(title, _):
+            self = .StepperableSection(title: title, items: items)
+        case let .ToggleableSection(title, _):
+            self = .ToggleableSection(title: title, items: items)
+        }
     }
 }
 

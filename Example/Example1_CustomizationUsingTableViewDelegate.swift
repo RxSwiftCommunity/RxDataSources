@@ -30,14 +30,6 @@ extension MySection : AnimatableSectionModelType {
     }
 }
 
-extension Int : IdentifiableType {
-    public typealias Identity = Int
-
-    public var identity : Int {
-        return self
-    }
-}
-
 class CustomizationUsingTableViewDelegate : UIViewController {
     @IBOutlet var tableView: UITableView!
 
