@@ -17,16 +17,16 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RxCocoa:
-    :commit: b47ce13eaea5929bd18758eef8828d6c8ce2a02b
+    :commit: 58e427b045b4f2823581ce89e9082bb2de19f0a4
     :git: git@github.com:ReactiveX/RxSwift.git
   RxSwift:
-    :commit: b47ce13eaea5929bd18758eef8828d6c8ce2a02b
+    :commit: 58e427b045b4f2823581ce89e9082bb2de19f0a4
     :git: git@github.com:ReactiveX/RxSwift.git
 
 SPEC CHECKSUMS:
   RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
   RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
 
-PODFILE CHECKSUM: 810d5edbe5528082fd2e6c64ec9959cbc8e24ec4
+PODFILE CHECKSUM: 669de935bb3a30d4211c554bb63a8a546395225a
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.beta.1
