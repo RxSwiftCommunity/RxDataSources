@@ -67,10 +67,10 @@ class CustomizationUsingTableViewDelegate : UIViewController {
         ]
 
         Observable.just(sections)
-            .bindTo(tableView.rx_itemsWithDataSource(dataSource))
+            .bindTo(tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
 
-        tableView.rx_setDelegate(self)
+        tableView.rx.setDelegate(self)
             .addDisposableTo(disposeBag)
 
         self.dataSource = dataSource
@@ -83,7 +83,7 @@ extension CustomizationUsingTableViewDelegate : UITableViewDelegate {
         // you can also fetch item
         guard let item = dataSource?.itemAtIndexPath(indexPath),
         // .. or section and customize what you like
-            _ = dataSource?.sectionAtIndex(indexPath.section)
+            let _ = dataSource?.sectionAtIndex(indexPath.section)
             else {
             return 0.0
         }

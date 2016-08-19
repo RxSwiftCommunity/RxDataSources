@@ -29,14 +29,14 @@ class EditingExampleViewController: UIViewController {
 
         let initialState = SectionedTableViewState(sections: sections)
         let add3ItemsAddStart = Observable.of((), (), ())
-        let addCommand = Observable.of(addButton.rx_tap.asObservable(), add3ItemsAddStart)
+        let addCommand = Observable.of(addButton.rx.tap.asObservable(), add3ItemsAddStart)
             .merge()
             .map(TableViewEditingCommand.addRandomItem)
 
-        let deleteCommand = tableView.rx_itemDeleted.asObservable()
+        let deleteCommand = tableView.rx.itemDeleted.asObservable()
             .map(TableViewEditingCommand.DeleteItem)
 
-        let movedCommand = tableView.rx_itemMoved
+        let movedCommand = tableView.rx.itemMoved
             .map(TableViewEditingCommand.MoveItem)
 
         skinTableViewDataSource(dataSource: dataSource)
@@ -50,7 +50,7 @@ class EditingExampleViewController: UIViewController {
                 $0.sections
             }
             .shareReplay(1)
-            .bindTo(tableView.rx_itemsWithDataSource(dataSource))
+            .bindTo(tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
     }
     
@@ -95,7 +95,7 @@ enum TableViewEditingCommand {
 // This is the part
 
 struct SectionedTableViewState {
-    private var sections: [NumberSection]
+    fileprivate var sections: [NumberSection]
     
     init(sections: [NumberSection]) {
         self.sections = sections

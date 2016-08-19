@@ -34,7 +34,7 @@ class MultipleSectionModelViewController: UIViewController {
         skinTableViewDataSource(dataSource)
         
         Observable.just(sections)
-            .bindTo(tableView.rx_itemsWithDataSource(dataSource))
+            .bindTo(tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
     }
     

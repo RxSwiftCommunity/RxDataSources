@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         let initialRandomizedSections = Randomizer(rng: PseudoRandomGenerator(4, 3), sections: initialValue())
 
         let ticks = Observable<Int>.interval(1, scheduler: MainScheduler.instance).map { _ in () }
-        let randomSections = Observable.of(ticks, refreshButton.rx_tap.asObservable())
+        let randomSections = Observable.of(ticks, refreshButton.rx.tap.asObservable())
                 .merge()
                 .scan(initialRandomizedSections) { a, _ in
                     return a.randomize()
@@ -51,11 +51,11 @@ class ViewController: UIViewController {
         skinTableViewDataSource(reloadDataSource)
 
         randomSections
-            .bindTo(animatedTableView.rx_itemsWithDataSource(tvAnimatedDataSource))
+            .bindTo(animatedTableView.rx.items(dataSource: tvAnimatedDataSource))
             .addDisposableTo(disposeBag)
 
         randomSections
-            .bindTo(tableView.rx_itemsWithDataSource(reloadDataSource))
+            .bindTo(tableView.rx.items(dataSource: reloadDataSource))
             .addDisposableTo(disposeBag)
 
         // Collection view logic works, but when clicking fast because of internal bugs
@@ -74,28 +74,28 @@ class ViewController: UIViewController {
             skinCollectionViewDataSource(cvAnimatedDataSource)
 
             randomSections
-                .bindTo(animatedCollectionView.rx_itemsWithDataSource(cvAnimatedDataSource))
+                .bindTo(animatedCollectionView.rx.items(dataSource: cvAnimatedDataSource))
                 .addDisposableTo(disposeBag)
         }
         else {
             let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
             skinCollectionViewDataSource(cvReloadDataSource)
             randomSections
-                .bindTo(animatedCollectionView.rx_itemsWithDataSource(cvReloadDataSource))
+                .bindTo(animatedCollectionView.rx.items(dataSource: cvReloadDataSource))
                 .addDisposableTo(disposeBag)
         }
 
         // touches
 
         Observable.of(
-            tableView.rx_modelSelected(IntItem.self),
-            animatedTableView.rx_modelSelected(IntItem.self),
-            animatedCollectionView.rx_modelSelected(IntItem.self)
+            tableView.rx.modelSelected(IntItem.self),
+            animatedTableView.rx.modelSelected(IntItem.self),
+            animatedCollectionView.rx.modelSelected(IntItem.self)
         )
             .merge()
-            .subscribeNext { item in
+            .subscribe(onNext: { item in
                 print("Let me guess, it's .... It's \(item), isn't it? Yeah, I've got it.")
-            }
+            })
             .addDisposableTo(disposeBag)
     }
 }

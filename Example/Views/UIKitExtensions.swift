@@ -16,7 +16,7 @@ protocol ReusableView: class {
 
 extension ReusableView {
     static var reuseIdentifier: String {
-        return String(self)
+        return String(describing: self)
     }
 }
 
@@ -25,7 +25,7 @@ extension UITableViewCell: ReusableView {
 
 extension UITableView {
     
-    func dequeueReusableCell<T: UITableViewCell where T: ReusableView>(forIndexPath indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T where T: ReusableView {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
         }
