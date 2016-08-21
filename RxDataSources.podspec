@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxDataSources"
-  s.version          = "0.9"
+  s.version          = "1.0.0.beta.1"
   s.summary          = "This is a collection of reactive data sources for UITableView and UICollectionView."
   s.description      = <<-DESC
 This is a collection of reactive data sources for UITableView and UICollectionView.
@@ -19,7 +19,7 @@ dataSource.cellFactory = { (tv, ip, i) in
 
 // animated
 data
-   .bindTo(animatedTableView.rx_itemsAnimatedWithDataSource(dataSource))
+   .bindTo(animatedTableView.rx_items(dataSource: dataSource))
    .addDisposableTo(disposeBag)
 
 // normal reload
@@ -40,6 +40,6 @@ data
 
   s.source_files          = 'Sources/**/*.swift'
 
-  s.dependency 'RxSwift', '~> 2.2'
-  s.dependency 'RxCocoa', '~> 2.2'
+  s.dependency 'RxSwift', '~> 3.0'
+  s.dependency 'RxCocoa', '~> 3.0'
 end
