@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.0.beta.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.0.beta.1)
+
+#### Features
+
+* Adaptations for Swift 3.0
+
+#### Fixes
+
+* Fixes `moveItem`
+
 ## [0.9](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/0.8.1)
 
 #### Possibly breaking changes
