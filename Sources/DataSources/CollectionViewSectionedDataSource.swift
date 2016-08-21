@@ -205,6 +205,7 @@ public class CollectionViewSectionedDataSource<S: SectionModelType>
     
     override func _rx_collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
+        self.moveItem?(self, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
     }
     
 }
