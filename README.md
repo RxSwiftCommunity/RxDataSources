@@ -26,15 +26,15 @@ Writing table and collection view data sources is tedious. There is a large numb
 RxSwift helps alleviate some of the burden with a simple data binding mechanism:
 1) Turn your data into an Observable sequence
 2) Bind the data to the tableView/collectionView using one of:
-  - `rx_itemsWithDataSource(:protocol<RxTableViewDataSourceType, UITableViewDataSource>)`
-  - `rx_itemsWithCellIdentifier(:String)`
-  - `rx_itemsWithCellIdentifier(:String:Cell.Type)`
-  - `rx_itemsWithCellFactory(:ObservableType)`
+  - `rx_items(dataSource:protocol<RxTableViewDataSourceType, UITableViewDataSource>)`
+  - `rx_items(cellIdentifier:String)`
+  - `rx_items(cellIdentifier:String:Cell.Type:_:)`
+  - `rx_items(_:_:)`
 
 ```swift
 let dataSource = Observable<[String]>.just(["first element", "second element", "third element"])
 
-dataSource.bindTo(tableView.rx_itemsWithCellIdentifier("Cell")) { index, model, cell in
+dataSource.bindTo(tableView.rx.items(cellIdentifier: "Cell")) { index, model, cell in
   cell.textLabel?.text = model
 }
 .addDisposableTo(disposeBag)
@@ -48,7 +48,7 @@ With RxDataSources, it is super easy to just write
 
 ```swift
 Observable.just([MySection(header: "title", items: [1, 2, 3])])
-    .bindTo(tableView.rx_itemsWithDataSource(dataSource))
+    .bindTo(tableView.rx.items(dataSource: dataSource))
     .addDisposableTo(disposeBag)
 ```
 ![RxDataSources example app](https://raw.githubusercontent.com/kzaher/rxswiftcontent/rxdatasources/RxDataSources.gif)
@@ -112,7 +112,7 @@ let sections = [
 ]
 
 Observable.just(sections)
-  .bindTo(tableView.rx_itemsWithDataSource(dataSource))
+  .bindTo(tableView.rx.items(dataSource: dataSource))
   .addDisposableTo(disposeBag)
 ```
 
@@ -123,6 +123,11 @@ To implement animations with RxDataSources, the same steps are required as with 
 - dataSource needs to be an instance of `RxTableViewSectionedAnimatedDataSource` or `RxTableViewSectionedAnimatedDataSource`
 
 
+## Requirements
+
+Xcode 8.0 beta 6 (8S201h)
+
+For Swift 2.3 version please use versions `0.1 ... 0.9`
 
 ## Installation
 
@@ -132,7 +137,7 @@ To implement animations with RxDataSources, the same steps are required as with 
 
 Podfile
 ```
-pod 'RxDataSources', '~> 0.7'
+pod 'RxDataSources', '~> 1.0.0.alpha.1'
 ```
 
 ### Carthage
