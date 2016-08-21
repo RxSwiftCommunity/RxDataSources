@@ -137,7 +137,7 @@ For Swift 2.3 version please use versions `0.1 ... 0.9`
 
 Podfile
 ```
-pod 'RxDataSources', '~> 1.0.0.alpha.1'
+pod 'RxDataSources', '~> 1.0.0.beta.1'
 ```
 
 ### Carthage
