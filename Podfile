@@ -2,8 +2,8 @@ platform :ios, '8.0'
 use_frameworks!
 
 def common
-    pod 'RxSwift', :git => 'git@github.com:ReactiveX/RxSwift.git', :branch => 'swift-3.0'
-    pod 'RxCocoa', :git => 'git@github.com:ReactiveX/RxSwift.git', :branch => 'swift-3.0'
+    pod 'RxSwift', :git => 'git@github.com:ReactiveX/RxSwift.git', :branch => 'develop'
+    pod 'RxCocoa', :git => 'git@github.com:ReactiveX/RxSwift.git', :branch => 'develop'
 end
 
 target 'RxDataSources' do
