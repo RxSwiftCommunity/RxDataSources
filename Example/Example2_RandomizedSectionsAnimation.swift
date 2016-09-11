@@ -20,22 +20,6 @@ class NumberSectionView : UICollectionReusableView {
     @IBOutlet weak var value: UILabel?
 }
 
-extension ObservableType {
-    func implicitTransaction() -> Observable<E> {
-        return Observable.create { observer in
-            return self.subscribe { event in
-                UIView.setAnimationDuration(5.0)
-                //CATransaction.begin()
-                    //CATransaction.setAnimationDuration(5.0)
-                //UIView.animate(withDuration: 3.0) {
-                    observer.on(event)
-                //}
-                //CATransaction.commit()
-            }
-        }
-    }
-}
-
 class ViewController: UIViewController {
 
     @IBOutlet weak var animatedTableView: UITableView!
@@ -74,33 +58,12 @@ class ViewController: UIViewController {
             .bindTo(tableView.rx.items(dataSource: reloadDataSource))
             .addDisposableTo(disposeBag)
 
-        // Collection view logic works, but when clicking fast because of internal bugs
-        // collection view will sometimes get confused. I know what you are thinking,
-        // but this is really not a bug in the algorithm. The generated changes are
-        // pseudorandom, and crash happens depending on clicking speed.
-        //
-        // If you want, turn this to true, just click slow :)
-        //
-        // While `useAnimatedUpdateForCollectionView` is false, you can click as fast as
-        // you want, table view doesn't seem to have same issues like collection view.
+        let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource<NumberSection>()
+        skinCollectionViewDataSource(cvAnimatedDataSource)
 
-        let useAnimatedUpdates = true
-        if useAnimatedUpdates {
-            let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource<NumberSection>()
-            skinCollectionViewDataSource(cvAnimatedDataSource)
-
-            randomSections
-                .implicitTransaction()
-                .bindTo(animatedCollectionView.rx.items(dataSource: cvAnimatedDataSource))
-                .addDisposableTo(disposeBag)
-        }
-        else {
-            let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
-            skinCollectionViewDataSource(cvReloadDataSource)
-            randomSections
-                .bindTo(animatedCollectionView.rx.items(dataSource: cvReloadDataSource))
-                .addDisposableTo(disposeBag)
-        }
+        randomSections
+            .bindTo(animatedCollectionView.rx.items(dataSource: cvAnimatedDataSource))
+            .addDisposableTo(disposeBag)
 
         // touches
 
