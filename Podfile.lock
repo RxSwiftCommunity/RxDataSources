@@ -17,10 +17,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RxCocoa:
-    :commit: 979f3723e43cf5e340818142baca15b3b37ec351
+    :commit: 4a36de8a2452b2cee62bc5cb8a5376e755f2d8e7
     :git: git@github.com:ReactiveX/RxSwift.git
   RxSwift:
-    :commit: 979f3723e43cf5e340818142baca15b3b37ec351
+    :commit: 4a36de8a2452b2cee62bc5cb8a5376e755f2d8e7
     :git: git@github.com:ReactiveX/RxSwift.git
 
 SPEC CHECKSUMS:
