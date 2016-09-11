@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.0-beta.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.0-beta.2)
+
+#### Features
+
+* Adaptations for Swift 3.0
+
+#### Fixes
+
+* Improves collection view animated updates behavior.
+
 ## [1.0.0.beta.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.0.beta.1)
 
 #### Features
