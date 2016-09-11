@@ -13,6 +13,10 @@ import RxSwift
 import RxCocoa
 #endif
 
+/*
+ This is commented becuse collection view has bugs when doing animated updates. 
+ Take a look at randomized sections.
+*/
 public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
@@ -23,10 +27,44 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionMod
     // it crashes. Still need to figure out that one.
     var dataSet = false
 
+    private let disposeBag = DisposeBag()
+
+    private let partialUpdateEvent = PublishSubject<(UICollectionView, Event<Element>)>()
+
     public override init() {
         super.init()
+
+        self.partialUpdateEvent
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] event in
+                self?.collectionView(event.0, observedPartialUpdateEvent: event.1)
+            })
+            .addDisposableTo(disposeBag)
     }
-    
+
+    public func collectionView(_ collectionView: UICollectionView, observedPartialUpdateEvent: Event<Element>) {
+        UIBindingObserver(UIElement: self) { dataSource, newSections in
+            let oldSections = dataSource.sectionModels
+            do {
+                let differences = try differencesForSectionedView(oldSections, finalSections: newSections)
+
+                for difference in differences {
+                    dataSource.setSections(difference.finalSections)
+
+                    collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                }
+            }
+            catch let e {
+                #if DEBUG
+                    print("Error while binding data animated: \(e)\nFallback to normal `reloadData` behavior.")
+                    rxDebugFatalError(e)
+                #endif
+                self.setSections(newSections)
+                collectionView.reloadData()
+            }
+        }.on(observedPartialUpdateEvent)
+    }
+
     public func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
         UIBindingObserver(UIElement: self) { dataSource, newSections in
             #if DEBUG
@@ -38,26 +76,8 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionMod
                 collectionView.reloadData()
             }
             else {
-                DispatchQueue.main.async {
-                    let oldSections = dataSource.sectionModels
-                    do {
-                        let differences = try differencesForSectionedView(oldSections, finalSections: newSections)
-
-                        for difference in differences {
-                            dataSource.setSections(difference.finalSections)
-
-                            collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
-                        }
-                    }
-                    catch let e {
-                        #if DEBUG
-                        print("Error while binding data animated: \(e)\nFallback to normal `reloadData` behavior.")
-                        rxDebugFatalError(e)
-                        #endif
-                        self.setSections(newSections)
-                        collectionView.reloadData()
-                    }
-                }
+                let element = (collectionView, observedEvent)
+                dataSource.partialUpdateEvent.on(.next(element))
             }
         }.on(observedEvent)
     }

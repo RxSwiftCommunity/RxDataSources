@@ -20,6 +20,22 @@ class NumberSectionView : UICollectionReusableView {
     @IBOutlet weak var value: UILabel?
 }
 
+extension ObservableType {
+    func implicitTransaction() -> Observable<E> {
+        return Observable.create { observer in
+            return self.subscribe { event in
+                UIView.setAnimationDuration(5.0)
+                //CATransaction.begin()
+                    //CATransaction.setAnimationDuration(5.0)
+                //UIView.animate(withDuration: 3.0) {
+                    observer.on(event)
+                //}
+                //CATransaction.commit()
+            }
+        }
+    }
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var animatedTableView: UITableView!
@@ -74,6 +90,7 @@ class ViewController: UIViewController {
             skinCollectionViewDataSource(cvAnimatedDataSource)
 
             randomSections
+                .implicitTransaction()
                 .bindTo(animatedCollectionView.rx.items(dataSource: cvAnimatedDataSource))
                 .addDisposableTo(disposeBag)
         }
@@ -129,7 +146,7 @@ extension ViewController {
         dataSource.supplementaryViewFactory = { (ds ,cv, kind, ip) in
             let section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Section", for: ip) as! NumberSectionView
 
-            section.value!.text = "\(ds.sectionAtIndex(ip.section).header)"
+            section.value!.text = "\(ds[ip.section].header)"
             
             return section
         }
@@ -141,8 +158,8 @@ extension ViewController {
         let generate = true
         if generate {
 
-            let nSections = 4
-            let nItems = 2
+            let nSections = 10
+            let nItems = 100
 
 
             /*

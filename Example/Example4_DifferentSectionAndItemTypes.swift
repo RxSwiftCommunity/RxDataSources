@@ -40,7 +40,7 @@ class MultipleSectionModelViewController: UIViewController {
     
     func skinTableViewDataSource(_ dataSource: RxTableViewSectionedReloadDataSource<MultipleSectionModel>) {
         dataSource.configureCell = { (dataSource, table, idxPath, _) in
-            switch dataSource.itemAtIndexPath(idxPath) {
+            switch dataSource[idxPath] {
             case let .ImageSectionItem(image, title):
                 let cell: ImageTitleTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
                 cell.titleLabel.text = title
