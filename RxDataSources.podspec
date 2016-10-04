@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxDataSources"
-  s.version          = "1.0.0-beta.2"
+  s.version          = "1.0.0-beta.3"
   s.summary          = "This is a collection of reactive data sources for UITableView and UICollectionView."
   s.description      = <<-DESC
 This is a collection of reactive data sources for UITableView and UICollectionView.
@@ -12,7 +12,7 @@ let data: Obserable<Section> = ...
 
 let dataSource = RxTableViewSectionedAnimatedDataSource<Section>()
 dataSource.cellFactory = { (tv, ip, i) in
-    let cell =tv.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style:.Default, reuseIdentifier: "Cell")
+    let cell = tv.dequeueReusableCellWithIdentifier("Cell") ?? UITableViewCell(style:.Default, reuseIdentifier: "Cell")
     cell.textLabel!.text = "\(i)"
     return cell
 }
@@ -40,6 +40,6 @@ data
 
   s.source_files          = 'Sources/**/*.swift'
 
-  s.dependency 'RxSwift', '~> 3.0.0-beta.1'
-  s.dependency 'RxCocoa', '~> 3.0.0-beta.1'
+  s.dependency 'RxSwift', '~> 3.0.0-beta.2'
+  s.dependency 'RxCocoa', '~> 3.0.0-beta.2'
 end
