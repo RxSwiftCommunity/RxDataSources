@@ -14,7 +14,7 @@ import RxCocoa
 #endif
 
 public class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
-    : RxTableViewSectionedDataSource<S>
+    : TableViewSectionedDataSource<S>
     , RxTableViewDataSourceType {
     
     public typealias Element = [S]

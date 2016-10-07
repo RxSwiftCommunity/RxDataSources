@@ -83,7 +83,7 @@ class ViewController: UIViewController {
 // MARK: Skinning
 extension ViewController {
 
-    func skinTableViewDataSource(_ dataSource: RxTableViewSectionedDataSource<NumberSection>) {
+    func skinTableViewDataSource(_ dataSource: TableViewSectionedDataSource<NumberSection>) {
         dataSource.configureCell = { (_, tv, ip, i) in
             let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style:.default, reuseIdentifier: "Cell")
 

@@ -100,13 +100,13 @@ public class _TableViewSectionedDataSource
 
 }
 
-public class RxTableViewSectionedDataSource<S: SectionModelType>
+public class TableViewSectionedDataSource<S: SectionModelType>
     : _TableViewSectionedDataSource
     , SectionedViewDataSourceType {
     
     public typealias I = S.Item
     public typealias Section = S
-    public typealias CellFactory = (RxTableViewSectionedDataSource<S>, UITableView, IndexPath, I) -> UITableViewCell
+    public typealias CellFactory = (TableViewSectionedDataSource<S>, UITableView, IndexPath, I) -> UITableViewCell
 
     #if DEBUG
     // If data source has already been bound, then mutating it
@@ -166,14 +166,14 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         }
     }
     
-    public var titleForHeaderInSection: ((RxTableViewSectionedDataSource<S>, Int) -> String?)? {
+    public var titleForHeaderInSection: ((TableViewSectionedDataSource<S>, Int) -> String?)? {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
             #endif
         }
     }
-    public var titleForFooterInSection: ((RxTableViewSectionedDataSource<S>, Int) -> String?)? {
+    public var titleForFooterInSection: ((TableViewSectionedDataSource<S>, Int) -> String?)? {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -181,14 +181,14 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         }
     }
     
-    public var canEditRowAtIndexPath: ((RxTableViewSectionedDataSource<S>, IndexPath) -> Bool)? {
+    public var canEditRowAtIndexPath: ((TableViewSectionedDataSource<S>, IndexPath) -> Bool)? {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
             #endif
         }
     }
-    public var canMoveRowAtIndexPath: ((RxTableViewSectionedDataSource<S>, IndexPath) -> Bool)? {
+    public var canMoveRowAtIndexPath: ((TableViewSectionedDataSource<S>, IndexPath) -> Bool)? {
         didSet {
             #if DEBUG
                 ensureNotMutatedAfterBinding()
@@ -199,14 +199,14 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     public var rowAnimation: UITableViewRowAnimation = .automatic
 
     #if os(iOS)
-    public var sectionIndexTitles: ((RxTableViewSectionedDataSource<S>) -> [String]?)? {
+    public var sectionIndexTitles: ((TableViewSectionedDataSource<S>) -> [String]?)? {
         didSet {
             #if DEBUG
             ensureNotMutatedAfterBinding()
             #endif
         }
     }
-    public var sectionForSectionIndexTitle:((RxTableViewSectionedDataSource<S>, _ title: String, _ index: Int) -> Int)? {
+    public var sectionForSectionIndexTitle:((TableViewSectionedDataSource<S>, _ title: String, _ index: Int) -> Int)? {
         didSet {
             #if DEBUG
             ensureNotMutatedAfterBinding()
