@@ -93,7 +93,7 @@ extension ViewController {
         }
 
         dataSource.titleForHeaderInSection = { (ds, section) -> String? in
-            return ds.sectionAtIndex(section).header
+            return ds[section].header
         }
     }
 

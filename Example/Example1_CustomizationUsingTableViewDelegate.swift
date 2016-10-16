@@ -83,7 +83,7 @@ extension CustomizationUsingTableViewDelegate : UITableViewDelegate {
         // you can also fetch item
         guard let item = dataSource?[indexPath],
         // .. or section and customize what you like
-            let _ = dataSource?.sectionAtIndex(indexPath.section)
+            let _ = dataSource?[indexPath.section]
             else {
             return 0.0
         }
