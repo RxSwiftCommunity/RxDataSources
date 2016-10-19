@@ -115,7 +115,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
         }
     }
     
-    open func model(_ indexPath: IndexPath) throws -> Any {
+    open func model(at indexPath: IndexPath) throws -> Any {
         return self[indexPath]
     }
     

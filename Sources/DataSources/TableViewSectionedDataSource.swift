@@ -134,12 +134,6 @@ open class TableViewSectionedDataSource<S: SectionModelType>
         return _sectionModels.map { Section(original: $0.model, items: $0.items) }
     }
 
-    @available(*, deprecated, renamed: "subscript(section:)")
-    open func sectionAtIndex(_ section: Int) -> S {
-        let sectionModel = _sectionModels[section]
-        return Section(original: sectionModel.model, items: sectionModel.items)
-    }
-
     open subscript(section: Int) -> S {
         let sectionModel = self._sectionModels[section]
         return S(original: sectionModel.model, items: sectionModel.items)
@@ -156,7 +150,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
         }
     }
 
-    open func model(_ indexPath: IndexPath) throws -> Any {
+    open func model(at indexPath: IndexPath) throws -> Any {
         return self[indexPath]
     }
 
