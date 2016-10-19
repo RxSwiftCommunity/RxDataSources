@@ -30,7 +30,6 @@
 		9FCDA1751C3AF4A2000F5F94 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */; };
 		9FCDA1761C3AF4A2000F5F94 /* RxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */; };
 		9FCDA1771C3AF4A2000F5F94 /* RxTableViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */; };
-		9FCDA1781C3AF4A2000F5F94 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5561C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift */; };
 		9FF3014A1C4AA6D1007376BD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF301481C4AA6D1007376BD /* RxCocoa.framework */; };
 		9FF3014B1C4AA6D1007376BD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF301491C4AA6D1007376BD /* RxSwift.framework */; };
 		9FF3014E1C4AA6DA007376BD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; };
@@ -56,7 +55,6 @@
 		C85EE5611C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */; };
 		C85EE5621C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */; };
 		C85EE5631C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */; };
-		C85EE5641C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5561C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift */; };
 		C87DF3461D0219A7006308C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3431D0219A7006308C5 /* AppDelegate.swift */; };
 		C87DF3471D0219A7006308C5 /* NumberSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3441D0219A7006308C5 /* NumberSection.swift */; };
 		C87DF3481D0219A7006308C5 /* Randomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3451D0219A7006308C5 /* Randomizer.swift */; };
@@ -103,7 +101,6 @@
 		C8BB76661C4C3E53002B21C8 /* SectionModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54E1C36F1FC0090614D /* SectionModelType.swift */; };
 		C8BB76671C4C3E53002B21C8 /* AnimatableSectionModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB76241C4C3CDF002B21C8 /* AnimatableSectionModelType.swift */; };
 		C8BB76691C4C3E53002B21C8 /* Differentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54B1C36F1FC0090614D /* Differentiator.swift */; };
-		C8BB766A1C4C3E53002B21C8 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5561C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift */; };
 		C8BB766C1C4C3E53002B21C8 /* RxTableViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */; };
 		C8BB766D1C4C3E53002B21C8 /* CollectionViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5491C36F1FC0090614D /* CollectionViewSectionedDataSource.swift */; };
 		C8BB766E1C4C3E53002B21C8 /* TableViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE54F1C36F1FC0090614D /* TableViewSectionedDataSource.swift */; };
@@ -212,7 +209,6 @@
 		C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCollectionViewSectionedReloadDataSource.swift; sourceTree = "<group>"; };
 		C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTableViewSectionedAnimatedDataSource.swift; sourceTree = "<group>"; };
 		C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTableViewSectionedReloadDataSource.swift; sourceTree = "<group>"; };
-		C85EE5561C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISectionedViewType+RxAnimatedDataSource.swift"; sourceTree = "<group>"; };
 		C87DF3431D0219A7006308C5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C87DF3441D0219A7006308C5 /* NumberSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSection.swift; sourceTree = "<group>"; };
 		C87DF3451D0219A7006308C5 /* Randomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Randomizer.swift; sourceTree = "<group>"; };
@@ -403,7 +399,6 @@
 				C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */,
 				C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */,
 				C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */,
-				C85EE5561C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift */,
 			);
 			path = "DataSources+Rx";
 			sourceTree = "<group>";
@@ -819,7 +814,6 @@
 				9FCDA1711C3AF4A2000F5F94 /* SectionModelType.swift in Sources */,
 				C8BB762F1C4C3CDF002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				9FCDA16E1C3AF4A2000F5F94 /* Differentiator.swift in Sources */,
-				9FCDA1781C3AF4A2000F5F94 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
 				C8477FBB1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				9FCDA1771C3AF4A2000F5F94 /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				9FCDA16C1C3AF4A2000F5F94 /* CollectionViewSectionedDataSource.swift in Sources */,
@@ -851,7 +845,6 @@
 				C85EE55D1C36F1FC0090614D /* SectionModelType.swift in Sources */,
 				C8BB762E1C4C3CDF002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				C85EE55A1C36F1FC0090614D /* Differentiator.swift in Sources */,
-				C85EE5641C36F1FC0090614D /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
 				C8477FBA1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				C85EE5631C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				C85EE5581C36F1FC0090614D /* CollectionViewSectionedDataSource.swift in Sources */,
@@ -927,7 +920,6 @@
 				C8BB76661C4C3E53002B21C8 /* SectionModelType.swift in Sources */,
 				C8BB76671C4C3E53002B21C8 /* AnimatableSectionModelType.swift in Sources */,
 				C8BB76691C4C3E53002B21C8 /* Differentiator.swift in Sources */,
-				C8BB766A1C4C3E53002B21C8 /* UISectionedViewType+RxAnimatedDataSource.swift in Sources */,
 				C8477FB91D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				C8BB766C1C4C3E53002B21C8 /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				C8BB766D1C4C3E53002B21C8 /* CollectionViewSectionedDataSource.swift in Sources */,

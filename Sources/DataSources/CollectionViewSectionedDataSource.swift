@@ -16,51 +16,51 @@ open class _CollectionViewSectionedDataSource
     : NSObject
     , UICollectionViewDataSource {
     
-    func _numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
+    open func _rx_numberOfSections(in collectionView: UICollectionView) -> Int {
         return 0
     }
     
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return _numberOfSectionsInCollectionView(collectionView)
+    open func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return _rx_numberOfSections(in: collectionView)
     }
 
-    func _rx_collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func _rx_collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return _rx_collectionView(collectionView, numberOfItemsInSection: section)
     }
 
-    func _rx_collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
+    open func _rx_collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return (nil as UICollectionViewCell?)!
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return _rx_collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return _rx_collectionView(collectionView, cellForItemAt: indexPath)
     }
 
-    func _rx_collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> UICollectionReusableView {
+    open func _rx_collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: IndexPath) -> UICollectionReusableView {
         return (nil as UICollectionReusableView?)!
     }
     
-    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         return _rx_collectionView(collectionView, viewForSupplementaryElementOfKind: kind, atIndexPath: indexPath)
     }
     
-    func _rx_collectionView(_ collectionView: UICollectionView, canMoveItemAtIndexPath indexPath: IndexPath) -> Bool {
+    open func _rx_collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     public func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return _rx_collectionView(collectionView, canMoveItemAtIndexPath: indexPath)
+        return _rx_collectionView(collectionView, canMoveItemAt: indexPath)
     }
     
-    func _rx_collectionView(_ collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: IndexPath, toIndexPath destinationIndexPath: IndexPath) {
+    open func _rx_collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
     }
     public func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        _rx_collectionView(collectionView, moveItemAtIndexPath: sourceIndexPath, toIndexPath: destinationIndexPath)
+        _rx_collectionView(collectionView, moveItemAt: sourceIndexPath, to: destinationIndexPath)
     }
     
 }
@@ -95,7 +95,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
     
     private var _sectionModels: [SectionModelSnapshot] = []
 
-    public var sectionModels: [S] {
+    open var sectionModels: [S] {
         return _sectionModels.map { Section(original: $0.model, items: $0.items) }
     }
 
@@ -119,7 +119,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
         return self[indexPath]
     }
     
-    public func setSections(_ sections: [S]) {
+    open func setSections(_ sections: [S]) {
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
     
@@ -174,7 +174,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
     
     // UICollectionViewDataSource
     
-    open override func _numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int {
+    open override func _rx_numberOfSections(in collectionView: UICollectionView) -> Int {
         return _sectionModels.count
     }
     
@@ -182,7 +182,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
         return _sectionModels[section].items.count
     }
     
-    open override func _rx_collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
+    open override func _rx_collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
         return configureCell(self, collectionView, indexPath, self[indexPath])
@@ -192,15 +192,15 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
         return supplementaryViewFactory(self, collectionView, kind, indexPath)
     }
     
-    open override func _rx_collectionView(_ collectionView: UICollectionView, canMoveItemAtIndexPath indexPath: IndexPath) -> Bool {
+    open override func _rx_collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         guard let canMoveItem = canMoveItemAtIndexPath?(self, indexPath) else {
-            return super._rx_collectionView(collectionView, canMoveItemAtIndexPath: indexPath)
+            return super._rx_collectionView(collectionView, canMoveItemAt: indexPath)
         }
         
         return canMoveItem
     }
     
-    open override func _rx_collectionView(_ collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: IndexPath, toIndexPath destinationIndexPath: IndexPath) {
+    open override func _rx_collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
         self.moveItem?(self, sourceIndexPath, destinationIndexPath)
     }

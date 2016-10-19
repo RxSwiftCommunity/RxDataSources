@@ -118,9 +118,7 @@ extension ViewController {
     // MARK: Initial value
 
     func initialValue() -> [NumberSection] {
-        let generate = true
-        if generate {
-
+        #if true
             let nSections = 10
             let nItems = 100
 
@@ -133,10 +131,9 @@ extension ViewController {
             return (0 ..< nSections).map { (i: Int) in
                 NumberSection(header: "Section \(i + 1)", numbers: $(Array(i * nItems ..< (i + 1) * nItems)), updated: Date())
             }
-        }
-        else {
+        #else
             return _initialValue
-        }
+        #endif
     }
 
 

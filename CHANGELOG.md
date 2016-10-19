@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.0-rc.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.0-rc.2)
+
+#### Features
+
+* Makes rest of data source classes and methods open.
+* Small polish for UI.
+* Removes part of deprecated extensions.
+
 ## [1.0.0-rc.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.0-rc.1)
 
 #### Features

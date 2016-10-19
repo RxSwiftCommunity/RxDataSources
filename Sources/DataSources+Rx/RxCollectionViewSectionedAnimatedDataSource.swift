@@ -17,7 +17,7 @@ import RxCocoa
  This is commented becuse collection view has bugs when doing animated updates. 
  Take a look at randomized sections.
 */
-public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
+open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
     public typealias Element = [S]
@@ -44,12 +44,16 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionMod
             // help to alleviate the issues with them.
             .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] event in
-                self?.collectionView(event.0, observedPartialUpdateEvent: event.1)
+                self?.collectionView(event.0, throttledObservedEvent: event.1)
             })
             .addDisposableTo(disposeBag)
     }
 
-    public func collectionView(_ collectionView: UICollectionView, observedPartialUpdateEvent: Event<Element>) {
+    /**
+     This method exists because collection view updates are throttled because of internal collection view bugs.
+     Collection view behaves poorly during fast updates, so this should remedy those issues.
+    */
+    open func collectionView(_ collectionView: UICollectionView, throttledObservedEvent event: Event<Element>) {
         UIBindingObserver(UIElement: self) { dataSource, newSections in
             let oldSections = dataSource.sectionModels
             do {
@@ -69,10 +73,10 @@ public class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionMod
                 self.setSections(newSections)
                 collectionView.reloadData()
             }
-        }.on(observedPartialUpdateEvent)
+        }.on(event)
     }
 
-    public func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
+    open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
         UIBindingObserver(UIElement: self) { dataSource, newSections in
             #if DEBUG
                 self._dataSourceBound = true

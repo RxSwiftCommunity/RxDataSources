@@ -17,85 +17,85 @@ open class _TableViewSectionedDataSource
     : NSObject
     , UITableViewDataSource {
     
-    func _numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    open func _rx_numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return _numberOfSectionsInTableView(tableView)
+    open func numberOfSections(in tableView: UITableView) -> Int {
+        return _rx_numberOfSections(in: tableView)
     }
 
-    func _rx_tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func _rx_tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _rx_tableView(tableView, numberOfRowsInSection: section)
     }
 
-    func _rx_tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+    open func _rx_tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return (nil as UITableViewCell?)!
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return _rx_tableView(tableView, cellForRowAtIndexPath: indexPath)
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return _rx_tableView(tableView, cellForRowAt: indexPath)
     }
 
-    func _rx_tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    open func _rx_tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return nil
     }
     
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return _rx_tableView(tableView, titleForHeaderInSection: section)
     }
 
-    func _rx_tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    open func _rx_tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return nil
     }
     
-    public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return _rx_tableView(tableView, titleForFooterInSection: section)
     }
     
-    func _rx_tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    open func _rx_tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return _rx_tableView(tableView, canEditRowAtIndexPath: indexPath)
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return _rx_tableView(tableView, canEditRowAt: indexPath)
     }
     
-    func _rx_tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+    open func _rx_tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
-    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return _rx_tableView(tableView, canMoveRowAtIndexPath: indexPath)
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return _rx_tableView(tableView, canMoveRowAt: indexPath)
     }
 
     #if os(iOS)
-    func _sectionIndexTitlesForTableView(_ tableView: UITableView) -> [String]? {
+    open func _rx_sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return nil
     }
     
-    public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return _sectionIndexTitlesForTableView(tableView)
+    open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return _rx_sectionIndexTitles(for: tableView)
     }
 
-    func _rx_tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    open func _rx_tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         return 0
     }
 
-    public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return _rx_tableView(tableView, sectionForSectionIndexTitle: title, atIndex: index)
+    open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return _rx_tableView(tableView, sectionForSectionIndexTitle: title, at: index)
     }
     #endif
 
-    func _rx_tableView(_ tableView: UITableView, moveRowAtIndexPath sourceIndexPath: IndexPath, toIndexPath destinationIndexPath: IndexPath) {
+    open func _rx_tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     }
 
-    public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        _rx_tableView(tableView, moveRowAtIndexPath: sourceIndexPath, toIndexPath: destinationIndexPath)
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        _rx_tableView(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath)
     }
 
 }
@@ -130,7 +130,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
     
     private var _sectionModels: [SectionModelSnapshot] = []
 
-    public var sectionModels: [S] {
+    open var sectionModels: [S] {
         return _sectionModels.map { Section(original: $0.model, items: $0.items) }
     }
 
@@ -160,7 +160,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
         return self[indexPath]
     }
 
-    public func setSections(_ sections: [S]) {
+    open func setSections(_ sections: [S]) {
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
 
@@ -234,7 +234,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
     
     // UITableViewDataSource
     
-    open override func _numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    open override func _rx_numberOfSections(in tableView: UITableView) -> Int {
         return _sectionModels.count
     }
     
@@ -242,7 +242,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
         return _sectionModels[section].items.count
     }
     
-    open override func _rx_tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+    open override func _rx_tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
         return configureCell(self, tableView, indexPath, self[indexPath])
@@ -256,38 +256,38 @@ open class TableViewSectionedDataSource<S: SectionModelType>
         return titleForFooterInSection?(self, section)
     }
     
-    open override func _rx_tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    open override func _rx_tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         guard let canEditRow = canEditRowAtIndexPath?(self, indexPath) else {
-            return super._rx_tableView(tableView, canEditRowAtIndexPath: indexPath)
+            return super._rx_tableView(tableView, canEditRowAt: indexPath)
         }
         
         return canEditRow
     }
    
-    open override func _rx_tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+    open override func _rx_tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         guard let canMoveRow = canMoveRowAtIndexPath?(self, indexPath) else {
-            return super._rx_tableView(tableView, canMoveRowAtIndexPath: indexPath)
+            return super._rx_tableView(tableView, canMoveRowAt: indexPath)
         }
         
         return canMoveRow
     }
 
-    open override func _rx_tableView(_ tableView: UITableView, moveRowAtIndexPath sourceIndexPath: IndexPath, toIndexPath destinationIndexPath: IndexPath) {
+    open override func _rx_tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
     }
 
     #if os(iOS)
-    open override func _sectionIndexTitlesForTableView(_ tableView: UITableView) -> [String]? {
+    open override func _rx_sectionIndexTitles(for tableView: UITableView) -> [String]? {
         guard let titles = sectionIndexTitles?(self) else {
-            return super._sectionIndexTitlesForTableView(tableView)
+            return super._rx_sectionIndexTitles(for: tableView)
         }
         
         return titles
     }
     
-    open override func _rx_tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    open override func _rx_tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         guard let section = sectionForSectionIndexTitle?(self, title, index) else {
-            return super._rx_tableView(tableView, sectionForSectionIndexTitle: title, atIndex: index)
+            return super._rx_tableView(tableView, sectionForSectionIndexTitle: title, at: index)
         }
         
         return section

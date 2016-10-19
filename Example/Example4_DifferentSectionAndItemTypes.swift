@@ -62,7 +62,7 @@ class MultipleSectionModelViewController: UIViewController {
         }
 
         dataSource.titleForHeaderInSection = { dataSource, index in
-            let section = dataSource.sectionAtIndex(index)
+            let section = dataSource[index]
             
             return section.title
         }
