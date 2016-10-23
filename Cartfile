@@ -1,1 +1,1 @@
-github "ReactiveX/RxSwift" "3.0.0-rc.1"
+github "ReactiveX/RxSwift" ~> 3.0
