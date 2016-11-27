@@ -113,7 +113,7 @@ func indexSections<S: AnimatableSectionModelType>(_ sections: [S]) throws -> [S.
                     print("Section \(section) has already been indexed at \(indexedSections[section.identity]!)")
                 }
             #endif
-            throw DifferentiatorError.duplicateItem(item: section)
+            throw DifferentiatorError.duplicateSection(section: section)
         }
         indexedSections[section.identity] = i
     }
@@ -282,9 +282,9 @@ public func differencesForSectionedView<S: AnimatableSectionModelType>(
 
     var sectionCommands = try CommandGenerator<S>.generatorForInitialSections(initialSections, finalSections: finalSections)
 
-    result.append(contentsOf: try sectionCommands.generateDeleteSections())
+    result.append(contentsOf: try sectionCommands.generateDeleteSectionsDeletedItemsAndUpdatedItems())
     result.append(contentsOf: try sectionCommands.generateInsertAndMoveSections())
-    result.append(contentsOf: try sectionCommands.generateNewAndMovedItems())
+    result.append(contentsOf: try sectionCommands.generateInsertAndMovedItems())
 
     return result
 }
@@ -522,7 +522,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         return (initialSectionData, finalSectionData)
     }
 
-    mutating func generateDeleteSections() throws -> [Changeset<S>] {
+    mutating func generateDeleteSectionsDeletedItemsAndUpdatedItems() throws -> [Changeset<S>] {
         var deletedSections = [Int]()
         var deletedItems = [ItemPath]()
         var updatedItems = [ItemPath]()
@@ -652,7 +652,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         )]
     }
 
-    mutating func generateNewAndMovedItems() throws -> [Changeset<S>] {
+    mutating func generateInsertAndMovedItems() throws -> [Changeset<S>] {
         var insertedItems = [ItemPath]()
         var movedItems = [(from: ItemPath, to: ItemPath)]()
 

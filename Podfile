@@ -10,6 +10,10 @@ target 'RxDataSources' do
     common
 end
 
+target 'Tests' do
+    common
+end
+
 target 'Example' do
     common
 end
