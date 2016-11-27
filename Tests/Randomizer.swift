@@ -44,13 +44,15 @@ struct Randomizer {
 
     let unusedItems: [IntItem]
     let unusedSections: [String]
+    let dateCounter: Int
 
-    init(rng: PseudoRandomGenerator, sections: [NumberSection], unusedItems: [IntItem] = [], unusedSections: [String] = []) {
+    init(rng: PseudoRandomGenerator, sections: [NumberSection], unusedItems: [IntItem] = [], unusedSections: [String] = [], dateCounter: Int = 0) {
         self.rng = rng
         self.sections = sections
 
         self.unusedSections = unusedSections
         self.unusedItems = unusedItems
+        self.dateCounter = dateCounter
     }
 
     func countTotalItems(sections: [NumberSection]) -> Int {
@@ -70,11 +72,11 @@ struct Randomizer {
 
         (nextRng, randomValue) = nextRng.get_random()
 
-        let date = Date()
+        let date = Date(timeIntervalSince1970: TimeInterval(dateCounter))
 
         // update updates in current items if needed
         var sections = self.sections.map {
-            updateDates ? NumberSection(header: $0.header, numbers: $0.numbers.map { x in IntItem(number: x.number, date: date) }, updated: date)  : $0
+            updateDates ? NumberSection(header: $0.header, numbers: $0.numbers.map { x in IntItem(number: x.number, date: date) }, updated: Date.distantPast)  : $0
         }
 
         let currentUnusedItems = self.unusedItems.map {
@@ -93,7 +95,7 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let index = randomValue % (sections.count + 1)
             if insertSections {
-                sections.insert(NumberSection(header: section, numbers: [], updated: Date()), at: index)
+                sections.insert(NumberSection(header: section, numbers: [], updated: Date.distantPast), at: index)
             }
             else {
                 nextUnusedSections.append(section)
@@ -249,6 +251,11 @@ struct Randomizer {
         assert(countTotalItems(sections: sections) + nextUnusedItems.count == startItemCount)
         assert(sections.count + nextUnusedSections.count == startSectionCount)
 
-        return Randomizer(rng: nextRng, sections: sections, unusedItems: nextUnusedItems, unusedSections: nextUnusedSections)
+        return Randomizer(
+            rng: nextRng,
+            sections: sections,
+            unusedItems: nextUnusedItems,
+            unusedSections: nextUnusedSections,
+            dateCounter: dateCounter + 1)
     }
 }

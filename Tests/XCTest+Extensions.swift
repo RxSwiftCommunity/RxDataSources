@@ -10,10 +10,10 @@ import Foundation
 import XCTest
 import RxDataSources
 
-func XCAssertEqual<S: SectionModelType where S: Equatable>(_ lhs: [S], _ rhs: [S], file: StaticString = #file, line: UInt = #line) {
+func XCAssertEqual<S: AnimatableSectionModelType where S: Equatable>(_ lhs: [S], _ rhs: [S], file: StaticString = #file, line: UInt = #line) {
     let areEqual = lhs == rhs
     if !areEqual {
-        printSequenceDifferences(lhs, rhs, { $0 == $1 })
+        printSectionModelDifferences(lhs, rhs)
     }
     
     XCTAssertTrue(areEqual, file: file, line: line)
@@ -31,7 +31,7 @@ func == <E: Equatable>(lhs: EquatableArray<E>, rhs: EquatableArray<E>) -> Bool {
 }
 
 func printSequenceDifferences<E>(_ lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool) {
-    print("Differences:")
+    print("Differences in sequence:")
     for (index, elements) in zip(lhs, rhs).enumerated() {
         let l = elements.0
         let r = elements.1
@@ -49,3 +49,29 @@ func printSequenceDifferences<E>(_ lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool
         print("rhs[\(index + shortest)]:\n    \(element)")
     }
 }
+
+func printSectionModelDifferences<S: AnimatableSectionModelType where S: Equatable>(_ lhs: [S], _ rhs: [S]) {
+    print("Differences in sections:")
+    for (index, elements) in zip(lhs, rhs).enumerated() {
+        let l = elements.0
+        let r = elements.1
+        if l != r {
+            if l.identity != r.identity {
+                print("lhs.identity[\(index)] (\(l.identity)) != rhs.identity[\(index)] (\(r.identity))\n")
+            }
+            if l.items != r.items {
+                print("Difference in items for \(l.identity) and \(r.identity)")
+                printSequenceDifferences(l.items, r.items, { $0 == $1 })
+            }
+        }
+    }
+
+    let shortest = min(lhs.count, rhs.count)
+    for (index, element) in lhs[shortest ..< lhs.count].enumerated() {
+        print("missing lhs[\(index + shortest)]:\n    \(element)")
+    }
+    for (index, element) in rhs[shortest ..< rhs.count].enumerated() {
+        print("missing rhs[\(index + shortest)]:\n    \(element)")
+    }
+}
+

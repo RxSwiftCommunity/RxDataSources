@@ -25,7 +25,6 @@ struct NumberSection {
     }
 }
 
-
 struct IntItem {
     let number: Int
     let date: Date
@@ -55,7 +54,9 @@ extension NumberSection
 extension NumberSection
     : CustomDebugStringConvertible {
     var debugDescription: String {
-        return "NumberSection(header: \"\(self.header)\", numbers: \(numbers.debugDescription), updated: date)"
+        let interval = updated.timeIntervalSince1970
+        let numbersDescription = numbers.map { "\n\($0.debugDescription)" }.joined(separator: "")
+        return "NumberSection(header: \"\(self.header)\", numbers: \(numbersDescription)\n, updated: \(interval))"
     }
 }
 
@@ -78,7 +79,7 @@ func == (lhs: IntItem, rhs: IntItem) -> Bool {
 extension IntItem
     : CustomDebugStringConvertible {
     var debugDescription: String {
-        return "IntItem(number: \(number), date: date)"
+        return "IntItem(number: \(number), date: \(date.timeIntervalSince1970))"
     }
 }
 
@@ -88,4 +89,12 @@ extension IntItem
     var description: String {
         return "\(number)"
     }
+}
+
+extension NumberSection: Equatable {
+    
+}
+
+func == (lhs: NumberSection, rhs: NumberSection) -> Bool {
+    return lhs.header == rhs.header && lhs.items == rhs.items && lhs.updated == rhs.updated
 }

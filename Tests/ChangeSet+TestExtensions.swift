@@ -248,7 +248,7 @@ extension SectionModelTypeWrapper {
     }
 }
 
-extension Array where Element: SectionModelType, Element: Equatable {
+extension Array where Element: AnimatableSectionModelType, Element: Equatable {
 
     func apply(_ changes: [Changeset<Element>]) -> [Element] {
         return changes.reduce(self) { sections, changes in
