@@ -272,9 +272,8 @@ to = [
 // There maybe exists a better division, but time will tell.
 //
 public func differencesForSectionedView<S: AnimatableSectionModelType>(
-        _ initialSections: [S],
-        finalSections: [S]
-    )
+    initialSections: [S],
+    finalSections: [S])
     throws -> [Changeset<S>] {
     typealias I = S.Item
 
@@ -287,6 +286,23 @@ public func differencesForSectionedView<S: AnimatableSectionModelType>(
     result.append(contentsOf: try sectionCommands.generateInsertAndMovedItems())
 
     return result
+}
+
+
+fileprivate struct OptimizationSection {
+
+}
+
+fileprivate struct OptimizedItem {
+
+}
+
+@available(*, deprecated, renamed: "differencesForSectionedView(initialSections:finalSections:)")
+public func differencesForSectionedView<S: AnimatableSectionModelType>(
+    _ initialSections: [S],
+    finalSections: [S])
+    throws -> [Changeset<S>] {
+    return try differencesForSectionedView(initialSections: initialSections, finalSections: finalSections)
 }
 
 private extension AnimatableSectionModelType {
