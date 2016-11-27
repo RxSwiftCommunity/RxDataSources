@@ -7,4 +7,4 @@ notifications:
   email: false
 
 script: 
-  - echo "WIP"
+  - . ./scripts/common.sh ; rx "Tests" Release "${DEFAULT_IOS_SIMULATOR}" test 
