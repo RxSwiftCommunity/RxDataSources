@@ -1,10 +1,12 @@
 language: objective-c
 
-osx_image: xcode7.3
+osx_image: xcode8
 
 notifications:
   slack: rxswift:3ykt2Z61f8GkdvhCZTYPduOL
   email: false
 
+install: true
+
 script: 
-  - echo "WIP"
+  - . ./scripts/common.sh ; rx "Tests" Release "${DEFAULT_IOS_SIMULATOR}" test 
