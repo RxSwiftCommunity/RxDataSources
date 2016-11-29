@@ -540,6 +540,7 @@ extension AlgorithmTests {
 
 // stress test
 extension AlgorithmTests {
+
     func testStress() {
         func initialValue() -> [NumberSection] {
             let nSections = 100
