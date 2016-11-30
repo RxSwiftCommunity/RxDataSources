@@ -10,7 +10,8 @@ import Foundation
 import XCTest
 import RxDataSources
 
-func XCAssertEqual<S: AnimatableSectionModelType where S: Equatable>(_ lhs: [S], _ rhs: [S], file: StaticString = #file, line: UInt = #line) {
+func XCAssertEqual<S: AnimatableSectionModelType>(_ lhs: [S], _ rhs: [S], file: StaticString = #file, line: UInt = #line)
+    where S: Equatable {
     let areEqual = lhs == rhs
     if !areEqual {
         printSectionModelDifferences(lhs, rhs)
@@ -19,18 +20,18 @@ func XCAssertEqual<S: AnimatableSectionModelType where S: Equatable>(_ lhs: [S],
     XCTAssertTrue(areEqual, file: file, line: line)
 }
 
-struct EquatableArray<Element: Equatable> : Equatable {
+fileprivate struct EquatableArray<Element: Equatable> : Equatable {
     let elements: [Element]
     init(_ elements: [Element]) {
         self.elements = elements
     }
 }
 
-func == <E: Equatable>(lhs: EquatableArray<E>, rhs: EquatableArray<E>) -> Bool {
+fileprivate func == <E: Equatable>(lhs: EquatableArray<E>, rhs: EquatableArray<E>) -> Bool {
     return lhs.elements == rhs.elements
 }
 
-func printSequenceDifferences<E>(_ lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool) {
+fileprivate func printSequenceDifferences<E>(_ lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool) {
     print("Differences in sequence:")
     for (index, elements) in zip(lhs, rhs).enumerated() {
         let l = elements.0
@@ -50,7 +51,8 @@ func printSequenceDifferences<E>(_ lhs: [E], _ rhs: [E], _ equal: (E, E) -> Bool
     }
 }
 
-func printSectionModelDifferences<S: AnimatableSectionModelType where S: Equatable>(_ lhs: [S], _ rhs: [S]) {
+fileprivate func printSectionModelDifferences<S: AnimatableSectionModelType>(_ lhs: [S], _ rhs: [S])
+    where S: Equatable {
     print("Differences in sections:")
     for (index, elements) in zip(lhs, rhs).enumerated() {
         let l = elements.0

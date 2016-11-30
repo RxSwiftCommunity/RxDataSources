@@ -702,7 +702,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = kzaher;
 				TargetAttributes = {
 					9FCDA1621C3AF49A000F5F94 = {
@@ -1179,6 +1179,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60C1607A340BC95530EF3B62 /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -1197,6 +1198,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4C328B92E99B466CA6390F62 /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -1456,7 +1458,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8A1509A86ADB3FDAEE200EF /* Pods-RxDataSources.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1480,7 +1481,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A58DC421ECF08DEF551FDFB /* Pods-RxDataSources.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

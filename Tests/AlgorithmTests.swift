@@ -34,7 +34,7 @@ extension AlgorithmTests {
                 ])
         ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(insertedItems: 1))
@@ -58,7 +58,7 @@ extension AlgorithmTests {
                 ])
         ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(deletedItems: 1))
@@ -83,7 +83,7 @@ extension AlgorithmTests {
                 ])
         ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(movedItems: 2))
@@ -108,7 +108,7 @@ extension AlgorithmTests {
                 ])
         ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(movedItems: 1))
@@ -133,7 +133,7 @@ extension AlgorithmTests {
                 ])
         ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(updatedItems: 1))
@@ -166,7 +166,7 @@ extension AlgorithmTests {
                 ]),
         ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(insertedSections: 1))
@@ -187,7 +187,7 @@ extension AlgorithmTests {
 
             ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(deletedSections: 1))
@@ -232,7 +232,7 @@ extension AlgorithmTests {
                 ]),
             ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(movedSections: 2))
@@ -277,7 +277,7 @@ extension AlgorithmTests {
                 ]),
             ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertTrue(differences.count == 1)
         XCTAssertTrue(differences.first!.onlyContains(movedSections: 1))
@@ -300,7 +300,7 @@ extension AlgorithmTests {
             ]
 
         do {
-            _ = try differencesForSectionedView(initial, finalSections: initial)
+            _ = try differencesForSectionedView(initialSections: initial, finalSections: initial)
             XCTFail()
         }
         catch let exception {
@@ -325,7 +325,7 @@ extension AlgorithmTests {
             ]
 
         do {
-            _ = try differencesForSectionedView(initial, finalSections: initial)
+            _ = try differencesForSectionedView(initialSections: initial, finalSections: initial)
             XCTFail()
         }
         catch let exception {
@@ -348,7 +348,7 @@ extension AlgorithmTests {
             ]
 
         do {
-            _ = try differencesForSectionedView(initial, finalSections: initial)
+            _ = try differencesForSectionedView(initialSections: initial, finalSections: initial)
             XCTFail()
         }
         catch let exception {
@@ -375,7 +375,7 @@ extension AlgorithmTests {
             ]
 
         do {
-            _ = try differencesForSectionedView(initial, finalSections: initial)
+            _ = try differencesForSectionedView(initialSections: initial, finalSections: initial)
             XCTFail()
         }
         catch let exception {
@@ -415,7 +415,7 @@ extension AlgorithmTests {
                 ]),
             ]
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertEqual(initial.apply(differences), final)
     }
@@ -448,7 +448,7 @@ extension AlgorithmTests {
             ]
 
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertEqual(initial.apply(differences), final)
     }
@@ -532,7 +532,7 @@ extension AlgorithmTests {
             ]
 
 
-        let differences = try! differencesForSectionedView(initial, finalSections: final)
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
 
         XCTAssertEqual(initial.apply(differences), final)
     }
@@ -540,6 +540,7 @@ extension AlgorithmTests {
 
 // stress test
 extension AlgorithmTests {
+
     func testStress() {
         func initialValue() -> [NumberSection] {
             let nSections = 100
@@ -564,7 +565,7 @@ extension AlgorithmTests {
                 print(i)
             }
             let newSections = sections.randomize()
-            let differences = try! differencesForSectionedView(sections.sections, finalSections: newSections.sections)
+            let differences = try! differencesForSectionedView(initialSections: sections.sections, finalSections: newSections.sections)
 
             XCTAssertEqual(sections.sections.apply(differences), newSections.sections)
             sections = newSections

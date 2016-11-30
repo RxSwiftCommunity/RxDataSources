@@ -31,7 +31,7 @@ extension DifferentiatorError {
     }
 }
 
-enum EditEvent : CustomDebugStringConvertible {
+fileprivate enum EditEvent : CustomDebugStringConvertible {
     case inserted           // can't be found in old sections
     case insertedAutomatically           // Item inside section being inserted
     case deleted            // Was in old, not in new, in it's place is something "not new" :(, otherwise it's Updated
@@ -42,7 +42,7 @@ enum EditEvent : CustomDebugStringConvertible {
 }
 
 extension EditEvent {
-    var debugDescription: String {
+    fileprivate var debugDescription: String {
         get {
             switch self {
             case .inserted:
@@ -64,14 +64,15 @@ extension EditEvent {
     }
 }
 
-struct SectionAssociatedData {
+fileprivate struct SectionAssociatedData {
     var event: EditEvent
     var indexAfterDelete: Int?
     var moveIndex: Int?
+    var itemCount: Int
 }
 
 extension SectionAssociatedData : CustomDebugStringConvertible {
-    var debugDescription: String {
+    fileprivate var debugDescription: String {
         get {
             return "\(event), \(indexAfterDelete)"
         }
@@ -79,19 +80,19 @@ extension SectionAssociatedData : CustomDebugStringConvertible {
 }
 
 extension SectionAssociatedData {
-    static var initial: SectionAssociatedData {
-        return SectionAssociatedData(event: .untouched, indexAfterDelete: nil, moveIndex: nil)
+    fileprivate static var initial: SectionAssociatedData {
+        return SectionAssociatedData(event: .untouched, indexAfterDelete: nil, moveIndex: nil, itemCount: 0)
     }
 }
 
-struct ItemAssociatedData {
+fileprivate struct ItemAssociatedData {
     var event: EditEvent
     var indexAfterDelete: Int?
     var moveIndex: ItemPath?
 }
 
 extension ItemAssociatedData : CustomDebugStringConvertible {
-    var debugDescription: String {
+    fileprivate var debugDescription: String {
         get {
             return "\(event) \(indexAfterDelete)"
         }
@@ -104,7 +105,7 @@ extension ItemAssociatedData {
     }
 }
 
-func indexSections<S: AnimatableSectionModelType>(_ sections: [S]) throws -> [S.Identity : Int] {
+fileprivate func indexSections<S: AnimatableSectionModelType>(_ sections: [S]) throws -> [S.Identity : Int] {
     var indexedSections: [S.Identity : Int] = [:]
     for (i, section) in sections.enumerated() {
         guard indexedSections[section.identity] == nil else {
@@ -121,32 +122,113 @@ func indexSections<S: AnimatableSectionModelType>(_ sections: [S]) throws -> [S.
     return indexedSections
 }
 
-func indexSectionItems<S: AnimatableSectionModelType>(_ sections: [S]) throws -> [S.Item.Identity : (Int, Int)] {
-    var totalItems = 0
-    for i in 0 ..< sections.count {
-        totalItems += sections[i].items.count
+//================================================================================
+//  Optimizations because Swift dictionaries are extremely slow (ARC, bridging ...)
+//================================================================================
+// swift dictionary optimizations {
+
+fileprivate struct OptimizedIdentity<E: Hashable> {
+    let hashValue: Int
+    let identity: UnsafePointer<E>
+
+    init(_ identity: UnsafePointer<E>) {
+        self.identity = identity
+        self.hashValue = identity.pointee.hashValue
     }
-    
-    // let's make sure it's enough
-    var indexedItems: [S.Item.Identity : (Int, Int)] = Dictionary(minimumCapacity: totalItems * 3)
-    
-    for i in 0 ..< sections.count {
-        for (j, item) in sections[i].items.enumerated() {
-            guard indexedItems[item.identity] == nil else {
+}
+
+extension OptimizedIdentity: Hashable {
+
+}
+
+fileprivate func == <E: Hashable>(lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
+    if lhs.hashValue != rhs.hashValue {
+        return false
+    }
+
+    if lhs.identity.distance(to: rhs.identity) == 0 {
+        return true
+    }
+
+    return lhs.identity.pointee == rhs.identity.pointee
+}
+
+fileprivate func calculateAssociatedData<Item: IdentifiableType>(
+    initialItemCache: ContiguousArray<ContiguousArray<Item>>,
+    finalItemCache: ContiguousArray<ContiguousArray<Item>>
+    ) throws
+    -> (ContiguousArray<ContiguousArray<ItemAssociatedData>>, ContiguousArray<ContiguousArray<ItemAssociatedData>>) {
+
+    typealias Identity = Item.Identity
+    let totalInitialItems = initialItemCache.map { $0.count }.reduce(0, +)
+
+    var initialIdentities: ContiguousArray<Identity> = ContiguousArray()
+    var initialItemPaths: ContiguousArray<ItemPath> = ContiguousArray()
+
+    initialIdentities.reserveCapacity(totalInitialItems)
+    initialItemPaths.reserveCapacity(totalInitialItems)
+
+    for (i, items) in initialItemCache.enumerated() {
+        for j in 0 ..< items.count {
+            let item = items[j]
+            initialIdentities.append(item.identity)
+            initialItemPaths.append(ItemPath(sectionIndex: i, itemIndex: j))
+        }
+    }
+
+    var initialItemData = ContiguousArray(initialItemCache.map { items in
+        return ContiguousArray<ItemAssociatedData>(repeating: ItemAssociatedData.initial, count: items.count)
+    })
+
+    var finalItemData = ContiguousArray(finalItemCache.map { items in
+        return ContiguousArray<ItemAssociatedData>(repeating: ItemAssociatedData.initial, count: items.count)
+    })
+
+    try initialIdentities.withUnsafeBufferPointer { (identitiesBuffer: UnsafeBufferPointer<Identity>) -> () in
+        var dictionary: [OptimizedIdentity<Identity>: Int] = Dictionary(minimumCapacity: totalInitialItems * 2)
+
+        for i in 0 ..< initialIdentities.count {
+            let identityPointer = identitiesBuffer.baseAddress!.advanced(by: i)
+
+            let key = OptimizedIdentity(identityPointer)
+
+            if let existingValueItemPathIndex = dictionary[key] {
+                let itemPath = initialItemPaths[existingValueItemPathIndex]
+                let item = initialItemCache[itemPath.sectionIndex][itemPath.itemIndex]
                 #if DEBUG
-                    if indexedItems[item.identity] != nil {
-                        print("Item \(item) has already been indexed at \(indexedItems[item.identity]!)" )
-                    }
+                    print("Item \(item) has already been indexed at \(itemPath)" )
                 #endif
                 throw DifferentiatorError.duplicateItem(item: item)
             }
-            indexedItems[item.identity] = (i, j)
+
+            dictionary[key] = i
         }
+
+        for (i, items) in finalItemCache.enumerated() {
+            for j in 0 ..< items.count {
+                let item = items[j]
+                var identity = item.identity
+                let key = OptimizedIdentity(&identity)
+                guard let initialItemPathIndex = dictionary[key] else {
+                    continue
+                }
+                let itemPath = initialItemPaths[initialItemPathIndex]
+                if initialItemData[itemPath.sectionIndex][itemPath.itemIndex].moveIndex != nil {
+                    throw DifferentiatorError.duplicateItem(item: item)
+                }
+
+                initialItemData[itemPath.sectionIndex][itemPath.itemIndex].moveIndex = ItemPath(sectionIndex: i, itemIndex: j)
+                finalItemData[i][j].moveIndex = itemPath
+            }
+        }
+
+        return ()
     }
-    
-    return indexedItems
+
+    return (initialItemData, finalItemData)
 }
 
+// } swift dictionary optimizations
 
 /*
 
@@ -272,9 +354,8 @@ to = [
 // There maybe exists a better division, but time will tell.
 //
 public func differencesForSectionedView<S: AnimatableSectionModelType>(
-        _ initialSections: [S],
-        finalSections: [S]
-    )
+    initialSections: [S],
+    finalSections: [S])
     throws -> [Changeset<S>] {
     typealias I = S.Item
 
@@ -289,6 +370,15 @@ public func differencesForSectionedView<S: AnimatableSectionModelType>(
     return result
 }
 
+
+@available(*, deprecated, renamed: "differencesForSectionedView(initialSections:finalSections:)")
+public func differencesForSectionedView<S: AnimatableSectionModelType>(
+    _ initialSections: [S],
+    finalSections: [S])
+    throws -> [Changeset<S>] {
+    return try differencesForSectionedView(initialSections: initialSections, finalSections: finalSections)
+}
+
 private extension AnimatableSectionModelType {
     init(safeOriginal: Self, safeItems: [Item]) throws {
         self.init(original: safeOriginal, items: safeItems)
@@ -299,24 +389,39 @@ private extension AnimatableSectionModelType {
     }
 }
 
-struct CommandGenerator<S: AnimatableSectionModelType> {
+fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
+    typealias Item = S.Item
+
     let initialSections: [S]
     let finalSections: [S]
 
-    let initialSectionData: [SectionAssociatedData]
-    let finalSectionData: [SectionAssociatedData]
+    let initialSectionData: ContiguousArray<SectionAssociatedData>
+    let finalSectionData: ContiguousArray<SectionAssociatedData>
 
-    let initialItemData: [[ItemAssociatedData]]
-    let finalItemData: [[ItemAssociatedData]]
+    let initialItemData: ContiguousArray<ContiguousArray<ItemAssociatedData>>
+    let finalItemData: ContiguousArray<ContiguousArray<ItemAssociatedData>>
 
+    let initialItemCache: ContiguousArray<ContiguousArray<Item>>
+    let finalItemCache: ContiguousArray<ContiguousArray<Item>>
+    
     static func generatorForInitialSections(
         _ initialSections: [S],
         finalSections: [S]
     ) throws -> CommandGenerator<S> {
 
-        let (initialSectionData, finalSectionData) = try calculateSectionMovementsForInitialSections(initialSections, finalSections: finalSections)
-        let (initialItemData, finalItemData) = try calculateItemMovementsForInitialSections(initialSections,
-            finalSections: finalSections,
+        let (initialSectionData, finalSectionData) = try calculateSectionMovements(initialSections: initialSections, finalSections: finalSections)
+
+        let initialItemCache = ContiguousArray(initialSections.map {
+            ContiguousArray($0.items)
+        })
+
+        let finalItemCache = ContiguousArray(finalSections.map {
+            ContiguousArray($0.items)
+        })
+        
+        let (initialItemData, finalItemData) = try calculateItemMovements(
+            initialItemCache: initialItemCache,
+            finalItemCache: finalItemCache,
             initialSectionData: initialSectionData,
             finalSectionData: finalSectionData
         )
@@ -329,42 +434,31 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
             finalSectionData: finalSectionData,
 
             initialItemData: initialItemData,
-            finalItemData: finalItemData
+            finalItemData: finalItemData,
+
+            initialItemCache: initialItemCache,
+            finalItemCache: finalItemCache
         )
     }
 
-    static func calculateItemMovementsForInitialSections(_ initialSections: [S], finalSections: [S],
-        initialSectionData: [SectionAssociatedData], finalSectionData: [SectionAssociatedData]) throws -> ([[ItemAssociatedData]], [[ItemAssociatedData]]) {
-        var initialItemData = initialSections.map { s in
-            return [ItemAssociatedData](repeating: ItemAssociatedData.initial, count: s.items.count)
-        }
+    static func calculateItemMovements(
+        initialItemCache: ContiguousArray<ContiguousArray<Item>>,
+        finalItemCache: ContiguousArray<ContiguousArray<Item>>,
+        initialSectionData: ContiguousArray<SectionAssociatedData>,
+        finalSectionData: ContiguousArray<SectionAssociatedData>) throws
+        -> (ContiguousArray<ContiguousArray<ItemAssociatedData>>, ContiguousArray<ContiguousArray<ItemAssociatedData>>) {
 
-        var finalItemData = finalSections.map { s in
-            return [ItemAssociatedData](repeating: ItemAssociatedData.initial, count: s.items.count)
-        }
-
-        let initialItemIndexes = try indexSectionItems(initialSections)
-
-        for i in 0 ..< finalSections.count {
-            for (j, item) in finalSections[i].items.enumerated() {
-                guard let initialItemIndex = initialItemIndexes[item.identity] else {
-                    continue
-                }
-                if initialItemData[initialItemIndex.0][initialItemIndex.1].moveIndex != nil {
-                    throw DifferentiatorError.duplicateItem(item: item)
-                }
-
-                initialItemData[initialItemIndex.0][initialItemIndex.1].moveIndex = ItemPath(sectionIndex: i, itemIndex: j)
-                finalItemData[i][j].moveIndex = ItemPath(sectionIndex: initialItemIndex.0, itemIndex: initialItemIndex.1)
-            }
-        }
+        var (initialItemData, finalItemData) = try calculateAssociatedData(
+            initialItemCache: initialItemCache,
+            finalItemCache: finalItemCache
+        )
 
         let findNextUntouchedOldIndex = { (initialSectionIndex: Int, initialSearchIndex: Int?) -> Int? in
             guard var i2 = initialSearchIndex else {
                 return nil
             }
 
-            while i2 < initialSections[initialSectionIndex].items.count {
+            while i2 < initialSectionData[initialSectionIndex].itemCount {
                 if initialItemData[initialSectionIndex][i2].event == .untouched {
                     return i2
                 }
@@ -376,13 +470,13 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         }
 
         // first mark deleted items
-        for i in 0 ..< initialSections.count {
+        for i in 0 ..< initialItemCache.count {
             guard let _ = initialSectionData[i].moveIndex else {
                 continue
             }
 
             var indexAfterDelete = 0
-            for j in 0 ..< initialSections[i].items.count {
+            for j in 0 ..< initialItemCache[i].count {
 
                 guard let finalIndexPath = initialItemData[i][j].moveIndex else {
                     initialItemData[i][j].event = .deleted
@@ -403,13 +497,13 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
         }
 
         // mark moved or moved automatically
-        for i in 0 ..< finalSections.count {
+        for i in 0 ..< finalItemCache.count {
             guard let originalSectionIndex = finalSectionData[i].moveIndex else {
                 continue
             }
 
             var untouchedIndex: Int? = 0
-            for j in 0 ..< finalSections[i].items.count {
+            for j in 0 ..< finalItemCache[i].count {
                 untouchedIndex = findNextUntouchedOldIndex(originalSectionIndex, untouchedIndex)
 
                 guard let originalIndex = finalItemData[i][j].moveIndex else {
@@ -435,21 +529,22 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
 
                 initialItemData[originalIndex.sectionIndex][originalIndex.itemIndex].event = eventType
                 finalItemData[i][j].event = eventType
-
             }
         }
 
         return (initialItemData, finalItemData)
     }
 
-    static func calculateSectionMovementsForInitialSections(_ initialSections: [S], finalSections: [S]) throws -> ([SectionAssociatedData], [SectionAssociatedData]) {
+    static func calculateSectionMovements(initialSections: [S], finalSections: [S]) throws
+        -> (ContiguousArray<SectionAssociatedData>, ContiguousArray<SectionAssociatedData>) {
 
         let initialSectionIndexes = try indexSections(initialSections)
 
-        var initialSectionData = [SectionAssociatedData](repeating: SectionAssociatedData.initial, count: initialSections.count)
-        var finalSectionData = [SectionAssociatedData](repeating: SectionAssociatedData.initial, count: finalSections.count)
+        var initialSectionData = ContiguousArray<SectionAssociatedData>(repeating: SectionAssociatedData.initial, count: initialSections.count)
+        var finalSectionData = ContiguousArray<SectionAssociatedData>(repeating: SectionAssociatedData.initial, count: finalSections.count)
 
         for (i, section) in finalSections.enumerated() {
+            finalSectionData[i].itemCount = finalSections[i].items.count
             guard let initialSectionIndex = initialSectionIndexes[section.identity] else {
                 continue
             }
@@ -466,6 +561,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
 
         // deleted sections
         for i in 0 ..< initialSectionData.count {
+            initialSectionData[i].itemCount = initialSections[i].items.count
             if initialSectionData[i].moveIndex == nil {
                 initialSectionData[i].event = .deleted
                 continue
@@ -524,6 +620,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
 
     mutating func generateDeleteSectionsDeletedItemsAndUpdatedItems() throws -> [Changeset<S>] {
         var deletedSections = [Int]()
+
         var deletedItems = [ItemPath]()
         var updatedItems = [ItemPath]()
 
@@ -531,7 +628,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
 
         // mark deleted items {
         // 1rst stage again (I know, I know ...)
-        for (i, initialSection) in initialSections.enumerated() {
+        for (i, initialItems) in initialItemCache.enumerated() {
             let event = initialSectionData[i].event
 
             // Deleted section will take care of deleting child items.
@@ -543,14 +640,14 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
             }
 
             var afterDeleteItems: [S.Item] = []
-            for j in 0 ..< initialSection.items.count {
+            for j in 0 ..< initialItems.count {
                 let event = initialItemData[i][j].event
                 switch event {
                 case .deleted:
                     deletedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
                 case .moved, .movedAutomatically:
                     let finalItemIndex = try initialItemData[i][j].moveIndex.unwrap()
-                    let finalItem = finalSections[finalItemIndex]
+                    let finalItem = finalItemCache[finalItemIndex.sectionIndex][finalItemIndex.itemIndex]
                     if finalItem != initialSections[i].items[j] {
                         updatedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
                     }
@@ -560,7 +657,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                 }
             }
 
-            afterDeleteState.append(try S(safeOriginal: initialSection, safeItems: afterDeleteItems))
+            afterDeleteState.append(try S(safeOriginal: initialSections[i], safeItems: afterDeleteItems))
         }
         // }
 
@@ -620,8 +717,10 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                 let originalSection = initialSections[originalSectionIndex]
                 
                 var items: [S.Item] = []
-                for (j, _) in originalSection.items.enumerated() {
-                    let initialData = self.initialItemData[originalSectionIndex][j]
+                items.reserveCapacity(originalSection.items.count)
+                let itemAssociatedData = self.initialItemData[originalSectionIndex]
+                for j in 0 ..< originalSection.items.count {
+                    let initialData = itemAssociatedData[j]
 
                     guard initialData.event != .deleted else {
                         continue
@@ -632,7 +731,7 @@ struct CommandGenerator<S: AnimatableSectionModelType> {
                         continue
                     }
 
-                    items.append(self.finalSections[finalIndex.sectionIndex].items[finalIndex.itemIndex])
+                    items.append(finalItemCache[finalIndex.sectionIndex][finalIndex.itemIndex])
                 }
                 
                 let modifiedSection = try S(safeOriginal: s, safeItems: items)
