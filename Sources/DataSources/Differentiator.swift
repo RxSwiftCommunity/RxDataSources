@@ -162,8 +162,11 @@ fileprivate func calculateAssociatedData<Item: IdentifiableType>(
     typealias Identity = Item.Identity
     let totalInitialItems = initialItemCache.map { $0.count }.reduce(0, +)
 
-    var initialIdentities: ContiguousArray<Identity> = []
-    var initialItemPaths: ContiguousArray<ItemPath> = []
+    var initialIdentities: ContiguousArray<Identity> = ContiguousArray()
+    var initialItemPaths: ContiguousArray<ItemPath> = ContiguousArray()
+
+    initialIdentities.reserveCapacity(totalInitialItems)
+    initialItemPaths.reserveCapacity(totalInitialItems)
 
     for (i, items) in initialItemCache.enumerated() {
         for j in 0 ..< items.count {
@@ -617,6 +620,7 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
 
     mutating func generateDeleteSectionsDeletedItemsAndUpdatedItems() throws -> [Changeset<S>] {
         var deletedSections = [Int]()
+
         var deletedItems = [ItemPath]()
         var updatedItems = [ItemPath]()
 
@@ -713,6 +717,7 @@ fileprivate struct CommandGenerator<S: AnimatableSectionModelType> {
                 let originalSection = initialSections[originalSectionIndex]
                 
                 var items: [S.Item] = []
+                items.reserveCapacity(originalSection.items.count)
                 let itemAssociatedData = self.initialItemData[originalSectionIndex]
                 for j in 0 ..< originalSection.items.count {
                     let initialData = itemAssociatedData[j]
