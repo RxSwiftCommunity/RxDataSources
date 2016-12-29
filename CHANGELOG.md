@@ -3,13 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.2)
+
+* Fixes issue with performing batch updates on view that is not in view hierarchy.
+
 ## [1.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.1)
 
-<<<<<<< 7dc8bc1170a8c984286dbd8e47318b2e4f282c7a
 * Fixes invalid version in bundle id.
-=======
 * Update CFBundleShortVersionString to current release version number.
->>>>>>> Adds 1.0.1 to changelog.
 
 ## [1.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.0)
 
