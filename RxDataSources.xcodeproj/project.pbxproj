@@ -64,6 +64,7 @@
 		C85EE5611C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */; };
 		C85EE5621C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */; };
 		C85EE5631C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */; };
+		C861C0F11E153FC400BEDC46 /* RxDataSources.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C861C0F01E153FC400BEDC46 /* RxDataSources.podspec */; };
 		C87DF3461D0219A7006308C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DF3431D0219A7006308C5 /* AppDelegate.swift */; };
 		C8984C5E1C36AF35001E4272 /* RxDataSources.h in Headers */ = {isa = PBXBuildFile; fileRef = C8984C5D1C36AF35001E4272 /* RxDataSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C8984CA01C36B6FA001E4272 /* Example2_RandomizedSectionsAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8984C9F1C36B6FA001E4272 /* Example2_RandomizedSectionsAnimation.swift */; };
@@ -236,6 +237,7 @@
 		C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCollectionViewSectionedReloadDataSource.swift; sourceTree = "<group>"; };
 		C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTableViewSectionedAnimatedDataSource.swift; sourceTree = "<group>"; };
 		C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTableViewSectionedReloadDataSource.swift; sourceTree = "<group>"; };
+		C861C0F01E153FC400BEDC46 /* RxDataSources.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RxDataSources.podspec; sourceTree = "<group>"; };
 		C87DF3431D0219A7006308C5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8984C5A1C36AF35001E4272 /* RxDataSources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxDataSources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8984C5D1C36AF35001E4272 /* RxDataSources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxDataSources.h; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		C8984C501C36AF35001E4272 = {
 			isa = PBXGroup;
 			children = (
+				C861C0F01E153FC400BEDC46 /* RxDataSources.podspec */,
 				C85EE5461C36F1FC0090614D /* Sources */,
 				C8984C5C1C36AF35001E4272 /* RxDataSources */,
 				C8984C9C1C36B6FA001E4272 /* Example */,
@@ -802,6 +805,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C861C0F11E153FC400BEDC46 /* RxDataSources.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
