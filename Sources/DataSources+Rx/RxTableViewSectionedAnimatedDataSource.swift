@@ -38,6 +38,11 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
             }
             else {
                 DispatchQueue.main.async {
+                    // if view is not in view hierarchy, performing batch updates will crash the app
+                    if tableView.window == nil {
+                        tableView.reloadData()
+                        return
+                    }
                     let oldSections = dataSource.sectionModels
                     do {
                         let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
