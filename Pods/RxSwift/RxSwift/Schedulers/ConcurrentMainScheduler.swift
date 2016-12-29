@@ -22,9 +22,7 @@ public final class ConcurrentMainScheduler : SchedulerType {
     private let _mainScheduler: MainScheduler
     private let _mainQueue: DispatchQueue
 
-    /**
-    - returns: Current time.
-    */
+    /// - returns: Current time.
     public var now : Date {
         return _mainScheduler.now as Date
     }
@@ -34,9 +32,7 @@ public final class ConcurrentMainScheduler : SchedulerType {
         _mainScheduler = mainScheduler
     }
 
-    /**
-    Singleton instance of `ConcurrentMainScheduler`
-    */
+    /// Singleton instance of `ConcurrentMainScheduler`
     public static let instance = ConcurrentMainScheduler(mainScheduler: MainScheduler.instance)
 
     /**
@@ -47,7 +43,7 @@ public final class ConcurrentMainScheduler : SchedulerType {
     - returns: The disposable object used to cancel the scheduled action (best effort).
     */
     public func schedule<StateType>(_ state: StateType, action: @escaping (StateType) -> Disposable) -> Disposable {
-        if Thread.current.isMainThread {
+        if DispatchQueue.isMain {
             return action(state)
         }
 

@@ -11,19 +11,18 @@ import Foundation
 import RxSwift
 #endif
 
-/**
-Protocol that enables extension of `ControlProperty`.
-*/
+/// Protocol that enables extension of `ControlProperty`.
 public protocol ControlPropertyType : ObservableType, ObserverType {
 
-    /**
-    - returns: `ControlProperty` interface
-    */
+    /// - returns: `ControlProperty` interface
     func asControlProperty() -> ControlProperty<E>
 }
 
 /**
     Unit for `Observable`/`ObservableType` that represents property of UI element.
+ 
+    Sequence of values only represents initial control value and user initiated value changes.
+    Programatic value changes won't be reported.
 
     It's properties are:
 
@@ -50,53 +49,57 @@ public struct ControlProperty<PropertyType> : ControlPropertyType {
     let _values: Observable<PropertyType>
     let _valueSink: AnyObserver<PropertyType>
 
-    /**
-     Initializes control property with a observable sequence that represents property values and observer that enables
-     binding values to property.
-
-     - parameter values: Observable sequence that represents property values.
-     - parameter valueSink: Observer that enables binding values to control property.
-     - returns: Control property created with a observable sequence of values and an observer that enables binding values
-     to property.
-    */
+    /// Initializes control property with a observable sequence that represents property values and observer that enables
+    /// binding values to property.
+    ///
+    /// - parameter values: Observable sequence that represents property values.
+    /// - parameter valueSink: Observer that enables binding values to control property.
+    /// - returns: Control property created with a observable sequence of values and an observer that enables binding values
+    /// to property.
     public init<V: ObservableType, S: ObserverType>(values: V, valueSink: S) where E == V.E, E == S.E {
         _values = values.subscribeOn(ConcurrentMainScheduler.instance)
         _valueSink = valueSink.asObserver()
     }
 
-    /**
-    Subscribes an observer to control property values.
-
-    - parameter observer: Observer to subscribe to property values.
-    - returns: Disposable object that can be used to unsubscribe the observer from receiving control property values.
-    */
+    /// Subscribes an observer to control property values.
+    ///
+    /// - parameter observer: Observer to subscribe to property values.
+    /// - returns: Disposable object that can be used to unsubscribe the observer from receiving control property values.
     public func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == E {
         return _values.subscribe(observer)
     }
 
-    /**
-    - returns: `Observable` interface.
-    */
-    // @warn_unused_result(message:"http://git.io/rxs.uo")
+    /// `ControlEvent` of user initiated value changes. Every time user updates control value change event
+    /// will be emitted from `changed` event.
+    ///
+    /// Programatic changes to control value won't be reported.
+    ///
+    /// It contains all control property values except for first one.
+    ///
+    /// The name only implies that sequence element will be generated once user changes a value and not that
+    /// adjacent sequence values need to be different (e.g. because of interaction between programatic and user updates,
+    /// or for any other reason).
+    public var changed: ControlEvent<PropertyType> {
+        get {
+            return ControlEvent(events: _values.skip(1))
+        }
+    }
+
+    /// - returns: `Observable` interface.
     public func asObservable() -> Observable<E> {
         return _values
     }
 
-    /**
-    - returns: `ControlProperty` interface.
-    */
-    // @warn_unused_result(message:"http://git.io/rxs.uo")
+    /// - returns: `ControlProperty` interface.
     public func asControlProperty() -> ControlProperty<E> {
         return self
     }
 
-    /**
-    Binds event to user interface.
-
-    - In case next element is received, it is being set to control value.
-    - In case error is received, DEBUG buids raise fatal error, RELEASE builds log event to standard output.
-    - In case sequence completes, nothing happens.
-    */
+    /// Binds event to user interface.
+    ///
+    /// - In case next element is received, it is being set to control value.
+    /// - In case error is received, DEBUG buids raise fatal error, RELEASE builds log event to standard output.
+    /// - In case sequence completes, nothing happens.
     public func on(_ event: Event<E>) {
         switch event {
         case .error(let error):
@@ -110,14 +113,12 @@ public struct ControlProperty<PropertyType> : ControlPropertyType {
 }
 
 extension ControlPropertyType where E == String? {
-    /**
-     Transforms control property of type `String?` into control property of type `String`.
-    */
+    /// Transforms control property of type `String?` into control property of type `String`.
     public var orEmpty: ControlProperty<String> {
         let original: ControlProperty<String?> = self.asControlProperty()
 
         let values: Observable<String> = original._values.map { $0 ?? "" }
-        let valueSink: AnyObserver<String> = original._valueSink.map { $0 }
+        let valueSink: AnyObserver<String> = original._valueSink.mapObserver { $0 }
         return ControlProperty<String>(values: values, valueSink: valueSink)
     }
 }

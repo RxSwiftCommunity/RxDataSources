@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Dispatch
 #if !RX_NO_MODULE
     import RxSwift
 #endif
@@ -17,6 +18,9 @@ Observer that enforces interface binding rules:
  * ensures binding is performed on main thread
  
 `UIBindingObserver` doesn't retain target interface and in case owned interface element is released, element isn't bound.
+ 
+ In case event binding is attempted from non main dispatch queue, event binding will be dispatched async to main dispatch
+ queue.
 */
 public class UIBindingObserver<UIElementType, Value> : ObserverType where UIElementType: AnyObject {
     public typealias E = Value
@@ -25,19 +29,20 @@ public class UIBindingObserver<UIElementType, Value> : ObserverType where UIElem
 
     let binding: (UIElementType, Value) -> Void
 
-    /**
-     Initializes `ViewBindingObserver` using
-    */
+    /// Initializes `ViewBindingObserver` using
     public init(UIElement: UIElementType, binding: @escaping (UIElementType, Value) -> Void) {
         self.UIElement = UIElement
         self.binding = binding
     }
 
-    /**
-     Binds next element to owner view as described in `binding`.
-    */
+    /// Binds next element to owner view as described in `binding`.
     public func on(_ event: Event<Value>) {
-        MainScheduler.ensureExecutingOnScheduler(errorMessage: "Element can be bound to user interface only on MainThread.")
+        if !DispatchQueue.isMain {
+            DispatchQueue.main.async {
+                self.on(event)
+            }
+            return
+        }
 
         switch event {
         case .next(let element):
@@ -51,11 +56,9 @@ public class UIBindingObserver<UIElementType, Value> : ObserverType where UIElem
         }
     }
 
-    /**
-     Erases type of observer.
-
-     - returns: type erased observer.
-     */
+    /// Erases type of observer.
+    ///
+    /// - returns: type erased observer.
     public func asObserver() -> AnyObserver<Value> {
         return AnyObserver(eventHandler: on)
     }
