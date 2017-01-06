@@ -40,6 +40,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                 DispatchQueue.main.async {
                     // if view is not in view hierarchy, performing batch updates will crash the app
                     if tableView.window == nil {
+                        dataSource.setSections(newSections)
                         tableView.reloadData()
                         return
                     }
