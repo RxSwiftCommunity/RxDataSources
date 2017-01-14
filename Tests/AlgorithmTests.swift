@@ -140,6 +140,37 @@ extension AlgorithmTests {
 
         XCTAssertEqual(initial.apply(differences), final)
     }
+
+    func testItemUpdatedAndMoved() {
+        let initial: [s] = [
+            s(1, [
+                i(0, ""),
+                i(1, ""),
+                i(2, ""),
+                ])
+        ]
+
+        let final: [s] = [
+            s(1, [
+                i(1, "u"),
+                i(0, ""),
+                i(2, ""),
+                ])
+        ]
+
+        let differences = try! differencesForSectionedView(initialSections: initial, finalSections: final)
+
+        XCTAssertTrue(differences.count == 2)
+
+        // updates ok
+        XCTAssertTrue(differences[0].onlyContains(updatedItems: 1))
+        XCTAssertTrue(differences[0].updatedItems[0] == ItemPath(sectionIndex: 0, itemIndex: 1))
+
+        // moves ok
+        XCTAssertTrue(differences[1].onlyContains(movedItems: 1))
+
+        XCTAssertEqual(initial.apply(differences), final)
+    }
 }
 
 // multiple sections simple
