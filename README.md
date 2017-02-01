@@ -97,7 +97,7 @@ let dataSource = RxTableViewSectionedReloadDataSource<SectionOfCustomData>()
 - etc
 
 ```swift 
-dataSource.configureCell = { ds, tv, ip, item in
+dataSource.configureCell = { (ds: RxTableViewSectionedReloadDataSource<SectionOfCustomData>, tv: UITableView, ip: IndexPath, item: Item) in
   let cell = tv.dequeueReusableCell(withIdentifier: "Cell", for: ip)
   cell.textLabel?.text = "Item \(item.anInt): \(item.aString) - \(item.aCGPoint.x):\(item.aCGPoint.y)"
   return cell
