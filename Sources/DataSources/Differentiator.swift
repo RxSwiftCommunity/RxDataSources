@@ -74,7 +74,7 @@ fileprivate struct SectionAssociatedData {
 extension SectionAssociatedData : CustomDebugStringConvertible {
     fileprivate var debugDescription: String {
         get {
-            return "\(event), \(indexAfterDelete)"
+            return "\(event), \(String(describing: indexAfterDelete))"
         }
     }
 }
@@ -94,7 +94,7 @@ fileprivate struct ItemAssociatedData {
 extension ItemAssociatedData : CustomDebugStringConvertible {
     fileprivate var debugDescription: String {
         get {
-            return "\(event) \(indexAfterDelete)"
+            return "\(event) \(String(describing: indexAfterDelete))"
         }
     }
 }
