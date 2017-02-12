@@ -30,6 +30,7 @@ open class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
             #endif
             dataSource.setSections(element)
             collectionView.reloadData()
+            collectionView.collectionViewLayout.invalidateLayout()
         }.on(observedEvent)
     }
 }
