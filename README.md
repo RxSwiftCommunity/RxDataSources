@@ -39,7 +39,7 @@ let data = Observable<[String]>.just(["first element", "second element", "third 
 data.bindTo(tableView.rx.items(cellIdentifier: "Cell")) { index, model, cell in
   cell.textLabel?.text = model
 }
-.addDisposableTo(disposeBag)
+.disposed(by: disposeBag)
 ```
 
 This works well with simple data sets but does not handle cases where you need to bind complex data sets with multiples sections, or when you need to perform animations when adding/modifying/deleting items.  
@@ -52,7 +52,7 @@ With RxDataSources, it is super easy to just write
 let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Int>>()
 Observable.just([SectionModel(model: "title", items: [1, 2, 3])])
     .bindTo(tableView.rx.items(dataSource: dataSource))
-    .addDisposableTo(disposeBag)
+    .disposed(by: disposeBag)
 ```
 ![RxDataSources example app](https://raw.githubusercontent.com/kzaher/rxswiftcontent/rxdatasources/RxDataSources.gif)
 
@@ -116,7 +116,7 @@ let sections = [
 
 Observable.just(sections)
   .bindTo(tableView.rx.items(dataSource: dataSource))
-  .addDisposableTo(disposeBag)
+  .disposed(by: disposeBag)
 ```
 
 
