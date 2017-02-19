@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 
 #### Anomalizes
 
-* #84 Adds settings data source sections even if view is not in view hierarchy.
+* #84 Set data source sections even if view is not in view hierarchy.
 * #93 Silence optional debug print warning in swift 3.1
 * #96 Adds additional call to `invalidateLayout` after reloading data.
 
