@@ -5,9 +5,9 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.3](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.3)
 
-#### Anomalizes
+#### Anomalies
 
-* #84 Adds settings data source sections even if view is not in view hierarchy.
+* #84 Set data source sections even if view is not in view hierarchy.
 * #93 Silence optional debug print warning in swift 3.1
 * #96 Adds additional call to `invalidateLayout` after reloading data.
 
