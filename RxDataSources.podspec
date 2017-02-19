@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxDataSources"
-  s.version          = "1.0.2"
+  s.version          = "1.0.3"
   s.summary          = "This is a collection of reactive data sources for UITableView and UICollectionView."
   s.description      = <<-DESC
 This is a collection of reactive data sources for UITableView and UICollectionView.
@@ -8,7 +8,7 @@ This is a collection of reactive data sources for UITableView and UICollectionVi
 It enables creation of animated data sources for table an collection views in just a couple of lines of code.
 
 ```swift
-let data: Obserable<Section> = ...
+let data: Observable<Section> = ...
 
 let dataSource = RxTableViewSectionedAnimatedDataSource<Section>()
 dataSource.cellFactory = { (tv, ip, i) in
@@ -24,8 +24,7 @@ data
 
 // normal reload
 data
-   .bindTo(tableView.rx.items(dataSource: dataSource))
-   .addDisposableTo(disposeBag)
+   .bindTo(tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
 ```
                         DESC
   s.homepage         = "https://github.com/ReactiveX/RxSwift"

@@ -56,12 +56,6 @@ Observable.just([SectionModel(model: "title", items: [1, 2, 3])])
 ```
 ![RxDataSources example app](https://raw.githubusercontent.com/kzaher/rxswiftcontent/rxdatasources/RxDataSources.gif)
 
-## Why was custom diff algorithm used?
-
-- All dynamic programming diff solutions (longest common subsequence problem) have worst quardratic time complexity O(n^2). If you are interested in exploring those solutions, we recommend [Diff](https://github.com/wokalski/Diff.swift#diffswift).
-- It's even more problematic to reconcile tree edit distance algorithms with `UI{Table,Collection}View` animated section updates.
-- In all practial cases each section item is uniquely identified and that can be used to optimize the algorithm.
-
 ## How
 Given the following custom data structure:
 ```swift
