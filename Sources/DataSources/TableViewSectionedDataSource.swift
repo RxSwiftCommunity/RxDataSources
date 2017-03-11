@@ -83,7 +83,7 @@ open class _TableViewSectionedDataSource
     }
 
     open func _rx_tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return 0
+        return index
     }
 
     open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
