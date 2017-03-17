@@ -52,9 +52,7 @@ extension UITableView : SectionedViewType {
     }
 
   public func performBatchUpdates<S: SectionModelType>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
-        self.beginUpdates()
         _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
-        self.endUpdates()
     }
 }
 
