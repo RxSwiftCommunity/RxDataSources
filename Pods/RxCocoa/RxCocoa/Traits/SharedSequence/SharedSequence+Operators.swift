@@ -6,7 +6,6 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import Foundation
 #if !RX_NO_MODULE
 import RxSwift
 #endif
@@ -217,8 +216,51 @@ extension SharedSequenceConvertibleType {
 }
 
 // MARK: merge
-extension SharedSequenceConvertibleType where E : SharedSequenceConvertibleType, E.SharingStrategy == SharingStrategy {
+extension SharedSequenceConvertibleType {
+    /**
+     Merges elements from all observable sequences from collection into a single observable sequence.
+
+     - seealso: [merge operator on reactivex.io](http://reactivex.io/documentation/operators/merge.html)
+
+     - parameter sources: Collection of observable sequences to merge.
+     - returns: The observable sequence that merges the elements of the observable sequences.
+     */
+    public static func merge<C: Collection>(_ sources: C) -> SharedSequence<SharingStrategy, E>
+        where C.Iterator.Element == SharedSequence<SharingStrategy, E> {
+        let source = Observable.merge(sources.map { $0.asObservable() })
+        return SharedSequence<SharingStrategy, E>(source)
+    }
+
+    /**
+     Merges elements from all observable sequences from array into a single observable sequence.
+
+     - seealso: [merge operator on reactivex.io](http://reactivex.io/documentation/operators/merge.html)
+
+     - parameter sources: Array of observable sequences to merge.
+     - returns: The observable sequence that merges the elements of the observable sequences.
+     */
+    public static func merge(_ sources: [SharedSequence<SharingStrategy, E>]) -> SharedSequence<SharingStrategy, E> {
+        let source = Observable.merge(sources.map { $0.asObservable() })
+        return SharedSequence<SharingStrategy, E>(source)
+    }
+
+    /**
+     Merges elements from all observable sequences into a single observable sequence.
+
+     - seealso: [merge operator on reactivex.io](http://reactivex.io/documentation/operators/merge.html)
+
+     - parameter sources: Collection of observable sequences to merge.
+     - returns: The observable sequence that merges the elements of the observable sequences.
+     */
+    public static func merge(_ sources: SharedSequence<SharingStrategy, E>...) -> SharedSequence<SharingStrategy, E> {
+        let source = Observable.merge(sources.map { $0.asObservable() })
+        return SharedSequence<SharingStrategy, E>(source)
+    }
     
+}
+
+// MARK: merge
+extension SharedSequenceConvertibleType where E : SharedSequenceConvertibleType, E.SharingStrategy == SharingStrategy {
     /**
     Merges elements from all observable sequences in the given enumerable sequence into a single observable sequence.
     
@@ -260,10 +302,10 @@ extension SharedSequenceConvertibleType {
      - parameter latest: Should latest element received in a dueTime wide time window since last element emission be emitted.
      - returns: The throttled sequence.
     */
-    public func throttle(_ dueTime: RxTimeInterval)
+    public func throttle(_ dueTime: RxTimeInterval, latest: Bool = true)
         -> SharedSequence<SharingStrategy, E> {
         let source = self.asObservable()
-            .throttle(dueTime, scheduler: SharingStrategy.scheduler)
+            .throttle(dueTime, latest: latest, scheduler: SharingStrategy.scheduler)
 
         return SharedSequence(source)
     }

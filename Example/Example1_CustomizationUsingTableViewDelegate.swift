@@ -67,7 +67,7 @@ class CustomizationUsingTableViewDelegate : UIViewController {
         ]
 
         Observable.just(sections)
-            .bindTo(tableView.rx.items(dataSource: dataSource))
+            .bind(to: tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
 
         tableView.rx.setDelegate(self)

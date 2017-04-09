@@ -50,7 +50,7 @@ class EditingExampleViewController: UIViewController {
                 $0.sections
             }
             .shareReplay(1)
-            .bindTo(tableView.rx.items(dataSource: dataSource))
+            .bind(to: tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
     }
     

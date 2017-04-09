@@ -6,14 +6,13 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-import Foundation
 #if !RX_NO_MODULE
     import RxSwift
 #endif
 
 
 /**
- Unit that represents observable sequence with following properties:
+ Trait that represents observable sequence with following properties:
 
  - it never fails
  - it delivers events on `MainScheduler.instance`
@@ -33,7 +32,7 @@ import Foundation
  If `drive*`, `subscribe*` and `bind*` are called from background thread, it is possible that initial replay
  will happen on background thread, and subsequent events will arrive on main thread.
 
- To find out more about units and how to use them, please visit `Documentation/Units.md`.
+ To find out more about traits and how to use them, please visit `Documentation/Traits.md`.
  */
 public typealias Driver<E> = SharedSequence<DriverSharingStrategy, E>
 
@@ -72,6 +71,8 @@ public func driveOnScheduler(_ scheduler: SchedulerType, action: () -> ()) {
 
 #if os(Linux)
     import Glibc
+#else
+    import func Foundation.arc4random
 #endif
 
 func _forceCompilerToStopDoingInsaneOptimizationsThatBreakCode(_ scheduler: SchedulerType) {

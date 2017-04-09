@@ -6,13 +6,12 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import Foundation
 #if !RX_NO_MODULE
     import RxSwift
 #endif
 
 /**
-    Unit that represents observable sequence that shares computation resources with following properties:
+    Trait that represents observable sequence that shares computation resources with following properties:
 
     - it never fails
     - it delivers events on `SharingStrategy.scheduler`
@@ -20,7 +19,7 @@ import Foundation
 
     `SharedSequence<Element>` can be considered a builder pattern for observable sequences that share computation resources.
 
-    To find out more about units and how to use them, please visit `Documentation/Units.md`.
+    To find out more about units and how to use them, please visit `Documentation/Traits.md`.
 */
 public struct SharedSequence<S: SharingStrategyProtocol, Element> : SharedSequenceConvertibleType {
     public typealias E = Element
@@ -109,7 +108,7 @@ extension SharedSequence {
     - returns: An observable sequence with no elements.
     */
     public static func empty() -> SharedSequence<S, E> {
-        return SharedSequence(Observable.empty().subscribeOn(S.scheduler))
+        return SharedSequence(raw: Observable.empty().subscribeOn(S.scheduler))
     }
 
     /**
@@ -118,7 +117,7 @@ extension SharedSequence {
     - returns: An observable sequence whose observers will never get called.
     */
     public static func never() -> SharedSequence<S, E> {
-        return SharedSequence(Observable.never())
+        return SharedSequence(raw: Observable.never())
     }
 
     /**
@@ -128,7 +127,7 @@ extension SharedSequence {
     - returns: An observable sequence containing the single specified element.
     */
     public static func just(_ element: E) -> SharedSequence<S, E> {
-        return SharedSequence(Observable.just(element).subscribeOn(S.scheduler))
+        return SharedSequence(raw: Observable.just(element).subscribeOn(S.scheduler))
     }
 
     /**

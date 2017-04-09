@@ -51,18 +51,18 @@ class ViewController: UIViewController {
         skinTableViewDataSource(reloadDataSource)
 
         randomSections
-            .bindTo(animatedTableView.rx.items(dataSource: tvAnimatedDataSource))
+            .bind(to: animatedTableView.rx.items(dataSource: tvAnimatedDataSource))
             .addDisposableTo(disposeBag)
 
         randomSections
-            .bindTo(tableView.rx.items(dataSource: reloadDataSource))
+            .bind(to: tableView.rx.items(dataSource: reloadDataSource))
             .addDisposableTo(disposeBag)
 
         let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource<NumberSection>()
         skinCollectionViewDataSource(cvAnimatedDataSource)
 
         randomSections
-            .bindTo(animatedCollectionView.rx.items(dataSource: cvAnimatedDataSource))
+            .bind(to: animatedCollectionView.rx.items(dataSource: cvAnimatedDataSource))
             .addDisposableTo(disposeBag)
 
         // touches
