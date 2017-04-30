@@ -48,11 +48,13 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                     do {
                         let differences = try differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
+                        tableView.beginUpdates()
                         for difference in differences {
                             dataSource.setSections(difference.finalSections)
 
                             tableView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
                         }
+                        tableView.endUpdates()
                     }
                     catch let e {
                         rxDebugFatalError(e)
