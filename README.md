@@ -35,7 +35,7 @@ RxSwift helps alleviate some of the burden with a simple data binding mechanism:
 
 ```swift
 let data = Observable<[String]>.just(["first element", "second element", "third element"])
-        
+
 data.bind(to: tableView.rx.items(cellIdentifier: "Cell")) { index, model, cell in
   cell.textLabel?.text = model
 }
