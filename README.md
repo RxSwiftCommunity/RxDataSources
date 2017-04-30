@@ -51,7 +51,7 @@ With RxDataSources, it is super easy to just write
 ```swift
 let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Int>>()
 Observable.just([SectionModel(model: "title", items: [1, 2, 3])])
-    .bindTo(tableView.rx.items(dataSource: dataSource))
+    .bind(to: tableView.rx.items(dataSource: dataSource))
     .disposed(by: disposeBag)
 ```
 ![RxDataSources example app](https://raw.githubusercontent.com/kzaher/rxswiftcontent/rxdatasources/RxDataSources.gif)
