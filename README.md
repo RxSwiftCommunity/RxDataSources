@@ -36,7 +36,7 @@ RxSwift helps alleviate some of the burden with a simple data binding mechanism:
 ```swift
 let data = Observable<[String]>.just(["first element", "second element", "third element"])
 
-data.bindTo(tableView.rx.items(cellIdentifier: "Cell")) { index, model, cell in
+data.bind(to: tableView.rx.items(cellIdentifier: "Cell")) { index, model, cell in
   cell.textLabel?.text = model
 }
 .disposed(by: disposeBag)
@@ -51,7 +51,7 @@ With RxDataSources, it is super easy to just write
 ```swift
 let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Int>>()
 Observable.just([SectionModel(model: "title", items: [1, 2, 3])])
-    .bindTo(tableView.rx.items(dataSource: dataSource))
+    .bind(to: tableView.rx.items(dataSource: dataSource))
     .disposed(by: disposeBag)
 ```
 ![RxDataSources example app](https://raw.githubusercontent.com/kzaher/rxswiftcontent/rxdatasources/RxDataSources.gif)
@@ -115,7 +115,7 @@ let sections = [
 ]
 
 Observable.just(sections)
-  .bindTo(tableView.rx.items(dataSource: dataSource))
+  .bind(to: tableView.rx.items(dataSource: dataSource))
   .disposed(by: disposeBag)
 ```
 
