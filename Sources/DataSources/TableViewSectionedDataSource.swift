@@ -233,6 +233,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
     }
     
     open override func _rx_tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard _sectionModels.count > section else { return 0 }
         return _sectionModels[section].items.count
     }
     
