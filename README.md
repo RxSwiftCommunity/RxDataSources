@@ -9,7 +9,7 @@ Table and Collection view data sources
   - the algorithm has the assumption that all sections and items are unique so there is no ambiguity
   - in case there is ambiguity, fallbacks automagically on non animated refresh
 - [x] it applies additional heuristics to send the least number of commands to sectioned view
-  - even though the running time is linear, preferred number of sent commands is usually a lot less then linear
+  - even though the running time is linear, preferred number of sent commands is usually a lot less than linear
   - it is preferred (and possible) to cap the number of changes to some small number, and in case the number of changes grows towards linear, just do normal reload
 - [x] Supports **extending your item and section structures**
   - just extend your item with `IdentifiableType` and `Equatable`, and your section with `AnimatableSectionModelType`
