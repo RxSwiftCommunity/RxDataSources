@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.4](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.4)
+
+#### Anomalies
+* Fixed crash that happened when using a combination of `estimatedHeightForRow` and `tableFooterView`. #129
+
 ## [1.0.3](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.3)
 
 #### Anomalies
