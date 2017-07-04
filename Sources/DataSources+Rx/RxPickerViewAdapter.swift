@@ -14,7 +14,6 @@ import UIKit
 #endif
 
 public protocol RxPickerViewDataSourceType {
-    /// Type of elements that can be bound to table view.
     associatedtype Element
     
     func pickerView(_ pickerView: UIPickerView, observedEvent: Event<Element>)
