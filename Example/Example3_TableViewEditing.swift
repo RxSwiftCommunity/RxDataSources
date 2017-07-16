@@ -77,10 +77,10 @@ class EditingExampleViewController: UIViewController {
             return ds[section].header
         }
         
-        dataSource.canEditRowAtIndexPath = { _ in
+        dataSource.canEditRowAtIndexPath = { _, _ in
             return true
         }
-        dataSource.canMoveRowAtIndexPath = { _ in
+        dataSource.canMoveRowAtIndexPath = { _, _ in
             return true
         }
     }
