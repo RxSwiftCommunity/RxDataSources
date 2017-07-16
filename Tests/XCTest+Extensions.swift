@@ -27,7 +27,7 @@ fileprivate struct EquatableArray<Element: Equatable> : Equatable {
     }
 }
 
-fileprivate func == <E: Equatable>(lhs: EquatableArray<E>, rhs: EquatableArray<E>) -> Bool {
+fileprivate func == <E>(lhs: EquatableArray<E>, rhs: EquatableArray<E>) -> Bool {
     return lhs.elements == rhs.elements
 }
 

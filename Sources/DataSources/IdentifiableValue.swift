@@ -36,6 +36,6 @@ extension IdentifiableValue
     }
 }
 
-public func == <V: Hashable>(lhs: IdentifiableValue<V>, rhs: IdentifiableValue<V>) -> Bool {
+public func == <V>(lhs: IdentifiableValue<V>, rhs: IdentifiableValue<V>) -> Bool {
     return lhs.value == rhs.value
 }

@@ -141,7 +141,7 @@ extension OptimizedIdentity: Hashable {
 
 }
 
-fileprivate func == <E: Hashable>(lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
+fileprivate func == <E>(lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
     if lhs.hashValue != rhs.hashValue {
         return false
     }

@@ -217,7 +217,7 @@ open class TableViewSectionedDataSource<S: SectionModelType>
     
     public override init() {
         super.init()
-        self.configureCell = { [weak self] _ in
+        self.configureCell = { [weak self] _, _, _, _ in
             if let strongSelf = self {
                 precondition(false, "There is a minor problem. `cellFactory` property on \(strongSelf) was not set. Please set it manually, or use one of the `rx_bindTo` methods.")
             }
