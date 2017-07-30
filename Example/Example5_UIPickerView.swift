@@ -19,15 +19,38 @@ final class ReactivePickerViewControllerExample: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    private let stringPickerAdapter = RxPickerViewStringAdapter<[String]>(components: [])
-    private let attributedStringPickerAdapter = RxPickerViewAttributedStringAdapter<[String]>(components: [])
-    private let viewPickerAdapter = RxPickerViewViewAdapter<[String]>(components: [])
+    private let stringPickerAdapter = RxPickerViewStringAdapter<[String]>(components: [],
+                                                                          numberOfComponents: { _ in 1 },
+                                                                          numberOfRowsInComponent: { (_, _, items, _) -> Int in
+                                                                            return items.count
+                                                                          },
+                                                                          titleForRow: { (_, _, items, row, _) -> String? in
+                                                                                return items[row]
+                                                                          })
+    private let attributedStringPickerAdapter = RxPickerViewAttributedStringAdapter<[String]>(components: [],
+                                                                                              numberOfComponents: { _ in 1 },
+                                                                                              numberOfRowsInComponent: { (_, _, items, _) -> Int in
+                                                                                                return items.count
+    }) { (_, _, items, row, _) -> NSAttributedString? in
+        return NSAttributedString(string: items[row],
+                                  attributes: [
+                                    NSForegroundColorAttributeName: UIColor.purple,
+                                    NSUnderlineStyleAttributeName: NSUnderlineStyle.styleDouble.rawValue,
+                                    NSTextEffectAttributeName: NSTextEffectLetterpressStyle
+            ])
+    }
+    private let viewPickerAdapter = RxPickerViewViewAdapter<[String]>(components: [],
+                                                                      numberOfComponents: { _ in 1 },
+                                                                      numberOfRowsInComponent: { (_, _, items, _) -> Int in
+                                                                        return items.count
+    }) { (_, _, _, row, _, view) -> UIView in
+        let componentView = view ?? UIView()
+        componentView.backgroundColor = row % 2 == 0 ? UIColor.red : UIColor.blue
+        return componentView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupStringPickerAdapter()
-        setupAttributedStringPickerAdapter()
-        setupViewPickerAdapter()
         
         Observable.just(["One", "Two", "Tree"])
             .bind(to: firstPickerView.rx.items(adapter: stringPickerAdapter))
@@ -40,55 +63,5 @@ final class ReactivePickerViewControllerExample: UIViewController {
         Observable.just(["One", "Two", "Tree"])
             .bind(to: thirdPickerView.rx.items(adapter: viewPickerAdapter))
             .disposed(by: disposeBag)
-    }
-    
-    func setupStringPickerAdapter() {
-        stringPickerAdapter.numberOfComponentsProvider = { _ in
-            return 1
-        }
-        
-        stringPickerAdapter.numberOfRowsInComponentProvider = { _, _, components, _ in
-            return components.count
-        }
-        
-        stringPickerAdapter.titleForRowProvider = { _, _, components, row, _ in
-            return components[row]
-        }
-    }
-    
-    func setupAttributedStringPickerAdapter() {
-        attributedStringPickerAdapter.numberOfComponentsProvider = { _ in
-            return 1
-        }
-        
-        attributedStringPickerAdapter.numberOfRowsInComponentProvider = { _, _, components, _ in
-            return components.count
-        }
-        
-        attributedStringPickerAdapter.attributedTitleForRowProvider = {_, _, components, row, _ in
-            let string = components[row]
-            return NSAttributedString(string: string,
-                                      attributes: [
-                                        NSForegroundColorAttributeName: UIColor.purple,
-                                        NSUnderlineStyleAttributeName: NSUnderlineStyle.styleDouble.rawValue,
-                                        NSTextEffectAttributeName: NSTextEffectLetterpressStyle
-                                    ])
-        }
-    }
-    
-    func setupViewPickerAdapter() {
-        viewPickerAdapter.numberOfComponentsProvider = { _ in
-            return 1
-        }
-        
-        viewPickerAdapter.numberOfRowsInComponentProvider = { _, _, components, _ in
-            return components.count
-        }
-        
-        viewPickerAdapter.viewForRowProvider = { _, _, components, row, _, view in
-            let componentView = view ?? UIView()
-            componentView.backgroundColor = row % 2 == 0 ? UIColor.red : UIColor.blue
-            return componentView
-        }
     }
 }

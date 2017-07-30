@@ -13,34 +13,93 @@ import UIKit
     import RxCocoa
 #endif
 
-public protocol RxPickerViewDataSourceType {
-    associatedtype Element
+open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
+    public typealias TitleForRow = (RxPickerViewStringAdapter<T>, UIPickerView, T,Int, Int) -> String?
     
-    func pickerView(_ pickerView: UIPickerView, observedEvent: Event<Element>)
+    private let titleForRow: TitleForRow
+    
+    public init(components: T,
+                numberOfComponents: @escaping NumberOfComponents,
+                numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
+                titleForRow: @escaping TitleForRow) {
+        self.titleForRow = titleForRow
+        super.init(components: components,
+                   numberOfComponents: numberOfComponents,
+                   numberOfRowsInComponent: numberOfRowsInComponent)
+    }
+    
+    open func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return titleForRow(self, pickerView, components, row, component)
+    }
 }
 
+open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
+    public typealias AttributedTitleForRow = (RxPickerViewAttributedStringAdapter<T>, UIPickerView, T, Int, Int) -> NSAttributedString?
+    
+    private let attributedTitleForRow: AttributedTitleForRow
+    
+    public init(components: T,
+                numberOfComponents: @escaping NumberOfComponents,
+                numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
+                attributedTitleForRow: @escaping AttributedTitleForRow) {
+        self.attributedTitleForRow = attributedTitleForRow
+        super.init(components: components,
+                   numberOfComponents: numberOfComponents,
+                   numberOfRowsInComponent: numberOfRowsInComponent)
+    }
+    
+    open func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return attributedTitleForRow(self, pickerView, components, row, component)
+    }
+}
+
+open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
+    public typealias ViewForRow = (RxPickerViewViewAdapter<T>, UIPickerView, T, Int, Int, UIView?) -> UIView
+    
+    private let viewForRow: ViewForRow
+    
+    public init(components: T,
+                numberOfComponents: @escaping NumberOfComponents,
+                numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
+                viewForRow: @escaping ViewForRow) {
+        self.viewForRow = viewForRow
+        super.init(components: components,
+                   numberOfComponents: numberOfComponents,
+                   numberOfRowsInComponent: numberOfRowsInComponent)
+    }
+    
+    open func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        return viewForRow(self, pickerView, components, row, component, view)
+    }
+}
+
+
 open class RxPickerViewDataSource<T>: NSObject, UIPickerViewDataSource {
-    public typealias NumberOfComponentsProvider = (RxPickerViewDataSource, UIPickerView, T) -> Int
-    public typealias NumberOfRowsInComponentProvider = (RxPickerViewDataSource, UIPickerView, T, Int) -> Int
+    public typealias NumberOfComponents = (RxPickerViewDataSource, UIPickerView, T) -> Int
+    public typealias NumberOfRowsInComponent = (RxPickerViewDataSource, UIPickerView, T, Int) -> Int
     
     fileprivate var components: T
     
-    init(components: T) {
+    init(components: T,
+         numberOfComponents: @escaping NumberOfComponents,
+         numberOfRowsInComponent: @escaping NumberOfRowsInComponent) {
         self.components = components
+        self.numberOfComponents = numberOfComponents
+        self.numberOfRowsInComponent = numberOfRowsInComponent
         super.init()
     }
     
-    public var numberOfComponentsProvider: NumberOfComponentsProvider!
-    public var numberOfRowsInComponentProvider: NumberOfRowsInComponentProvider!
+    private let numberOfComponents: NumberOfComponents
+    private let numberOfRowsInComponent: NumberOfRowsInComponent
     
     //MARK: UIPickerViewDataSource
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return numberOfComponentsProvider(self, pickerView, components)
+        return numberOfComponents(self, pickerView, components)
     }
-
+    
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numberOfRowsInComponentProvider(self, pickerView, components, component)
+        return numberOfRowsInComponent(self, pickerView, components, component)
     }
 }
 
@@ -49,65 +108,6 @@ extension RxPickerViewDataSource: RxPickerViewDataSourceType {
         UIBindingObserver(UIElement: self) { (dataSource, components) in
             dataSource.components = components
             pickerView.reloadAllComponents()
-        }.on(observedEvent)
+            }.on(observedEvent)
     }
 }
-
-open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
-    public typealias TitleForRowProvider = (RxPickerViewStringAdapter<T>, UIPickerView, T,Int, Int) -> String?
-    
-    public var titleForRowProvider: TitleForRowProvider! = nil
-    
-    public override init(components: T) {
-        super.init(components: components)
-    }
-    
-    open func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return titleForRowProvider(self, pickerView, components, row, component)
-    }
-}
-
-open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
-    public typealias AttributedTitleForRowProvider = (RxPickerViewAttributedStringAdapter<T>, UIPickerView, T, Int, Int) -> NSAttributedString?
-    
-    public var attributedTitleForRowProvider: AttributedTitleForRowProvider! = nil
-    
-    public override init(components: T) {
-        super.init(components: components)
-    }
-    
-    open func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return attributedTitleForRowProvider(self, pickerView, components, row, component)
-    }
-}
-
-open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
-    public typealias ViewForRowProvider = (RxPickerViewViewAdapter<T>, UIPickerView, T, Int, Int, UIView?) -> UIView
-    
-    public var viewForRowProvider: ViewForRowProvider!
-    
-    public override init(components: T) {
-        super.init(components: components)
-    }
-    
-    open func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        return viewForRowProvider(self, pickerView, components, row, component, view)
-    }
-}
-
-extension Reactive where Base: UIPickerView {
-    public func items<O: ObservableType,
-                         Adapter: RxPickerViewDataSourceType & UIPickerViewDataSource & UIPickerViewDelegate>(adapter: Adapter)
-        -> (_ source: O)
-        -> Disposable where O.E == Adapter.Element {
-            return { source in
-                self.base.delegate = adapter
-                self.base.dataSource = adapter
-                return source.subscribe{ [weak pickerView = self.base] (event) in
-                    guard let pickerView = pickerView else { return }
-                    adapter.pickerView(pickerView, observedEvent: event)
-                }
-            }
-    }
-}
-
