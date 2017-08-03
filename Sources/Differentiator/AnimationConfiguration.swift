@@ -13,9 +13,9 @@ import UIKit
    Exposes custom animation styles for insertion, deletion and reloading behavior.
 */
 public struct AnimationConfiguration {
-  let insertAnimation: UITableViewRowAnimation
-  let reloadAnimation: UITableViewRowAnimation
-  let deleteAnimation: UITableViewRowAnimation
+  public let insertAnimation: UITableViewRowAnimation
+  public let reloadAnimation: UITableViewRowAnimation
+  public let deleteAnimation: UITableViewRowAnimation
   
   public init(insertAnimation: UITableViewRowAnimation = .automatic,
     reloadAnimation: UITableViewRowAnimation = .automatic,

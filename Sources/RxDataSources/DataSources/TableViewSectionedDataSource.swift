@@ -11,6 +11,7 @@ import UIKit
 #if !RX_NO_MODULE
 import RxCocoa
 #endif
+import Differentiator
 
 // objc monkey business
 open class _TableViewSectionedDataSource
