@@ -322,6 +322,7 @@
 		C81905B21DEA019100AE679C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C81905B91DEA0BD700AE679C /* ChangeSet+TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChangeSet+TestExtensions.swift"; sourceTree = "<group>"; };
 		C81905BD1DEA104400AE679C /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		C82541851F363C76009F6C03 /* dependencies.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = dependencies.sh; sourceTree = "<group>"; };
 		C8477FB81D29DBC90074454A /* IntegerType+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerType+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C8477FBC1D29DCE20074454A /* FloatingPointType+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingPointType+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C8595DA81DEA3D4800FA20CD /* AlgorithmTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmTests.swift; sourceTree = "<group>"; };
@@ -567,6 +568,7 @@
 		C8984C501C36AF35001E4272 = {
 			isa = PBXGroup;
 			children = (
+				C82541851F363C76009F6C03 /* dependencies.sh */,
 				C861C0F01E153FC400BEDC46 /* RxDataSources.podspec */,
 				C87C34191F36346A00DB85FE /* Rx.xcodeproj */,
 				C85EE5461C36F1FC0090614D /* Sources */,
@@ -731,6 +733,7 @@
 				C8984C981C36B6FA001E4272 /* Frameworks */,
 				C8984C991C36B6FA001E4272 /* Resources */,
 				C87C34A11F363B1400DB85FE /* Embed Frameworks */,
+				C82FDC991F3651D0002FA2B6 /* NormalizeCocoapods */,
 			);
 			buildRules = (
 			);
@@ -1063,6 +1066,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		C82FDC991F3651D0002FA2B6 /* NormalizeCocoapods */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = NormalizeCocoapods;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "pushd \"${DERIVED_FILE_DIR}\"\nif [[ -d \"RxSwift/RxSwift.framework\" ]]; then\n    ln -s \"RxSwift/RxSwift.framework\" RxSwift.framework\nfi\nif [[ -d \"RxCocoa/RxCocoa.framework\" ]]; then\n    ln -s \"RxCocoa/RxCocoa.framework\" RxSwift.framework\nfi\npopd";
 		};
 /* End PBXShellScriptBuildPhase section */
 
