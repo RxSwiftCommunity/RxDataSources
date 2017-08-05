@@ -732,8 +732,8 @@
 				C8984C971C36B6FA001E4272 /* Sources */,
 				C8984C981C36B6FA001E4272 /* Frameworks */,
 				C8984C991C36B6FA001E4272 /* Resources */,
-				C87C34A11F363B1400DB85FE /* Embed Frameworks */,
 				C82FDC991F3651D0002FA2B6 /* NormalizeCocoapods */,
+				C87C34A11F363B1400DB85FE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1079,7 +1079,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "pushd \"${DERIVED_FILE_DIR}\"\nif [[ -d \"RxSwift/RxSwift.framework\" ]]; then\n    ln -s \"RxSwift/RxSwift.framework\" RxSwift.framework\nfi\nif [[ -d \"RxCocoa/RxCocoa.framework\" ]]; then\n    ln -s \"RxCocoa/RxCocoa.framework\" RxSwift.framework\nfi\npopd";
+			shellScript = "pushd \"${BUILT_PRODUCTS_DIR}\"\necho \"${BUILT_PRODUCTS_DIR}\"\nfunction copy {\n    if [[ -d \"$1/$1.framework\" ]]; then\n    rm -rf $1.framework\n    cp -r $1/$1.framework $1.framework\n    fi\n}\ncopy RxSwift\ncopy RxCocoa\npopd";
 		};
 /* End PBXShellScriptBuildPhase section */
 
