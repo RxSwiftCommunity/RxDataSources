@@ -1,6 +1,6 @@
 language: objective-c
 
-osx_image: xcode8
+osx_image: xcode8.3
 
 notifications:
   slack: rxswift:3ykt2Z61f8GkdvhCZTYPduOL
@@ -8,7 +8,16 @@ notifications:
 
 install: true
 
-script: 
+cache:
+  directories:
+    - Carthage
+
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+  - carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
+  
+script:
   - mkdir -p build && . ./scripts/common.sh && rx "Tests" Release "${DEFAULT_IOS_SIMULATOR}" test && rx "ExampleUITests" Release "${DEFAULT_IOS_SIMULATOR}" test && set +e
 
 after_success:

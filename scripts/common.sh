@@ -111,11 +111,11 @@ function ensure_simulator_available() {
 BUILD_DIRECTORY=build
 
 function rx() {
-	action RxDataSources.xcworkspace "$1" "$2" "$3" "$4"
+	action RxDataSources.xcodeproj "$1" "$2" "$3" "$4"
 }
 
 function action() {
-	WORKSPACE=$1
+	PROJECT=$1
 	SCHEME=$2
 	CONFIGURATION=$3
 	SIMULATOR=$4
@@ -149,7 +149,7 @@ function action() {
 
 	set -x
 	killall Simulator || true
-	xcodebuild -workspace "${WORKSPACE}" \
+	xcodebuild -project "${PROJECT}" \
 		-scheme "${SCHEME}" \
 		-configuration "${CONFIGURATION}" \
 		-derivedDataPath "${BUILD_DIRECTORY}" \
