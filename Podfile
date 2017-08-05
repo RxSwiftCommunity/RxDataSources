@@ -6,7 +6,11 @@ def common
     pod 'RxCocoa', :git => 'git@github.com:ReactiveX/RxSwift.git', :branch => 'master'
 end
 
-target 'RxDataSources' do
+target 'RxDataSources-iOS' do
+    common
+end
+
+target 'RxDataSources-tvOS' do
     common
 end
 
