@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4B2515941F2F01A8003B277F"
+               BlueprintIdentifier = "4BA8ACD81F36D6AB00371C26"
                BuildableName = "Differentiator.framework"
                BlueprintName = "Differentiator-tvOS"
                ReferencedContainer = "container:RxDataSources.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4B2515941F2F01A8003B277F"
+            BlueprintIdentifier = "4BA8ACD81F36D6AB00371C26"
             BuildableName = "Differentiator.framework"
             BlueprintName = "Differentiator-tvOS"
             ReferencedContainer = "container:RxDataSources.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4B2515941F2F01A8003B277F"
+            BlueprintIdentifier = "4BA8ACD81F36D6AB00371C26"
             BuildableName = "Differentiator.framework"
             BlueprintName = "Differentiator-tvOS"
             ReferencedContainer = "container:RxDataSources.xcodeproj">
