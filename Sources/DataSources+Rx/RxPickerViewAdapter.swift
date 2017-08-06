@@ -13,6 +13,17 @@ import UIKit
     import RxCocoa
 #endif
 
+/// A reactive UIPickerView adapter which uses `func pickerView(UIPickerView, titleForRow: Int, forComponent: Int)` to desplay content
+/**
+ Example:
+ 
+let adapter = RxPickerViewStringAdapter<[T]>(...)
+ 
+items
+ .bind(to: firstPickerView.rx.items(adapter: adapter))
+ .disposed(by: disposeBag)
+ 
+ */
 open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
     public typealias TitleForRow = (RxPickerViewStringAdapter<T>, UIPickerView, T,Int, Int) -> String?
     
@@ -33,6 +44,17 @@ open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerView
     }
 }
 
+/// A reactive UIPickerView adapter which uses `func pickerView(UIPickerView, viewForRow: Int, forComponent: Int, reusing: UIView?)` to desplay content
+/**
+ Example:
+ 
+ let adapter = RxPickerViewAttributedStringAdapter<[T]>(...)
+ 
+ items
+ .bind(to: firstPickerView.rx.items(adapter: adapter))
+ .disposed(by: disposeBag)
+ 
+ */
 open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
     public typealias AttributedTitleForRow = (RxPickerViewAttributedStringAdapter<T>, UIPickerView, T, Int, Int) -> NSAttributedString?
     
@@ -53,6 +75,17 @@ open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UI
     }
 }
 
+/// A reactive UIPickerView adapter which uses `func pickerView(pickerView:, viewForRow row:, forComponent component:)` to desplay content
+/**
+ Example:
+ 
+ let adapter = RxPickerViewViewAdapter<[T]>(...)
+ 
+ items
+ .bind(to: firstPickerView.rx.items(adapter: adapter))
+ .disposed(by: disposeBag)
+ 
+ */
 open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
     public typealias ViewForRow = (RxPickerViewViewAdapter<T>, UIPickerView, T, Int, Int, UIView?) -> UIView
     
@@ -73,7 +106,7 @@ open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDe
     }
 }
 
-
+/// A reactive UIPickerView data source  
 open class RxPickerViewDataSource<T>: NSObject, UIPickerViewDataSource {
     public typealias NumberOfComponents = (RxPickerViewDataSource, UIPickerView, T) -> Int
     public typealias NumberOfRowsInComponent = (RxPickerViewDataSource, UIPickerView, T, Int) -> Int
@@ -108,6 +141,6 @@ extension RxPickerViewDataSource: RxPickerViewDataSourceType {
         UIBindingObserver(UIElement: self) { (dataSource, components) in
             dataSource.components = components
             pickerView.reloadAllComponents()
-            }.on(observedEvent)
+        }.on(observedEvent)
     }
 }
