@@ -1,8 +1,8 @@
 //
-//  RxCollectionViewSectionedReloadDataSource.swift
+//  RxTableViewSectionedReloadDataSource.swift
 //  RxExample
 //
-//  Created by Krunoslav Zaher on 7/2/15.
+//  Created by Krunoslav Zaher on 6/27/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
@@ -12,25 +12,24 @@ import UIKit
 import RxSwift
 import RxCocoa
 #endif
+import Differentiator
 
-open class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
-    : CollectionViewSectionedDataSource<S>
-    , RxCollectionViewDataSourceType {
-    
+open class RxTableViewSectionedReloadDataSource<S: SectionModelType>
+    : TableViewSectionedDataSource<S>
+    , RxTableViewDataSourceType {
     public typealias Element = [S]
 
     public override init() {
         super.init()
     }
 
-    open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
+    open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
         UIBindingObserver(UIElement: self) { dataSource, element in
             #if DEBUG
                 self._dataSourceBound = true
             #endif
             dataSource.setSections(element)
-            collectionView.reloadData()
-            collectionView.collectionViewLayout.invalidateLayout()
+            tableView.reloadData()
         }.on(observedEvent)
     }
 }
