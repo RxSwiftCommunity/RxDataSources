@@ -9,7 +9,7 @@
 import Foundation
 
 extension Array where Element: SectionModelType {
-    public mutating func moveFromSourceIndexPath(_ sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
+    mutating func moveFromSourceIndexPath(_ sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
         let sourceSection = self[sourceIndexPath.section]
         var sourceItems = sourceSection.items
 
