@@ -29,6 +29,11 @@
 		9FF3014B1C4AA6D1007376BD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF301491C4AA6D1007376BD /* RxSwift.framework */; };
 		9FF3014E1C4AA6DA007376BD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; };
 		9FF301501C4AA6DA007376BD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014D1C4AA6DA007376BD /* RxSwift.framework */; };
+		A5E035641F0BD55A00EA6BDE /* Example5_UIPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E035631F0BD55A00EA6BDE /* Example5_UIPickerView.swift */; };
+		A5FFBC311F0B922C0074D147 /* RxPickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FFBC301F0B922C0074D147 /* RxPickerViewAdapter.swift */; };
+		A5FFBC321F0B922C0074D147 /* RxPickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FFBC301F0B922C0074D147 /* RxPickerViewAdapter.swift */; };
+		A5FFBC331F0B922C0074D147 /* RxPickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FFBC301F0B922C0074D147 /* RxPickerViewAdapter.swift */; };
+		C814E8F51D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */; };
 		C814E8F61D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */; };
 		C814E8F71D29DB4F00837FE1 /* String+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */; };
 		C8153A501CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8153A4F1CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift */; };
@@ -315,6 +320,8 @@
 		9FF301491C4AA6D1007376BD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/tvOS/RxSwift.framework; sourceTree = "<group>"; };
 		9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		9FF3014D1C4AA6DA007376BD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		A5E035631F0BD55A00EA6BDE /* Example5_UIPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example5_UIPickerView.swift; sourceTree = "<group>"; };
+		A5FFBC301F0B922C0074D147 /* RxPickerViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxPickerViewAdapter.swift; sourceTree = "<group>"; };
 		A66428182C504F0369D6A3F2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C814E8F41D29DB4F00837FE1 /* String+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C8153A4F1CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example1_CustomizationUsingTableViewDelegate.swift; sourceTree = "<group>"; };
@@ -525,6 +532,7 @@
 				C85EE5531C36F1FC0090614D /* RxCollectionViewSectionedReloadDataSource.swift */,
 				C85EE5541C36F1FC0090614D /* RxTableViewSectionedAnimatedDataSource.swift */,
 				C85EE5551C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift */,
+				A5FFBC301F0B922C0074D147 /* RxPickerViewAdapter.swift */,
 			);
 			path = "DataSources+Rx";
 			sourceTree = "<group>";
@@ -610,6 +618,7 @@
 				C8984C9F1C36B6FA001E4272 /* Example2_RandomizedSectionsAnimation.swift */,
 				84FC6BED1CA4830A00D3C605 /* Example3_TableViewEditing.swift */,
 				845F61F31CCFD96800A8BE32 /* Example4_DifferentSectionAndItemTypes.swift */,
+				A5E035631F0BD55A00EA6BDE /* Example5_UIPickerView.swift */,
 				C87DF3421D0219A7006308C5 /* Support */,
 				845F61F51CCFDD7100A8BE32 /* Views */,
 				C8984CA11C36B6FA001E4272 /* Main.storyboard */,
@@ -1054,6 +1063,7 @@
 				9FCDA16E1C3AF4A2000F5F94 /* Differentiator.swift in Sources */,
 				C8477FBB1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				9FCDA1771C3AF4A2000F5F94 /* RxTableViewSectionedReloadDataSource.swift in Sources */,
+				A5FFBC331F0B922C0074D147 /* RxPickerViewAdapter.swift in Sources */,
 				9FCDA16C1C3AF4A2000F5F94 /* CollectionViewSectionedDataSource.swift in Sources */,
 				9FCDA1721C3AF4A2000F5F94 /* TableViewSectionedDataSource.swift in Sources */,
 				9FCDA1741C3AF4A2000F5F94 /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */,
@@ -1100,6 +1110,7 @@
 				C85EE55A1C36F1FC0090614D /* Differentiator.swift in Sources */,
 				C8477FBA1D29DBC90074454A /* IntegerType+IdentifiableType.swift in Sources */,
 				C85EE5631C36F1FC0090614D /* RxTableViewSectionedReloadDataSource.swift in Sources */,
+				A5FFBC321F0B922C0074D147 /* RxPickerViewAdapter.swift in Sources */,
 				C85EE5581C36F1FC0090614D /* CollectionViewSectionedDataSource.swift in Sources */,
 				C85EE55E1C36F1FC0090614D /* TableViewSectionedDataSource.swift in Sources */,
 				C85EE5601C36F1FC0090614D /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */,
@@ -1118,6 +1129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8595DB51DEA66E500FA20CD /* NumberSection.swift in Sources */,
+				A5E035641F0BD55A00EA6BDE /* Example5_UIPickerView.swift in Sources */,
 				845F61F71CCFDE6A00A8BE32 /* ImageTitleTableViewCell.swift in Sources */,
 				84FC6BEE1CA4830A00D3C605 /* Example3_TableViewEditing.swift in Sources */,
 				C8984CA01C36B6FA001E4272 /* Example2_RandomizedSectionsAnimation.swift in Sources */,
