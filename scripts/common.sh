@@ -119,7 +119,7 @@ function ensure_simulator_available() {
 BUILD_DIRECTORY=build
 
 function rx() {
-	action `find . -name "*.xcworkspace" -maxdepth 1` "$1" "$2" "$3" "$4"
+	action `find . -name "*.xcodeproj" -maxdepth 1` "$1" "$2" "$3" "$4"
 }
 
 function action() {
@@ -158,7 +158,7 @@ function action() {
 	set -x
 	mkdir -p build
 	killall Simulator || true
-	xcodebuild -workspace "${WORKSPACE}" \
+	xcodebuild -project "${WORKSPACE}" \
 		-scheme "${SCHEME}" \
 		-configuration "${CONFIGURATION}" \
 		-derivedDataPath "${BUILD_DIRECTORY}" \
