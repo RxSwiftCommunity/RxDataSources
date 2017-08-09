@@ -13,7 +13,7 @@ import UIKit
     import RxCocoa
 #endif
 
-/// A reactive UIPickerView adapter which uses `func pickerView(UIPickerView, titleForRow: Int, forComponent: Int)` to desplay content
+/// A reactive UIPickerView adapter which uses `func pickerView(UIPickerView, titleForRow: Int, forComponent: Int)` to display the content
 /**
  Example:
  
@@ -25,10 +25,29 @@ items
  
  */
 open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
-    public typealias TitleForRow = (RxPickerViewStringAdapter<T>, UIPickerView, T,Int, Int) -> String?
+    /**
+     - parameter dataSource
+     - parameter pickerView
+     - parameter components
+     - parameter row
+     - parameter component
+    */
+    public typealias TitleForRow = (
+        _ dataSource: RxPickerViewStringAdapter<T>,
+        _ pickerView: UIPickerView,
+        _ components: T,
+        _ row: Int,
+        _ component: Int
+    ) -> String?
     
     private let titleForRow: TitleForRow
-    
+
+    /**
+     - parameter components: Initial content value.
+     - parameter numberOfComponents: Implementation of corresponding delegate method.
+     - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
+     - parameter titleForRow: Implementation of corresponding adapter method that converts component to `String`.
+     */
     public init(components: T,
                 numberOfComponents: @escaping NumberOfComponents,
                 numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
@@ -44,7 +63,7 @@ open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerView
     }
 }
 
-/// A reactive UIPickerView adapter which uses `func pickerView(UIPickerView, viewForRow: Int, forComponent: Int, reusing: UIView?)` to desplay content
+/// A reactive UIPickerView adapter which uses `func pickerView(UIPickerView, viewForRow: Int, forComponent: Int, reusing: UIView?)` to display the content
 /**
  Example:
  
@@ -56,10 +75,29 @@ open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerView
  
  */
 open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
-    public typealias AttributedTitleForRow = (RxPickerViewAttributedStringAdapter<T>, UIPickerView, T, Int, Int) -> NSAttributedString?
+    /**
+     - parameter dataSource
+     - parameter pickerView
+     - parameter components
+     - parameter row
+     - parameter component
+    */
+    public typealias AttributedTitleForRow = (
+        _ dataSource: RxPickerViewAttributedStringAdapter<T>,
+        _ pickerView: UIPickerView,
+        _ components: T,
+        _ row: Int,
+        _ component: Int
+    ) -> NSAttributedString?
     
     private let attributedTitleForRow: AttributedTitleForRow
-    
+
+    /**
+     - parameter components: Initial content value.
+     - parameter numberOfComponents: Implementation of corresponding delegate method.
+     - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
+     - parameter attributedTitleForRow: Implementation of corresponding adapter method that converts component to `NSAttributedString`.
+     */
     public init(components: T,
                 numberOfComponents: @escaping NumberOfComponents,
                 numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
@@ -75,7 +113,7 @@ open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UI
     }
 }
 
-/// A reactive UIPickerView adapter which uses `func pickerView(pickerView:, viewForRow row:, forComponent component:)` to desplay content
+/// A reactive UIPickerView adapter which uses `func pickerView(pickerView:, viewForRow row:, forComponent component:)` to display the content
 /**
  Example:
  
@@ -87,10 +125,31 @@ open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UI
  
  */
 open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
-    public typealias ViewForRow = (RxPickerViewViewAdapter<T>, UIPickerView, T, Int, Int, UIView?) -> UIView
+    /**
+     - parameter dataSource
+     - parameter pickerView
+     - parameter components
+     - parameter row
+     - parameter component
+     - parameter view
+    */
+    public typealias ViewForRow = (
+        _ dataSource: RxPickerViewViewAdapter<T>,
+        _ pickerView: UIPickerView,
+        _ components: T,
+        _ row: Int,
+        _ component: Int,
+        _ view: UIView?
+    ) -> UIView
     
     private let viewForRow: ViewForRow
-    
+
+    /**
+     - parameter components: Initial content value.
+     - parameter numberOfComponents: Implementation of corresponding delegate method.
+     - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
+     - parameter attributedTitleForRow: Implementation of corresponding adapter method that converts component to `UIView`.
+     */
     public init(components: T,
                 numberOfComponents: @escaping NumberOfComponents,
                 numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
@@ -108,11 +167,35 @@ open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDe
 
 /// A reactive UIPickerView data source  
 open class RxPickerViewDataSource<T>: NSObject, UIPickerViewDataSource {
-    public typealias NumberOfComponents = (RxPickerViewDataSource, UIPickerView, T) -> Int
-    public typealias NumberOfRowsInComponent = (RxPickerViewDataSource, UIPickerView, T, Int) -> Int
+    /**
+     - parameter dataSource
+     - parameter pickerView
+     - parameter components
+    */
+    public typealias NumberOfComponents = (
+        _ dataSource: RxPickerViewDataSource,
+        _ pickerView: UIPickerView,
+        _ components: T) -> Int
+    /**
+     - parameter dataSource
+     - parameter pickerView
+     - parameter components
+     - parameter component
+    */
+    public typealias NumberOfRowsInComponent = (
+        _ dataSource: RxPickerViewDataSource,
+        _ pickerView: UIPickerView,
+        _ components: T,
+        _ component: Int
+    ) -> Int
     
     fileprivate var components: T
-    
+
+    /**
+     - parameter components: Initial content value.
+     - parameter numberOfComponents: Implementation of corresponding delegate method.
+     - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
+     */
     init(components: T,
          numberOfComponents: @escaping NumberOfComponents,
          numberOfRowsInComponent: @escaping NumberOfRowsInComponent) {

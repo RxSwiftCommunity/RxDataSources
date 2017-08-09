@@ -18,7 +18,7 @@ final class ReactivePickerViewControllerExample: UIViewController {
     @IBOutlet weak var thirdPickerView: UIPickerView!
     
     let disposeBag = DisposeBag()
-    
+
     private let stringPickerAdapter = RxPickerViewStringAdapter<[String]>(components: [],
                                                                           numberOfComponents: { _ in 1 },
                                                                           numberOfRowsInComponent: { (_, _, items, _) -> Int in
