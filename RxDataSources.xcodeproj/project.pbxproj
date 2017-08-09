@@ -60,6 +60,7 @@
 		C8984CA51C36B6FA001E4272 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8984CA41C36B6FA001E4272 /* Assets.xcassets */; };
 		C8984CA81C36B6FA001E4272 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8984CA61C36B6FA001E4272 /* LaunchScreen.storyboard */; };
 		C8984CB41C36B723001E4272 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8984CB31C36B723001E4272 /* ExampleUITests.swift */; };
+		C8B4386A1F3BA49F00B6A80B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = C8B438561F3BA49F00B6A80B /* CHANGELOG.md */; };
 		C8BBFBD71F3B8F8D00A225F7 /* CollectionViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBFBCC1F3B8F8D00A225F7 /* CollectionViewSectionedDataSource.swift */; };
 		C8BBFBD81F3B8F8D00A225F7 /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBFBCD1F3B8F8D00A225F7 /* DataSources.swift */; };
 		C8BBFBDA1F3B8F8D00A225F7 /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBFBCF1F3B8F8D00A225F7 /* RxCollectionViewSectionedAnimatedDataSource.swift */; };
@@ -356,6 +357,7 @@
 		C8984CB11C36B723001E4272 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8984CB31C36B723001E4272 /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		C8984CB51C36B723001E4272 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8B438561F3BA49F00B6A80B /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		C8BBFBCC1F3B8F8D00A225F7 /* CollectionViewSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionedDataSource.swift; sourceTree = "<group>"; };
 		C8BBFBCD1F3B8F8D00A225F7 /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
 		C8BBFBCE1F3B8F8D00A225F7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 		C8984C501C36AF35001E4272 = {
 			isa = PBXGroup;
 			children = (
+				C8B438561F3BA49F00B6A80B /* CHANGELOG.md */,
 				C81FBF5A1F3B9CF10094061E /* Podspecs */,
 				C82541851F363C76009F6C03 /* dependencies.sh */,
 				C87C34191F36346A00DB85FE /* Rx.xcodeproj */,
@@ -1006,6 +1009,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C81FBF461F3B9CED0094061E /* Differentiator.podspec in Resources */,
+				C8B4386A1F3BA49F00B6A80B /* CHANGELOG.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1202,7 +1206,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEVELOPMENT_TEAM = 783T66X79Y;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.rx.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1220,7 +1224,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEVELOPMENT_TEAM = 783T66X79Y;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.rx.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1499,6 +1503,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kzaher.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1511,6 +1516,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kzaher.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

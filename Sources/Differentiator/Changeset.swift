@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 public struct Changeset<S: SectionModelType> {
     public typealias I = S.Item
