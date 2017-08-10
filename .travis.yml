@@ -9,7 +9,7 @@ notifications:
 install: true
 
 script: 
-  - mkdir -p build && . ./scripts/common.sh && rx "Tests" Release "${DEFAULT_IOS_SIMULATOR}" test && rx "ExampleUITests" Release "${DEFAULT_IOS_SIMULATOR}" test && set +e
+  - mkdir -p build && ./dependencies.sh && . ./scripts/common.sh && rx "Tests" Release "${DEFAULT_IOS_SIMULATOR}" test && rx "ExampleUITests" Release "${DEFAULT_IOS_SIMULATOR}" test && set +e
 
 after_success:
   - sleep 5 # workaround https://github.com/travis-ci/travis-ci/issues/4725
