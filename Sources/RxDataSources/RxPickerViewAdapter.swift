@@ -6,6 +6,8 @@
 //  Copyright © 2017 kzaher. All rights reserved.
 //
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 #if !RX_NO_MODULE
@@ -227,3 +229,5 @@ extension RxPickerViewDataSource: RxPickerViewDataSourceType {
         }.on(observedEvent)
     }
 }
+
+#endif
