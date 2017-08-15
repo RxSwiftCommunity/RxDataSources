@@ -9,12 +9,12 @@ notifications:
 install: true
 
 env:
-  - BUILD="pod update        && set -o pipefail && (xcodebuild -workspace RxDataSources.xcworkspace -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
-  - BUILD="./dependencies.sh && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
-  - BUILD="carthage update   && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
+  - BUILD="pod update                      && set -o pipefail && (xcodebuild -workspace RxDataSources.xcworkspace -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
+  - BUILD="./dependencies.sh               && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
+  - BUILD="carthage update --platform ios  && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
   - BUILD="pod lib lint RxDataSources.podspec --verbose && pod lib lint Differentiator.podspec --verbose "
-  - BUILD="carthage build --no-skip-current --platform iOS"
-  - BUILD="carthage build --no-skip-current --platform tvOS"
+  - BUILD="carthage update --platform iOS  && carthage build --no-skip-current --platform iOS"
+  - BUILD="carthage update --platform tvOS && carthage build --no-skip-current --platform tvOS"
 
 script: eval "${BUILD}"
 
