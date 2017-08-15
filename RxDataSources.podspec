@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxDataSources"
-  s.version          = "2.0.0"
+  s.version          = "2.0.1"
   s.summary          = "This is a collection of reactive data sources for UITableView and UICollectionView."
   s.description      = <<-DESC
 This is a collection of reactive data sources for UITableView and UICollectionView.
@@ -29,7 +29,6 @@ data
 ```
                         DESC
                         
-  s.homepage         = "https://github.com/ReactiveX/RxSwift"
   s.license          = 'MIT'
   s.author           = { "Krunoslav Zaher" => "krunoslav.zaher@gmail.com" }
   s.source           = { :git => "https://github.com/RxSwiftCommunity/RxDataSources.git", :tag => s.version.to_s }

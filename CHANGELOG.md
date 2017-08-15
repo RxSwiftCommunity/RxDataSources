@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/2.0.1)
+
+* Fixes issue with CocoaPods and Carthage integration.
+
 ## [2.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/2.0.0)
 
 * Adds `UIPickerView` extensions.
