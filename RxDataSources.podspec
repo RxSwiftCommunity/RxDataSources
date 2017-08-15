@@ -28,7 +28,7 @@ data
     .disposed(by: disposeBag)
 ```
                         DESC
-                        
+  s.homepage         = "https://github.com/RxSwiftCommunity/RxDataSources"                      
   s.license          = 'MIT'
   s.author           = { "Krunoslav Zaher" => "krunoslav.zaher@gmail.com" }
   s.source           = { :git => "https://github.com/RxSwiftCommunity/RxDataSources.git", :tag => s.version.to_s }
