@@ -8,8 +8,15 @@ notifications:
 
 install: true
 
-script: 
-  - mkdir -p build && ./dependencies.sh && . ./scripts/common.sh && rx "Tests" Release "${DEFAULT_IOS_SIMULATOR}" test && rx "ExampleUITests" Release "${DEFAULT_IOS_SIMULATOR}" test && set +e
+env:
+  - BUILD="pod update        && xcodebuild -workspace RxDataSources.xcworkspace -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build"
+  - BUILD="./dependencies.sh && xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build"
+  - BUILD="carthage update   && xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -destination 'platform=iOS Simulator,name=iPhone 7' build"
+  - BUILD="pod lib lint RxDataSources.podspec --verbose && pod lib lint Differentiator.podspec --verbose "
+  - BUILD="carthage build --no-skip-current --platform iOS"
+  - BUILD="carthage build --no-skip-current --platform tvOS"
+
+script: eval "${BUILD}"
 
 after_success:
   - sleep 5 # workaround https://github.com/travis-ci/travis-ci/issues/4725
