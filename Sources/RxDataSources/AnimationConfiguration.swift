@@ -6,6 +6,7 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import Foundation
 import UIKit
 
@@ -25,3 +26,4 @@ public struct AnimationConfiguration {
       self.deleteAnimation = deleteAnimation
   }
 }
+#endif

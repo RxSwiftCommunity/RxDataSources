@@ -6,6 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import Foundation
 import UIKit
 import Differentiator
@@ -146,3 +147,4 @@ func _performBatchUpdates<V: SectionedViewType, S: SectionModelType>(_ view: V, 
         )
     }
 }
+#endif
