@@ -21,18 +21,6 @@ extension ObservableType {
             return FlatMap(source: asObservable(), selector: selector)
     }
 
-    /**
-     Projects each element of an observable sequence to an observable sequence by incorporating the element's index and merges the resulting observable sequences into one observable sequence.
-
-     - seealso: [flatMap operator on reactivex.io](http://reactivex.io/documentation/operators/flatmap.html)
-
-     - parameter selector: A transform function to apply to each element; the second parameter of the function represents the index of the source element.
-     - returns: An observable sequence whose elements are the result of invoking the one-to-many transform function on each element of the input sequence.
-     */
-    public func flatMapWithIndex<O: ObservableConvertibleType>(_ selector: @escaping (E, Int) throws -> O)
-        -> Observable<O.E> {
-            return FlatMapWithIndex(source: asObservable(), selector: selector)
-    }
 }
 
 extension ObservableType {
@@ -220,8 +208,7 @@ fileprivate final class MergeLimitedBasicSink<SourceSequence: ObservableConverti
 
 fileprivate class MergeLimitedSink<SourceElement, SourceSequence: ObservableConvertibleType, Observer: ObserverType>
     : Sink<Observer>
-    , LockOwnerType
-    , SynchronizedOnType where Observer.E == SourceSequence.E  {
+    , ObserverType where Observer.E == SourceSequence.E  {
     typealias QueueType = Queue<SourceSequence>
 
     let _maxConcurrent: Int
@@ -267,14 +254,10 @@ fileprivate class MergeLimitedSink<SourceElement, SourceSequence: ObservableConv
     func performMap(_ element: SourceElement) throws -> SourceSequence {
         rxAbstractMethod()
     }
-    
-    func on(_ event: Event<SourceElement>) {
-        synchronizedOn(event)
-    }
 
-    func _synchronized_on(_ event: Event<SourceElement>) {
-        switch event {
-        case .next(let element):
+    @inline(__always)
+    final private func nextElementArrived(element: SourceElement) -> SourceSequence? {
+        _lock.lock(); defer { _lock.unlock() } // {
             let subscribe: Bool
             if _activeCount < _maxConcurrent {
                 _activeCount += 1
@@ -293,17 +276,31 @@ fileprivate class MergeLimitedSink<SourceElement, SourceSequence: ObservableConv
 
             if subscribe {
                 do {
-                    let value = try performMap(element)
-                    self.subscribe(value, group: _group)
+                    return try performMap(element)
                 } catch {
                     forwardOn(.error(error))
                     dispose()
                 }
             }
+
+            return nil
+        // }
+    }
+
+    func on(_ event: Event<SourceElement>) {
+        switch event {
+        case .next(let element):
+            if let sequence = self.nextElementArrived(element: element) {
+                self.subscribe(sequence, group: _group)
+            }
         case .error(let error):
+            _lock.lock(); defer { _lock.unlock() }
+
             forwardOn(.error(error))
             dispose()
         case .completed:
+            _lock.lock(); defer { _lock.unlock() }
+
             if _activeCount == 0 {
                 forwardOn(.completed)
                 dispose()
@@ -355,22 +352,6 @@ fileprivate final class FlatMapSink<SourceElement, SourceSequence: ObservableCon
 
     override func performMap(_ element: SourceElement) throws -> SourceSequence {
         return try _selector(element)
-    }
-}
-
-fileprivate final class FlatMapWithIndexSink<SourceElement, SourceSequence: ObservableConvertibleType, Observer: ObserverType> : MergeSink<SourceElement, SourceSequence, Observer> where Observer.E == SourceSequence.E {
-    typealias Selector = (SourceElement, Int) throws -> SourceSequence
-
-    private var _index = 0
-    private let _selector: Selector
-
-    init(selector: @escaping Selector, observer: Observer, cancel: Cancelable) {
-        _selector = selector
-        super.init(observer: observer, cancel: cancel)
-    }
-
-    override func performMap(_ element: SourceElement) throws -> SourceSequence {
-        return try _selector(element, try incrementChecked(&_index))
     }
 }
 
@@ -452,48 +433,59 @@ fileprivate class MergeSink<SourceElement, SourceSequence: ObservableConvertible
     func performMap(_ element: SourceElement) throws -> SourceSequence {
         rxAbstractMethod()
     }
+
+    @inline(__always)
+    final private func nextElementArrived(element: SourceElement) -> SourceSequence? {
+        _lock.lock(); defer { _lock.unlock() } // {
+            if !subscribeNext {
+                return nil
+            }
+
+            do {
+                let value = try performMap(element)
+                _activeCount += 1
+                return value
+            }
+            catch let e {
+                forwardOn(.error(e))
+                dispose()
+                return nil
+            }
+        // }
+    }
     
     func on(_ event: Event<SourceElement>) {
-        _lock.lock(); defer { _lock.unlock() } // lock {
-            switch event {
-            case .next(let element):
-                if !subscribeNext {
-                    return
-                }
-                do {
-                    let value = try performMap(element)
-                    subscribeInner(value.asObservable())
-                }
-                catch let e {
-                    forwardOn(.error(e))
-                    dispose()
-                }
-            case .error(let error):
-                forwardOn(.error(error))
-                dispose()
-            case .completed:
-                _stopped = true
-                _sourceSubscription.dispose()
-                checkCompleted()
+        switch event {
+        case .next(let element):
+            if let value = nextElementArrived(element: element) {
+                subscribeInner(value.asObservable())
             }
-        //}
+        case .error(let error):
+            _lock.lock(); defer { _lock.unlock() }
+            forwardOn(.error(error))
+            dispose()
+        case .completed:
+            _lock.lock(); defer { _lock.unlock() }
+            _stopped = true
+            _sourceSubscription.dispose()
+            checkCompleted()
+        }
     }
 
     func subscribeInner(_ source: Observable<Observer.E>) {
         let iterDisposable = SingleAssignmentDisposable()
         if let disposeKey = _group.insert(iterDisposable) {
-            _activeCount += 1
             let iter = MergeSinkIter(parent: self, disposeKey: disposeKey)
             let subscription = source.subscribe(iter)
             iterDisposable.setDisposable(subscription)
         }
     }
 
-    func run(_ sources: [SourceElement]) -> Disposable {
-        let _ = _group.insert(_sourceSubscription)
+    func run(_ sources: [Observable<Observer.E>]) -> Disposable {
+        _activeCount += sources.count
 
         for source in sources {
-            self.on(.next(source))
+            subscribeInner(source)
         }
 
         _stopped = true
@@ -540,26 +532,6 @@ final fileprivate class FlatMap<SourceElement, SourceSequence: ObservableConvert
         let subscription = sink.run(_source)
         return (sink: sink, subscription: subscription)
     }
-}
-
-final fileprivate class FlatMapWithIndex<SourceElement, SourceSequence: ObservableConvertibleType>: Producer<SourceSequence.E> {
-    typealias Selector = (SourceElement, Int) throws -> SourceSequence
-
-    private let _source: Observable<SourceElement>
-    
-    private let _selector: Selector
-
-    init(source: Observable<SourceElement>, selector: @escaping Selector) {
-        _source = source
-        _selector = selector
-    }
-    
-    override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == SourceSequence.E {
-        let sink = FlatMapWithIndexSink<SourceElement, SourceSequence, O>(selector: _selector, observer: observer, cancel: cancel)
-        let subscription = sink.run(_source)
-        return (sink: sink, subscription: subscription)
-    }
-
 }
 
 final fileprivate class FlatMapFirst<SourceElement, SourceSequence: ObservableConvertibleType>: Producer<SourceSequence.E> {

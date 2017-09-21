@@ -13,8 +13,6 @@ import UIKit
 import RxSwift
 #endif
 
-    
-    
 extension Reactive where Base: UITextView {
     /// Reactive wrapper for `text` property
     public var text: ControlProperty<String?> {
@@ -44,7 +42,7 @@ extension Reactive where Base: UITextView {
                 .startWith(text)
         }
 
-        let bindingObserver = UIBindingObserver(UIElement: self.base) { (textView, text: String?) in
+        let bindingObserver = Binder(self.base) { (textView, text: String?) in
             // This check is important because setting text value always clears control state
             // including marked text selection which is imporant for proper input 
             // when IME input method is used.
