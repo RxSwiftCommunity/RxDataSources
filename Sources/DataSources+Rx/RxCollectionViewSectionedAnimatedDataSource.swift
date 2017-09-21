@@ -54,7 +54,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
      Collection view behaves poorly during fast updates, so this should remedy those issues.
     */
     open func collectionView(_ collectionView: UICollectionView, throttledObservedEvent event: Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        Binder(self) { dataSource, newSections in
             let oldSections = dataSource.sectionModels
             do {
                 // if view is not in view hierarchy, performing batch updates will crash the app
@@ -83,7 +83,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     }
 
     open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
-        UIBindingObserver(UIElement: self) { dataSource, newSections in
+        Binder(self) { dataSource, newSections in
             #if DEBUG
                 self._dataSourceBound = true
             #endif

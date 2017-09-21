@@ -15,31 +15,32 @@
 
     /// For more information take a look at `DelegateProxyType`.
     open class RxNavigationControllerDelegateProxy
-        : DelegateProxy
-        , UINavigationControllerDelegate
-        , DelegateProxyType {
-        
-        public static var factory = DelegateProxyFactory { (parentObject: UINavigationController) in
-            RxNavigationControllerDelegateProxy(parentObject: parentObject)
+        : DelegateProxy<UINavigationController, UINavigationControllerDelegate>
+        , DelegateProxyType 
+        , UINavigationControllerDelegate {
+
+        /// Typed parent object.
+        public weak private(set) var navigationController: UINavigationController?
+
+        /// - parameter parentObject: Parent object for delegate proxy.
+        public init(parentObject: ParentObject) {
+            self.navigationController = parentObject
+            super.init(parentObject: parentObject, delegateProxy: RxNavigationControllerDelegateProxy.self)
         }
-        
-        /// For more information take a look at `DelegateProxyType`.
-        public class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
-            let navigationController: UINavigationController = castOrFatalError(object)
-            return navigationController.delegate
+
+        // Register known implementations
+        public static func registerKnownImplementations() {
+            self.register { RxNavigationControllerDelegateProxy(parentObject: $0) }
         }
 
         /// For more information take a look at `DelegateProxyType`.
-        public class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
-            let navigationController: UINavigationController = castOrFatalError(object)
-            navigationController.delegate = castOptionalOrFatalError(delegate)
+        open class func currentDelegate(for object: ParentObject) -> UINavigationControllerDelegate? {
+            return object.delegate
+        }
+
+        /// For more information take a look at `DelegateProxyType`.
+        open class func setCurrentDelegate(_ delegate: UINavigationControllerDelegate?, to object: ParentObject) {
+            object.delegate = delegate
         }
     }
-
-    #if os(iOS)
-        extension RxNavigationControllerDelegateProxy: UIImagePickerControllerDelegate {
-
-        }
-    #endif
-
 #endif
