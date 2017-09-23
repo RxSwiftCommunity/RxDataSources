@@ -8,8 +8,16 @@ notifications:
 
 install: true
 
-script: 
-  - mkdir -p build && . ./scripts/common.sh && rx "Tests" Release "${DEFAULT_IOS_SIMULATOR}" test && rx "ExampleUITests" Release "${DEFAULT_IOS_SIMULATOR}" test && set +e
+env:
+  - BUILD="pod update                     && set -o pipefail && (xcodebuild -workspace RxDataSources.xcworkspace -scheme Tests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme ExampleUITests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -workspace RxDataSources.xcworkspace -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
+  - BUILD="./dependencies.sh              && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
+  - BUILD="carthage update --platform ios && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme ExampleUITests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   RxDataSources.xcodeproj   -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
+  - BUILD="pod repo update && pod lib lint RxDataSources.podspec --verbose && pod lib lint Differentiator.podspec --verbose "
+  - BUILD="carthage update --platform iOS  && carthage build --no-skip-current --platform iOS"
+  - BUILD="carthage update --platform tvOS && carthage build --no-skip-current --platform tvOS"
+  - BUILD="swift test"
+
+script: eval "${BUILD}"
 
 after_success:
   - sleep 5 # workaround https://github.com/travis-ci/travis-ci/issues/4725

@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/2.0.2)
+
+* Adds Swift Package Manager support
+
+## [2.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/2.0.1)
+
+* Fixes issue with CocoaPods and Carthage integration.
+
+## [2.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/2.0.0)
+
+* Adds `UIPickerView` extensions.
+* Separates `Differentiator` from `RxDataSources`.
+
 ## [1.0.4](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/1.0.4)
 
 #### Anomalies

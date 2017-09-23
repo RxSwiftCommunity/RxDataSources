@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -9,41 +9,31 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C81905AD1DEA019100AE679C"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
+               BlueprintIdentifier = "C82C3C531F3B937500309AE8"
+               BuildableName = "Differentiator.framework"
+               BlueprintName = "Differentiator"
                ReferencedContainer = "container:RxDataSources.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C81905AD1DEA019100AE679C"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
-               ReferencedContainer = "container:RxDataSources.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -55,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C81905AD1DEA019100AE679C"
-            BuildableName = "Tests.xctest"
-            BlueprintName = "Tests"
+            BlueprintIdentifier = "C82C3C531F3B937500309AE8"
+            BuildableName = "Differentiator.framework"
+            BlueprintName = "Differentiator"
             ReferencedContainer = "container:RxDataSources.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -73,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C81905AD1DEA019100AE679C"
-            BuildableName = "Tests.xctest"
-            BlueprintName = "Tests"
+            BlueprintIdentifier = "C82C3C531F3B937500309AE8"
+            BuildableName = "Differentiator.framework"
+            BlueprintName = "Differentiator"
             ReferencedContainer = "container:RxDataSources.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
