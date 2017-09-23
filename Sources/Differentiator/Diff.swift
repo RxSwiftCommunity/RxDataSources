@@ -136,7 +136,7 @@ public enum Diff {
             self.hashValue = identity.pointee.hashValue
         }
 
-        static func == <E: Hashable>(lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
+        static func == (lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
             if lhs.hashValue != rhs.hashValue {
                 return false
             }

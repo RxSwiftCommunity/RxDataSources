@@ -20,7 +20,7 @@ final class ReactivePickerViewControllerExample: UIViewController {
     let disposeBag = DisposeBag()
 
     private let stringPickerAdapter = RxPickerViewStringAdapter<[String]>(components: [],
-                                                                          numberOfComponents: { _ in 1 },
+                                                                          numberOfComponents: { _,_,_  in 1 },
                                                                           numberOfRowsInComponent: { (_, _, items, _) -> Int in
                                                                             return items.count
                                                                           },
@@ -28,19 +28,19 @@ final class ReactivePickerViewControllerExample: UIViewController {
                                                                                 return items[row]
                                                                           })
     private let attributedStringPickerAdapter = RxPickerViewAttributedStringAdapter<[String]>(components: [],
-                                                                                              numberOfComponents: { _ in 1 },
+                                                                                              numberOfComponents: { _,_,_  in 1 },
                                                                                               numberOfRowsInComponent: { (_, _, items, _) -> Int in
                                                                                                 return items.count
     }) { (_, _, items, row, _) -> NSAttributedString? in
         return NSAttributedString(string: items[row],
                                   attributes: [
-                                    NSForegroundColorAttributeName: UIColor.purple,
-                                    NSUnderlineStyleAttributeName: NSUnderlineStyle.styleDouble.rawValue,
-                                    NSTextEffectAttributeName: NSTextEffectLetterpressStyle
+                                    NSAttributedStringKey.foregroundColor: UIColor.purple,
+                                    NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleDouble.rawValue,
+                                    NSAttributedStringKey.textEffect: NSAttributedString.TextEffectStyle.letterpressStyle
             ])
     }
     private let viewPickerAdapter = RxPickerViewViewAdapter<[String]>(components: [],
-                                                                      numberOfComponents: { _ in 1 },
+                                                                      numberOfComponents: { _,_,_  in 1 },
                                                                       numberOfRowsInComponent: { (_, _, items, _) -> Int in
                                                                         return items.count
     }) { (_, _, _, row, _, view) -> UIView in
