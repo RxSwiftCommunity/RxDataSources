@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.0.0-rc.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.0-rc.0)
+
+* Cleans up public interface to use initializers vs nillable properties and deprecates nillable properties in favor of passing parameters
+through init.
+
 ## [2.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/2.0.2)
 
 * Adds Swift Package Manager support

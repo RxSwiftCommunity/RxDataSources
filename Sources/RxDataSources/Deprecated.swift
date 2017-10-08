@@ -8,7 +8,7 @@
 
 extension CollectionViewSectionedDataSource {
     @available(*, deprecated, renamed: "configureSupplementaryView")
-    open var supplementaryViewFactory: ConfigureSupplementaryView {
+    public var supplementaryViewFactory: ConfigureSupplementaryView {
         get {
             return self.configureSupplementaryView
         }
