@@ -29,43 +29,43 @@ class MultipleSectionModelViewController: UIViewController {
                 items: [.StepperSectionItem(title: "1")])
         ]
         
-        let dataSource = RxTableViewSectionedReloadDataSource<MultipleSectionModel>()
-
-        skinTableViewDataSource(dataSource)
+        let dataSource = MultipleSectionModelViewController.dataSource()
         
         Observable.just(sections)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .addDisposableTo(disposeBag)
     }
-    
-    func skinTableViewDataSource(_ dataSource: RxTableViewSectionedReloadDataSource<MultipleSectionModel>) {
-        dataSource.configureCell = { (dataSource, table, idxPath, _) in
-            switch dataSource[idxPath] {
-            case let .ImageSectionItem(image, title):
-                let cell: ImageTitleTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
-                cell.titleLabel.text = title
-                cell.cellImageView.image = image
-                
-                return cell
-            case let .StepperSectionItem(title):
-                let cell: TitleSteperTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
-                cell.titleLabel.text = title
-                
-                return cell
-            case let .ToggleableSectionItem(title, enabled):
-                let cell: TitleSwitchTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
-                cell.switchControl.isOn = enabled
-                cell.titleLabel.text = title
-                
-                return cell
-            }
-        }
+}
 
-        dataSource.titleForHeaderInSection = { dataSource, index in
-            let section = dataSource[index]
-            
-            return section.title
-        }
+extension MultipleSectionModelViewController {
+    static func dataSource() -> RxTableViewSectionedReloadDataSource<MultipleSectionModel> {
+        return RxTableViewSectionedReloadDataSource<MultipleSectionModel>(
+            configureCell: { (dataSource, table, idxPath, _) in
+                switch dataSource[idxPath] {
+                case let .ImageSectionItem(image, title):
+                    let cell: ImageTitleTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
+                    cell.titleLabel.text = title
+                    cell.cellImageView.image = image
+
+                    return cell
+                case let .StepperSectionItem(title):
+                    let cell: TitleSteperTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
+                    cell.titleLabel.text = title
+
+                    return cell
+                case let .ToggleableSectionItem(title, enabled):
+                    let cell: TitleSwitchTableViewCell = table.dequeueReusableCell(forIndexPath: idxPath)
+                    cell.switchControl.isOn = enabled
+                    cell.titleLabel.text = title
+
+                    return cell
+                }
+            },
+            titleForHeaderInSection: { dataSource, index in
+                let section = dataSource[index]
+                return section.title
+            }
+        )
     }
 }
 

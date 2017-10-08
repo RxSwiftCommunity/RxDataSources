@@ -42,18 +42,19 @@ class CustomizationUsingTableViewDelegate : UIViewController {
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
-        let dataSource = RxTableViewSectionedAnimatedDataSource<MySection>()
+        let dataSource = RxTableViewSectionedAnimatedDataSource<MySection>(
+            configureCell: { ds, tv, ip, item in
+                let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
+                cell.textLabel?.text = "Item \(item)"
 
-        dataSource.configureCell = { ds, tv, ip, item in
-            let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
-            cell.textLabel?.text = "Item \(item)"
+                return cell
+            },
+            titleForHeaderInSection: { ds, index in
+                return ds.sectionModels[index].header
+            }
+        )
 
-            return cell
-        }
-
-        dataSource.titleForHeaderInSection = { ds, index in
-            return ds.sectionModels[index].header
-        }
+        self.dataSource = dataSource
 
         let sections = [
             MySection(header: "First section", items: [
@@ -72,8 +73,6 @@ class CustomizationUsingTableViewDelegate : UIViewController {
 
         tableView.rx.setDelegate(self)
             .addDisposableTo(disposeBag)
-
-        self.dataSource = dataSource
     }
 }
 
@@ -88,6 +87,6 @@ extension CustomizationUsingTableViewDelegate : UITableViewDelegate {
             return 0.0
         }
 
-        return CGFloat(40 + item)
+        return CGFloat(40 + item * 10)
     }
 }

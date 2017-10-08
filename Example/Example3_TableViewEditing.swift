@@ -22,7 +22,8 @@ class EditingExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dataSource = RxTableViewSectionedAnimatedDataSource<NumberSection>()
+        let dataSource = EditingExampleViewController.dataSource()
+
         let sections: [NumberSection] = [NumberSection(header: "Section 1", numbers: [], updated: Date()),
                                          NumberSection(header: "Section 2", numbers: [], updated: Date()),
                                          NumberSection(header: "Section 3", numbers: [], updated: Date())]
@@ -39,7 +40,6 @@ class EditingExampleViewController: UIViewController {
         let movedCommand = tableView.rx.itemMoved
             .map(TableViewEditingCommand.MoveItem)
 
-        skinTableViewDataSource(dataSource: dataSource)
         Observable.of(addCommand, deleteCommand, movedCommand)
             .merge()
             .scan(initialState) { (state: SectionedTableViewState, command: TableViewEditingCommand) -> SectionedTableViewState in
@@ -58,31 +58,29 @@ class EditingExampleViewController: UIViewController {
         super.viewDidAppear(animated)
         tableView.setEditing(true, animated: true)
     }
-    
-    func skinTableViewDataSource(dataSource: RxTableViewSectionedAnimatedDataSource<NumberSection>) {
-        
-        dataSource.animationConfiguration = AnimationConfiguration(insertAnimation: .top,
+}
+
+extension EditingExampleViewController {
+    static func dataSource() -> RxTableViewSectionedAnimatedDataSource<NumberSection> {
+        return RxTableViewSectionedAnimatedDataSource(
+            animationConfiguration: AnimationConfiguration(insertAnimation: .top,
                                                                    reloadAnimation: .fade,
-                                                                   deleteAnimation: .left)
-        
-        dataSource.configureCell = { (dataSource, table, idxPath, item) in
-            let cell = table.dequeueReusableCell(withIdentifier: "Cell", for: idxPath)
-            
-            cell.textLabel?.text = "\(item)"
-            
-            return cell
-        }
-        
-        dataSource.titleForHeaderInSection = { (ds, section) -> String? in
-            return ds[section].header
-        }
-        
-        dataSource.canEditRowAtIndexPath = { _, _ in
-            return true
-        }
-        dataSource.canMoveRowAtIndexPath = { _, _ in
-            return true
-        }
+                                                                   deleteAnimation: .left),
+            configureCell: { (dataSource, table, idxPath, item) in
+                let cell = table.dequeueReusableCell(withIdentifier: "Cell", for: idxPath)
+                cell.textLabel?.text = "\(item)"
+                return cell
+            },
+            titleForHeaderInSection: { (ds, section) -> String? in
+                return ds[section].header
+            },
+            canEditRowAtIndexPath: { _, _ in
+                return true
+            },
+            canMoveRowAtIndexPath: { _, _ in
+                return true
+            }
+        )
     }
 }
 
