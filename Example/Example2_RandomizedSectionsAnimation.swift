@@ -43,7 +43,7 @@ class PartialUpdatesViewController: UIViewController {
                 .map { a in
                     return a.sections
                 }
-                .shareReplay(1)
+            .share(replay: 1)
 
         let (configureCell, titleForSection) = PartialUpdatesViewController.tableViewDataSourceUI()
         let tvAnimatedDataSource = RxTableViewSectionedAnimatedDataSource<NumberSection>(
