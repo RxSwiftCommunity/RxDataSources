@@ -376,10 +376,10 @@
             </objects>
             <point key="canvasLocation" x="1171" y="1695"/>
         </scene>
-        <!--View Controller-->
+        <!--Partial Updates View Controller-->
         <scene sceneID="2Ak-6r-Q44">
             <objects>
-                <viewController id="WCh-dm-Kq1" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WCh-dm-Kq1" customClass="PartialUpdatesViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N8U-gT-9KM"/>
                         <viewControllerLayoutGuide type="bottom" id="84O-UE-hUo"/>

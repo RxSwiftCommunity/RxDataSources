@@ -20,7 +20,7 @@ class NumberSectionView : UICollectionReusableView {
     @IBOutlet weak var value: UILabel?
 }
 
-class ViewController: UIViewController {
+class PartialUpdatesViewController: UIViewController {
 
     @IBOutlet weak var animatedTableView: UITableView!
     @IBOutlet weak var tableView: UITableView!
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                 }
                 .shareReplay(1)
 
-        let (configureCell, titleForSection) = ViewController.tableViewDataSourceUI()
+        let (configureCell, titleForSection) = PartialUpdatesViewController.tableViewDataSourceUI()
         let tvAnimatedDataSource = RxTableViewSectionedAnimatedDataSource<NumberSection>(
             configureCell: configureCell,
             titleForHeaderInSection: titleForSection
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
             .bind(to: tableView.rx.items(dataSource: reloadDataSource))
             .addDisposableTo(disposeBag)
 
-        let (configureCollectionViewCell, configureSupplementaryView) =  ViewController.collectionViewDataSourceUI()
+        let (configureCollectionViewCell, configureSupplementaryView) =  PartialUpdatesViewController.collectionViewDataSourceUI()
         let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource(
             configureCell: configureCollectionViewCell,
             configureSupplementaryView: configureSupplementaryView
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: Skinning
-extension ViewController {
+extension PartialUpdatesViewController {
 
     static func tableViewDataSourceUI() -> (
         TableViewSectionedDataSource<NumberSection>.ConfigureCell,
