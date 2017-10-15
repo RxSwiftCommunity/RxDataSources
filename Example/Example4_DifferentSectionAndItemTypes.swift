@@ -33,7 +33,7 @@ class MultipleSectionModelViewController: UIViewController {
         
         Observable.just(sections)
             .bind(to: tableView.rx.items(dataSource: dataSource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

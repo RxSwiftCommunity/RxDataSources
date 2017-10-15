@@ -49,9 +49,9 @@ class EditingExampleViewController: UIViewController {
             .map {
                 $0.sections
             }
-            .shareReplay(1)
+            .share(replay: 1)
             .bind(to: tableView.rx.items(dataSource: dataSource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -57,11 +57,11 @@ class PartialUpdatesViewController: UIViewController {
 
         randomSections
             .bind(to: animatedTableView.rx.items(dataSource: tvAnimatedDataSource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         randomSections
             .bind(to: tableView.rx.items(dataSource: reloadDataSource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         let (configureCollectionViewCell, configureSupplementaryView) =  PartialUpdatesViewController.collectionViewDataSourceUI()
         let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource(
@@ -71,7 +71,7 @@ class PartialUpdatesViewController: UIViewController {
 
         randomSections
             .bind(to: animatedCollectionView.rx.items(dataSource: cvAnimatedDataSource))
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         // touches
 
@@ -84,7 +84,7 @@ class PartialUpdatesViewController: UIViewController {
             .subscribe(onNext: { item in
                 print("Let me guess, it's .... It's \(item), isn't it? Yeah, I've got it.")
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 
