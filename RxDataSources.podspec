@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxDataSources"
-  s.version          = "3.0.0-rc.0"
+  s.version          = "3.0.0"
   s.summary          = "This is a collection of reactive data sources for UITableView and UICollectionView."
   s.description      = <<-DESC
 This is a collection of reactive data sources for UITableView and UICollectionView.
@@ -36,9 +36,9 @@ data
   s.requires_arc          = true
   
   s.source_files = 'Sources/RxDataSources/**/*.swift'
-  s.dependency 'Differentiator', '~> 3.0.0-rc.0'
-  s.dependency 'RxSwift', '~> 4.0.0-rc.0'
-  s.dependency 'RxCocoa', '~> 4.0.0-rc.0'
+  s.dependency 'Differentiator', '~> 3.0'
+  s.dependency 'RxSwift', '~> 4.0'
+  s.dependency 'RxCocoa', '~> 4.0'
 
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'

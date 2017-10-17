@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.0)
+
+* Adapted for RxSwift 4.0
+
 ## [3.0.0-rc.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.0-rc.0)
 
 * Cleans up public interface to use initializers vs nillable properties and deprecates nillable properties in favor of passing parameters
