@@ -128,8 +128,11 @@ To implement animations with RxDataSources, the same steps are required as with 
 
 ## Requirements
 
-Xcode 8.0 GM (8A218a)
+Xcode 9.0
 
+Swift 4.0
+
+For Swift 3.x version please use versions `1.0 ... 2.0.2`
 For Swift 2.3 version please use versions `0.1 ... 0.9`
 
 ## Installation
@@ -140,12 +143,12 @@ For Swift 2.3 version please use versions `0.1 ... 0.9`
 
 Podfile
 ```
-pod 'RxDataSources', '~> 1.0'
+pod 'RxDataSources', '~> 3.0'
 ```
 
 ### Carthage
 
 Cartfile
 ```
-github "RxSwiftCommunity/RxDataSources" ~> 1.0
+github "RxSwiftCommunity/RxDataSources" ~> 3.0
 ```
