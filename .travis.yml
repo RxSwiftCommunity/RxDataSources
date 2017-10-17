@@ -15,7 +15,6 @@ env:
   - BUILD="pod repo update && pod lib lint RxDataSources.podspec --verbose && pod lib lint Differentiator.podspec --verbose "
   - BUILD="carthage update --platform iOS  && carthage build --no-skip-current --platform iOS"
   - BUILD="carthage update --platform tvOS && carthage build --no-skip-current --platform tvOS"
-  - BUILD="swift test"
 
 script: eval "${BUILD}"
 
