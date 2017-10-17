@@ -9,7 +9,7 @@ let package = Package(
     .library(name: "Differentiator", targets: ["Differentiator"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/ReactiveX/RxSwift.git", .branch("rxswift4.0-swift4.0")),
+    .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0"),
   ],
   targets: [
     .target(name: "RxDataSources", dependencies: ["Differentiator"]),
