@@ -18,15 +18,19 @@ import Differentiator
 open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : TableViewSectionedDataSource<S>
     , RxTableViewDataSourceType {
-    
     public typealias Element = [S]
+    public typealias DecideViewTransition = (TableViewSectionedDataSource<S>, UITableView, [Changeset<S>]) -> ViewTransition
 
     /// Animation configuration for data source
     public var animationConfiguration: AnimationConfiguration
 
+    /// Calculates view transition depending on type of changes
+    public var decideViewTransition: DecideViewTransition
+
     #if os(iOS)
         public init(
                 animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
+                decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
                 configureCell: @escaping ConfigureCell,
                 titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
                 titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
@@ -36,6 +40,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                 sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
             ) {
             self.animationConfiguration = animationConfiguration
+            self.decideViewTransition = decideViewTransition
             super.init(
                 configureCell: configureCell,
                titleForHeaderInSection: titleForHeaderInSection,
@@ -49,6 +54,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     #else
         public init(
                 animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
+                decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
                 configureCell: @escaping ConfigureCell,
                 titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
                 titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
@@ -56,6 +62,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                 canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false }
             ) {
             self.animationConfiguration = animationConfiguration
+            self.decideViewTransition = decideViewTransition
             super.init(
                 configureCell: configureCell,
                titleForHeaderInSection: titleForHeaderInSection,
@@ -90,10 +97,17 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                     do {
                         let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
-                        for difference in differences {
-                            dataSource.setSections(difference.finalSections)
+                        switch self.decideViewTransition(self, tableView, differences) {
+                        case .animated:
+                            for difference in differences {
+                                dataSource.setSections(difference.finalSections)
 
-                            tableView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                                tableView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                            }
+                        case .reload:
+                            self.setSections(newSections)
+                            tableView.reloadData()
+                            return
                         }
                     }
                     catch let e {

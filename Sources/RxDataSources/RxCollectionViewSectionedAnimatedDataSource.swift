@@ -23,18 +23,24 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
     public typealias Element = [S]
+    public typealias DecideViewTransition = (CollectionViewSectionedDataSource<S>, UICollectionView, [Changeset<S>]) -> ViewTransition
 
     // animation configuration
     public var animationConfiguration: AnimationConfiguration
 
+    /// Calculates view transition depending on type of changes
+    public var decideViewTransition: DecideViewTransition
+
     public init(
         animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
+        decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
         configureCell: @escaping ConfigureCell,
         configureSupplementaryView: @escaping ConfigureSupplementaryView,
         moveItem: @escaping MoveItem = { _, _, _ in () },
         canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
         ) {
         self.animationConfiguration = animationConfiguration
+        self.decideViewTransition = decideViewTransition
         super.init(
             configureCell: configureCell,
             configureSupplementaryView: configureSupplementaryView,
@@ -81,10 +87,16 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                 }
                 let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
-                for difference in differences {
-                    dataSource.setSections(difference.finalSections)
+                switch self.decideViewTransition(self, collectionView, differences) {
+                case .animated:
+                    for difference in differences {
+                        dataSource.setSections(difference.finalSections)
 
-                    collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                        collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                    }
+                case .reload:
+                    self.setSections(newSections)
+                    collectionView.reloadData()
                 }
             }
             catch let e {
