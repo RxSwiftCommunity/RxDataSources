@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 ## [3.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.1)
 
 * Adds custom logic to control should perform animated updates.
-* Fixes SMP integration.
+* Fixes SPM integration.
 
 ## [3.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.0)
 
