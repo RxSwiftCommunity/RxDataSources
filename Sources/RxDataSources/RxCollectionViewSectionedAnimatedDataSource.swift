@@ -35,7 +35,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
         animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
         decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
         configureCell: @escaping ConfigureCell,
-        configureSupplementaryView: @escaping ConfigureSupplementaryView,
+        configureSupplementaryView: ConfigureSupplementaryView? = nil,
         moveItem: @escaping MoveItem = { _, _, _ in () },
         canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
         ) {
