@@ -28,7 +28,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
 
     public init(
         configureCell: @escaping ConfigureCell,
-        configureSupplementaryView: @escaping ConfigureSupplementaryView,
+        configureSupplementaryView: ConfigureSupplementaryView? = nil,
         moveItem: @escaping MoveItem = { _, _, _ in () },
         canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
     ) {
@@ -96,7 +96,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
         }
     }
 
-    open var configureSupplementaryView: ConfigureSupplementaryView {
+    open var configureSupplementaryView: ConfigureSupplementaryView? {
         didSet {
             #if DEBUG
             ensureNotMutatedAfterBinding()
@@ -136,7 +136,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
     }
     
     open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        return configureSupplementaryView(self, collectionView, kind, indexPath)
+        return configureSupplementaryView!(self, collectionView, kind, indexPath)
     }
     
     open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
@@ -151,6 +151,14 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
         self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
         self.moveItem(self, sourceIndexPath, destinationIndexPath)
     }
-    
+
+    override open func responds(to aSelector: Selector!) -> Bool {
+        if aSelector == #selector(UICollectionViewDataSource.collectionView(_:viewForSupplementaryElementOfKind:at:)) {
+            return configureSupplementaryView != nil
+        }
+        else {
+            return super.responds(to: aSelector)
+        }
+    }
 }
 #endif

@@ -74,6 +74,7 @@
 		C8BBFBE01F3B8F8D00A225F7 /* TableViewSectionedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBFBD51F3B8F8D00A225F7 /* TableViewSectionedDataSource.swift */; };
 		C8BBFBE11F3B8F8D00A225F7 /* UI+SectionedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBFBD61F3B8F8D00A225F7 /* UI+SectionedViewType.swift */; };
 		C8E3905A1F36625B004FC993 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8984C5A1C36AF35001E4272 /* RxDataSources.framework */; };
+		C8E643E01FAE45710080BD2C /* RxCollectionViewSectionedDataSource+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E643DF1FAE45710080BD2C /* RxCollectionViewSectionedDataSource+Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,6 +395,7 @@
 		C8BBFBD41F3B8F8D00A225F7 /* RxTableViewSectionedReloadDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTableViewSectionedReloadDataSource.swift; sourceTree = "<group>"; };
 		C8BBFBD51F3B8F8D00A225F7 /* TableViewSectionedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionedDataSource.swift; sourceTree = "<group>"; };
 		C8BBFBD61F3B8F8D00A225F7 /* UI+SectionedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UI+SectionedViewType.swift"; sourceTree = "<group>"; };
+		C8E643DF1FAE45710080BD2C /* RxCollectionViewSectionedDataSource+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxCollectionViewSectionedDataSource+Test.swift"; sourceTree = "<group>"; };
 		E39CF67E2A16306B47BCE935 /* Pods_RxDataSources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxDataSources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3CB312567712E0443B47BE1 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -464,6 +466,7 @@
 				03EEEE851F5B7D5C006068BC /* Randomizer.swift */,
 				03EEEE861F5B7D5C006068BC /* s.swift */,
 				03EEEE871F5B7D5C006068BC /* XCTest+Extensions.swift */,
+				C8E643DF1FAE45710080BD2C /* RxCollectionViewSectionedDataSource+Test.swift */,
 			);
 			path = RxDataSourcesTests;
 			sourceTree = "<group>";
@@ -1095,6 +1098,7 @@
 				03EEEE911F5B7D71006068BC /* AlgorithmTests.swift in Sources */,
 				03EEEE921F5B7D71006068BC /* Array+Extensions.swift in Sources */,
 				03EEEE931F5B7D71006068BC /* ChangeSet+TestExtensions.swift in Sources */,
+				C8E643E01FAE45710080BD2C /* RxCollectionViewSectionedDataSource+Test.swift in Sources */,
 				03EEEE941F5B7D71006068BC /* i.swift in Sources */,
 				03EEEE951F5B7D71006068BC /* NumberSection.swift in Sources */,
 				03EEEE961F5B7D71006068BC /* Randomizer.swift in Sources */,
