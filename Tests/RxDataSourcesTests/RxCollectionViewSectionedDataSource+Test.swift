@@ -6,6 +6,8 @@
 //  Copyright © 2017 kzaher. All rights reserved.
 //
 
+#if os(iOS)
+
 import Foundation
 import RxDataSources
 import XCTest
@@ -112,3 +114,4 @@ extension RxCollectionViewSectionedDataSourceTest {
     }
 }
 
+#endif
