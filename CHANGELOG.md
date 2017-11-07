@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.2)
+
+* Makes `configureSupplementaryView` optional for reload data source. #186
+
 ## [3.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.1)
 
 * Adds custom logic to control should perform animated updates.
