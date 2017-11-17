@@ -23,6 +23,7 @@
 		845F61FB1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FA1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift */; };
 		845F61FD1CCFF63600A8BE32 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61FC1CCFF63600A8BE32 /* UIKitExtensions.swift */; };
 		84FC6BEE1CA4830A00D3C605 /* Example3_TableViewEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6BED1CA4830A00D3C605 /* Example3_TableViewEditing.swift */; };
+		8C945B601FBEF763006B4DFF /* Example6_AnimatedScrollToItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C945B4C1FBEF762006B4DFF /* Example6_AnimatedScrollToItem.swift */; };
 		9FF3014E1C4AA6DA007376BD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; };
 		9FF301501C4AA6DA007376BD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014D1C4AA6DA007376BD /* RxSwift.framework */; };
 		A5E035641F0BD55A00EA6BDE /* Example5_UIPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E035631F0BD55A00EA6BDE /* Example5_UIPickerView.swift */; };
@@ -338,6 +339,7 @@
 		845F61FA1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleSteperTableViewCell.swift; sourceTree = "<group>"; };
 		845F61FC1CCFF63600A8BE32 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		84FC6BED1CA4830A00D3C605 /* Example3_TableViewEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example3_TableViewEditing.swift; sourceTree = "<group>"; };
+		8C945B4C1FBEF762006B4DFF /* Example6_AnimatedScrollToItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example6_AnimatedScrollToItem.swift; sourceTree = "<group>"; };
 		9FF301481C4AA6D1007376BD /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/tvOS/RxCocoa.framework; sourceTree = "<group>"; };
 		9FF301491C4AA6D1007376BD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/tvOS/RxSwift.framework; sourceTree = "<group>"; };
 		9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				84FC6BED1CA4830A00D3C605 /* Example3_TableViewEditing.swift */,
 				845F61F31CCFD96800A8BE32 /* Example4_DifferentSectionAndItemTypes.swift */,
 				A5E035631F0BD55A00EA6BDE /* Example5_UIPickerView.swift */,
+				8C945B4C1FBEF762006B4DFF /* Example6_AnimatedScrollToItem.swift */,
 				C87DF3421D0219A7006308C5 /* Support */,
 				845F61F51CCFDD7100A8BE32 /* Views */,
 				C8984CA11C36B6FA001E4272 /* Main.storyboard */,
@@ -1160,6 +1163,7 @@
 				84FC6BEE1CA4830A00D3C605 /* Example3_TableViewEditing.swift in Sources */,
 				C8984CA01C36B6FA001E4272 /* Example2_RandomizedSectionsAnimation.swift in Sources */,
 				C87DF3461D0219A7006308C5 /* AppDelegate.swift in Sources */,
+				8C945B601FBEF763006B4DFF /* Example6_AnimatedScrollToItem.swift in Sources */,
 				845F61F41CCFD96800A8BE32 /* Example4_DifferentSectionAndItemTypes.swift in Sources */,
 				845F61FB1CCFDED600A8BE32 /* TitleSteperTableViewCell.swift in Sources */,
 				845F61F91CCFDEA800A8BE32 /* TitleSwitchTableViewCell.swift in Sources */,

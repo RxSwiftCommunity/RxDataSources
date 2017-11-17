@@ -53,10 +53,15 @@ extension UITableView : SectionedViewType {
         self.reloadSections(indexSet(sections), with: animationStyle)
     }
 
-  public func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
+    public func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration, completion: ((Bool) -> Void)?) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { completion?(true) }
+
         self.beginUpdates()
         _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
         self.endUpdates()
+
+        CATransaction.commit()
     }
 }
 
@@ -93,11 +98,10 @@ extension UICollectionView : SectionedViewType {
         self.reloadSections(indexSet(sections))
     }
     
-  public func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
+    public func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration, completion: ((Bool) -> Void)?) {
         self.performBatchUpdates({ () -> Void in
             _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
-        }, completion: { (completed: Bool) -> Void in
-        })
+        }, completion: completion)
     }
 }
 
@@ -112,7 +116,7 @@ public protocol SectionedViewType {
     func moveSection(_ from: Int, to: Int)
     func reloadSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
 
-    func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration)
+    func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration, completion: ((Bool) -> Void)?)
 }
 
 func _performBatchUpdates<V: SectionedViewType, S>(_ view: V, changes: Changeset<S>, animationConfiguration:AnimationConfiguration) {

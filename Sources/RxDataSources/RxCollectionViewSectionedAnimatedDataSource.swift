@@ -31,6 +31,11 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     /// Calculates view transition depending on type of changes
     public var decideViewTransition: DecideViewTransition
 
+    // Emits an event when collection view finishes processing updates
+    public var updatesCompleted: Observable<Bool> {
+        return batchUpdatesCompletedEvent.asObservable()
+    }
+
     public init(
         animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
         decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
@@ -71,6 +76,8 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     // This should somewhat help to alleviate the problem.
     private let partialUpdateEvent = PublishSubject<(UICollectionView, Event<Element>)>()
 
+    private let batchUpdatesCompletedEvent = PublishSubject<Bool>()
+
     /**
      This method exists because collection view updates are throttled because of internal collection view bugs.
      Collection view behaves poorly during fast updates, so this should remedy those issues.
@@ -92,7 +99,9 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                     for difference in differences {
                         dataSource.setSections(difference.finalSections)
 
-                        collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                        collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration) { [weak self] in
+                            self?.batchUpdatesCompletedEvent.onNext($0)
+                        }
                     }
                 case .reload:
                     self.setSections(newSections)

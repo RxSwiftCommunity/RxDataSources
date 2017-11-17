@@ -27,6 +27,11 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     /// Calculates view transition depending on type of changes
     public var decideViewTransition: DecideViewTransition
 
+    // Emits an event when table view view finishes processing updates
+    public var updatesCompleted: Observable<Bool> {
+        return updatesCompletedEvent.asObservable()
+    }
+
     #if os(iOS)
         public init(
                 animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
@@ -75,6 +80,8 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
 
     var dataSet = false
 
+    private var updatesCompletedEvent = PublishSubject<Bool>()
+
     open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, newSections in
             #if DEBUG
@@ -102,7 +109,9 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                             for difference in differences {
                                 dataSource.setSections(difference.finalSections)
 
-                                tableView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                                tableView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration) { [weak self] in
+                                    self?.updatesCompletedEvent.onNext($0)
+                                }
                             }
                         case .reload:
                             self.setSections(newSections)
