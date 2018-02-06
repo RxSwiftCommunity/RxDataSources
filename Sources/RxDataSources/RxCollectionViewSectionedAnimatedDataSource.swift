@@ -22,8 +22,15 @@ import Differentiator
 open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
+
+    public enum BatchUpdateType {
+        case single
+        case multiple
+    }
+
     public typealias Element = [S]
     public var animationConfiguration = AnimationConfiguration()
+    public var batchType: BatchUpdateType = .multiple
     
     // For some inexplicable reason, when doing animated updates first time
     // it crashes. Still need to figure out that one.
@@ -38,7 +45,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
 
     public override init() {
         super.init()
-
+        
         self.partialUpdateEvent
             // so in case it does produce a crash, it will be after the data has changed
             .observeOn(MainScheduler.asyncInstance)
@@ -67,17 +74,25 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                 }
                 let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
-                
-                if let finalSections = differences.last?.finalSections {
-                    dataSource.setSections(finalSections)
-                }
-                
-                collectionView.performBatchUpdates({
+                switch self.batchType {
+                case .single:
+                    if let finalSections = differences.last?.finalSections {
+                        dataSource.setSections(finalSections)
+                    }
+                    collectionView.performBatchUpdates({
+                        for difference in differences {
+                            collectionView.performSingleBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                        }
+                        
+                    }, completion: nil)
+                default :
                     for difference in differences {
+                        dataSource.setSections(difference.finalSections)
+                        
                         collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
                     }
-                    
-                }, completion: nil)
+                }
+                
             }
             catch let e {
                 #if DEBUG
