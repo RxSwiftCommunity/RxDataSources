@@ -67,11 +67,17 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                 }
                 let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
 
-                for difference in differences {
-                    dataSource.setSections(difference.finalSections)
-
-                    collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                
+                if let finalSections = differences.last?.finalSections {
+                    dataSource.setSections(finalSections)
                 }
+                
+                collectionView.performBatchUpdates({
+                    for difference in differences {
+                        collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                    }
+                    
+                }, completion: nil)
             }
             catch let e {
                 #if DEBUG
