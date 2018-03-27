@@ -3,13 +3,17 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-#### Enhancements
-* Reduce computational complexity. #242
-* Adapted for RxSwift 4.2
+## Unreleased
+
+* Provide a `.custom` option for `ViewTransition`.
 
 ## [3.1.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.1.0)
 
 * Xcode 10.0 compatibility.
+
+#### Enhancements
+* Reduce computational complexity. #242
+* Adapted for RxSwift 4.2
 
 ## [3.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.2)
 
