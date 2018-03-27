@@ -7,10 +7,11 @@
 //
 
 /// Transition between two view states
-public enum ViewTransition {
+public enum ViewTransition<T> {
     /// animated transition
     case animated
     /// refresh view without animations
     case reload
+    /// perform custom behavior
+    case custom((T) -> Void)
 }
-
