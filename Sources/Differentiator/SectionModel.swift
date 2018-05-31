@@ -36,6 +36,15 @@ extension SectionModel
     }
 }
 
+extension SectionModel
+    : Equatable where Section: Equatable, ItemType: Equatable {
+    
+    public static func == (lhs: SectionModel, rhs: SectionModel) -> Bool {
+        return lhs.model == rhs.model
+            && lhs.items == rhs.items
+    }
+}
+
 extension SectionModel {
     public init(original: SectionModel<Section, Item>, items: [Item]) {
         self.model = original.model
