@@ -119,12 +119,16 @@ Observable.just(sections)
   .disposed(by: disposeBag)
 ```
 
+### Animated Data Sources
 
-### Animations
-To implement animations with RxDataSources, the same steps are required as with non-animated data, execept:
+RxDataSources provides two special data source types that automatically take care of animating changes in the bound data source: `RxTableViewSectionedAnimatedDataSource` and `RxCollectionViewSectionedAnimatedDataSource`.
+
+To use one of the two animated data sources, you must take a few extra steps on top of those outlined above:
+
 - SectionOfCustomData needs to conform to `AnimatableSectionModelType`
-- dataSource needs to be an instance of `RxTableViewSectionedAnimatedDataSource` or `RxCollectionViewSectionedAnimatedDataSource`
-
+- Your data model must conform to
+  * `IdentifiableType`: The `identity` provided by the `IdentifiableType` protocol must be an **immutable identifier representing an instance of the model**. For example, in case of a `Car` model, you might want to use the car's `plateNumber` as its identity.
+  * `Equatable`: Conforming to `Equatable` helps `RxDataSources` determine which cells have changed so it can animate only these specific cells. Meaning, changing **any** of the `Car` model's properties will trigger an animated reload of that cell.
 
 ## Requirements
 
