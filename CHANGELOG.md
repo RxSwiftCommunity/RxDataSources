@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## Master
+* Provide a `.custom` option for `ViewTransition`. #220
+
 ## [3.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.2)
 
 * Makes `configureSupplementaryView` optional for reload data source. #186

@@ -19,7 +19,7 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     : TableViewSectionedDataSource<S>
     , RxTableViewDataSourceType {
     public typealias Element = [S]
-    public typealias DecideViewTransition = (TableViewSectionedDataSource<S>, UITableView, [Changeset<S>]) -> ViewTransition
+    public typealias DecideViewTransition = (TableViewSectionedDataSource<S>, UITableView, [Changeset<S>]) -> ViewTransition<UITableView>
 
     /// Animation configuration for data source
     public var animationConfiguration: AnimationConfiguration
@@ -107,7 +107,9 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                         case .reload:
                             self.setSections(newSections)
                             tableView.reloadData()
-                            return
+                        case .custom(let actions):
+                            self.setSections(newSections)
+                            actions(tableView)
                         }
                     }
                     catch let e {

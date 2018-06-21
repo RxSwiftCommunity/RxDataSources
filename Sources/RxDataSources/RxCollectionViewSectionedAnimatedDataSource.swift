@@ -23,7 +23,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
     public typealias Element = [S]
-    public typealias DecideViewTransition = (CollectionViewSectionedDataSource<S>, UICollectionView, [Changeset<S>]) -> ViewTransition
+    public typealias DecideViewTransition = (CollectionViewSectionedDataSource<S>, UICollectionView, [Changeset<S>]) -> ViewTransition<UICollectionView>
 
     // animation configuration
     public var animationConfiguration: AnimationConfiguration
@@ -97,6 +97,9 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                 case .reload:
                     self.setSections(newSections)
                     collectionView.reloadData()
+                case .custom(let actions):
+                    self.setSections(newSections)
+                    actions(collectionView)
                 }
             }
             catch let e {
