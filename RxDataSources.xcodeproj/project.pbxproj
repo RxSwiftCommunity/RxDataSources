@@ -26,6 +26,10 @@
 		9FF3014E1C4AA6DA007376BD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; };
 		9FF301501C4AA6DA007376BD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014D1C4AA6DA007376BD /* RxSwift.framework */; };
 		A5E035641F0BD55A00EA6BDE /* Example5_UIPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E035631F0BD55A00EA6BDE /* Example5_UIPickerView.swift */; };
+		C391DF6B20DBFD8B00081308 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; };
+		C391DF6C20DBFD8B00081308 /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014C1C4AA6DA007376BD /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C391DF6D20DBFD8F00081308 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014D1C4AA6DA007376BD /* RxSwift.framework */; };
+		C391DF6E20DBFD8F00081308 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF3014D1C4AA6DA007376BD /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C8153A501CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8153A4F1CC6C2F40050C990 /* Example1_CustomizationUsingTableViewDelegate.swift */; };
 		C81FBF461F3B9CED0094061E /* Differentiator.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C81FBF451F3B9CED0094061E /* Differentiator.podspec */; };
 		C81FBF5E1F3B9D660094061E /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81FBF5B1F3B9D4C0094061E /* Array+Extensions.swift */; };
@@ -146,6 +150,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C391DF6E20DBFD8F00081308 /* RxSwift.framework in Embed Frameworks */,
+				C391DF6C20DBFD8B00081308 /* RxCocoa.framework in Embed Frameworks */,
 				C87C34A31F363B3000DB85FE /* RxDataSources.framework in Embed Frameworks */,
 				C82C3C5C1F3B937500309AE8 /* Differentiator.framework in Embed Frameworks */,
 			);
@@ -261,6 +267,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C391DF6D20DBFD8F00081308 /* RxSwift.framework in Frameworks */,
+				C391DF6B20DBFD8B00081308 /* RxCocoa.framework in Frameworks */,
 				C87C34A21F363B3000DB85FE /* RxDataSources.framework in Frameworks */,
 				C82C3C5B1F3B937500309AE8 /* Differentiator.framework in Frameworks */,
 			);
