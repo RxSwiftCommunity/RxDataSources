@@ -125,7 +125,7 @@ extension Changeset {
     }
 
     private func applySectionMovesAndInserts(original: [S]) -> [S] {
-        if updatedSections.count > 0 {
+        if !updatedSections.isEmpty {
             fatalError("Section updates aren't supported")
         }
 

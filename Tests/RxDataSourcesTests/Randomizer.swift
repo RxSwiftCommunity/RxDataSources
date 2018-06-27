@@ -152,7 +152,7 @@ struct Randomizer {
 
         // move items
         for _ in 0 ..< itemActionCount {
-            if sections.count == 0 {
+            if sections.isEmpty {
                 continue
             }
 
@@ -162,14 +162,12 @@ struct Randomizer {
             (nextRng, randomValue) = nextRng.get_random()
             let destinationSectionIndex = randomValue % sections.count
 
-            let sectionItemCount = sections[sourceSectionIndex].numbers.count
-
-            if sectionItemCount == 0 {
+            if sections[sourceSectionIndex].numbers.isEmpty {
                 continue
             }
 
             (nextRng, randomValue) = nextRng.get_random()
-            let sourceItemIndex = randomValue % sectionItemCount
+            let sourceItemIndex = randomValue % sections[sourceSectionIndex].numbers.count
 
             (nextRng, randomValue) = nextRng.get_random()
 
@@ -185,21 +183,19 @@ struct Randomizer {
 
         // delete items
         for _ in 0 ..< itemActionCount {
-            if sections.count == 0 {
+            if sections.isEmpty {
                 continue
             }
 
             (nextRng, randomValue) = nextRng.get_random()
             let sourceSectionIndex = randomValue % sections.count
 
-            let sectionItemCount = sections[sourceSectionIndex].numbers.count
-
-            if sectionItemCount == 0 {
+            if sections[sourceSectionIndex].numbers.isEmpty {
                 continue
             }
 
             (nextRng, randomValue) = nextRng.get_random()
-            let sourceItemIndex = randomValue % sectionItemCount
+            let sourceItemIndex = randomValue % sections[sourceSectionIndex].numbers.count
 
             if deleteItems {
                 nextUnusedItems.append(sections[sourceSectionIndex].numbers.remove(at: sourceItemIndex))
@@ -211,7 +207,7 @@ struct Randomizer {
 
         // move sections
         for _ in 0 ..< sectionActionCount {
-            if sections.count == 0 {
+            if sections.isEmpty {
                 continue
             }
 
@@ -231,7 +227,7 @@ struct Randomizer {
 
         // delete sections
         for _ in 0 ..< sectionActionCount {
-            if sections.count == 0 {
+            if sections.isEmpty {
                 continue
             }
 
