@@ -28,7 +28,11 @@ open class RxCollectionViewSectionedReloadDataSource<S: SectionModelType>
             #endif
             dataSource.setSections(element)
             collectionView.reloadData()
-            collectionView.collectionViewLayout.invalidateLayout()
+            collectionView.performBatchUpdates(nil, completion: {
+                (_) in
+                // This needs to run here to make auto-layout work in custom layout.
+                collectionView.collectionViewLayout.invalidateLayout()
+            })
         }.on(observedEvent)
     }
 }
