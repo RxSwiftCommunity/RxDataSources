@@ -108,6 +108,14 @@ dataSource.titleForHeaderInSection = { dataSource, index in
 dataSource.titleForFooterInSection = { dataSource, indexPath in
   return dataSource.sectionModels[index].footer
 }
+
+dataSource.canEditRowAtIndexPath = { dataSource, indexPath in
+  return true
+}
+
+dataSource.canMoveRowAtIndexPath = { dataSource, indexPath in
+  return true
+}
 ```
 
 4) Define the actual data as an Observable sequence of CustomData objects and bind it to the tableView
