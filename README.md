@@ -104,6 +104,10 @@ let dataSource = RxTableViewSectionedReloadDataSource<SectionOfCustomData>(
 dataSource.titleForHeaderInSection = { dataSource, index in
   return dataSource.sectionModels[index].header
 }
+
+dataSource.titleForFooterInSection = { dataSource, indexPath in
+  return dataSource.sectionModels[index].footer
+}
 ```
 
 4) Define the actual data as an Observable sequence of CustomData objects and bind it to the tableView
