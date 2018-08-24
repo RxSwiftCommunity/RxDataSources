@@ -98,25 +98,11 @@ let dataSource = RxTableViewSectionedReloadDataSource<SectionOfCustomData>(
 3) Customize closures on the dataSource as needed:
 - `titleForHeaderInSection`
 - `titleForFooterInSection`
-- `canEditRowAtIndexPath`
-- `canMoveRowAtIndexPath`
 - etc
 
 ```swift
 dataSource.titleForHeaderInSection = { dataSource, index in
   return dataSource.sectionModels[index].header
-}
-
-dataSource.titleForFooterInSection = { dataSource, indexPath in
-  return dataSource.sectionModels[index].footer
-}
-
-dataSource.canEditRowAtIndexPath = { dataSource, indexPath in
-  return true
-}
-
-dataSource.canMoveRowAtIndexPath = { dataSource, indexPath in
-  return true
 }
 ```
 
