@@ -11,6 +11,10 @@ import Foundation
 import UIKit
 import Differentiator
 
+#if swift(>=4.2)
+public typealias UITableViewRowAnimation = UITableView.RowAnimation
+#endif
+
 func indexSet(_ values: [Int]) -> IndexSet {
     let indexSet = NSMutableIndexSet()
     for i in values {
