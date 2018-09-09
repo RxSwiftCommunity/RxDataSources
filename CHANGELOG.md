@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 #### Enhancements
 * Reduce computational complexity. #242
 * Adapted for RxSwift 4.2
+* Allow unthrottled reload updates for `RxCollectionViewSectionedAnimatedDataSource`.
 
 ## [3.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.2)
 
