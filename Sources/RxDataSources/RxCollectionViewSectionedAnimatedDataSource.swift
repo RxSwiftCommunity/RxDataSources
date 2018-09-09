@@ -53,7 +53,9 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
         )
         
         let cancelableAnimatedUpdates = PublishRelay<(UICollectionView, [Changeset<S>])?>()
-        self.animatedUpdates.bind(to: cancelableAnimatedUpdates).disposed(by: disposeBag)
+        self.animatedUpdates.subscribe(onNext: { [weak cancelableAnimatedUpdates] in
+            cancelableAnimatedUpdates?.accept($0)
+        }).disposed(by: disposeBag)
         let throttledAnimatedUpdates = cancelableAnimatedUpdates
             // so in case it does produce a crash, it will be after the data has changed
             .observeOn(MainScheduler.asyncInstance)
