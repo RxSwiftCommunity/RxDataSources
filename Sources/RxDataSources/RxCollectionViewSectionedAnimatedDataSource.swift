@@ -99,26 +99,26 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, newSections in
             #if DEBUG
-                self._dataSourceBound = true
+                dataSource._dataSourceBound = true
             #endif
-            if !self.dataSet {
-                self.dataSet = true
-                self.reloadUpdates.accept((collectionView, newSections))
+            if !dataSource.dataSet {
+                dataSource.dataSet = true
+                dataSource.reloadUpdates.accept((collectionView, newSections))
             }
             else {
                 do {
                     let oldSections = dataSource.sectionModels
                     let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-                    switch self.decideViewTransition(self, collectionView, differences) {
+                    switch dataSource.decideViewTransition(dataSource, collectionView, differences) {
                     case .animated:
                         // if view is not in view hierarchy, performing batch updates will crash the app
                         if collectionView.window == nil {
-                            self.reloadUpdates.accept((collectionView, newSections))
+                            dataSource.reloadUpdates.accept((collectionView, newSections))
                             return
                         }
                         dataSource.animatedUpdates.accept((collectionView, differences))
                     case .reload:
-                        self.reloadUpdates.accept((collectionView, newSections))
+                        dataSource.reloadUpdates.accept((collectionView, newSections))
                     }
                 }
                 catch let e {
@@ -126,7 +126,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
                     print("Error while binding data animated: \(e)\nFallback to normal `reloadData` behavior.")
                     rxDebugFatalError(e)
                     #endif
-                    self.reloadUpdates.accept((collectionView, newSections))
+                    dataSource.reloadUpdates.accept((collectionView, newSections))
                 }
             }
         }.on(observedEvent)
