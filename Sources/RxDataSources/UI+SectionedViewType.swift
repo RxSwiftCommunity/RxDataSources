@@ -97,10 +97,15 @@ extension UICollectionView : SectionedViewType {
         self.reloadSections(indexSet(sections))
     }
     
-  public func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
-        self.performBatchUpdates({ () -> Void in
-            _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
-        }, completion: { (completed: Bool) -> Void in
+    public func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
+        NSExceptionCatcher.try({
+            performBatchUpdates({ () -> Void in
+                _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
+            }, completion: { (completed: Bool) -> Void in
+                //
+            })
+        }, catch: { (exception: NSException) in
+            fatalError("\(exception)")
         })
     }
 }

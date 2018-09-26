@@ -35,7 +35,7 @@ data
 
   s.requires_arc          = true
   
-  s.source_files = 'Sources/RxDataSources/**/*.swift'
+  s.source_files = 'Sources/RxDataSources/**/*.{h,m,swift}'
   s.dependency 'Differentiator', '~> 3.0'
   s.dependency 'RxSwift', '~> 4.0'
   s.dependency 'RxCocoa', '~> 4.0'
