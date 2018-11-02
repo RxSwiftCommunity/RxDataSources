@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 #### Enhancements
 * Reduce computational complexity. #242
 * Adapted for RxSwift 4.2
-* SectionModel made equatable when its model and items conforms to equatable.
+* Makes SectionModel equatable when its model and items conforms to equatable.
 
 ## [3.1.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.1.0)
 
