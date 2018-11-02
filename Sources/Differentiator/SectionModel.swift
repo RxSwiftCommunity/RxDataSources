@@ -36,6 +36,9 @@ extension SectionModel
     }
 }
 
+extension SectionModel
+    : Equatable where Section: Equatable, ItemType: Equatable {}
+
 extension SectionModel {
     public init(original: SectionModel<Section, Item>, items: [Item]) {
         self.model = original.model
