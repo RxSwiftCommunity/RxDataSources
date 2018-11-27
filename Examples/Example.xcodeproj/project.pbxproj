@@ -77,41 +77,6 @@
 			remoteGlobalIDString = C82C3C531F3B937500309AE8;
 			remoteInfo = Differentiator;
 		};
-		C82C3C9C1F3B93D900309AE8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C85CB0C41F4349E6005CE91A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C85CB0C61F434A80005CE91A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C85CB0C81F434A83005CE91A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C87C34601F36353300DB85FE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
 		C87C34641F36353B00DB85FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
@@ -321,7 +286,6 @@
 		C81FBF611F3B9DC00094061E /* IntegerType+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerType+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C81FBF621F3B9DC00094061E /* String+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C81FBF651F3B9DF60094061E /* AnimationConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationConfiguration.swift; sourceTree = "<group>"; };
-		C82541851F363C76009F6C03 /* dependencies.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = dependencies.sh; sourceTree = "<group>"; };
 		C82C3C541F3B937500309AE8 /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C82C3C611F3B938C00309AE8 /* AnimatableSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSectionModel.swift; sourceTree = "<group>"; };
 		C82C3C621F3B938C00309AE8 /* AnimatableSectionModelType+ItemPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimatableSectionModelType+ItemPath.swift"; sourceTree = "<group>"; };
@@ -490,7 +454,6 @@
 		C8984C501C36AF35001E4272 = {
 			isa = PBXGroup;
 			children = (
-				C82541851F363C76009F6C03 /* dependencies.sh */,
 				C85EE5461C36F1FC0090614D /* Sources */,
 				C8984C9C1C36B6FA001E4272 /* Example */,
 				C8984CB21C36B723001E4272 /* ExampleUITests */,
@@ -584,22 +547,6 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
-/* Begin PBXLegacyTarget section */
-		C87C345C1F36352600DB85FE /* Dependencies */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = C87C345D1F36352600DB85FE /* Build configuration list for PBXLegacyTarget "Dependencies" */;
-			buildPhases = (
-			);
-			buildToolPath = ./dependencies.sh;
-			dependencies = (
-			);
-			name = Dependencies;
-			passBuildSettingsInEnvironment = 1;
-			productName = Dependencies;
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		C81905AD1DEA019100AE679C /* Tests */ = {
 			isa = PBXNativeTarget;
@@ -612,7 +559,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C85CB0C51F4349E6005CE91A /* PBXTargetDependency */,
 			);
 			name = Tests;
 			productName = Tests;
@@ -631,7 +577,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C82C3C9D1F3B93D900309AE8 /* PBXTargetDependency */,
 			);
 			name = Differentiator;
 			productName = Differentiator;
@@ -653,7 +598,6 @@
 				C88AC73F214D9BF800C1A3E5 /* PBXTargetDependency */,
 				C88AC741214D9BF800C1A3E5 /* PBXTargetDependency */,
 				C82C3C9B1F3B93D200309AE8 /* PBXTargetDependency */,
-				C87C34611F36353300DB85FE /* PBXTargetDependency */,
 			);
 			name = RxDataSources;
 			productName = RxDataSources;
@@ -673,7 +617,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C85CB0C91F434A83005CE91A /* PBXTargetDependency */,
 				C87C34651F36353B00DB85FE /* PBXTargetDependency */,
 				C82C3C5A1F3B937500309AE8 /* PBXTargetDependency */,
 			);
@@ -693,7 +636,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C85CB0C71F434A80005CE91A /* PBXTargetDependency */,
 				C8984CB71C36B723001E4272 /* PBXTargetDependency */,
 			);
 			name = ExampleUITests;
@@ -718,11 +660,6 @@
 					};
 					C82C3C531F3B937500309AE8 = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
-					};
-					C87C345C1F36352600DB85FE = {
-						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 783T66X79Y;
 						ProvisioningStyle = Automatic;
 					};
 					C8984C591C36AF35001E4272 = {
@@ -761,7 +698,6 @@
 				C8984C9A1C36B6FA001E4272 /* Example */,
 				C8984CB01C36B723001E4272 /* ExampleUITests */,
 				C81905AD1DEA019100AE679C /* Tests */,
-				C87C345C1F36352600DB85FE /* Dependencies */,
 			);
 		};
 /* End PBXProject section */
@@ -971,7 +907,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "pushd \"${BUILT_PRODUCTS_DIR}\"\necho \"${BUILT_PRODUCTS_DIR}\"\nfunction copy {\n    if [[ -d \"$1/$1.framework\" ]]; then\n    rm -rf $1.framework\n    cp -r $1/$1.framework $1.framework\n    fi\n}\ncopy RxSwift\ncopy RxCocoa\npopd";
+			shellScript = "pushd \"${BUILT_PRODUCTS_DIR}\"\necho \"${BUILT_PRODUCTS_DIR}\"\nfunction copy {\n    if [[ -d \"$1/$1.framework\" ]]; then\n    rm -rf $1.framework\n    cp -r $1/$1.framework $1.framework\n    fi\n}\ncopy RxSwift\ncopy RxCocoa\npopd\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1064,31 +1000,6 @@
 			isa = PBXTargetDependency;
 			target = C82C3C531F3B937500309AE8 /* Differentiator */;
 			targetProxy = C82C3C9A1F3B93D200309AE8 /* PBXContainerItemProxy */;
-		};
-		C82C3C9D1F3B93D900309AE8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C82C3C9C1F3B93D900309AE8 /* PBXContainerItemProxy */;
-		};
-		C85CB0C51F4349E6005CE91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C85CB0C41F4349E6005CE91A /* PBXContainerItemProxy */;
-		};
-		C85CB0C71F434A80005CE91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C85CB0C61F434A80005CE91A /* PBXContainerItemProxy */;
-		};
-		C85CB0C91F434A83005CE91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C85CB0C81F434A83005CE91A /* PBXContainerItemProxy */;
-		};
-		C87C34611F36353300DB85FE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C87C34601F36353300DB85FE /* PBXContainerItemProxy */;
 		};
 		C87C34651F36353B00DB85FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1209,37 +1120,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-			};
-			name = Release;
-		};
-		C87C345E1F36352600DB85FE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 783T66X79Y;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		C87C345F1F36352600DB85FE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 783T66X79Y;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1489,15 +1369,6 @@
 			buildConfigurations = (
 				C82C3C5E1F3B937500309AE8 /* Debug */,
 				C82C3C5F1F3B937500309AE8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C87C345D1F36352600DB85FE /* Build configuration list for PBXLegacyTarget "Dependencies" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C87C345E1F36352600DB85FE /* Debug */,
-				C87C345F1F36352600DB85FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
