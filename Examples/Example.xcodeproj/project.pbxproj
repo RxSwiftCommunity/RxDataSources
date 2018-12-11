@@ -63,6 +63,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B6F732B321C01D3B0007F9D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C8165ABC21891AFF00494BEF;
+			remoteInfo = RxAtomic;
+		};
 		C82C3C591F3B937500309AE8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
@@ -76,41 +83,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = C82C3C531F3B937500309AE8;
 			remoteInfo = Differentiator;
-		};
-		C82C3C9C1F3B93D900309AE8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C85CB0C41F4349E6005CE91A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C85CB0C61F434A80005CE91A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C85CB0C81F434A83005CE91A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
-		};
-		C87C34601F36353300DB85FE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8984C511C36AF35001E4272 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87C345C1F36352600DB85FE;
-			remoteInfo = Dependencies;
 		};
 		C87C34641F36353B00DB85FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -126,54 +98,12 @@
 			remoteGlobalIDString = C8A56AD71AD7424700B4673B;
 			remoteInfo = "RxSwift-iOS";
 		};
-		C88AC716214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C88BB8711B07E5ED0064D411;
-			remoteInfo = "RxSwift-macOS";
-		};
-		C88AC718214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2EA280C1BB9B5A200880ED3;
-			remoteInfo = "RxSwift-tvOS";
-		};
-		C88AC71A214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C8F0C0021BBBFB8B001B112F;
-			remoteInfo = "RxSwift-watchOS";
-		};
 		C88AC71C214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C809396D1B8A71760088E94D;
 			remoteInfo = "RxCocoa-iOS";
-		};
-		C88AC71E214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C80939E71B8A71840088E94D;
-			remoteInfo = "RxCocoa-macOS";
-		};
-		C88AC720214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2138C751BB9BE9800339B5C;
-			remoteInfo = "RxCocoa-tvOS";
-		};
-		C88AC722214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C8F0C04B1BBBFBB9001B112F;
-			remoteInfo = "RxCocoa-watchOS";
 		};
 		C88AC724214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -182,54 +112,12 @@
 			remoteGlobalIDString = C8093BC71B8A71F00088E94D;
 			remoteInfo = "RxBlocking-iOS";
 		};
-		C88AC726214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C8093C451B8A71FC0088E94D;
-			remoteInfo = "RxBlocking-macOS";
-		};
-		C88AC728214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2EBEB811BB9B99D003A27DC;
-			remoteInfo = "RxBlocking-tvOS";
-		};
-		C88AC72A214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C8F0C0581BBBFBCE001B112F;
-			remoteInfo = "RxBlocking-watchOS";
-		};
 		C88AC72C214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C88FA50C1C25C44800CCFEA4;
 			remoteInfo = "RxTest-iOS";
-		};
-		C88AC72E214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C88FA51D1C25C4B500CCFEA4;
-			remoteInfo = "RxTest-macOS";
-		};
-		C88AC730214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C88FA52E1C25C4C000CCFEA4;
-			remoteInfo = "RxTest-tvOS";
-		};
-		C88AC732214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C88FA53F1C25C4CC00CCFEA4;
-			remoteInfo = "RxTest-watchOS";
 		};
 		C88AC734214D9BA800C1A3E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -321,7 +209,6 @@
 		C81FBF611F3B9DC00094061E /* IntegerType+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerType+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C81FBF621F3B9DC00094061E /* String+IdentifiableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+IdentifiableType.swift"; sourceTree = "<group>"; };
 		C81FBF651F3B9DF60094061E /* AnimationConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationConfiguration.swift; sourceTree = "<group>"; };
-		C82541851F363C76009F6C03 /* dependencies.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = dependencies.sh; sourceTree = "<group>"; };
 		C82C3C541F3B937500309AE8 /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C82C3C611F3B938C00309AE8 /* AnimatableSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSectionModel.swift; sourceTree = "<group>"; };
 		C82C3C621F3B938C00309AE8 /* AnimatableSectionModelType+ItemPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimatableSectionModelType+ItemPath.swift"; sourceTree = "<group>"; };
@@ -462,22 +349,11 @@
 		C88AC6FD214D9BA800C1A3E5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				B6F732B421C01D3B0007F9D9 /* RxAtomic.framework */,
 				C88AC715214D9BA800C1A3E5 /* RxSwift.framework */,
-				C88AC717214D9BA800C1A3E5 /* RxSwift.framework */,
-				C88AC719214D9BA800C1A3E5 /* RxSwift.framework */,
-				C88AC71B214D9BA800C1A3E5 /* RxSwift.framework */,
 				C88AC71D214D9BA800C1A3E5 /* RxCocoa.framework */,
-				C88AC71F214D9BA800C1A3E5 /* RxCocoa.framework */,
-				C88AC721214D9BA800C1A3E5 /* RxCocoa.framework */,
-				C88AC723214D9BA800C1A3E5 /* RxCocoa.framework */,
 				C88AC725214D9BA800C1A3E5 /* RxBlocking.framework */,
-				C88AC727214D9BA800C1A3E5 /* RxBlocking.framework */,
-				C88AC729214D9BA800C1A3E5 /* RxBlocking.framework */,
-				C88AC72B214D9BA800C1A3E5 /* RxBlocking.framework */,
 				C88AC72D214D9BA800C1A3E5 /* RxTest.framework */,
-				C88AC72F214D9BA800C1A3E5 /* RxTest.framework */,
-				C88AC731214D9BA800C1A3E5 /* RxTest.framework */,
-				C88AC733214D9BA800C1A3E5 /* RxTest.framework */,
 				C88AC735214D9BA800C1A3E5 /* AllTests-iOS.xctest */,
 				C88AC737214D9BA800C1A3E5 /* AllTests-tvOS.xctest */,
 				C88AC739214D9BA800C1A3E5 /* AllTests-macOS.xctest */,
@@ -490,7 +366,6 @@
 		C8984C501C36AF35001E4272 = {
 			isa = PBXGroup;
 			children = (
-				C82541851F363C76009F6C03 /* dependencies.sh */,
 				C85EE5461C36F1FC0090614D /* Sources */,
 				C8984C9C1C36B6FA001E4272 /* Example */,
 				C8984CB21C36B723001E4272 /* ExampleUITests */,
@@ -584,22 +459,6 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
-/* Begin PBXLegacyTarget section */
-		C87C345C1F36352600DB85FE /* Dependencies */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = C87C345D1F36352600DB85FE /* Build configuration list for PBXLegacyTarget "Dependencies" */;
-			buildPhases = (
-			);
-			buildToolPath = ./dependencies.sh;
-			dependencies = (
-			);
-			name = Dependencies;
-			passBuildSettingsInEnvironment = 1;
-			productName = Dependencies;
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		C81905AD1DEA019100AE679C /* Tests */ = {
 			isa = PBXNativeTarget;
@@ -612,7 +471,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C85CB0C51F4349E6005CE91A /* PBXTargetDependency */,
 			);
 			name = Tests;
 			productName = Tests;
@@ -631,7 +489,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C82C3C9D1F3B93D900309AE8 /* PBXTargetDependency */,
 			);
 			name = Differentiator;
 			productName = Differentiator;
@@ -653,7 +510,6 @@
 				C88AC73F214D9BF800C1A3E5 /* PBXTargetDependency */,
 				C88AC741214D9BF800C1A3E5 /* PBXTargetDependency */,
 				C82C3C9B1F3B93D200309AE8 /* PBXTargetDependency */,
-				C87C34611F36353300DB85FE /* PBXTargetDependency */,
 			);
 			name = RxDataSources;
 			productName = RxDataSources;
@@ -673,7 +529,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C85CB0C91F434A83005CE91A /* PBXTargetDependency */,
 				C87C34651F36353B00DB85FE /* PBXTargetDependency */,
 				C82C3C5A1F3B937500309AE8 /* PBXTargetDependency */,
 			);
@@ -693,7 +548,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C85CB0C71F434A80005CE91A /* PBXTargetDependency */,
 				C8984CB71C36B723001E4272 /* PBXTargetDependency */,
 			);
 			name = ExampleUITests;
@@ -708,7 +562,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = kzaher;
 				TargetAttributes = {
 					C81905AD1DEA019100AE679C = {
@@ -718,11 +572,6 @@
 					};
 					C82C3C531F3B937500309AE8 = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
-					};
-					C87C345C1F36352600DB85FE = {
-						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 783T66X79Y;
 						ProvisioningStyle = Automatic;
 					};
 					C8984C591C36AF35001E4272 = {
@@ -761,38 +610,23 @@
 				C8984C9A1C36B6FA001E4272 /* Example */,
 				C8984CB01C36B723001E4272 /* ExampleUITests */,
 				C81905AD1DEA019100AE679C /* Tests */,
-				C87C345C1F36352600DB85FE /* Dependencies */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		B6F732B421C01D3B0007F9D9 /* RxAtomic.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxAtomic.framework;
+			remoteRef = B6F732B321C01D3B0007F9D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		C88AC715214D9BA800C1A3E5 /* RxSwift.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = RxSwift.framework;
 			remoteRef = C88AC714214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC717214D9BA800C1A3E5 /* RxSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxSwift.framework;
-			remoteRef = C88AC716214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC719214D9BA800C1A3E5 /* RxSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxSwift.framework;
-			remoteRef = C88AC718214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC71B214D9BA800C1A3E5 /* RxSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxSwift.framework;
-			remoteRef = C88AC71A214D9BA800C1A3E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C88AC71D214D9BA800C1A3E5 /* RxCocoa.framework */ = {
@@ -802,27 +636,6 @@
 			remoteRef = C88AC71C214D9BA800C1A3E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C88AC71F214D9BA800C1A3E5 /* RxCocoa.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxCocoa.framework;
-			remoteRef = C88AC71E214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC721214D9BA800C1A3E5 /* RxCocoa.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxCocoa.framework;
-			remoteRef = C88AC720214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC723214D9BA800C1A3E5 /* RxCocoa.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxCocoa.framework;
-			remoteRef = C88AC722214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		C88AC725214D9BA800C1A3E5 /* RxBlocking.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -830,53 +643,11 @@
 			remoteRef = C88AC724214D9BA800C1A3E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C88AC727214D9BA800C1A3E5 /* RxBlocking.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxBlocking.framework;
-			remoteRef = C88AC726214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC729214D9BA800C1A3E5 /* RxBlocking.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxBlocking.framework;
-			remoteRef = C88AC728214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC72B214D9BA800C1A3E5 /* RxBlocking.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxBlocking.framework;
-			remoteRef = C88AC72A214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		C88AC72D214D9BA800C1A3E5 /* RxTest.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = RxTest.framework;
 			remoteRef = C88AC72C214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC72F214D9BA800C1A3E5 /* RxTest.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxTest.framework;
-			remoteRef = C88AC72E214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC731214D9BA800C1A3E5 /* RxTest.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxTest.framework;
-			remoteRef = C88AC730214D9BA800C1A3E5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C88AC733214D9BA800C1A3E5 /* RxTest.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RxTest.framework;
-			remoteRef = C88AC732214D9BA800C1A3E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C88AC735214D9BA800C1A3E5 /* AllTests-iOS.xctest */ = {
@@ -1065,31 +836,6 @@
 			target = C82C3C531F3B937500309AE8 /* Differentiator */;
 			targetProxy = C82C3C9A1F3B93D200309AE8 /* PBXContainerItemProxy */;
 		};
-		C82C3C9D1F3B93D900309AE8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C82C3C9C1F3B93D900309AE8 /* PBXContainerItemProxy */;
-		};
-		C85CB0C51F4349E6005CE91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C85CB0C41F4349E6005CE91A /* PBXContainerItemProxy */;
-		};
-		C85CB0C71F434A80005CE91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C85CB0C61F434A80005CE91A /* PBXContainerItemProxy */;
-		};
-		C85CB0C91F434A83005CE91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C85CB0C81F434A83005CE91A /* PBXContainerItemProxy */;
-		};
-		C87C34611F36353300DB85FE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87C345C1F36352600DB85FE /* Dependencies */;
-			targetProxy = C87C34601F36353300DB85FE /* PBXContainerItemProxy */;
-		};
 		C87C34651F36353B00DB85FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C8984C591C36AF35001E4272 /* RxDataSources */;
@@ -1212,37 +958,6 @@
 			};
 			name = Release;
 		};
-		C87C345E1F36352600DB85FE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 783T66X79Y;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		C87C345F1F36352600DB85FE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 783T66X79Y;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		C8984C601C36AF35001E4272 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1255,12 +970,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1316,12 +1033,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1489,15 +1208,6 @@
 			buildConfigurations = (
 				C82C3C5E1F3B937500309AE8 /* Debug */,
 				C82C3C5F1F3B937500309AE8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C87C345D1F36352600DB85FE /* Build configuration list for PBXLegacyTarget "Dependencies" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C87C345E1F36352600DB85FE /* Debug */,
-				C87C345F1F36352600DB85FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
