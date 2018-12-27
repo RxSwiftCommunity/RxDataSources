@@ -36,19 +36,20 @@ extension SectionModel
     }
 }
 
-#if swift(>=4.1)
-extension SectionModel
-    : Equatable where Section: Equatable, ItemType: Equatable {
-    public static func == (lhs: SectionModel, rhs: SectionModel) -> Bool {
-        return lhs.model == rhs.model
-            && lhs.items == rhs.items
-    }
-}
-#endif
-
 extension SectionModel {
     public init(original: SectionModel<Section, Item>, items: [Item]) {
         self.model = original.model
         self.items = items
     }
 }
+
+#if swift(>=4.1)
+extension SectionModel
+    : Equatable where Section: Equatable, ItemType: Equatable {
+    
+    public static func == (lhs: SectionModel, rhs: SectionModel) -> Bool {
+        return lhs.model == rhs.model
+            && lhs.items == rhs.items
+    }
+}
+#endif
