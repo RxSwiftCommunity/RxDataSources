@@ -58,9 +58,15 @@ extension UITableView : SectionedViewType {
     }
 
     public func performBatchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration) {
-        self.beginUpdates()
-        _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
-        self.endUpdates()
+        if #available(iOS 11, tvOS 11, *) {
+            performBatchUpdates({
+                _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
+            }, completion: nil)
+        } else {
+            beginUpdates()
+            _performBatchUpdates(self, changes: changes, animationConfiguration: animationConfiguration)
+            endUpdates()
+        }
     }
 }
 
