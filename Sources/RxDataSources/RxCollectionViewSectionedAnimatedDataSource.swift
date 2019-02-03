@@ -21,21 +21,16 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
     public typealias Element = [Section]
     public typealias DecideViewTransition = (CollectionViewSectionedDataSource<Section>, UICollectionView, [Changeset<Section>]) -> ViewTransition
 
-    // animation configuration
-    public var animationConfiguration: AnimationConfiguration
-
     /// Calculates view transition depending on type of changes
     public var decideViewTransition: DecideViewTransition
 
     public init(
-        animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
         decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
         configureCell: @escaping ConfigureCell,
         configureSupplementaryView: ConfigureSupplementaryView? = nil,
         moveItem: @escaping MoveItem = { _, _, _ in () },
         canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
         ) {
-        self.animationConfiguration = animationConfiguration
         self.decideViewTransition = decideViewTransition
         super.init(
             configureCell: configureCell,
@@ -78,7 +73,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                             let updateBlock = {
                                 // sections must be set within updateBlock in 'performBatchUpdates'
                                 dataSource.setSections(difference.finalSections)
-                                collectionView.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
+                                collectionView.batchUpdates(difference)
                             }
                             collectionView.performBatchUpdates(updateBlock, completion: nil)
                         }

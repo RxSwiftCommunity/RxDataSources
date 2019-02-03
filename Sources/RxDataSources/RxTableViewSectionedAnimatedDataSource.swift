@@ -22,14 +22,14 @@ open class RxTableViewSectionedAnimatedDataSource<Section: AnimatableSectionMode
     public typealias DecideViewTransition = (TableViewSectionedDataSource<Section>, UITableView, [Changeset<Section>]) -> ViewTransition
 
     /// Animation configuration for data source
-    public var animationConfiguration: AnimationConfiguration
+    public var animationConfiguration: TableViewAnimationConfiguration
 
     /// Calculates view transition depending on type of changes
     public var decideViewTransition: DecideViewTransition
 
     #if os(iOS)
         public init(
-                animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
+                animationConfiguration: TableViewAnimationConfiguration = TableViewAnimationConfiguration(),
                 decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
                 configureCell: @escaping ConfigureCell,
                 titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
@@ -53,7 +53,7 @@ open class RxTableViewSectionedAnimatedDataSource<Section: AnimatableSectionMode
         }
     #else
         public init(
-                animationConfiguration: AnimationConfiguration = AnimationConfiguration(),
+                animationConfiguration: TableViewAnimationConfiguration = TableViewAnimationConfiguration(),
                 decideViewTransition: @escaping DecideViewTransition = { _, _, _ in .animated },
                 configureCell: @escaping ConfigureCell,
                 titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },

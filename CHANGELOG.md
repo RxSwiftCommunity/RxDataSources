@@ -3,8 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-#### Master
+#### Breaking Changes
+* Removing unused AnimationConfiguration from RxCollectionViewSectionedAnimatedDataSource, making AnimationConfiguration generic so it is more flexible for future usage.
 
+#### Master
 * Added support of mutable CellViewModels.
 
 ## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)

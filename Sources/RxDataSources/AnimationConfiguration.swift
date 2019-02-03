@@ -10,17 +10,22 @@
     import Foundation
     import UIKit
 
+    public typealias TableViewAnimationConfiguration = AnimationConfiguration<UITableView.Animation>
+    
     /**
      Exposes custom animation styles for insertion, deletion and reloading behavior.
      */
-    public struct AnimationConfiguration {
-        public let insertAnimation: UITableView.RowAnimation
-        public let reloadAnimation: UITableView.RowAnimation
-        public let deleteAnimation: UITableView.RowAnimation
-
-        public init(insertAnimation: UITableView.RowAnimation = .automatic,
-                    reloadAnimation: UITableView.RowAnimation = .automatic,
-                    deleteAnimation: UITableView.RowAnimation = .automatic) {
+    public struct AnimationConfiguration<Animation> {
+        public let insertAnimation: Animation
+        public let reloadAnimation: Animation
+        public let deleteAnimation: Animation
+    }
+    
+    public extension AnimationConfiguration where Animation == UITableView.Animation {
+        
+        init(insertAnimation: Animation = .automatic,
+             reloadAnimation: Animation = .automatic,
+             deleteAnimation: Animation = .automatic) {
             self.insertAnimation = insertAnimation
             self.reloadAnimation = reloadAnimation
             self.deleteAnimation = deleteAnimation
