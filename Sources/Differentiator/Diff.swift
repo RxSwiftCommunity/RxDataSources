@@ -126,21 +126,22 @@ public enum Diff {
     //================================================================================
     // swift dictionary optimizations {
 
-    private struct OptimizedIdentity<E: Hashable> : Hashable {
-
+    private struct OptimizedIdentity<E: Hashable>: Hashable {
+        #if swift(>=4.2)
+        #else
         let hashValue: Int
+        #endif
         let identity: UnsafePointer<E>
 
         init(_ identity: UnsafePointer<E>) {
             self.identity = identity
+            #if swift(>=4.2)
+            #else
             self.hashValue = identity.pointee.hashValue
+            #endif
         }
 
         static func == (lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
-            if lhs.hashValue != rhs.hashValue {
-                return false
-            }
-
             if lhs.identity.distance(to: rhs.identity) == 0 {
                 return true
             }
@@ -148,6 +149,11 @@ public enum Diff {
             return lhs.identity.pointee == rhs.identity.pointee
         }
 
+        #if swift(>=4.2)
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(self.identity.pointee)
+        }
+        #endif
     }
 
     private static func calculateAssociatedData<Item: IdentifiableType>(
