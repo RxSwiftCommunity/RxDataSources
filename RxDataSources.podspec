@@ -34,7 +34,8 @@ data
   s.source           = { :git => "https://github.com/RxSwiftCommunity/RxDataSources.git", :tag => s.version.to_s }
 
   s.requires_arc          = true
-  
+  s.swift_version    = '5.0'
+
   s.source_files = 'Sources/RxDataSources/**/*.swift'
   s.dependency 'Differentiator', '~> 3.0'
   s.dependency 'RxSwift', '~> 4.5'
