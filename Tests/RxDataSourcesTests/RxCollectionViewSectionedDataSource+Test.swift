@@ -30,7 +30,7 @@ extension RxCollectionViewSectionedDataSourceTest {
 
         let returnValue = dataSource.collectionView(
             collectionView,
-            viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
             at: IndexPath(item: 0, section: 0)
         )
         XCTAssertEqual(returnValue, sentinel)
@@ -49,7 +49,7 @@ extension RxCollectionViewSectionedDataSourceTest {
 
         let returnValue = dataSource.collectionView(
             collectionView,
-            viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
             at: IndexPath(item: 0, section: 0)
         )
         XCTAssertEqual(returnValue, sentinel)
@@ -70,7 +70,7 @@ extension RxCollectionViewSectionedDataSourceTest {
 
         let returnValue = dataSource.collectionView(
             collectionView,
-            viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
             at: IndexPath(item: 0, section: 0)
         )
         XCTAssertEqual(returnValue, sentinel)
@@ -88,7 +88,7 @@ extension RxCollectionViewSectionedDataSourceTest {
 
         let returnValue = dataSource.collectionView(
             collectionView,
-            viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
             at: IndexPath(item: 0, section: 0)
         )
         XCTAssertEqual(returnValue, sentinel)
@@ -106,7 +106,7 @@ extension RxCollectionViewSectionedDataSourceTest {
 
         let returnValue = dataSource.collectionView(
             collectionView,
-            viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
             at: IndexPath(item: 0, section: 0)
         )
         XCTAssertEqual(returnValue, sentinel)
