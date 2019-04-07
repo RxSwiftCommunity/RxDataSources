@@ -99,11 +99,23 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
 
                         switch self.decideViewTransition(self, tableView, differences) {
                         case .animated:
+                            // each difference must be run in a separate performBatchUpdate, otherwise it crashes.
+                            // this is a limitation of Diff tool
                             for difference in differences {
-                                dataSource.setSections(difference.finalSections)
-
-                                tableView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                                let updateBlock = { [unowned self] in
+                                    // sections must be set within updateBlock in performBatchUpdates
+                                    dataSource.setSections(difference.finalSections)
+                                    tableView.batchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                                }
+                                if #available(iOS 11, *) {
+                                    tableView.performBatchUpdates(updateBlock, completion: nil)
+                                } else {
+                                    tableView.beginUpdates()
+                                    updateBlock()
+                                    tableView.endUpdates()
+                                }
                             }
+                            
                         case .reload:
                             self.setSections(newSections)
                             tableView.reloadData()
