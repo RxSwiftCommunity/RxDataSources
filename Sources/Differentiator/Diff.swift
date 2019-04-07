@@ -129,13 +129,15 @@ public enum Diff {
     private struct OptimizedIdentity<E: Hashable> : Hashable {
 
         let identity: UnsafePointer<E>
+        private let cachedHashValue: Int
 
         init(_ identity: UnsafePointer<E>) {
             self.identity = identity
+            self.cachedHashValue = identity.pointee.hashValue
         }
 
         func hash(into hasher: inout Hasher) {
-          hasher.combine(self.identity.pointee.hashValue)
+          hasher.combine(self.cachedHashValue)
         }
 
         static func == (lhs: OptimizedIdentity<E>, rhs: OptimizedIdentity<E>) -> Bool {
