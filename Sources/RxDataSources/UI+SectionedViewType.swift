@@ -102,8 +102,6 @@ public protocol SectionedViewType {
     func deleteSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
     func moveSection(_ from: Int, to: Int)
     func reloadSections(_ sections: [Int], animationStyle: UITableViewRowAnimation)
-
-    func batchUpdates<S>(_ changes: Changeset<S>, animationConfiguration: AnimationConfiguration)
 }
 
 extension SectionedViewType {
