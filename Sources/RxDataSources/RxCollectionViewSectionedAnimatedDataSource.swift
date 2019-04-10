@@ -52,48 +52,47 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
     open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, newSections in
             #if DEBUG
-                self._dataSourceBound = true
+                dataSource._dataSourceBound = true
             #endif
-            if !self.dataSet {
-                self.dataSet = true
+            if !dataSource.dataSet {
+                dataSource.dataSet = true
                 dataSource.setSections(newSections)
                 collectionView.reloadData()
             }
             else {
-                DispatchQueue.main.async {
-                    // if view is not in view hierarchy, performing batch updates will crash the app
-                    if collectionView.window == nil {
+                // if view is not in view hierarchy, performing batch updates will crash the app
+                if collectionView.window == nil {
+                    dataSource.setSections(newSections)
+                    collectionView.reloadData()
+                    return
+                }
+                let oldSections = dataSource.sectionModels
+                do {
+                    let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                    
+                    switch dataSource.decideViewTransition(dataSource, collectionView, differences) {
+                    case .animated:
+                        // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
+                        // this is a limitation of Diff tool
+                        for difference in differences {
+                            let updateBlock = {
+                                // sections must be set within updateBlock in 'performBatchUpdates'
+                                dataSource.setSections(difference.finalSections)
+                                collectionView.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
+                            }
+                            collectionView.performBatchUpdates(updateBlock, completion: nil)
+                        }
+                        
+                    case .reload:
                         dataSource.setSections(newSections)
                         collectionView.reloadData()
                         return
                     }
-                    let oldSections = dataSource.sectionModels
-                    do {
-                        let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-                        
-                        switch self.decideViewTransition(self, collectionView, differences) {
-                        case .animated:
-                            // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
-                            // this is a limitation of Diff tool
-                            for difference in differences {
-                                collectionView.performBatchUpdates({ [unowned self] in
-                                    // sections must be set within updateBlock in 'performBatchUpdates'
-                                    dataSource.setSections(difference.finalSections)
-                                    collectionView.batchUpdates(difference, animationConfiguration: self.animationConfiguration)
-                                    }, completion: nil)
-                            }
-                            
-                        case .reload:
-                            self.setSections(newSections)
-                            collectionView.reloadData()
-                            return
-                        }
-                    }
-                    catch let e {
-                        rxDebugFatalError(e)
-                        self.setSections(newSections)
-                        collectionView.reloadData()
-                    }
+                }
+                catch let e {
+                    rxDebugFatalError(e)
+                    dataSource.setSections(newSections)
+                    collectionView.reloadData()
                 }
             }
         }.on(observedEvent)
