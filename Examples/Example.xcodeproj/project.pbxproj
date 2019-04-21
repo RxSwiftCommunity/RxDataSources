@@ -63,12 +63,89 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B6F732B321C01D3B0007F9D9 /* PBXContainerItemProxy */ = {
+		1E88A64F226C8A81007B9436 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = C8165ABC21891AFF00494BEF;
-			remoteInfo = RxAtomic;
+			remoteGlobalIDString = C88BB8711B07E5ED0064D411;
+			remoteInfo = "RxSwift-macOS";
+		};
+		1E88A651226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2EA280C1BB9B5A200880ED3;
+			remoteInfo = "RxSwift-tvOS";
+		};
+		1E88A653226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C8F0C0021BBBFB8B001B112F;
+			remoteInfo = "RxSwift-watchOS";
+		};
+		1E88A655226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C80939E71B8A71840088E94D;
+			remoteInfo = "RxCocoa-macOS";
+		};
+		1E88A657226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2138C751BB9BE9800339B5C;
+			remoteInfo = "RxCocoa-tvOS";
+		};
+		1E88A659226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C8F0C04B1BBBFBB9001B112F;
+			remoteInfo = "RxCocoa-watchOS";
+		};
+		1E88A65B226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C8093C451B8A71FC0088E94D;
+			remoteInfo = "RxBlocking-macOS";
+		};
+		1E88A65D226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2EBEB811BB9B99D003A27DC;
+			remoteInfo = "RxBlocking-tvOS";
+		};
+		1E88A65F226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C8F0C0581BBBFBCE001B112F;
+			remoteInfo = "RxBlocking-watchOS";
+		};
+		1E88A661226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C88FA51D1C25C4B500CCFEA4;
+			remoteInfo = "RxTest-macOS";
+		};
+		1E88A663226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C88FA52E1C25C4C000CCFEA4;
+			remoteInfo = "RxTest-tvOS";
+		};
+		1E88A665226C8A81007B9436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C88FA53F1C25C4CC00CCFEA4;
+			remoteInfo = "RxTest-watchOS";
 		};
 		C82C3C591F3B937500309AE8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -349,11 +426,22 @@
 		C88AC6FD214D9BA800C1A3E5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B6F732B421C01D3B0007F9D9 /* RxAtomic.framework */,
 				C88AC715214D9BA800C1A3E5 /* RxSwift.framework */,
+				1E88A650226C8A81007B9436 /* RxSwift.framework */,
+				1E88A652226C8A81007B9436 /* RxSwift.framework */,
+				1E88A654226C8A81007B9436 /* RxSwift.framework */,
 				C88AC71D214D9BA800C1A3E5 /* RxCocoa.framework */,
+				1E88A656226C8A81007B9436 /* RxCocoa.framework */,
+				1E88A658226C8A81007B9436 /* RxCocoa.framework */,
+				1E88A65A226C8A81007B9436 /* RxCocoa.framework */,
 				C88AC725214D9BA800C1A3E5 /* RxBlocking.framework */,
+				1E88A65C226C8A81007B9436 /* RxBlocking.framework */,
+				1E88A65E226C8A81007B9436 /* RxBlocking.framework */,
+				1E88A660226C8A81007B9436 /* RxBlocking.framework */,
 				C88AC72D214D9BA800C1A3E5 /* RxTest.framework */,
+				1E88A662226C8A81007B9436 /* RxTest.framework */,
+				1E88A664226C8A81007B9436 /* RxTest.framework */,
+				1E88A666226C8A81007B9436 /* RxTest.framework */,
 				C88AC735214D9BA800C1A3E5 /* AllTests-iOS.xctest */,
 				C88AC737214D9BA800C1A3E5 /* AllTests-tvOS.xctest */,
 				C88AC739214D9BA800C1A3E5 /* AllTests-macOS.xctest */,
@@ -591,6 +679,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -615,11 +704,88 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		B6F732B421C01D3B0007F9D9 /* RxAtomic.framework */ = {
+		1E88A650226C8A81007B9436 /* RxSwift.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = RxAtomic.framework;
-			remoteRef = B6F732B321C01D3B0007F9D9 /* PBXContainerItemProxy */;
+			path = RxSwift.framework;
+			remoteRef = 1E88A64F226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A652226C8A81007B9436 /* RxSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxSwift.framework;
+			remoteRef = 1E88A651226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A654226C8A81007B9436 /* RxSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxSwift.framework;
+			remoteRef = 1E88A653226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A656226C8A81007B9436 /* RxCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxCocoa.framework;
+			remoteRef = 1E88A655226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A658226C8A81007B9436 /* RxCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxCocoa.framework;
+			remoteRef = 1E88A657226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A65A226C8A81007B9436 /* RxCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxCocoa.framework;
+			remoteRef = 1E88A659226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A65C226C8A81007B9436 /* RxBlocking.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxBlocking.framework;
+			remoteRef = 1E88A65B226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A65E226C8A81007B9436 /* RxBlocking.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxBlocking.framework;
+			remoteRef = 1E88A65D226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A660226C8A81007B9436 /* RxBlocking.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxBlocking.framework;
+			remoteRef = 1E88A65F226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A662226C8A81007B9436 /* RxTest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxTest.framework;
+			remoteRef = 1E88A661226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A664226C8A81007B9436 /* RxTest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxTest.framework;
+			remoteRef = 1E88A663226C8A81007B9436 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E88A666226C8A81007B9436 /* RxTest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RxTest.framework;
+			remoteRef = 1E88A665226C8A81007B9436 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C88AC715214D9BA800C1A3E5 /* RxSwift.framework */ = {
@@ -927,6 +1093,7 @@
 				INFOPLIST_FILE = Sources/Differentiator/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.rxswiftcommunity.Differentiator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -950,6 +1117,7 @@
 				INFOPLIST_FILE = Sources/Differentiator/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.rxswiftcommunity.Differentiator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1094,6 +1262,7 @@
 				INFOPLIST_FILE = Sources/RxDataSources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = kzaher.RxDataSources;
 				PRODUCT_NAME = RxDataSources;
 				SKIP_INSTALL = YES;
@@ -1117,6 +1286,7 @@
 				INFOPLIST_FILE = Sources/RxDataSources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = kzaher.RxDataSources;
 				PRODUCT_NAME = RxDataSources;
 				SKIP_INSTALL = YES;
