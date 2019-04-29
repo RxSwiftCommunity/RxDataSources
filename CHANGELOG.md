@@ -3,11 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-#### Enhancements
-* Reduce computational complexity. #242
-* Adapted for RxSwift 4.2
-* Makes SectionModel and AnimatableSectionModel equatable when their model and items conforms to equatable.
-* Resolved issues with Animated Collection View #60
+#### Master
 
 ## [4.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.0)
 
