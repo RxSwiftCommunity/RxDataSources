@@ -15,10 +15,10 @@ import RxCocoa
 #endif
 import Differentiator
 
-open class RxTableViewSectionedReloadDataSource<S: SectionModelType>
-    : TableViewSectionedDataSource<S>
+open class RxTableViewSectionedReloadDataSource<Section: SectionModelType>
+    : TableViewSectionedDataSource<Section>
     , RxTableViewDataSourceType {
-    public typealias Element = [S]
+    public typealias Element = [Section]
 
     open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, element in

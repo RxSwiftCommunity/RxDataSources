@@ -48,7 +48,6 @@ extension AnimatableSectionModel
 
 }
 
-#if swift(>=4.1)
 extension AnimatableSectionModel
     : Equatable where Section: Equatable {
     
@@ -57,4 +56,3 @@ extension AnimatableSectionModel
             && lhs.items == rhs.items
     }
 }
-#endif

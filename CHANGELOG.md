@@ -9,6 +9,13 @@ All notable changes to this project will be documented in this file.
 * Makes SectionModel and AnimatableSectionModel equatable when their model and items conforms to equatable.
 * Resolved issues with Animated Collection View #60
 
+## [4.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.0)
+
+* Swift 5.0
+* Fixes problems with `UICollectionView` animation crashes.
+* Improves readability by renaming short generic names to more descriptive names.
+* Changes frameworks to be static libs. (Carthage integration)
+
 ## [3.1.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.1.0)
 
 * Xcode 10.0 compatibility.

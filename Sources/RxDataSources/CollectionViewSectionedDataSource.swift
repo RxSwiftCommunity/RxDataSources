@@ -14,16 +14,16 @@ import RxCocoa
 #endif
 import Differentiator
     
-open class CollectionViewSectionedDataSource<S: SectionModelType>
+open class CollectionViewSectionedDataSource<Section: SectionModelType>
     : NSObject
     , UICollectionViewDataSource
     , SectionedViewDataSourceType {
-    public typealias I = S.Item
-    public typealias Section = S
-    public typealias ConfigureCell = (CollectionViewSectionedDataSource<S>, UICollectionView, IndexPath, I) -> UICollectionViewCell
-    public typealias ConfigureSupplementaryView = (CollectionViewSectionedDataSource<S>, UICollectionView, String, IndexPath) -> UICollectionReusableView
-    public typealias MoveItem = (CollectionViewSectionedDataSource<S>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void
-    public typealias CanMoveItemAtIndexPath = (CollectionViewSectionedDataSource<S>, IndexPath) -> Bool
+    public typealias Item = Section.Item
+    public typealias Section = Section
+    public typealias ConfigureCell = (CollectionViewSectionedDataSource<Section>, UICollectionView, IndexPath, Item) -> UICollectionViewCell
+    public typealias ConfigureSupplementaryView = (CollectionViewSectionedDataSource<Section>, UICollectionView, String, IndexPath) -> UICollectionReusableView
+    public typealias MoveItem = (CollectionViewSectionedDataSource<Section>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void
+    public typealias CanMoveItemAtIndexPath = (CollectionViewSectionedDataSource<Section>, IndexPath) -> Bool
 
 
     public init(
@@ -56,20 +56,20 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
     // and their relationship with section.
     // If particular item is mutable, that is irrelevant for this logic to function
     // properly.
-    public typealias SectionModelSnapshot = SectionModel<S, I>
+    public typealias SectionModelSnapshot = SectionModel<Section, Item>
     
     private var _sectionModels: [SectionModelSnapshot] = []
 
-    open var sectionModels: [S] {
+    open var sectionModels: [Section] {
         return _sectionModels.map { Section(original: $0.model, items: $0.items) }
     }
 
-    open subscript(section: Int) -> S {
+    open subscript(section: Int) -> Section {
         let sectionModel = self._sectionModels[section]
-        return S(original: sectionModel.model, items: sectionModel.items)
+        return Section(original: sectionModel.model, items: sectionModel.items)
     }
     
-    open subscript(indexPath: IndexPath) -> I {
+    open subscript(indexPath: IndexPath) -> Item {
         get {
             return self._sectionModels[indexPath.section].items[indexPath.item]
         }
@@ -84,7 +84,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
         return self[indexPath]
     }
     
-    open func setSections(_ sections: [S]) {
+    open func setSections(_ sections: [Section]) {
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
     
@@ -111,7 +111,7 @@ open class CollectionViewSectionedDataSource<S: SectionModelType>
             #endif
         }
     }
-    open var canMoveItemAtIndexPath: ((CollectionViewSectionedDataSource<S>, IndexPath) -> Bool)? {
+    open var canMoveItemAtIndexPath: ((CollectionViewSectionedDataSource<Section>, IndexPath) -> Bool)? {
         didSet {
             #if DEBUG
             ensureNotMutatedAfterBinding()

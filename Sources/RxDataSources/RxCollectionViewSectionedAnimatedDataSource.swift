@@ -15,11 +15,11 @@ import RxCocoa
 #endif
 import Differentiator
 
-open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
-    : CollectionViewSectionedDataSource<S>
+open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectionModelType>
+    : CollectionViewSectionedDataSource<Section>
     , RxCollectionViewDataSourceType {
-    public typealias Element = [S]
-    public typealias DecideViewTransition = (CollectionViewSectionedDataSource<S>, UICollectionView, [Changeset<S>]) -> ViewTransition
+    public typealias Element = [Section]
+    public typealias DecideViewTransition = (CollectionViewSectionedDataSource<Section>, UICollectionView, [Changeset<Section>]) -> ViewTransition
 
     // animation configuration
     public var animationConfiguration: AnimationConfiguration

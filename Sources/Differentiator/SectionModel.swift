@@ -43,7 +43,6 @@ extension SectionModel {
     }
 }
 
-#if swift(>=4.1)
 extension SectionModel
     : Equatable where Section: Equatable, ItemType: Equatable {
     
@@ -52,4 +51,3 @@ extension SectionModel
             && lhs.items == rhs.items
     }
 }
-#endif

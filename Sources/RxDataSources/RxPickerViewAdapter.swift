@@ -26,7 +26,7 @@ items
  .disposed(by: disposeBag)
  
  */
-open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
+open class RxPickerViewStringAdapter<Components>: RxPickerViewDataSource<Components>, UIPickerViewDelegate {
     /**
      - parameter dataSource
      - parameter pickerView
@@ -35,9 +35,9 @@ open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerView
      - parameter component
     */
     public typealias TitleForRow = (
-        _ dataSource: RxPickerViewStringAdapter<T>,
+        _ dataSource: RxPickerViewStringAdapter<Components>,
         _ pickerView: UIPickerView,
-        _ components: T,
+        _ components: Components,
         _ row: Int,
         _ component: Int
     ) -> String?
@@ -50,7 +50,7 @@ open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerView
      - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
      - parameter titleForRow: Implementation of corresponding adapter method that converts component to `String`.
      */
-    public init(components: T,
+    public init(components: Components,
                 numberOfComponents: @escaping NumberOfComponents,
                 numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
                 titleForRow: @escaping TitleForRow) {
@@ -76,7 +76,7 @@ open class RxPickerViewStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerView
  .disposed(by: disposeBag)
  
  */
-open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
+open class RxPickerViewAttributedStringAdapter<Components>: RxPickerViewDataSource<Components>, UIPickerViewDelegate {
     /**
      - parameter dataSource
      - parameter pickerView
@@ -85,9 +85,9 @@ open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UI
      - parameter component
     */
     public typealias AttributedTitleForRow = (
-        _ dataSource: RxPickerViewAttributedStringAdapter<T>,
+        _ dataSource: RxPickerViewAttributedStringAdapter<Components>,
         _ pickerView: UIPickerView,
-        _ components: T,
+        _ components: Components,
         _ row: Int,
         _ component: Int
     ) -> NSAttributedString?
@@ -100,7 +100,7 @@ open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UI
      - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
      - parameter attributedTitleForRow: Implementation of corresponding adapter method that converts component to `NSAttributedString`.
      */
-    public init(components: T,
+    public init(components: Components,
                 numberOfComponents: @escaping NumberOfComponents,
                 numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
                 attributedTitleForRow: @escaping AttributedTitleForRow) {
@@ -126,7 +126,7 @@ open class RxPickerViewAttributedStringAdapter<T>: RxPickerViewDataSource<T>, UI
  .disposed(by: disposeBag)
  
  */
-open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDelegate {
+open class RxPickerViewViewAdapter<Components>: RxPickerViewDataSource<Components>, UIPickerViewDelegate {
     /**
      - parameter dataSource
      - parameter pickerView
@@ -136,9 +136,9 @@ open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDe
      - parameter view
     */
     public typealias ViewForRow = (
-        _ dataSource: RxPickerViewViewAdapter<T>,
+        _ dataSource: RxPickerViewViewAdapter<Components>,
         _ pickerView: UIPickerView,
-        _ components: T,
+        _ components: Components,
         _ row: Int,
         _ component: Int,
         _ view: UIView?
@@ -152,7 +152,7 @@ open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDe
      - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
      - parameter attributedTitleForRow: Implementation of corresponding adapter method that converts component to `UIView`.
      */
-    public init(components: T,
+    public init(components: Components,
                 numberOfComponents: @escaping NumberOfComponents,
                 numberOfRowsInComponent: @escaping NumberOfRowsInComponent,
                 viewForRow: @escaping ViewForRow) {
@@ -168,7 +168,7 @@ open class RxPickerViewViewAdapter<T>: RxPickerViewDataSource<T>, UIPickerViewDe
 }
 
 /// A reactive UIPickerView data source  
-open class RxPickerViewDataSource<T>: NSObject, UIPickerViewDataSource {
+open class RxPickerViewDataSource<Components>: NSObject, UIPickerViewDataSource {
     /**
      - parameter dataSource
      - parameter pickerView
@@ -177,7 +177,7 @@ open class RxPickerViewDataSource<T>: NSObject, UIPickerViewDataSource {
     public typealias NumberOfComponents = (
         _ dataSource: RxPickerViewDataSource,
         _ pickerView: UIPickerView,
-        _ components: T) -> Int
+        _ components: Components) -> Int
     /**
      - parameter dataSource
      - parameter pickerView
@@ -187,18 +187,18 @@ open class RxPickerViewDataSource<T>: NSObject, UIPickerViewDataSource {
     public typealias NumberOfRowsInComponent = (
         _ dataSource: RxPickerViewDataSource,
         _ pickerView: UIPickerView,
-        _ components: T,
+        _ components: Components,
         _ component: Int
     ) -> Int
     
-    fileprivate var components: T
+    fileprivate var components: Components
 
     /**
      - parameter components: Initial content value.
      - parameter numberOfComponents: Implementation of corresponding delegate method.
      - parameter numberOfRowsInComponent: Implementation of corresponding delegate method.
      */
-    init(components: T,
+    init(components: Components,
          numberOfComponents: @escaping NumberOfComponents,
          numberOfRowsInComponent: @escaping NumberOfRowsInComponent) {
         self.components = components
@@ -222,7 +222,7 @@ open class RxPickerViewDataSource<T>: NSObject, UIPickerViewDataSource {
 }
 
 extension RxPickerViewDataSource: RxPickerViewDataSourceType {
-    public func pickerView(_ pickerView: UIPickerView, observedEvent: Event<T>) {
+    public func pickerView(_ pickerView: UIPickerView, observedEvent: Event<Components>) {
         Binder(self) { (dataSource, components) in
             dataSource.components = components
             pickerView.reloadAllComponents()

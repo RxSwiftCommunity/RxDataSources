@@ -15,11 +15,11 @@ import RxCocoa
 #endif
 import Differentiator
 
-open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
-    : TableViewSectionedDataSource<S>
+open class RxTableViewSectionedAnimatedDataSource<Section: AnimatableSectionModelType>
+    : TableViewSectionedDataSource<Section>
     , RxTableViewDataSourceType {
-    public typealias Element = [S]
-    public typealias DecideViewTransition = (TableViewSectionedDataSource<S>, UITableView, [Changeset<S>]) -> ViewTransition
+    public typealias Element = [Section]
+    public typealias DecideViewTransition = (TableViewSectionedDataSource<Section>, UITableView, [Changeset<Section>]) -> ViewTransition
 
     /// Animation configuration for data source
     public var animationConfiguration: AnimationConfiguration
