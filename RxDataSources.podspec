@@ -37,7 +37,7 @@ data
   s.swift_version    = '5.0'
 
   s.source_files = 'Sources/RxDataSources/**/*.swift'
-  s.dependency 'Differentiator', '~> 4.0'
+  s.dependency 'Differentiator', '~> 5.0'
   s.dependency 'RxSwift', '~> 5.0'
   s.dependency 'RxCocoa', '~> 5.0'
 
