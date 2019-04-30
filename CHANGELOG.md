@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 #### Master
 
+## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)
+
+* Fixes Carthage integration and reverts static frameworks to dynamic frameworks.
+
 ## [4.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.0)
 
 * Swift 5.0
