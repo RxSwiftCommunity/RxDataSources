@@ -159,12 +159,12 @@ For Swift 2.3 version please use versions `0.1 ... 0.9`
 
 Podfile
 ```
-pod 'RxDataSources', '~> 3.0'
+pod 'RxDataSources', '~> 4.0'
 ```
 
 ### Carthage
 
 Cartfile
 ```
-github "RxSwiftCommunity/RxDataSources" ~> 3.0
+github "RxSwiftCommunity/RxDataSources" ~> 4.0
 ```
