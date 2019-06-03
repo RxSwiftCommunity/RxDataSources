@@ -139,9 +139,11 @@ struct SectionedTableViewState {
 }
 
 extension TableViewEditingCommand {
+    static var nextNumber = 0
     static func addRandomItem() -> TableViewEditingCommand {
         let randSection = Int.random(in: 0...2)
-        let number = Int.random(in: 0...10000)
+        let number = nextNumber
+        defer { nextNumber = nextNumber + 1 }
         let item = IntItem(number: number, date: Date())
         return TableViewEditingCommand.AppendItem(item: item, section: randSection)
     }
