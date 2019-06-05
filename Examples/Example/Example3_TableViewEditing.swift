@@ -14,9 +14,9 @@ import RxCocoa
 // redux like editing example
 class EditingExampleViewController: UIViewController {
     
-    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet private weak var addButton: UIBarButtonItem!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -66,12 +66,12 @@ extension EditingExampleViewController {
             animationConfiguration: AnimationConfiguration(insertAnimation: .top,
                                                                    reloadAnimation: .fade,
                                                                    deleteAnimation: .left),
-            configureCell: { (dataSource, table, idxPath, item) in
+            configureCell: { _, table, idxPath, item in
                 let cell = table.dequeueReusableCell(withIdentifier: "Cell", for: idxPath)
                 cell.textLabel?.text = "\(item)"
                 return cell
             },
-            titleForHeaderInSection: { (ds, section) -> String? in
+            titleForHeaderInSection: { ds, section -> String? in
                 return ds[section].header
             },
             canEditRowAtIndexPath: { _, _ in

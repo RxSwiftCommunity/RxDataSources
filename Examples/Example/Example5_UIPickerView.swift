@@ -13,41 +13,49 @@ import RxDataSources
 
 final class ReactivePickerViewControllerExample: UIViewController {
     
-    @IBOutlet weak var firstPickerView: UIPickerView!
-    @IBOutlet weak var secondPickerView: UIPickerView!
-    @IBOutlet weak var thirdPickerView: UIPickerView!
+    @IBOutlet private weak var firstPickerView: UIPickerView!
+    @IBOutlet private weak var secondPickerView: UIPickerView!
+    @IBOutlet private weak var thirdPickerView: UIPickerView!
     
     let disposeBag = DisposeBag()
 
     private let stringPickerAdapter = RxPickerViewStringAdapter<[String]>(components: [],
                                                                           numberOfComponents: { _,_,_  in 1 },
-                                                                          numberOfRowsInComponent: { (_, _, items, _) -> Int in
+                                                                          numberOfRowsInComponent: { _, _, items, _ -> Int in
                                                                             return items.count
                                                                           },
-                                                                          titleForRow: { (_, _, items, row, _) -> String? in
+                                                                          titleForRow: { _, _, items, row, _ -> String? in
                                                                                 return items[row]
                                                                           })
-    private let attributedStringPickerAdapter = RxPickerViewAttributedStringAdapter<[String]>(components: [],
-                                                                                              numberOfComponents: { _,_,_  in 1 },
-                                                                                              numberOfRowsInComponent: { (_, _, items, _) -> Int in
-                                                                                                return items.count
-    }) { (_, _, items, row, _) -> NSAttributedString? in
-        return NSAttributedString(string: items[row],
-                                  attributes: [
-                                    NSAttributedStringKey.foregroundColor: UIColor.purple,
-                                    NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleDouble.rawValue,
-                                    NSAttributedStringKey.textEffect: NSAttributedString.TextEffectStyle.letterpressStyle
-            ])
-    }
-    private let viewPickerAdapter = RxPickerViewViewAdapter<[String]>(components: [],
-                                                                      numberOfComponents: { _,_,_  in 1 },
-                                                                      numberOfRowsInComponent: { (_, _, items, _) -> Int in
-                                                                        return items.count
-    }) { (_, _, _, row, _, view) -> UIView in
-        let componentView = view ?? UIView()
-        componentView.backgroundColor = row % 2 == 0 ? UIColor.red : UIColor.blue
-        return componentView
-    }
+    private let attributedStringPickerAdapter = RxPickerViewAttributedStringAdapter<[String]>(
+        components: [],
+        numberOfComponents: { _,_,_  in 1 },
+        numberOfRowsInComponent: { _, _, items, _ -> Int in
+            return items.count
+        },
+        attributedTitleForRow: { _, _, items, row, _ -> NSAttributedString? in
+            NSAttributedString(
+                string: items[row],
+                attributes: [
+                    NSAttributedStringKey.foregroundColor: UIColor.purple,
+                    NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleDouble.rawValue,
+                    NSAttributedStringKey.textEffect: NSAttributedString.TextEffectStyle.letterpressStyle
+                ]
+            )
+        }
+    )
+    private let viewPickerAdapter = RxPickerViewViewAdapter<[String]>(
+        components: [],
+        numberOfComponents: { _,_,_  in 1 },
+        numberOfRowsInComponent: { _, _, items, _ -> Int in
+            return items.count
+        },
+        viewForRow: { _, _, _, row, _, view -> UIView in
+            let componentView = view ?? UIView()
+            componentView.backgroundColor = row % 2 == 0 ? UIColor.red : UIColor.blue
+            return componentView
+        }
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()

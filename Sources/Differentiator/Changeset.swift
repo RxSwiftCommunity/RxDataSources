@@ -27,18 +27,16 @@ public struct Changeset<Section: SectionModelType> {
     public let updatedItems: [ItemPath]
 
     init(reloadData: Bool = false,
-        originalSections: [Section] = [],
-        finalSections: [Section] = [],
-        insertedSections: [Int] = [],
-        deletedSections: [Int] = [],
-        movedSections: [(from: Int, to: Int)] = [],
-        updatedSections: [Int] = [],
-
-        insertedItems: [ItemPath] = [],
-        deletedItems: [ItemPath] = [],
-        movedItems: [(from: ItemPath, to: ItemPath)] = [],
-        updatedItems: [ItemPath] = []
-    ) {
+         originalSections: [Section] = [],
+         finalSections: [Section] = [],
+         insertedSections: [Int] = [],
+         deletedSections: [Int] = [],
+         movedSections: [(from: Int, to: Int)] = [],
+         updatedSections: [Int] = [],
+         insertedItems: [ItemPath] = [],
+         deletedItems: [ItemPath] = [],
+         movedItems: [(from: ItemPath, to: ItemPath)] = [],
+         updatedItems: [ItemPath] = []) {
         self.reloadData = reloadData
 
         self.originalSections = originalSections
