@@ -50,23 +50,21 @@ public enum Diff {
         case untouched
 
         var debugDescription: String {
-            get {
-                switch self {
-                case .inserted:
-                    return "Inserted"
-                case .insertedAutomatically:
-                    return "InsertedAutomatically"
-                case .deleted:
-                    return "Deleted"
-                case .deletedAutomatically:
-                    return "DeletedAutomatically"
-                case .moved:
-                    return "Moved"
-                case .movedAutomatically:
-                    return "MovedAutomatically"
-                case .untouched:
-                    return "Untouched"
-                }
+            switch self {
+            case .inserted:
+                return "Inserted"
+            case .insertedAutomatically:
+                return "InsertedAutomatically"
+            case .deleted:
+                return "Deleted"
+            case .deletedAutomatically:
+                return "DeletedAutomatically"
+            case .moved:
+                return "Moved"
+            case .movedAutomatically:
+                return "MovedAutomatically"
+            case .untouched:
+                return "Untouched"
             }
         }
     }
@@ -78,9 +76,7 @@ public enum Diff {
         var itemCount: Int
 
         var debugDescription: String {
-            get {
-                return "\(event), \(String(describing: indexAfterDelete))"
-            }
+            return "\(event), \(String(describing: indexAfterDelete))"
         }
 
         static var initial: SectionAssociatedData {
@@ -94,9 +90,7 @@ public enum Diff {
         var moveIndex: ItemPath?
 
         var debugDescription: String {
-            get {
-                return "\(event) \(String(describing: indexAfterDelete))"
-            }
+            return "\(event) \(String(describing: indexAfterDelete))"
         }
 
         static var initial : ItemAssociatedData {
@@ -159,7 +153,7 @@ public enum Diff {
         finalItemCache: ContiguousArray<ContiguousArray<Item>>
     ) throws
         -> (ContiguousArray<ContiguousArray<ItemAssociatedData>>, ContiguousArray<ContiguousArray<ItemAssociatedData>>) {
-
+            // swiftlint:disable:next nesting
             typealias Identity = Item.Identity
             let totalInitialItems = initialItemCache.map { $0.count }.reduce(0, +)
 
@@ -185,7 +179,7 @@ public enum Diff {
                 return ContiguousArray<ItemAssociatedData>(repeating: ItemAssociatedData.initial, count: items.count)
             })
 
-            try initialIdentities.withUnsafeBufferPointer { (identitiesBuffer: UnsafeBufferPointer<Identity>) -> () in
+            try initialIdentities.withUnsafeBufferPointer { (identitiesBuffer: UnsafeBufferPointer<Identity>) -> Void in
                 var dictionary: [OptimizedIdentity<Identity>: Int] = Dictionary(minimumCapacity: totalInitialItems * 2)
 
                 for i in 0 ..< initialIdentities.count {
@@ -358,8 +352,6 @@ public enum Diff {
         initialSections: [Section],
         finalSections: [Section])
         throws -> [Changeset<Section>] {
-            typealias I = Section.Item
-
             var result: [Changeset<Section>] = []
 
             var sectionCommands = try CommandGenerator<Section>.generatorForInitialSections(initialSections, finalSections: finalSections)
@@ -372,6 +364,7 @@ public enum Diff {
     }
 
     private struct CommandGenerator<Section: AnimatableSectionModelType> {
+        // swiftlint:disable:next nesting
         typealias Item = Section.Item
 
         let initialSections: [Section]
@@ -445,7 +438,7 @@ public enum Diff {
                             return i2
                         }
 
-                        i2 = i2 + 1
+                        i2 += 1
                     }
 
                     return nil
@@ -453,7 +446,7 @@ public enum Diff {
 
                 // first mark deleted items
                 for i in 0 ..< initialItemCache.count {
-                    guard let _ = initialSectionData[i].moveIndex else {
+                    guard initialSectionData[i].moveIndex != nil else {
                         continue
                     }
 
@@ -566,7 +559,7 @@ public enum Diff {
                             return i
                         }
 
-                        i = i + 1
+                        i += 1
                     }
 
                     return nil
@@ -591,10 +584,8 @@ public enum Diff {
                 }
 
                 // inserted sections
-                for (i, section) in finalSectionData.enumerated() {
-                    if section.moveIndex == nil {
-                        _ = finalSectionData[i].event == .inserted
-                    }
+                for (i, section) in finalSectionData.enumerated() where  section.moveIndex == nil {
+                    _ = finalSectionData[i].event == .inserted
                 }
 
                 return (initialSectionData, finalSectionData)
@@ -639,7 +630,7 @@ public enum Diff {
                     }
                 }
 
-                afterDeleteState.append(try Section.init(safeOriginal: initialSections[i], safeItems: afterDeleteItems))
+                afterDeleteState.append(try Section(safeOriginal: initialSections[i], safeItems: afterDeleteItems))
             }
             // }
 
@@ -716,7 +707,7 @@ public enum Diff {
                         items.append(finalItemCache[finalIndex.sectionIndex][finalIndex.itemIndex])
                     }
                     
-                    let modifiedSection = try Section.init(safeOriginal: s, safeItems: items)
+                    let modifiedSection = try Section(safeOriginal: s, safeItems: items)
                     
                     return modifiedSection
                 }

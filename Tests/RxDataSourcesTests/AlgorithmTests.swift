@@ -22,7 +22,7 @@ extension AlgorithmTests {
             s(1, [
                     i(0, ""),
                     i(1, ""),
-                    i(2, ""),
+                    i(2, "")
                 ])
         ]
 
@@ -31,7 +31,7 @@ extension AlgorithmTests {
                     i(0, ""),
                     i(1, ""),
                     i(2, ""),
-                    i(3, ""),
+                    i(3, "")
                 ])
         ]
 
@@ -48,14 +48,14 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
         let final: [s] = [
             s(1, [
                 i(0, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -72,7 +72,7 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -80,7 +80,7 @@ extension AlgorithmTests {
             s(1, [
                 i(1, ""),
                 i(2, ""),
-                i(0, ""),
+                i(0, "")
                 ])
         ]
 
@@ -97,7 +97,7 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -105,7 +105,7 @@ extension AlgorithmTests {
             s(1, [
                 i(2, ""),
                 i(0, ""),
-                i(1, ""),
+                i(1, "")
                 ])
         ]
 
@@ -122,7 +122,7 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -130,7 +130,7 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, "u"),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -147,7 +147,7 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -155,7 +155,7 @@ extension AlgorithmTests {
             s(1, [
                 i(1, "u"),
                 i(0, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -181,7 +181,7 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -189,13 +189,13 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ]),
             s(2, [
                 i(3, ""),
                 i(4, ""),
-                i(5, ""),
-                ]),
+                i(5, "")
+                ])
         ]
 
         let differences = try! Diff.differencesForSectionedView(initialSections: initial, finalSections: final)
@@ -211,7 +211,7 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ])
         ]
 
@@ -232,36 +232,36 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ]),
             s(2, [
                 i(3, ""),
                 i(4, ""),
-                i(5, ""),
+                i(5, "")
                 ]),
             s(3, [
                 i(6, ""),
                 i(7, ""),
-                i(8, ""),
-                ]),
+                i(8, "")
+                ])
         ]
 
         let final: [s] = [
             s(2, [
                 i(3, ""),
                 i(4, ""),
-                i(5, ""),
+                i(5, "")
                 ]),
             s(3, [
                 i(6, ""),
                 i(7, ""),
-                i(8, ""),
+                i(8, "")
                 ]),
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
-                ]),
+                i(2, "")
+                ])
             ]
 
         let differences = try! Diff.differencesForSectionedView(initialSections: initial, finalSections: final)
@@ -277,36 +277,36 @@ extension AlgorithmTests {
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ]),
             s(2, [
                 i(3, ""),
                 i(4, ""),
-                i(5, ""),
+                i(5, "")
                 ]),
             s(3, [
                 i(6, ""),
                 i(7, ""),
-                i(8, ""),
-                ]),
+                i(8, "")
+                ])
             ]
 
         let final: [s] = [
             s(3, [
                 i(6, ""),
                 i(7, ""),
-                i(8, ""),
+                i(8, "")
                 ]),
             s(1, [
                 i(0, ""),
                 i(1, ""),
-                i(2, ""),
+                i(2, "")
                 ]),
             s(2, [
                 i(3, ""),
                 i(4, ""),
-                i(5, ""),
-                ]),
+                i(5, "")
+                ])
             ]
 
         let differences = try! Diff.differencesForSectionedView(initialSections: initial, finalSections: final)
@@ -323,21 +323,21 @@ extension AlgorithmTests {
     func testThrowsErrorOnDuplicateItem() {
         let initial: [s] = [
             s(1, [
-                i(1111, ""),
+                i(1111, "")
                 ]),
             s(2, [
-                i(1111, ""),
-                ]),
+                i(1111, "")
+                ])
 
             ]
 
         do {
             _ = try Diff.differencesForSectionedView(initialSections: initial, finalSections: initial)
-            XCTFail()
+            XCTFail("Should throw exception")
         }
         catch let exception {
             guard case let .duplicateItem(item) = exception as! Diff.Error else {
-                XCTFail()
+                XCTFail("Not required error")
                 return
             }
 
@@ -348,26 +348,26 @@ extension AlgorithmTests {
     func testThrowsErrorOnDuplicateSection() {
         let initial: [s] = [
             s(1, [
-                i(1111, ""),
+                i(1111, "")
                 ]),
             s(1, [
-                i(1112, ""),
-                ]),
+                i(1112, "")
+                ])
 
             ]
 
         do {
             _ = try Diff.differencesForSectionedView(initialSections: initial, finalSections: initial)
-            XCTFail()
+            XCTFail("Should throw exception")
         }
         catch let exception {
             guard case let .duplicateSection(section) = exception as! Diff.Error else {
-                XCTFail()
+                XCTFail("Not required error")
                 return
             }
 
             XCTAssertEqual(section as! s, s(1, [
-                i(1112, ""),
+                i(1112, "")
             ]))
         }
     }
@@ -375,23 +375,23 @@ extension AlgorithmTests {
     func testThrowsErrorOnInvalidInitializerImplementation1() {
         let initial: [sInvalidInitializerImplementation1] = [
             sInvalidInitializerImplementation1(1, [
-                i(1111, ""),
-                ]),
+                i(1111, "")
+                ])
             ]
 
         do {
             _ = try Diff.differencesForSectionedView(initialSections: initial, finalSections: initial)
-            XCTFail()
+            XCTFail("Should throw exception")
         }
         catch let exception {
             guard case let .invalidInitializerImplementation(section, expectedItems, identifier) = exception as! Diff.Error else {
-                XCTFail()
+                XCTFail("Not required error")
                 return
             }
 
             XCTAssertEqual(section as! sInvalidInitializerImplementation1, sInvalidInitializerImplementation1(1, [
                 i(1111, ""),
-                i(1111, ""),
+                i(1111, "")
                 ]))
 
             XCTAssertEqual(expectedItems as! [i], [i(1111, "")])
@@ -402,22 +402,22 @@ extension AlgorithmTests {
     func testThrowsErrorOnInvalidInitializerImplementation2() {
         let initial: [sInvalidInitializerImplementation2] = [
             sInvalidInitializerImplementation2(1, [
-                i(1111, ""),
-                ]),
+                i(1111, "")
+                ])
             ]
 
         do {
             _ = try Diff.differencesForSectionedView(initialSections: initial, finalSections: initial)
-            XCTFail()
+            XCTFail("Should throw exception")
         }
         catch let exception {
             guard case let .invalidInitializerImplementation(section, expectedItems, identifier) = exception as! Diff.Error else {
-                XCTFail()
+                XCTFail("Not required error")
                 return
             }
 
             XCTAssertEqual(section as! sInvalidInitializerImplementation2, sInvalidInitializerImplementation2(-1, [
-                i(1111, ""),
+                i(1111, "")
                 ]))
 
             XCTAssertEqual(expectedItems as! [i], [i(1111, "")])
@@ -431,20 +431,20 @@ extension AlgorithmTests {
     func testCase1() {
         let initial: [s] = [
             s(1, [
-                i(1111, ""),
+                i(1111, "")
                 ]),
             s(2, [
-                i(2222, ""),
-                ]),
+                i(2222, "")
+                ])
 
             ]
 
         let final: [s] = [
             s(2, [
-                i(0, "1"),
+                i(0, "1")
                 ]),
             s(1, [
-                ]),
+                ])
             ]
 
         let differences = try! Diff.differencesForSectionedView(initialSections: initial, finalSections: final)
@@ -457,13 +457,13 @@ extension AlgorithmTests {
             s(4, [
                 i(10, ""),
                 i(11, ""),
-                i(12, ""),
+                i(12, "")
                 ]),
             s(9, [
                 i(25, ""),
                 i(26, ""),
-                i(27, ""),
-                ]),
+                i(27, "")
+                ])
 
             ]
 
@@ -471,12 +471,12 @@ extension AlgorithmTests {
             s(9, [
                 i(11, "u"),
                 i(26, ""),
-                i(27, "u"),
+                i(27, "u")
                 ]),
             s(4, [
                 i(10, "u"),
-                i(12, ""),
-                ]),
+                i(12, "")
+                ])
             ]
 
 
@@ -488,25 +488,25 @@ extension AlgorithmTests {
     func testCase3() {
         let initial: [s] = [
             s(4, [
-                i(5, ""),
+                i(5, "")
                 ]),
             s(6, [
                 i(20, ""),
-                i(14, ""),
+                i(14, "")
                 ]),
             s(9, [
                 ]),
             s(2, [
                 i(2, ""),
-                i(26, ""),
+                i(26, "")
                 ]),
             s(8, [
-                i(23, ""),
+                i(23, "")
                 ]),
             s(10, [
                 i(8, ""),
                 i(18, ""),
-                i(13, ""),
+                i(13, "")
                 ]),
             s(1, [
                 i(28, ""),
@@ -517,37 +517,37 @@ extension AlgorithmTests {
                 i(29, ""),
                 i(24, ""),
                 i(7, ""),
-                i(19, ""),
-                ]),
+                i(19, "")
+                ])
             ]
 
         let final: [s] = [
             s(4, [
-                i(5, ""),
+                i(5, "")
                 ]),
             s(6, [
                 i(20, "u"),
-                i(14, ""),
+                i(14, "")
                 ]),
             s(9, [
-                i(16, "u"),
+                i(16, "u")
                 ]),
             s(7, [
                 i(17, ""),
                 i(15, ""),
-                i(4, "u"),
+                i(4, "u")
                 ]),
             s(2, [
                 i(2, ""),
                 i(26, "u"),
-                i(23, "u"),
+                i(23, "u")
                 ]),
             s(8, [
                 ]),
             s(10, [
                 i(8, "u"),
                 i(18, "u"),
-                i(13, "u"),
+                i(13, "u")
                 ]),
             s(1, [
                 i(28, "u"),
@@ -558,8 +558,8 @@ extension AlgorithmTests {
                 i(29, "u"),
                 i(24, "u"),
                 i(7, "u"),
-                i(19, "u"),
-                ]),
+                i(19, "u")
+                ])
 
             ]
 

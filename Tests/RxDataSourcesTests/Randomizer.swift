@@ -21,8 +21,8 @@ struct PseudoRandomGenerator {
     }
 
     func get_random() -> (PseudoRandomGenerator, Int) {
-        let m_z = 36969 &* (self.m_z & 65535) &+ (self.m_z >> 16);
-        let m_w = 18000 &* (self.m_w & 65535) &+ (self.m_w >> 16);
+        let m_z = 36969 &* (self.m_z & 65535) &+ (self.m_z >> 16)
+        let m_w = 18000 &* (self.m_w & 65535) &+ (self.m_w >> 16)
         let val = ((m_z << 16) &+ m_w)
         return (PseudoRandomGenerator(m_w, m_z), Int(val % (1 << 30)))  /* 32-bit result */
     }
