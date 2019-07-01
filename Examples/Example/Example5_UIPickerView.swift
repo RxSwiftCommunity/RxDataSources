@@ -34,9 +34,9 @@ final class ReactivePickerViewControllerExample: UIViewController {
     }) { (_, _, items, row, _) -> NSAttributedString? in
         return NSAttributedString(string: items[row],
                                   attributes: [
-                                    NSAttributedStringKey.foregroundColor: UIColor.purple,
-                                    NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleDouble.rawValue,
-                                    NSAttributedStringKey.textEffect: NSAttributedString.TextEffectStyle.letterpressStyle
+                                    .foregroundColor: UIColor.purple,
+                                    .underlineStyle: NSUnderlineStyle.double.rawValue,
+                                    .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle
             ])
     }
     private let viewPickerAdapter = RxPickerViewViewAdapter<[String]>(components: [],
