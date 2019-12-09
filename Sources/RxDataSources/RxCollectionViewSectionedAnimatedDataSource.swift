@@ -58,7 +58,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
         configureSupplementaryView: ConfigureSupplementaryView? = nil,
         moveItem: @escaping MoveItem = { _, _, _ in () },
         canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false },
-        asyncDiffing: Bool = true,
+        asyncDiffing: Bool = false,
         disableBatchUpdatesAnimation: Bool = false
         ) {
         self.animationConfiguration = animationConfiguration
