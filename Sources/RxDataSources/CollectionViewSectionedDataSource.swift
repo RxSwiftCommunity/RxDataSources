@@ -17,10 +17,12 @@ import Differentiator
 open class CollectionViewSectionedDataSource<Section: SectionModelType>
     : NSObject
     , UICollectionViewDataSource
+    , UICollectionViewDelegateFlowLayout
     , SectionedViewDataSourceType {
     public typealias Item = Section.Item
     public typealias Section = Section
     public typealias ConfigureCell = (CollectionViewSectionedDataSource<Section>, UICollectionView, IndexPath, Item) -> UICollectionViewCell
+    public typealias ConfigureCellSize = (CollectionViewSectionedDataSource<Section>, UICollectionView, IndexPath, Item) -> CGSize
     public typealias ConfigureSupplementaryView = (CollectionViewSectionedDataSource<Section>, UICollectionView, String, IndexPath) -> UICollectionReusableView
     public typealias MoveItem = (CollectionViewSectionedDataSource<Section>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void
     public typealias CanMoveItemAtIndexPath = (CollectionViewSectionedDataSource<Section>, IndexPath) -> Bool
@@ -28,11 +30,13 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
 
     public init(
         configureCell: @escaping ConfigureCell,
+        configureCellSize: ConfigureCellSize? = nil,
         configureSupplementaryView: ConfigureSupplementaryView? = nil,
         moveItem: @escaping MoveItem = { _, _, _ in () },
         canMoveItemAtIndexPath: @escaping CanMoveItemAtIndexPath = { _, _ in false }
     ) {
         self.configureCell = configureCell
+        self.configureCellSize = configureCellSize
         self.configureSupplementaryView = configureSupplementaryView
         self.moveItem = moveItem
         self.canMoveItemAtIndexPath = canMoveItemAtIndexPath
@@ -95,6 +99,14 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
             #endif
         }
     }
+    
+    open var configureCellSize: ConfigureCellSize? {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
 
     open var configureSupplementaryView: ConfigureSupplementaryView? {
         didSet {
@@ -151,12 +163,20 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
         self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
         self.moveItem(self, sourceIndexPath, destinationIndexPath)
     }
-
+    
+    // UICollectionViewDelegateFlowLayout
+    
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return configureCellSize!(self, collectionView, indexPath, self[indexPath])
+    }
+    
     override open func responds(to aSelector: Selector!) -> Bool {
-        if aSelector == #selector(UICollectionViewDataSource.collectionView(_:viewForSupplementaryElementOfKind:at:)) {
+        switch aSelector {
+        case #selector(UICollectionViewDataSource.collectionView(_:viewForSupplementaryElementOfKind:at:)):
             return configureSupplementaryView != nil
-        }
-        else {
+        case #selector(UICollectionViewDelegateFlowLayout.collectionView(_:layout:sizeForItemAt:)):
+            return configureCellSize != nil
+        default:
             return super.responds(to: aSelector)
         }
     }
