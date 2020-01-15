@@ -32,6 +32,41 @@ private enum DiffingResult<S> where S: AnimatableSectionModelType {
     case differences([Changeset<S>], finalSections: [S])
     case error(Error, finalSections: [S])
     case force(finalSections: [S])
+    
+    var error: Error? {
+        switch self {
+        case .error(let error, finalSections: _):
+            return error
+        default:
+            return nil
+        }
+    }
+    
+    var finalSections: [S] {
+        switch self {
+        case .differences(_, finalSections: let finalSections):
+            return finalSections
+        case .error(_, finalSections: let finalSections):
+            return finalSections
+        case .force(finalSections: let finalSections):
+            return finalSections
+        }
+    }
+}
+
+private struct DiffingReducer<S> where S: AnimatableSectionModelType {
+    
+    let finalSections: [S]
+    let force: Bool
+    let initialSections: [S]
+    let view: UICollectionView
+    
+    init(finalSections: [S], force: Bool, initialSections: [S], view: UICollectionView) {
+        self.finalSections = finalSections
+        self.force = force
+        self.initialSections = initialSections
+        self.view = view
+    }
 }
 
 open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectionModelType>
@@ -75,63 +110,64 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
     }
 
     private func prepare() {
+        let scheduler: ImmediateSchedulerType = {
+            if self.asyncDiffing {
+                let queue = DispatchQueue(label: UUID().uuidString, qos: .userInteractive)
+                return SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: UUID().uuidString)
+            } else {
+                return MainScheduler.instance
+            }
+        }()
         self.relayInput
             .asObservable()
+            .observeOn(scheduler)
             .compactMap({ $0 })
-            .observeOn(MainScheduler.instance)
-            .flatMapLatest({ [weak dataSource = self] (input: DiffingInput<Section>) -> Observable<DiffingOutput<Section>> in
-                assert(Thread.isMainThread)
-                guard let dataSource = dataSource else {
-                    return .never()
-                }
+            .scan(nil, accumulator: { (reducer, input) -> DiffingReducer<Section> in
+                let finalSections = input.sections
+                let force = input.view !== reducer?.view || reducer?.finalSections.isEmpty ?? true
+                let initialSections = reducer?.finalSections ?? []
                 let view = input.view
-                guard view.window != nil else {
-                    let finalSections = input.sections
-                    let result = DiffingResult.force(finalSections: finalSections)
-                    let output = DiffingOutput(result: result, view: view)
-                    return Observable
-                        .just(output, scheduler: MainScheduler.instance)
-                }
-                let initialSections = dataSource.sectionModels
-                let scheduler: ImmediateSchedulerType = {
-                    if dataSource.asyncDiffing {
-                        return ConcurrentDispatchQueueScheduler(qos: .userInteractive)
-                    } else {
-                        return MainScheduler.instance
-                    }
-                }()
-                return Observable
-                    .just((), scheduler: scheduler)
-                    .map({ [asyncDiffing = dataSource.asyncDiffing, finalSections = input.sections] _ -> DiffingResult<Section> in
-                        assert(Thread.isMainThread != asyncDiffing)
-                        do {
-                            let differences = try Diff.differencesForSectionedView(
-                                initialSections: initialSections,
-                                finalSections: finalSections
-                            )
-                            return .differences(differences, finalSections: finalSections)
-                        } catch let error {
-                            return .error(error, finalSections: finalSections)
-                        }
-                    })
-                    .map({ DiffingOutput(result: $0, view: view) })
-                    .observeOn(MainScheduler.instance)
+                return DiffingReducer(finalSections: finalSections, force: force, initialSections: initialSections, view: view)
             })
+            .compactMap({ $0 })
+            .concatMap({ (reducer: DiffingReducer<Section>) -> Observable<DiffingOutput<Section>> in
+                return Observable<DiffingOutput<Section>>
+                    .create({ (observer: AnyObserver<DiffingOutput<Section>>) -> Disposable in
+                        defer {
+                            let result: DiffingResult<Section> = {
+                                guard reducer.force == false else {
+                                    return .force(finalSections: reducer.finalSections)
+                                }
+                                do {
+                                    let differences = try Diff.differencesForSectionedView(
+                                        initialSections: reducer.initialSections,
+                                        finalSections: reducer.finalSections
+                                    )
+                                    return .differences(differences, finalSections: reducer.finalSections)
+                                } catch let error {
+                                    return .error(error, finalSections: reducer.finalSections)
+                                }
+                            }()
+                            let view = reducer.view
+                            let output = DiffingOutput(result: result, view: view)
+                            observer.onNext(output)
+                            observer.onCompleted()
+                        }
+                        return Disposables.create()
+                    })
+            })
+            .observeOn(MainScheduler.instance)
             .bind(onNext: { [weak dataSource = self] (output: DiffingOutput<Section>) in
                 guard let dataSource = dataSource else {
                     return
                 }
-                assert(Thread.isMainThread)
                 switch output.result {
-                case .differences(let differences, finalSections: let finalSections):
+                case .differences(let differences, finalSections: let finalSections) where output.view.window != nil:
                     switch dataSource.decideViewTransition(dataSource, output.view, differences) {
                     case .animated:
-                        // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
-                        // this is a limitation of Diff tool
                         let updates: () -> Void = {
                             for difference in differences {
                                 let updateBlock = {
-                                    // sections must be set within updateBlock in 'performBatchUpdates'
                                     dataSource.setSections(difference.finalSections)
                                     output.view.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
                                 }
@@ -147,12 +183,11 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                         dataSource.setSections(finalSections)
                         output.view.reloadData()
                     }
-                case .error(let error, finalSections: let finalSections):
-                    rxDebugFatalError(error)
-                    dataSource.setSections(finalSections)
-                    output.view.reloadData()
-                case .force(finalSections: let finalSections):
-                    dataSource.setSections(finalSections)
+                default:
+                    if let error = output.result.error {
+                        rxDebugFatalError(error)
+                    }
+                    dataSource.setSections(output.result.finalSections)
                     output.view.reloadData()
                 }
             })
