@@ -134,6 +134,9 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                 return Observable<DiffingOutput<Section>>
                     .create({ (observer: AnyObserver<DiffingOutput<Section>>) -> Disposable in
                         defer {
+                            #if DEBUG
+                            let start = CFAbsoluteTimeGetCurrent()
+                            #endif
                             let result: DiffingResult<Section> = {
                                 guard reducer.force == false else {
                                     return .force(finalSections: reducer.finalSections)
@@ -150,6 +153,10 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                             }()
                             let view = reducer.view
                             let output = DiffingOutput(result: result, view: view)
+                            #if DEBUG
+                            let milliseconds = Int(round((CFAbsoluteTimeGetCurrent() - start) * 1000))
+                            print("diffing: \(milliseconds) milliseconds")
+                            #endif
                             observer.onNext(output)
                             observer.onCompleted()
                         }
