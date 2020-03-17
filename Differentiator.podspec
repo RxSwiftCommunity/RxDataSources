@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Differentiator"
-  s.version          = "4.0.1"
+  s.version          = "4.0.2"
   s.summary          = "Diff algorithm for UITableView and UICollectionView."
   s.description      = <<-DESC
   Diff algorithm for UITableView and UICollectionView.
