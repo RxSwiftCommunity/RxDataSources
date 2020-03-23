@@ -15,6 +15,9 @@
 		03EEEE961F5B7D71006068BC /* Randomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EEEE851F5B7D5C006068BC /* Randomizer.swift */; };
 		03EEEE971F5B7D71006068BC /* s.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EEEE861F5B7D5C006068BC /* s.swift */; };
 		03EEEE981F5B7D71006068BC /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EEEE871F5B7D5C006068BC /* XCTest+Extensions.swift */; };
+		122548CA2428659800D144D0 /* RxTableViewSectionedCommandDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122548C92428659800D144D0 /* RxTableViewSectionedCommandDataSource.swift */; };
+		122548D6242865F700D144D0 /* SectionedDataSourceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122548D5242865F700D144D0 /* SectionedDataSourceCommand.swift */; };
+		122548D82428663100D144D0 /* IdentifiableSectionModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122548D72428663100D144D0 /* IdentifiableSectionModelType.swift */; };
 		80FB1F5C228489FF009D6516 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F48228489EC009D6516 /* RxSwift.framework */; };
 		80FB1F5D22848A0E009D6516 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F4A228489EC009D6516 /* RxCocoa.framework */; };
 		C81FBF461F3B9CED0094061E /* Differentiator.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C81FBF451F3B9CED0094061E /* Differentiator.podspec */; };
@@ -143,6 +146,9 @@
 		03EEEE851F5B7D5C006068BC /* Randomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Randomizer.swift; sourceTree = "<group>"; };
 		03EEEE861F5B7D5C006068BC /* s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = s.swift; sourceTree = "<group>"; };
 		03EEEE871F5B7D5C006068BC /* XCTest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		122548C92428659800D144D0 /* RxTableViewSectionedCommandDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTableViewSectionedCommandDataSource.swift; sourceTree = "<group>"; };
+		122548D5242865F700D144D0 /* SectionedDataSourceCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedDataSourceCommand.swift; sourceTree = "<group>"; };
+		122548D72428663100D144D0 /* IdentifiableSectionModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableSectionModelType.swift; sourceTree = "<group>"; };
 		1E38DA4A22778D1A00C07A09 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		80FB1F3A228489EB009D6516 /* Rx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Rx.xcodeproj; path = Carthage/Checkouts/RxSwift/Rx.xcodeproj; sourceTree = "<group>"; };
 		C81905AE1DEA019100AE679C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,22 +336,25 @@
 			isa = PBXGroup;
 			children = (
 				C81FBF651F3B9DF60094061E /* AnimationConfiguration.swift */,
-				C81FBF611F3B9DC00094061E /* IntegerType+IdentifiableType.swift */,
-				C81FBF621F3B9DC00094061E /* String+IdentifiableType.swift */,
-				C81FBF5F1F3B9D8B0094061E /* FloatingPointType+IdentifiableType.swift */,
 				C81FBF5B1F3B9D4C0094061E /* Array+Extensions.swift */,
 				C8BBFBCC1F3B8F8D00A225F7 /* CollectionViewSectionedDataSource.swift */,
 				C8BBFBCD1F3B8F8D00A225F7 /* DataSources.swift */,
+				C833338C1F8A5FAC00D46EAE /* Deprecated.swift */,
+				C81FBF5F1F3B9D8B0094061E /* FloatingPointType+IdentifiableType.swift */,
+				122548D72428663100D144D0 /* IdentifiableSectionModelType.swift */,
 				C8BBFBCE1F3B8F8D00A225F7 /* Info.plist */,
+				C81FBF611F3B9DC00094061E /* IntegerType+IdentifiableType.swift */,
 				C8BBFBCF1F3B8F8D00A225F7 /* RxCollectionViewSectionedAnimatedDataSource.swift */,
 				C8BBFBD01F3B8F8D00A225F7 /* RxCollectionViewSectionedReloadDataSource.swift */,
 				C8BBFBD11F3B8F8D00A225F7 /* RxDataSources.h */,
 				C8BBFBD21F3B8F8D00A225F7 /* RxPickerViewAdapter.swift */,
 				C8BBFBD31F3B8F8D00A225F7 /* RxTableViewSectionedAnimatedDataSource.swift */,
+				122548C92428659800D144D0 /* RxTableViewSectionedCommandDataSource.swift */,
 				C8BBFBD41F3B8F8D00A225F7 /* RxTableViewSectionedReloadDataSource.swift */,
+				122548D5242865F700D144D0 /* SectionedDataSourceCommand.swift */,
+				C81FBF621F3B9DC00094061E /* String+IdentifiableType.swift */,
 				C8BBFBD51F3B8F8D00A225F7 /* TableViewSectionedDataSource.swift */,
 				C8BBFBD61F3B8F8D00A225F7 /* UI+SectionedViewType.swift */,
-				C833338C1F8A5FAC00D46EAE /* Deprecated.swift */,
 				C84043C21F9D33CE0093C3E7 /* ViewTransition.swift */,
 			);
 			path = RxDataSources;
@@ -639,6 +648,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				122548D6242865F700D144D0 /* SectionedDataSourceCommand.swift in Sources */,
 				C81FBF641F3B9DC00094061E /* String+IdentifiableType.swift in Sources */,
 				C8BBFBDF1F3B8F8D00A225F7 /* RxTableViewSectionedReloadDataSource.swift in Sources */,
 				C81FBF5E1F3B9D660094061E /* Array+Extensions.swift in Sources */,
@@ -647,7 +657,9 @@
 				C84043C31F9D33CE0093C3E7 /* ViewTransition.swift in Sources */,
 				C81FBF661F3B9DF60094061E /* AnimationConfiguration.swift in Sources */,
 				C8BBFBDA1F3B8F8D00A225F7 /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */,
+				122548D82428663100D144D0 /* IdentifiableSectionModelType.swift in Sources */,
 				C8BBFBD81F3B8F8D00A225F7 /* DataSources.swift in Sources */,
+				122548CA2428659800D144D0 /* RxTableViewSectionedCommandDataSource.swift in Sources */,
 				C8BBFBD71F3B8F8D00A225F7 /* CollectionViewSectionedDataSource.swift in Sources */,
 				C8BBFBE01F3B8F8D00A225F7 /* TableViewSectionedDataSource.swift in Sources */,
 				C8BBFBE11F3B8F8D00A225F7 /* UI+SectionedViewType.swift in Sources */,
