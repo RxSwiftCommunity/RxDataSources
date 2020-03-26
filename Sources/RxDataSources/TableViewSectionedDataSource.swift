@@ -121,6 +121,16 @@ open class TableViewSectionedDataSource<Section: SectionModelType>
 		self._sectionModels[sectionIndex] = SectionModelSnapshot(model: section, items: section.items)
 	}
 	
+	open func insertSection(_ section: Section, after sectionIndex: Int) {
+		guard _sectionModels.count > sectionIndex else { return }
+		self._sectionModels.insert(SectionModelSnapshot(model: section, items: section.items), at: sectionIndex + 1)
+	}
+	
+	open func removeSection(at sectionIndex: Int) {
+		guard _sectionModels.count > sectionIndex else { return }
+		self._sectionModels.remove(at: sectionIndex)
+	}
+	
     open var configureCell: ConfigureCell {
         didSet {
             #if DEBUG
