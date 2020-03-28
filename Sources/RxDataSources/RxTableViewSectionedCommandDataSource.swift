@@ -18,10 +18,14 @@ open class RxTableViewSectionedCommandDataSource<Section: IdentifiableSectionMod
 	open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
 		Binder(self) { dataSource, element in
 			switch element {
-			case let .add(section, sectionIdentifier):
+			case .append(let section):
+				let newSectionIndex = dataSource.sectionModels.count
+				dataSource.appendSection(section)
+				tableView.insertSections(IndexSet(arrayLiteral: newSectionIndex), with: .fade)
+			case let .insert(section, sectionIdentifier):
 				if let sectionIndex = dataSource.index(of: sectionIdentifier) {
-					dataSource.insertSection(section, after: sectionIndex)
-					tableView.insertSections(IndexSet(arrayLiteral: sectionIndex + 1), with: .fade)
+					dataSource.insertSection(section, at: sectionIndex)
+					tableView.insertSections(IndexSet(arrayLiteral: sectionIndex), with: .fade)
 				}
 			case .load(let sections):
 				dataSource.setSections(sections)
