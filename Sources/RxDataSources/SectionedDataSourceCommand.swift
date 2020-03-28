@@ -7,8 +7,8 @@
 //
 
 public enum SectionedDataSourceCommand<Section: IdentifiableSectionModelType> {
-	case add(section: Section, at: Section.Identity)
 	case append(section: Section)
+	case insert(section: Section, at: Section.Identity)
 	case load(sections: [Section])
 	case remove(section: Section.Identity)
 	case update(section: Section)
