@@ -105,7 +105,7 @@ dataSource.titleForHeaderInSection = { dataSource, index in
   return dataSource.sectionModels[index].header
 }
 
-dataSource.titleForFooterInSection = { dataSource, indexPath in
+dataSource.titleForFooterInSection = { dataSource, index in
   return dataSource.sectionModels[index].footer
 }
 
