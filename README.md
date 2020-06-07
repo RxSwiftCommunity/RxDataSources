@@ -105,7 +105,7 @@ dataSource.titleForHeaderInSection = { dataSource, index in
   return dataSource.sectionModels[index].header
 }
 
-dataSource.titleForFooterInSection = { dataSource, indexPath in
+dataSource.titleForFooterInSection = { dataSource, index in
   return dataSource.sectionModels[index].footer
 }
 
@@ -168,3 +168,20 @@ Cartfile
 ```
 github "RxSwiftCommunity/RxDataSources" ~> 4.0
 ```
+
+### Swift Package Manager
+
+Create a `Package.swift` file.
+
+```swift
+import PackageDescription
+
+let package = Package(
+    name: "SampleProject",
+    dependencies: [
+        .Package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git" from: "4.0.0")
+    ]
+)
+```
+
+If you are using Xcode 11 or higher, go to **File / Swift Packages / Add Package Dependency...** and enter package repository URL **https://github.com/RxSwiftCommunity/RxDataSources.git**, then follow the instructions.
