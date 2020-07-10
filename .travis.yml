@@ -1,6 +1,6 @@
 language: objective-c
 
-osx_image: xcode10.2
+osx_image: xcode11.5
 
 notifications:
   slack: rxswift:3ykt2Z61f8GkdvhCZTYPduOL
@@ -10,9 +10,9 @@ install: true
 
 env:
   - BUILD="brew install swiftlint"
-  - BUILD="carthage update --platform iOS && pushd Examples && set -o pipefail && (xcodebuild -project Example.xcodeproj -scheme ExampleUITests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test && xcodebuild -project   Example.xcodeproj   -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' build) | xcpretty"
-  - BUILD="carthage update --platform ios && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 7' test) | xcpretty"
-  - BUILD="gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet; pod repo update && pod lib lint RxDataSources.podspec --verbose && pod lib lint Differentiator.podspec --verbose "
+  - BUILD="carthage update --platform iOS && pushd Examples && set -o pipefail && (xcodebuild -project Example.xcodeproj -scheme ExampleUITests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' test && xcodebuild -project   Example.xcodeproj   -scheme Example -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' build) | xcpretty"
+  - BUILD="carthage update --platform iOS && set -o pipefail && (xcodebuild -project   RxDataSources.xcodeproj   -scheme Tests -configuration Release -destination 'platform=iOS Simulator,name=iPhone 8' test) | xcpretty"
+  - BUILD="gem install cocoapods --pre --no-document --quiet; pod repo update && pod lib lint RxDataSources.podspec --verbose && pod lib lint Differentiator.podspec --verbose "
   - BUILD="carthage update --platform iOS  && carthage build --no-skip-current --platform iOS"
   - BUILD="carthage update --platform tvOS && carthage build --no-skip-current --platform tvOS"
   - BUILD="swift test"
