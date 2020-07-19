@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 
 #### Master
 
+* Added new datasource, RxTableViewSectionedCommandDataSource.  This datasource supports calling the following tableView methods:
+  * insertSections
+  * deleteSections
+  * reloadSections
+
 ## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)
 
 * Fixes Carthage integration and reverts static frameworks to dynamic frameworks.
