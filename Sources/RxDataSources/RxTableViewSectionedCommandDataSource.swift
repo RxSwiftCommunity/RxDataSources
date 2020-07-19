@@ -6,9 +6,12 @@
 //  Copyright © 2020 Saskatoon Skunkworx. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import UIKit
+#if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
+#endif
 
 open class RxTableViewSectionedCommandDataSource<Section: IdentifiableSectionModelType>
 	: TableViewSectionedDataSource<Section>
@@ -49,3 +52,4 @@ open class RxTableViewSectionedCommandDataSource<Section: IdentifiableSectionMod
 		return sectionModels.firstIndex(where: { $0.identity == sectionIdentifier })
 	}
 }
+#endif
