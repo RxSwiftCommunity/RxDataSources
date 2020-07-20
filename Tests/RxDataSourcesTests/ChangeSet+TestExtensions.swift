@@ -15,7 +15,7 @@ fileprivate class ItemModelTypeWrapper<I> {
 
     var deleted: Bool = false
     var updated: Bool = false
-    var moved: IndexPath? = nil
+    var moved: IndexPath?
 
     init(item: I) {
         self.item = item
@@ -25,7 +25,7 @@ fileprivate class ItemModelTypeWrapper<I> {
 fileprivate class SectionModelTypeWrapper<S: SectionModelType> {
     var updated: Bool = false
     var deleted: Bool = false
-    var moved: Int? = nil
+    var moved: Int?
 
     var items: [ItemModelTypeWrapper<S.Item>]
 
@@ -86,7 +86,7 @@ extension Changeset {
 
 extension Changeset {
 
-    fileprivate func apply(original: [S]) -> [S] {
+    fileprivate func apply(original: [Section]) -> [Section] {
 
         let afterDeletesAndUpdates = applyDeletesAndUpdates(original: original)
         let afterSectionMovesAndInserts = applySectionMovesAndInserts(original: afterDeletesAndUpdates)
@@ -95,8 +95,8 @@ extension Changeset {
         return afterItemInsertsAndMoves
     }
 
-    private func applyDeletesAndUpdates(original: [S]) -> [S] {
-        var resultAfterDeletesAndUpdates: [SectionModelTypeWrapper<S>] = SectionModelTypeWrapper.wrap(original)
+    private func applyDeletesAndUpdates(original: [Section]) -> [Section] {
+        var resultAfterDeletesAndUpdates: [SectionModelTypeWrapper<Section>] = SectionModelTypeWrapper.wrap(original)
 
         for index in updatedItems {
             resultAfterDeletesAndUpdates[index.sectionIndex].items[index.itemIndex].updated = true
@@ -114,17 +114,15 @@ extension Changeset {
 
         for (sectionIndex, section) in resultAfterDeletesAndUpdates.enumerated() {
             section.items = section.items.filter { !$0.deleted }
-            for (itemIndex, item) in section.items.enumerated() {
-                if item.updated {
-                    section.items[itemIndex] = ItemModelTypeWrapper(item: finalSections[sectionIndex].items[itemIndex])
-                }
+            for (itemIndex, item) in section.items.enumerated() where item.updated {
+                section.items[itemIndex] = ItemModelTypeWrapper(item: finalSections[sectionIndex].items[itemIndex])
             }
         }
 
         return SectionModelTypeWrapper.unwrap(resultAfterDeletesAndUpdates)
     }
 
-    private func applySectionMovesAndInserts(original: [S]) -> [S] {
+    private func applySectionMovesAndInserts(original: [Section]) -> [Section] {
         if !updatedSections.isEmpty {
             fatalError("Section updates aren't supported")
         }
@@ -149,7 +147,7 @@ extension Changeset {
 
         let totalCount = original.count + insertedSections.count
 
-        var results: [S] = []
+        var results: [Section] = []
         
         for index in 0 ..< totalCount {
             if insertedSectionsIndexes.contains(index) {
@@ -170,8 +168,8 @@ extension Changeset {
         return results
     }
 
-    private func applyItemInsertsAndMoves(original: [S]) -> [S] {
-        var resultAfterInsertsAndMoves: [S] = original
+    private func applyItemInsertsAndMoves(original: [Section]) -> [Section] {
+        var resultAfterInsertsAndMoves: [Section] = original
 
         let sourceIndexesThatShouldBeMoved = Set(movedItems.map { $0.from })
         let destinationToSourceMapping = Dictionary(elements: self.movedItems, keySelector: { $0.to }, valueSelector: { $0.from })
@@ -210,7 +208,7 @@ extension Changeset {
                 + movedInSection[sectionIndex]
                 - movedOutSection[sectionIndex]
 
-            var resultItems: [S.Item] = []
+            var resultItems: [Section.Item] = []
 
             for index in 0 ..< totalCount {
                 let itemPath = ItemPath(sectionIndex: sectionIndex, itemIndex: index)
@@ -229,7 +227,7 @@ extension Changeset {
                 }
             }
 
-            resultAfterInsertsAndMoves[sectionIndex] = S(original: section, items: resultItems)
+            resultAfterInsertsAndMoves[sectionIndex] = Section(original: section, items: resultItems)
         }
 
         return resultAfterInsertsAndMoves

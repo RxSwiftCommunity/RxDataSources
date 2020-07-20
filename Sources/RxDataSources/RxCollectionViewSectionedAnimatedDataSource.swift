@@ -15,15 +15,11 @@ import RxCocoa
 #endif
 import Differentiator
 
-/*
- This is commented becuse collection view has bugs when doing animated updates. 
- Take a look at randomized sections.
-*/
-open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
-    : CollectionViewSectionedDataSource<S>
+open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectionModelType>
+    : CollectionViewSectionedDataSource<Section>
     , RxCollectionViewDataSourceType {
-    public typealias Element = [S]
-    public typealias DecideViewTransition = (CollectionViewSectionedDataSource<S>, UICollectionView, [Changeset<S>]) -> ViewTransition
+    public typealias Element = [Section]
+    public typealias DecideViewTransition = (CollectionViewSectionedDataSource<Section>, UICollectionView, [Changeset<Section>]) -> ViewTransition
 
     // animation configuration
     public var animationConfiguration: AnimationConfiguration
@@ -47,82 +43,57 @@ open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModel
             moveItem: moveItem,
             canMoveItemAtIndexPath: canMoveItemAtIndexPath
         )
-
-        self.partialUpdateEvent
-            // so in case it does produce a crash, it will be after the data has changed
-            .observeOn(MainScheduler.asyncInstance)
-            // Collection view has issues digesting fast updates, this should
-            // help to alleviate the issues with them.
-            .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] event in
-                self?.collectionView(event.0, throttledObservedEvent: event.1)
-            })
-            .disposed(by: disposeBag)
     }
-
-    // For some inexplicable reason, when doing animated updates first time
-    // it crashes. Still need to figure out that one.
+    
+    // there is no longer limitation to load initial sections with reloadData
+    // but it is kept as a feature everyone got used to
     var dataSet = false
 
-    private let disposeBag = DisposeBag()
-
-    // This subject and throttle are here
-    // because collection view has problems processing animated updates fast.
-    // This should somewhat help to alleviate the problem.
-    private let partialUpdateEvent = PublishSubject<(UICollectionView, Event<Element>)>()
-
-    /**
-     This method exists because collection view updates are throttled because of internal collection view bugs.
-     Collection view behaves poorly during fast updates, so this should remedy those issues.
-    */
-    open func collectionView(_ collectionView: UICollectionView, throttledObservedEvent event: Event<Element>) {
+    open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, newSections in
-            let oldSections = dataSource.sectionModels
-            do {
+            #if DEBUG
+                dataSource._dataSourceBound = true
+            #endif
+            if !dataSource.dataSet {
+                dataSource.dataSet = true
+                dataSource.setSections(newSections)
+                collectionView.reloadData()
+            }
+            else {
                 // if view is not in view hierarchy, performing batch updates will crash the app
                 if collectionView.window == nil {
                     dataSource.setSections(newSections)
                     collectionView.reloadData()
                     return
                 }
-                let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-
-                switch self.decideViewTransition(self, collectionView, differences) {
-                case .animated:
-                    for difference in differences {
-                        dataSource.setSections(difference.finalSections)
-
-                        collectionView.performBatchUpdates(difference, animationConfiguration: self.animationConfiguration)
+                let oldSections = dataSource.sectionModels
+                do {
+                    let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                    
+                    switch dataSource.decideViewTransition(dataSource, collectionView, differences) {
+                    case .animated:
+                        // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
+                        // this is a limitation of Diff tool
+                        for difference in differences {
+                            let updateBlock = {
+                                // sections must be set within updateBlock in 'performBatchUpdates'
+                                dataSource.setSections(difference.finalSections)
+                                collectionView.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
+                            }
+                            collectionView.performBatchUpdates(updateBlock, completion: nil)
+                        }
+                        
+                    case .reload:
+                        dataSource.setSections(newSections)
+                        collectionView.reloadData()
+                        return
                     }
-                case .reload:
-                    self.setSections(newSections)
+                }
+                catch let e {
+                    rxDebugFatalError(e)
+                    dataSource.setSections(newSections)
                     collectionView.reloadData()
                 }
-            }
-            catch let e {
-                #if DEBUG
-                    print("Error while binding data animated: \(e)\nFallback to normal `reloadData` behavior.")
-                    rxDebugFatalError(e)
-                #endif
-                self.setSections(newSections)
-                collectionView.reloadData()
-            }
-        }.on(event)
-    }
-
-    open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
-        Binder(self) { dataSource, newSections in
-            #if DEBUG
-                self._dataSourceBound = true
-            #endif
-            if !self.dataSet {
-                self.dataSet = true
-                dataSource.setSections(newSections)
-                collectionView.reloadData()
-            }
-            else {
-                let element = (collectionView, observedEvent)
-                dataSource.partialUpdateEvent.on(.next(element))
             }
         }.on(observedEvent)
     }

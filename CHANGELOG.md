@@ -3,9 +3,22 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-#### Enhancements
-* Reduce computational complexity. #242
-* Adapted for RxSwift 4.2
+#### Master
+
+## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)
+
+* Fixes Carthage integration and reverts static frameworks to dynamic frameworks.
+
+## [4.0.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.0)
+
+* Swift 5.0
+* Fixes problems with `UICollectionView` animation crashes.
+* Improves readability by renaming short generic names to more descriptive names.
+* Changes frameworks to be static libs. (Carthage integration)
+
+## [3.1.0](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.1.0)
+
+* Xcode 10.0 compatibility.
 
 ## [3.0.2](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/3.0.2)
 

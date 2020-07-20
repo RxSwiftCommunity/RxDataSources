@@ -14,9 +14,9 @@ import RxCocoa
 // redux like editing example
 class EditingExampleViewController: UIViewController {
     
-    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet private weak var addButton: UIBarButtonItem!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -66,12 +66,12 @@ extension EditingExampleViewController {
             animationConfiguration: AnimationConfiguration(insertAnimation: .top,
                                                                    reloadAnimation: .fade,
                                                                    deleteAnimation: .left),
-            configureCell: { (dataSource, table, idxPath, item) in
+            configureCell: { _, table, idxPath, item in
                 let cell = table.dequeueReusableCell(withIdentifier: "Cell", for: idxPath)
                 cell.textLabel?.text = "\(item)"
                 return cell
             },
-            titleForHeaderInSection: { (ds, section) -> String? in
+            titleForHeaderInSection: { ds, section -> String? in
                 return ds[section].header
             },
             canEditRowAtIndexPath: { _, _ in
@@ -139,9 +139,11 @@ struct SectionedTableViewState {
 }
 
 extension TableViewEditingCommand {
+    static var nextNumber = 0
     static func addRandomItem() -> TableViewEditingCommand {
-        let randSection = Int(arc4random_uniform(UInt32(3)))
-        let number = Int(arc4random_uniform(UInt32(100)))
+        let randSection = Int.random(in: 0...2)
+        let number = nextNumber
+        defer { nextNumber = nextNumber + 1 }
         let item = IntItem(number: number, date: Date())
         return TableViewEditingCommand.AppendItem(item: item, section: randSection)
     }

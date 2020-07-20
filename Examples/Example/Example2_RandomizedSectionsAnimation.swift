@@ -13,19 +13,27 @@ import RxCocoa
 import CoreLocation
 
 class NumberCell : UICollectionViewCell {
-    @IBOutlet var value: UILabel?
+    @IBOutlet private var value: UILabel?
+
+    func configure(with value: String) {
+        self.value?.text = value
+    }
 }
 
 class NumberSectionView : UICollectionReusableView {
-    @IBOutlet weak var value: UILabel?
+    @IBOutlet private weak var value: UILabel?
+
+    func configure(value: String) {
+        self.value?.text = value
+    }
 }
 
 class PartialUpdatesViewController: UIViewController {
 
-    @IBOutlet weak var animatedTableView: UITableView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var animatedCollectionView: UICollectionView!
-    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet private weak var animatedTableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var animatedCollectionView: UICollectionView!
+    @IBOutlet private weak var refreshButton: UIButton!
 
     let disposeBag = DisposeBag()
 
@@ -34,7 +42,7 @@ class PartialUpdatesViewController: UIViewController {
 
         let initialRandomizedSections = Randomizer(rng: PseudoRandomGenerator(4, 3), sections: initialValue())
 
-        let ticks = Observable<Int>.interval(1, scheduler: MainScheduler.instance).map { _ in () }
+        let ticks = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance).map { _ in () }
         let randomSections = Observable.of(ticks, refreshButton.rx.tap.asObservable())
                 .merge()
                 .scan(initialRandomizedSections) { a, _ in
@@ -96,12 +104,12 @@ extension PartialUpdatesViewController {
         TableViewSectionedDataSource<NumberSection>.TitleForHeaderInSection
     ) {
         return (
-            { (_, tv, ip, i) in
+            { _, tv, ip, i in
                 let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style:.default, reuseIdentifier: "Cell")
                 cell.textLabel!.text = "\(i)"
                 return cell
             },
-            { (ds, section) -> String? in
+            { ds, section -> String? in
                 return ds[section].header
             }
         )
@@ -112,15 +120,15 @@ extension PartialUpdatesViewController {
             CollectionViewSectionedDataSource<NumberSection>.ConfigureSupplementaryView
         ) {
         return (
-             { (_, cv, ip, i) in
+             { _, cv, ip, i in
                 let cell = cv.dequeueReusableCell(withReuseIdentifier: "Cell", for: ip) as! NumberCell
-                cell.value!.text = "\(i)"
+                cell.configure(with: "\(i)")
                 return cell
 
             },
-             { (ds ,cv, kind, ip) in
+             { ds ,cv, kind, ip in
                 let section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Section", for: ip) as! NumberSectionView
-                section.value!.text = "\(ds[ip.section].header)"
+                section.configure(value: "\(ds[ip.section].header)")
                 return section
             }
         )
