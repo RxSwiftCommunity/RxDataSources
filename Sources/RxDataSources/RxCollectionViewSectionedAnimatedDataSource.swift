@@ -56,14 +56,12 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
             #endif
             if !dataSource.dataSet {
                 dataSource.dataSet = true
-                dataSource.setSections(newSections)
-                collectionView.reloadData()
+                OperationQueue.main.addOperation(UpdateOperation(dataSource: dataSource, collectionView: collectionView, updateType: .reload(sections: newSections)))
             }
             else {
                 // if view is not in view hierarchy, performing batch updates will crash the app
                 if collectionView.window == nil {
-                    dataSource.setSections(newSections)
-                    collectionView.reloadData()
+                    OperationQueue.main.addOperation(UpdateOperation(dataSource: dataSource, collectionView: collectionView, updateType: .reload(sections: newSections)))
                     return
                 }
                 let oldSections = dataSource.sectionModels
@@ -72,30 +70,121 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                     
                     switch dataSource.decideViewTransition(dataSource, collectionView, differences) {
                     case .animated:
-                        // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
-                        // this is a limitation of Diff tool
-                        for difference in differences {
-                            let updateBlock = {
-                                // sections must be set within updateBlock in 'performBatchUpdates'
-                                dataSource.setSections(difference.finalSections)
-                                collectionView.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
-                            }
-                            collectionView.performBatchUpdates(updateBlock, completion: nil)
-                        }
-                        
+                        OperationQueue.main.addOperation(UpdateOperation(dataSource: dataSource, collectionView: collectionView, updateType: .animated(changesets: differences)))
                     case .reload:
-                        dataSource.setSections(newSections)
-                        collectionView.reloadData()
+                        OperationQueue.main.addOperation(UpdateOperation(dataSource: dataSource, collectionView: collectionView, updateType: .reload(sections: newSections)))
                         return
                     }
                 }
                 catch let e {
                     rxDebugFatalError(e)
-                    dataSource.setSections(newSections)
-                    collectionView.reloadData()
+                    OperationQueue.main.addOperation(UpdateOperation(dataSource: dataSource, collectionView: collectionView, updateType: .reload(sections: newSections)))
                 }
             }
         }.on(observedEvent)
     }
 }
+
+private class UpdateOperation<Section: AnimatableSectionModelType>: Operation {
+    enum UpdateType {
+        case animated(changesets: [Changeset<Section>])
+        case reload(sections: [Section])
+    }
+    
+    private weak var dataSource: RxCollectionViewSectionedAnimatedDataSource<Section>?
+    private weak var collectionView: UICollectionView?
+    private let updateType: UpdateType
+    
+    override var isExecuting: Bool {
+        _isExecuting
+    }
+    
+    override var isFinished: Bool {
+        _isFinished
+    }
+    
+    override var isConcurrent: Bool {
+        switch updateType {
+        case .animated:
+            return true
+        case .reload:
+            return false
+        }
+    }
+    
+    override var isAsynchronous: Bool {
+        switch updateType {
+        case .animated:
+            return true
+        case .reload:
+            return false
+        }
+    }
+    
+    private var _isExecuting: Bool = false
+    private var _isFinished: Bool = false
+    
+    required init(dataSource: RxCollectionViewSectionedAnimatedDataSource<Section>, collectionView: UICollectionView, updateType: UpdateType) {
+        self.dataSource = dataSource
+        self.collectionView = collectionView
+        self.updateType = updateType
+        
+        super.init()
+    }
+    
+    override func start() {
+        guard !isCancelled, let dataSource = dataSource, let collectionView = collectionView else {
+            willChangeValue(for: \.isFinished)
+            _isFinished = true
+            didChangeValue(for: \.isFinished)
+            return
+        }
+        
+        willChangeValue(for: \.isExecuting)
+        _isExecuting = true
+        didChangeValue(for: \.isExecuting)
+        
+        switch updateType {
+        case .animated(let changesets):
+            if !changesets.isEmpty {
+                var updatesInProgress = changesets.count
+                for changeset in changesets {
+                    let updateBlock = { [weak dataSource, weak collectionView] in
+                        // sections must be set within updateBlock in 'performBatchUpdates'
+                        dataSource?.setSections(changeset.finalSections)
+                        collectionView?.batchUpdates(changeset, animationConfiguration: dataSource?.animationConfiguration ?? .init())
+                    }
+                    
+                    collectionView.performBatchUpdates(updateBlock, completion: { [weak self] animated in
+                        guard let self = self else { return }
+                        
+                        updatesInProgress -= 1
+                        
+                        if updatesInProgress == 0 {
+                            self.finish()
+                        }
+                    })
+                }
+            }
+            else {
+                finish()
+            }
+        case .reload(let sections):
+            dataSource.setSections(sections)
+            collectionView.reloadData()
+            finish()
+        }
+    }
+    
+    private func finish() {
+        willChangeValue(for: \.isExecuting)
+        _isExecuting = false
+        didChangeValue(for: \.isExecuting)
+        
+        willChangeValue(for: \.isFinished)
+        _isFinished = true
+        didChangeValue(for: \.isFinished)
+    }
+}
+
 #endif
