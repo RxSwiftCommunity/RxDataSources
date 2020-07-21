@@ -48,9 +48,15 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
     // there is no longer limitation to load initial sections with reloadData
     // but it is kept as a feature everyone got used to
     var dataSet = false
+    
+    private var latestSections: [Section] = []
 
     open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, newSections in
+            defer {
+                dataSource.latestSections = newSections
+            }
+            
             #if DEBUG
                 dataSource._dataSourceBound = true
             #endif
@@ -64,9 +70,9 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                     OperationQueue.main.addOperation(UpdateOperation(dataSource: dataSource, collectionView: collectionView, updateType: .reload(sections: newSections)))
                     return
                 }
-                let oldSections = dataSource.sectionModels
+
                 do {
-                    let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
+                    let differences = try Diff.differencesForSectionedView(initialSections: dataSource.latestSections, finalSections: newSections)
                     
                     switch dataSource.decideViewTransition(dataSource, collectionView, differences) {
                     case .animated:
