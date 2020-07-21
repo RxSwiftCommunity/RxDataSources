@@ -49,12 +49,13 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
     // but it is kept as a feature everyone got used to
     var dataSet = false
     
-    private var latestSections: [Section] = []
+    /// Stores the latest section models received via `collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>)`. These are used to calculate differences between newly received event data and the data of the preceding event (as this may not be the same as `sectionModels`, due to event queueing).
+    private var _latestSectionModels: [SectionModelSnapshot] = []
 
     open func collectionView(_ collectionView: UICollectionView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, newSections in
             defer {
-                dataSource.latestSections = newSections
+                dataSource._latestSectionModels = newSections.map { SectionModelSnapshot(model: $0, items: $0.items) }
             }
             
             #if DEBUG
@@ -72,7 +73,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                 }
 
                 do {
-                    let differences = try Diff.differencesForSectionedView(initialSections: dataSource.latestSections, finalSections: newSections)
+                    let differences = try Diff.differencesForSectionedView(initialSections: dataSource._latestSectionModels.map { Section(original: $0.model, items: $0.items) }, finalSections: newSections)
                     
                     switch dataSource.decideViewTransition(dataSource, collectionView, differences) {
                     case .animated:
