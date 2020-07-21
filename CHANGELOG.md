@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 
 #### Master
 
+* Fixes an issue in `RxCollectionViewSectionedAnimatedDataSource` caused by multiple updates occurring in quick succession and interfering with one another.
+
 ## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)
 
 * Fixes Carthage integration and reverts static frameworks to dynamic frameworks.
