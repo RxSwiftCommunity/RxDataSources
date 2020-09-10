@@ -623,8 +623,10 @@ public enum Diff {
                         let finalItem = finalItemCache[finalItemIndex.sectionIndex][finalItemIndex.itemIndex]
                         if finalItem != initialSections[i].items[j] {
                             updatedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
+                            afterDeleteItems.append(finalItem)
+                        } else {
+                            afterDeleteItems.append(initialSections[i].items[j])
                         }
-                        afterDeleteItems.append(finalItem)
                     default:
                         try precondition(false, "Unhandled case")
                     }
