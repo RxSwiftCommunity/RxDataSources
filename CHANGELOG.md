@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 #### Master
 
 * Added support of mutable CellViewModels.
+* Fixes failing duplicate identity detection
 
 ## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)
 
