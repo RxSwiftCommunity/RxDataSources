@@ -622,10 +622,11 @@ public enum Diff {
                         let finalItemIndex = try initialItemData[i][j].moveIndex.unwrap()
                         let finalItem = finalItemCache[finalItemIndex.sectionIndex][finalItemIndex.itemIndex]
                         if finalItem != initialSections[i].items[j] {
-                            updatedItems.append(ItemPath(sectionIndex: i, itemIndex: j))
+                            updatedItems.append(ItemPath(sectionIndex: i, itemIndex: j)) // causes cell reload
                             afterDeleteItems.append(finalItem)
                         } else {
-                            afterDeleteItems.append(initialSections[i].items[j])
+                            // update model without cell reload
+                            afterDeleteItems.append(finalItem)
                         }
                     default:
                         try precondition(false, "Unhandled case")
