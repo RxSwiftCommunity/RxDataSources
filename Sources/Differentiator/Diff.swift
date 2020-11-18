@@ -623,11 +623,14 @@ public enum Diff {
                         let finalItem = finalItemCache[finalItemIndex.sectionIndex][finalItemIndex.itemIndex]
                         if finalItem != initialSections[i].items[j] {
                             updatedItems.append(ItemPath(sectionIndex: i, itemIndex: j)) // causes cell reload
-                            afterDeleteItems.append(finalItem)
                         } else {
-                            // update model without cell reload
-                            afterDeleteItems.append(finalItem)
+                            // update model, without cell reload
                         }
+                        afterDeleteItems.append(finalItem) // this version is in v4.0.1, it works correctly
+                        // abort of commit d8b0b6bd49797e0777bbdacb7aecbfca2b0f916c
+                        // Adding support of mutable CellViewModels  d8b0b6b  Mikhail Markin <shire8bit@gmail.com>
+                        // 10 Jul 2020, 20:13
+
                     default:
                         try precondition(false, "Unhandled case")
                     }
@@ -637,7 +640,9 @@ public enum Diff {
             }
             // }
 
-            if deletedItems.isEmpty && deletedSections.isEmpty && updatedItems.isEmpty && afterDeleteState.isEmpty {
+            // if afterDeleteState is not empty, return Changeset. This is the situation, when there are no UI changes in
+            // ChangeSet (e.g. reloads), but we still need to update Datasource.
+            if deletedItems.isEmpty, deletedSections.isEmpty, updatedItems.isEmpty, afterDeleteState.isEmpty {
               return []
             }
 
