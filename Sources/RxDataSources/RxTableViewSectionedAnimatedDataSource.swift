@@ -114,6 +114,8 @@ open class RxTableViewSectionedAnimatedDataSource<Section: AnimatableSectionMode
                                 tableView.endUpdates()
                             }
                         }
+                        // Finaly, set actual datasource:
+                        dataSource.setSections(newSections)
                         
                     case .reload:
                         dataSource.setSections(newSections)
