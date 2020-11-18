@@ -637,8 +637,8 @@ public enum Diff {
             }
             // }
 
-            if deletedItems.isEmpty && deletedSections.isEmpty && updatedItems.isEmpty {
-                return []
+            if deletedItems.isEmpty && deletedSections.isEmpty && updatedItems.isEmpty && afterDeleteState.isEmpty {
+              return []
             }
 
             return [Changeset(
