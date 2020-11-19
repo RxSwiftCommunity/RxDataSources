@@ -82,6 +82,8 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                             }
                             collectionView.performBatchUpdates(updateBlock, completion: nil)
                         }
+                        // Finaly, set actual datasource:
+                        dataSource.setSections(newSections)
                         
                     case .reload:
                         dataSource.setSections(newSections)
