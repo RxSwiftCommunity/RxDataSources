@@ -24,6 +24,8 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
     public typealias ConfigureSupplementaryView = (CollectionViewSectionedDataSource<Section>, UICollectionView, String, IndexPath) -> UICollectionReusableView
     public typealias MoveItem = (CollectionViewSectionedDataSource<Section>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void
     public typealias CanMoveItemAtIndexPath = (CollectionViewSectionedDataSource<Section>, IndexPath) -> Bool
+    public typealias IndexTitles = () -> [String]?
+    public typealias IndexPathForIndexTitle = (String, Int) -> IndexPath
 
 
     public init(
@@ -119,6 +121,21 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
         }
     }
 
+    open var indexTitles: IndexTitles? {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    open var indexPathForIndexTitle: IndexPathForIndexTitle? {
+        didSet {
+            #if DEBUG
+                ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+
     // UICollectionViewDataSource
     
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -152,9 +169,23 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
         self.moveItem(self, sourceIndexPath, destinationIndexPath)
     }
 
+    open func indexTitles(for collectionView: UICollectionView) -> [String]? {
+        return indexTitles?()
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+        return indexPathForIndexTitle!(title, index)
+    }
+
     override open func responds(to aSelector: Selector!) -> Bool {
         if aSelector == #selector(UICollectionViewDataSource.collectionView(_:viewForSupplementaryElementOfKind:at:)) {
             return configureSupplementaryView != nil
+        }
+        else if aSelector == #selector(UICollectionViewDataSource.collectionView(_:indexPathForIndexTitle:at:)) {
+            return indexPathForIndexTitle != nil
+        }
+        else if aSelector == #selector(UICollectionViewDataSource.indexTitles(for:)) {
+            return indexTitles != nil
         }
         else {
             return super.responds(to: aSelector)
