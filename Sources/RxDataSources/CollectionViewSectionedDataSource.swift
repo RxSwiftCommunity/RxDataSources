@@ -25,7 +25,7 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
     public typealias MoveItem = (CollectionViewSectionedDataSource<Section>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void
     public typealias CanMoveItemAtIndexPath = (CollectionViewSectionedDataSource<Section>, IndexPath) -> Bool
     public typealias IndexTitles = ([Section]) -> [String]?
-    public typealias IndexPathForIndexTitle = (String, Int) -> IndexPath
+    public typealias IndexPathForIndexTitle = ([Section], String, Int) -> IndexPath
 
 
     public init(
@@ -174,7 +174,7 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
     }
 
     public func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
-        return indexPathForIndexTitle!(title, index)
+        return indexPathForIndexTitle!(sectionModels, title, index)
     }
 
     override open func responds(to aSelector: Selector!) -> Bool {
