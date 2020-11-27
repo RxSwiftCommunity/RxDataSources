@@ -24,7 +24,7 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
     public typealias ConfigureSupplementaryView = (CollectionViewSectionedDataSource<Section>, UICollectionView, String, IndexPath) -> UICollectionReusableView
     public typealias MoveItem = (CollectionViewSectionedDataSource<Section>, _ sourceIndexPath:IndexPath, _ destinationIndexPath:IndexPath) -> Void
     public typealias CanMoveItemAtIndexPath = (CollectionViewSectionedDataSource<Section>, IndexPath) -> Bool
-    public typealias IndexTitles = () -> [String]?
+    public typealias IndexTitles = ([Section]) -> [String]?
     public typealias IndexPathForIndexTitle = (String, Int) -> IndexPath
 
 
@@ -170,7 +170,7 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
     }
 
     open func indexTitles(for collectionView: UICollectionView) -> [String]? {
-        return indexTitles?()
+        return indexTitles?(sectionModels)
     }
 
     public func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
