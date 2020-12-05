@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 
 * Adds support of mutable CellViewModels.
 * Changes `TableViewSectionedDataSource` default parameters `canEditRowAtIndexPath` and `canMoveRowAtIndexPath` to align with iOS default behavior #383
+* Updated RxSwift to 6.0
+* Minimum iOS version is now 9.0
 
 ## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)
 
