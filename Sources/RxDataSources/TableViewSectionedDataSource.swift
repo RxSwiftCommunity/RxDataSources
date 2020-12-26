@@ -109,6 +109,11 @@ open class TableViewSectionedDataSource<Section: SectionModelType>
     }
 
     open func model(at indexPath: IndexPath) throws -> Any {
+        guard indexPath.section < self._sectionModels.count,
+              indexPath.item < self._sectionModels[indexPath.section].items.count else {
+            throw RxDataSourceError.outOfBounds(indexPath: indexPath)
+        }
+
         return self[indexPath]
     }
 
