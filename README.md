@@ -1,4 +1,4 @@
-[![Travis CI](https://travis-ci.org/RxSwiftCommunity/RxDataSources.svg?branch=master)](https://travis-ci.org/RxSwiftCommunity/RxDataSources)
+[![Travis CI](https://travis-ci.org/RxSwiftCommunity/RxDataSources.svg?branch=main)](https://travis-ci.org/RxSwiftCommunity/RxDataSources)
 
 Table and Collection view data sources
 ======================================

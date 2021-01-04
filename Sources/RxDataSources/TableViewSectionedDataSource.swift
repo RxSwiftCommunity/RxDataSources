@@ -37,8 +37,8 @@ open class TableViewSectionedDataSource<Section: SectionModelType>
                 configureCell: @escaping ConfigureCell,
                 titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
                 titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
-                canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
-                canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false },
+                canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in true },
+                canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in true },
                 sectionIndexTitles: @escaping SectionIndexTitles = { _ in nil },
                 sectionForSectionIndexTitle: @escaping SectionForSectionIndexTitle = { _, _, index in index }
             ) {
@@ -55,8 +55,8 @@ open class TableViewSectionedDataSource<Section: SectionModelType>
                 configureCell: @escaping ConfigureCell,
                 titleForHeaderInSection: @escaping  TitleForHeaderInSection = { _, _ in nil },
                 titleForFooterInSection: @escaping TitleForFooterInSection = { _, _ in nil },
-                canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in false },
-                canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in false }
+                canEditRowAtIndexPath: @escaping CanEditRowAtIndexPath = { _, _ in true },
+                canMoveRowAtIndexPath: @escaping CanMoveRowAtIndexPath = { _, _ in true }
             ) {
             self.configureCell = configureCell
             self.titleForHeaderInSection = titleForHeaderInSection
@@ -109,6 +109,11 @@ open class TableViewSectionedDataSource<Section: SectionModelType>
     }
 
     open func model(at indexPath: IndexPath) throws -> Any {
+        guard indexPath.section < self._sectionModels.count,
+              indexPath.item < self._sectionModels[indexPath.section].items.count else {
+            throw RxDataSourceError.outOfBounds(indexPath: indexPath)
+        }
+
         return self[indexPath]
     }
 
