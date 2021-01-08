@@ -1,5 +1,6 @@
-excluded:
-  - Carthage
+included:
+  - Sources
+  - Tests
 opt_in_rules:
   - overridden_super_call
   - private_outlet
