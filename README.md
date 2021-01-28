@@ -159,14 +159,14 @@ For Swift 2.3 version please use versions `0.1 ... 0.9`
 
 Podfile
 ```
-pod 'RxDataSources', '~> 4.0'
+pod 'RxDataSources', '~> 5.0'
 ```
 
 ### Carthage
 
 Cartfile
 ```
-github "RxSwiftCommunity/RxDataSources" ~> 4.0
+github "RxSwiftCommunity/RxDataSources" ~> 5.0
 ```
 
 ### Swift Package Manager
@@ -179,7 +179,7 @@ import PackageDescription
 let package = Package(
     name: "SampleProject",
     dependencies: [
-        .package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", from: "4.0.0")
+        .package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", from: "5.0.0")
     ]
 )
 ```
