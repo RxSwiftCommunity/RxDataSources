@@ -320,19 +320,16 @@ extension AlgorithmTests {
 
 // errors
 extension AlgorithmTests {
-    func testThrowsErrorOnDuplicateItem() {
-        let initial: [s] = [
+    func testThrowsErrorOnDuplicateItem_inInitialSections() {
+        let sections: [s] = [
             s(1, [
+                i(1111, ""),
                 i(1111, "")
-                ]),
-            s(2, [
-                i(1111, "")
-                ])
-
-            ]
+            ])
+        ]
 
         do {
-            _ = try Diff.differencesForSectionedView(initialSections: initial, finalSections: initial)
+            _ = try Diff.differencesForSectionedView(initialSections: sections, finalSections: sections)
             XCTFail("Should throw exception")
         }
         catch let exception {
@@ -345,8 +342,105 @@ extension AlgorithmTests {
         }
     }
 
-    func testThrowsErrorOnDuplicateSection() {
-        let initial: [s] = [
+    func testThrowsErrorOnDuplicateItem_inFinalSections() {
+        let final: [s] = [
+            s(1, [
+                i(1111, ""),
+                i(1111, "")
+            ])
+        ]
+
+        do {
+            _ = try Diff.differencesForSectionedView(initialSections: [], finalSections: final)
+            XCTFail("Should throw exception")
+        }
+        catch let exception {
+            guard case let .duplicateItem(item) = exception as! Diff.Error else {
+                XCTFail("Not required error")
+                return
+            }
+
+            XCTAssertEqual(item as! i, i(1111, ""))
+        }
+    }
+
+    func testThrowsErrorOnDuplicateItemInDifferentSection_inInitialSections() {
+        let sections: [s] = [
+            s(1, [
+                i(1111, "")
+            ]),
+            s(2, [
+                i(1111, "")
+            ])
+
+        ]
+
+        do {
+            _ = try Diff.differencesForSectionedView(initialSections: sections, finalSections: sections)
+            XCTFail("Should throw exception")
+        }
+        catch let exception {
+            guard case let .duplicateItem(item) = exception as! Diff.Error else {
+                XCTFail("Not required error")
+                return
+            }
+
+            XCTAssertEqual(item as! i, i(1111, ""))
+        }
+    }
+
+    func testThrowsErrorOnDuplicateItemInDifferentSection_inFinalSections() {
+        let final: [s] = [
+            s(1, [
+                i(1111, "")
+                ]),
+            s(2, [
+                i(1111, "")
+                ])
+
+            ]
+
+        do {
+            _ = try Diff.differencesForSectionedView(initialSections: [], finalSections: final)
+            XCTFail("Should throw exception")
+        }
+        catch let exception {
+            guard case let .duplicateItem(item) = exception as! Diff.Error else {
+                XCTFail("Not required error")
+                return
+            }
+
+            XCTAssertEqual(item as! i, i(1111, ""))
+        }
+    }
+
+    func testThrowsErrorOnDuplicateSection_inInitialSections() {
+        let sections: [s] = [
+            s(1, [
+                i(1111, "")
+            ]),
+            s(1, [
+                i(1112, "")
+            ])
+        ]
+
+        do {
+            _ = try Diff.differencesForSectionedView(initialSections: sections, finalSections: sections)
+            XCTFail("Should throw exception")
+        }
+        catch let exception {
+            guard case let .duplicateSection(section) = exception as! Diff.Error else {
+                XCTFail("Not required error")
+                return
+            }
+
+            XCTAssertEqual(section as! s, s(1, [
+                i(1112, "")
+            ]))
+        }
+    }
+    func testThrowsErrorOnDuplicateSection_inFinalSections() {
+        let final: [s] = [
             s(1, [
                 i(1111, "")
                 ]),
@@ -357,7 +451,7 @@ extension AlgorithmTests {
             ]
 
         do {
-            _ = try Diff.differencesForSectionedView(initialSections: initial, finalSections: initial)
+            _ = try Diff.differencesForSectionedView(initialSections: [], finalSections: final)
             XCTFail("Should throw exception")
         }
         catch let exception {

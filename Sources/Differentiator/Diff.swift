@@ -199,11 +199,19 @@ public enum Diff {
                     dictionary[key] = i
                 }
 
+                var finalKeys = Set<OptimizedIdentity<Identity>>()
+
                 for (i, items) in finalItemCache.enumerated() {
                     for j in 0 ..< items.count {
                         let item = items[j]
                         var identity = item.identity
                         let key = OptimizedIdentity(&identity)
+
+                        if finalKeys.contains(key) {
+                            throw Error.duplicateItem(item: item)
+                        }
+                        finalKeys.insert(key)
+
                         guard let initialItemPathIndex = dictionary[key] else {
                             continue
                         }
@@ -518,8 +526,16 @@ public enum Diff {
                 var initialSectionData = ContiguousArray<SectionAssociatedData>(repeating: SectionAssociatedData.initial, count: initialSections.count)
                 var finalSectionData = ContiguousArray<SectionAssociatedData>(repeating: SectionAssociatedData.initial, count: finalSections.count)
 
+                var finalSectionIdentities = Set<Section.Identity>()
+
                 for (i, section) in finalSections.enumerated() {
                     finalSectionData[i].itemCount = finalSections[i].items.count
+
+                    if finalSectionIdentities.contains(section.identity) {
+                        throw Error.duplicateSection(section: section)
+                    }
+                    finalSectionIdentities.insert(section.identity)
+
                     guard let initialSectionIndex = initialSectionIndexes[section.identity] else {
                         continue
                     }
