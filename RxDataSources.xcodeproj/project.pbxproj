@@ -17,6 +17,8 @@
 		03EEEE981F5B7D71006068BC /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EEEE871F5B7D5C006068BC /* XCTest+Extensions.swift */; };
 		70C0622425A8FE3D002A57ED /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F48228489EC009D6516 /* RxSwift.framework */; platformFilter = ios; };
 		70C0623425A8FE54002A57ED /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F4A228489EC009D6516 /* RxCocoa.framework */; platformFilter = ios; };
+		70C0622425A8FE3D002A57ED /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F48228489EC009D6516 /* RxSwift.framework */; };
+		70C0623425A8FE54002A57ED /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F4A228489EC009D6516 /* RxCocoa.framework */; };
 		C81FBF461F3B9CED0094061E /* Differentiator.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C81FBF451F3B9CED0094061E /* Differentiator.podspec */; };
 		C81FBF5E1F3B9D660094061E /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81FBF5B1F3B9D4C0094061E /* Array+Extensions.swift */; };
 		C81FBF601F3B9D8B0094061E /* FloatingPointType+IdentifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81FBF5F1F3B9D8B0094061E /* FloatingPointType+IdentifiableType.swift */; };
