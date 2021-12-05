@@ -9,6 +9,7 @@ let package = Package(
   ],
   products: [
     .library(name: "RxDataSources", targets: ["RxDataSources"]),
+    .library(name: "RxDataSources-Dynamic", type: .dynamic, targets: ["RxDataSources"]),
     .library(name: "Differentiator", targets: ["Differentiator"])
   ],
   dependencies: [
