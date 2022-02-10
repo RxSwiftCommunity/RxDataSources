@@ -130,7 +130,7 @@ This can break your code if you've implemented those extensions locally. This ca
 #### Features
 
 * Swift 2.3 compatible
-* Improves mutability checkes. If data source is being mutated after binding, warning assert is triggered.
+* Improves mutability checks. If data source is being mutated after binding, warning assert is triggered.
 * Deprecates `cellFactory` in favor of `configureCell`.
 * Improves runtime checks in DEBUG mode for correct `SectionModelType.init` implementation.
 
