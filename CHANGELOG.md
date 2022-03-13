@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * Fixes xcodeproj and submodule structure to avoid duplicate symbols and properly build for Carthage #392
 * Adds support of mutable CellViewModels.
 * Changes `TableViewSectionedDataSource` default parameters `canEditRowAtIndexPath` and `canMoveRowAtIndexPath` to align with iOS default behavior #383
+* Fixes failing duplicate identity detection
 
 ## [4.0.1](https://github.com/RxSwiftCommunity/RxDataSources/releases/tag/4.0.1)
 
