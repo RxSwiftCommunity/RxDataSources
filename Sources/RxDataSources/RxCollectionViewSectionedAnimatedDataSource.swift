@@ -80,7 +80,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                                 dataSource.setSections(difference.finalSections)
                                 collectionView.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
                             }
-                            collectionView.performBatchUpdates(updateBlock, completion: nil)
+                            collectionView.performBatchUpdates(updateBlock)
                         }
                         
                     case .reload:
