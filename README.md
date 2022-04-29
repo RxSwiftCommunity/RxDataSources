@@ -30,8 +30,8 @@ RxSwift helps alleviate some of the burden with a simple data binding mechanism:
 2) Bind the data to the tableView/collectionView using one of:
   - `rx.items(dataSource:protocol<RxTableViewDataSourceType, UITableViewDataSource>)`
   - `rx.items(cellIdentifier:String)`
-  - `rx.items(cellIdentifier:String:Cell.Type:_:)`
-  - `rx.items(_:_:)`
+  - `rx.items(cellIdentifier:String, cellType: Cell.Type)`
+  - `rx.items(_ source: ObservableType)`
 
 ```swift
 let data = Observable<[String]>.just(["first element", "second element", "third element"])
