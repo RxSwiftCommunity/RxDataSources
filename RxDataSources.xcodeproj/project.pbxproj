@@ -17,6 +17,7 @@
 		03EEEE981F5B7D71006068BC /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EEEE871F5B7D5C006068BC /* XCTest+Extensions.swift */; };
 		70C0622425A8FE3D002A57ED /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F48228489EC009D6516 /* RxSwift.framework */; platformFilter = ios; };
 		70C0623425A8FE54002A57ED /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F4A228489EC009D6516 /* RxCocoa.framework */; platformFilter = ios; };
+		183A555028ED44E8005BF2E3 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A554F28ED44E8005BF2E3 /* Collection+Extensions.swift */; };
 		70C0622425A8FE3D002A57ED /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F48228489EC009D6516 /* RxSwift.framework */; };
 		70C0623425A8FE54002A57ED /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FB1F4A228489EC009D6516 /* RxCocoa.framework */; };
 		C81FBF461F3B9CED0094061E /* Differentiator.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C81FBF451F3B9CED0094061E /* Differentiator.podspec */; };
@@ -145,6 +146,7 @@
 		03EEEE851F5B7D5C006068BC /* Randomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Randomizer.swift; sourceTree = "<group>"; };
 		03EEEE861F5B7D5C006068BC /* s.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = s.swift; sourceTree = "<group>"; };
 		03EEEE871F5B7D5C006068BC /* XCTest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		183A554F28ED44E8005BF2E3 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		1E38DA4A22778D1A00C07A09 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		80FB1F3A228489EB009D6516 /* Rx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Rx.xcodeproj; path = Carthage/Checkouts/RxSwift/Rx.xcodeproj; sourceTree = "<group>"; };
 		C81905AE1DEA019100AE679C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +351,7 @@
 				C8BBFBD61F3B8F8D00A225F7 /* UI+SectionedViewType.swift */,
 				C833338C1F8A5FAC00D46EAE /* Deprecated.swift */,
 				C84043C21F9D33CE0093C3E7 /* ViewTransition.swift */,
+				183A554F28ED44E8005BF2E3 /* Collection+Extensions.swift */,
 			);
 			path = RxDataSources;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				C8BBFBDA1F3B8F8D00A225F7 /* RxCollectionViewSectionedAnimatedDataSource.swift in Sources */,
 				C8BBFBD81F3B8F8D00A225F7 /* DataSources.swift in Sources */,
 				C8BBFBD71F3B8F8D00A225F7 /* CollectionViewSectionedDataSource.swift in Sources */,
+				183A555028ED44E8005BF2E3 /* Collection+Extensions.swift in Sources */,
 				C8BBFBE01F3B8F8D00A225F7 /* TableViewSectionedDataSource.swift in Sources */,
 				C8BBFBE11F3B8F8D00A225F7 /* UI+SectionedViewType.swift in Sources */,
 				C8BBFBDB1F3B8F8D00A225F7 /* RxCollectionViewSectionedReloadDataSource.swift in Sources */,
