@@ -96,6 +96,15 @@ open class TableViewSectionedDataSource<Section: SectionModelType>
         let sectionModel = self._sectionModels[section]
         return Section(original: sectionModel.model, items: sectionModel.items)
     }
+        
+    open subscript(safe section: Int) -> Section? {
+        let sectionModel = self._sectionModels[safe: section]
+        if let sectionModel = sectionModel {
+            return Section(original: sectionModel.model, items: sectionModel.items)
+        } else {
+            return nil
+        }
+    }
 
     open subscript(indexPath: IndexPath) -> Item {
         get {
@@ -105,6 +114,18 @@ open class TableViewSectionedDataSource<Section: SectionModelType>
             var section = self._sectionModels[indexPath.section]
             section.items[indexPath.item] = item
             self._sectionModels[indexPath.section] = section
+        }
+    }
+    open subscript(safe indexPath: IndexPath) -> Item? {
+        get {
+            return self._sectionModels[safe: indexPath.section]?.items[safe: indexPath.item]
+        }
+        set(item) {
+            var section = self._sectionModels[indexPath.section]
+            if let item = item {
+                section.items[indexPath.item] = item
+                self._sectionModels[indexPath.section] = section
+            }
         }
     }
 
