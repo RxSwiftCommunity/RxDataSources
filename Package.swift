@@ -1,11 +1,12 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.5
 
 import PackageDescription
 
 let package = Package(
   name: "RxDataSources",
   platforms: [
-    .iOS(.v9), .tvOS(.v9)
+    .iOS(.v9),
+    .tvOS(.v9)
   ],
   products: [
     .library(name: "RxDataSources", targets: ["RxDataSources"]),
@@ -16,7 +17,14 @@ let package = Package(
     .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.0.0"))
   ],
   targets: [
-    .target(name: "RxDataSources", dependencies: ["Differentiator", "RxSwift", "RxCocoa"]),
+    .target(
+        name: "RxDataSources",
+        dependencies: [
+            "Differentiator",
+            .product(name: "RxSwift", package: "rxswift"),
+            .product(name: "RxCocoa", package: "rxswift")
+        ]
+    ),
     .target(name: "Differentiator"),
     .testTarget(name: "RxDataSourcesTests", dependencies: ["RxDataSources"])
   ],
