@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String : IdentifiableType {
+extension Swift.String : Differentiator.IdentifiableType {
     public typealias Identity = String
 
     public var identity: String {

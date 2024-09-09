@@ -16,10 +16,10 @@ extension FloatingPoint {
     }
 }
 
-extension Float : IdentifiableType {
+extension Swift.Float : Differentiator.IdentifiableType {
 
 }
 
-extension Double : IdentifiableType {
+extension Swift.Double : Differentiator.IdentifiableType {
 
 }

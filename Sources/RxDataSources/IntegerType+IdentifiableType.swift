@@ -16,44 +16,44 @@ extension BinaryInteger {
     }
 }
 
-extension Int : IdentifiableType {
+extension Swift.Int : Differentiator.IdentifiableType {
 
 }
 
-extension Int8 : IdentifiableType {
+extension Swift.Int8 : Differentiator.IdentifiableType {
 
 }
 
-extension Int16 : IdentifiableType {
+extension Swift.Int16 : Differentiator.IdentifiableType {
 
 }
 
-extension Int32 : IdentifiableType {
+extension Swift.Int32 : Differentiator.IdentifiableType {
 
 }
 
-extension Int64 : IdentifiableType {
+extension Swift.Int64 : Differentiator.IdentifiableType {
 
 }
 
 
-extension UInt : IdentifiableType {
+extension Swift.UInt : Differentiator.IdentifiableType {
 
 }
 
-extension UInt8 : IdentifiableType {
+extension Swift.UInt8 : Differentiator.IdentifiableType {
 
 }
 
-extension UInt16 : IdentifiableType {
+extension Swift.UInt16 : Differentiator.IdentifiableType {
 
 }
 
-extension UInt32 : IdentifiableType {
+extension Swift.UInt32 : Differentiator.IdentifiableType {
 
 }
 
-extension UInt64 : IdentifiableType {
-    
+extension Swift.UInt64 : Differentiator.IdentifiableType {
+
 }
 
