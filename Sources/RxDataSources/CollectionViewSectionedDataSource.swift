@@ -79,7 +79,23 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
             self._sectionModels[indexPath.section] = section
         }
     }
-    
+
+    open subscript(safe section: Int) -> Section? {
+        guard let sectionModel = self._sectionModels[safe: section] else { return nil }
+        return Section(original: sectionModel.model, items: sectionModel.items)
+    }
+
+    open subscript(safe indexPath: IndexPath) -> Item? {
+        get {
+            _sectionModels[safe: indexPath.section]?.items[safe: indexPath.item]
+        }
+        set(item) {
+            guard var section = self._sectionModels[safe: indexPath.section] else { return }
+            section.items[safe: indexPath.item] = item
+            self._sectionModels[indexPath.section] = section
+        }
+    }
+
     open func model(at indexPath: IndexPath) throws -> Any {
         guard indexPath.section < self._sectionModels.count,
               indexPath.item < self._sectionModels[indexPath.section].items.count else {
@@ -167,3 +183,19 @@ open class CollectionViewSectionedDataSource<Section: SectionModelType>
     }
 }
 #endif
+
+private extension Array {
+    subscript(safe index: Int) -> Element? {
+        get {
+            (0..<count).contains(index) ? self[index] : nil
+        }
+        set {
+            guard let newValue else { return }
+            if index < count {
+                self[index] = newValue
+            } else {
+                append(newValue)
+            }
+        }
+    }
+}
